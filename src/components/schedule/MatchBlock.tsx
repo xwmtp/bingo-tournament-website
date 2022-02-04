@@ -2,16 +2,19 @@ import React from "react";
 import styled from "styled-components";
 import { ScheduledMatch } from "../../domain/Schedule";
 import { DateTime } from "luxon";
+import { Button } from "../forms/Button";
 
 interface Props {
   match: ScheduledMatch;
 }
 
-export const ScheduledMatchBlock: React.FC<Props> = ({ match }) => {
+export const MatchBlock: React.FC<Props> = ({ match }) => {
   return (
     <Match>
       <StartTime>
-        <p>{match.startTime.toLocaleString(DateTime.TIME_SIMPLE)}</p>
+        <p>
+          {match.startTime.setZone("EST").toLocaleString(DateTime.TIME_SIMPLE)}
+        </p>
       </StartTime>
       <Entrants>
         <p>{match.entrant1}</p>
@@ -20,6 +23,7 @@ export const ScheduledMatchBlock: React.FC<Props> = ({ match }) => {
       <Round>
         <p>{match.round}</p>
       </Round>
+      <Button>Restream</Button>
     </Match>
   );
 };
@@ -56,4 +60,13 @@ const StartTime = styled.div`
 
 const Round = styled.div`
   min-width: 250px;
+`;
+
+const Restream = styled.div`
+  background-color: var(--twitch-purple);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 5px;
 `;

@@ -6,6 +6,7 @@ export const GlobalStyle = createGlobalStyle`
     --dark-grey: #3b4141;
     --medium-gray: #464c4c;
     --light-gray: #535959;
+    --twitch-purple: #9146FF
   }
 
   * {
@@ -37,6 +38,12 @@ export const GlobalStyle = createGlobalStyle`
   a {
     color: inherit;
     text-decoration: none;
+  }
+  
+  button {
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
   }
 
 `;
