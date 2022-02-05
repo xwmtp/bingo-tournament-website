@@ -34,7 +34,7 @@ const Match = styled.div`
   align-items: center;
   background-color: #535959;
   border-radius: 10px;
-  padding: 10px 0px;
+  padding: 10px 0;
   margin-top: 12px;
 `;
 
@@ -43,7 +43,7 @@ const Entrants = styled.div`
 
   p {
     font-size: 18px;
-    margin: 5px 0px;
+    margin: 5px 0;
   }
 `;
 
@@ -60,13 +60,4 @@ const StartTime = styled.div`
 
 const Round = styled.div`
   min-width: 250px;
-`;
-
-const Restream = styled.div`
-  background-color: var(--twitch-purple);
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 5px 10px;
-  border-radius: 5px;
 `;

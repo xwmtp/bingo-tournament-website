@@ -1,5 +1,6 @@
 import { Nav } from "./Nav";
 import styled from "styled-components";
+import { Colors } from "../GlobalStyle";
 
 export function Header() {
   return (
@@ -10,6 +11,6 @@ export function Header() {
 }
 
 const StyledHeader = styled.div`
-  background-color: var(--moss-green);
+  background-color: ${Colors.mossGreen};
   padding: 20px;
 `;

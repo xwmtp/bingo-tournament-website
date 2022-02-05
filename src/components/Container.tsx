@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Colors } from "../GlobalStyle";
 
 interface Props {
   width?: number;
@@ -7,7 +8,7 @@ interface Props {
 export const Container: React.FC<Props> = ({ width, children }) => {
   const StyledContainer = styled.div`
     width: ${width || 1000}px;
-    background-color: var(--medium-gray);
+    background-color: ${Colors.mediumGray};
     padding: 20px;
   `;
 

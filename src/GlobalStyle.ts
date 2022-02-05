@@ -1,14 +1,16 @@
 import { createGlobalStyle } from "styled-components";
 
-export const GlobalStyle = createGlobalStyle`
-  :root {
-    --moss-green: darkslategrey;
-    --dark-grey: #3b4141;
-    --medium-gray: #464c4c;
-    --light-gray: #535959;
-    --twitch-purple: #9146FF
-  }
+export const Colors: { [key: string]: string } = {
+  mossGreen: "#2F4F4F",
+  darkGrey: "#3b4141",
+  mediumGray: "#464c4c",
+  lightGray: "#535959",
+  twitchPurple: "#9146FF",
+};
 
+export type ColorNames = keyof typeof Colors;
+
+export const GlobalStyle = createGlobalStyle`
   * {
     margin: 0;
     padding: 0;
@@ -23,7 +25,7 @@ export const GlobalStyle = createGlobalStyle`
   body {
     height: 100%;
     width: 100%;
-    background-color: var(--dark-grey);
+    background-color: ${Colors.darkGrey};
     color: white;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;

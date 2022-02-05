@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import React from "react";
+import { ColorNames, Colors } from "../../GlobalStyle";
 
 interface Props {
+  color?: ColorNames;
   disabled?: boolean;
 }
 
@@ -14,7 +16,8 @@ export const Button: React.FC<Props> = ({ disabled, children }) => {
 };
 
 const DefaultButton = styled.button`
-  background-color: var(--twitch-purple);
+  background-color: ${(props) =>
+    props.color ? Colors[props.color] : Colors.twitchPurple};
   border: none;
   display: flex;
   flex-direction: row;
