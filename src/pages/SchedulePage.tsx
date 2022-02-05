@@ -4,19 +4,22 @@ import { DateTime } from "luxon";
 import { groupBy } from "../lib/groupBy";
 import React from "react";
 import styled from "styled-components";
+import { ScheduledMatch } from "../domain/Schedule";
 
-const matches = [
+const matches: ScheduledMatch[] = [
   {
     entrant1: "Fleush",
     entrant2: "matttinthehat",
     startTime: DateTime.fromISO("2022-02-02T19:45:03Z"),
     round: "Round 1",
+    restreamChannel: "xwillmarktheplace",
   },
   {
     entrant1: "xwillmarktheplace",
     entrant2: "scaramangado",
     startTime: DateTime.fromISO("2022-02-04T04:45:03Z"),
     round: "Round 1",
+    restreamChannel: "ZeldaSpeedruns",
   },
   {
     entrant1: "juwk",
@@ -42,10 +45,17 @@ export const SchedulePage: React.FC = () => {
 
         {Object.keys(matchesByDate).map((formattedDate) => {
           return (
-            <MatchesByDate>
+            <MatchesByDate key={formattedDate}>
               <h3>{formattedDate}</h3>
               {matchesByDate[formattedDate].map((match) => (
-                <MatchBlock match={match} />
+                <MatchBlock
+                  key={
+                    match.entrant1 +
+                    match.entrant2 +
+                    match.startTime.toLocaleString()
+                  }
+                  match={match}
+                />
               ))}
             </MatchesByDate>
           );

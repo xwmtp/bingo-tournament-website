@@ -1,27 +1,46 @@
 import styled from "styled-components";
 import React from "react";
-import { ColorNames, Colors } from "../../GlobalStyle";
+import { ColorName, Colors } from "../../GlobalStyle";
 
-interface Props {
-  color?: ColorNames;
+export interface ButtonProps extends ButtonLayoutProps {
+  onClick?: () => void;
+  href?: string;
+}
+
+export interface ButtonLayoutProps {
+  color?: ColorName;
   disabled?: boolean;
 }
 
-export const Button: React.FC<Props> = ({ disabled, children }) => {
+export const Button: React.FC<ButtonProps> = ({
+  color,
+  disabled,
+  onClick,
+  href,
+  children,
+}) => {
   let StyledButton = DefaultButton;
   if (disabled) {
     StyledButton = DisabledButton;
   }
-  return <StyledButton>{children}</StyledButton>;
+  return (
+    <StyledButton color={color} onClick={onClick} href={href} target={"_blank"}>
+      {children}
+    </StyledButton>
+  );
 };
 
-const DefaultButton = styled.button`
-  background-color: ${(props) =>
-    props.color ? Colors[props.color] : Colors.twitchPurple};
+const DefaultButton = styled.a<ButtonLayoutProps>`
+  background-color: ${(props) => {
+    console.log(props.color);
+    return props.color ? Colors[props.color] : "black";
+  }};
   border: none;
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
+  flex-grow: 1;
   padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;

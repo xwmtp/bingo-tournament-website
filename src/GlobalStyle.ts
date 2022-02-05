@@ -1,14 +1,15 @@
 import { createGlobalStyle } from "styled-components";
 
-export const Colors: { [key: string]: string } = {
+export const Colors = {
   mossGreen: "#2F4F4F",
+  leafGreen: "#297948",
   darkGrey: "#3b4141",
   mediumGray: "#464c4c",
   lightGray: "#535959",
   twitchPurple: "#9146FF",
-};
+} as const;
 
-export type ColorNames = keyof typeof Colors;
+export type ColorName = keyof typeof Colors;
 
 export const GlobalStyle = createGlobalStyle`
   * {

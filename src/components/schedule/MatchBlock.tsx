@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { ScheduledMatch } from "../../domain/Schedule";
 import { DateTime } from "luxon";
-import { Button } from "../forms/Button";
+import { UrlButton } from "../forms/UrlButton";
 
 interface Props {
   match: ScheduledMatch;
@@ -23,7 +23,26 @@ export const MatchBlock: React.FC<Props> = ({ match }) => {
       <Round>
         <p>{match.round}</p>
       </Round>
-      <Button>Restream</Button>
+
+      <StreamButtons>
+        <UrlButton
+          color={"twitchPurple"}
+          url={
+            match.restreamChannel &&
+            "https://www.twitch.tv/" + match.restreamChannel
+          }
+        >
+          Restream
+        </UrlButton>
+        <ButtonDiv>
+          <UrlButton
+            color={"leafGreen"}
+            url={`https://kadgar.net/live/${match.entrant1}/${match.entrant2}`}
+          >
+            Kadgar
+          </UrlButton>
+        </ButtonDiv>
+      </StreamButtons>
     </Match>
   );
 };
@@ -60,4 +79,17 @@ const StartTime = styled.div`
 
 const Round = styled.div`
   min-width: 250px;
+`;
+
+const StreamButtons = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+const ButtonDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-top: 8px;
+  flex-grow: 1;
 `;
