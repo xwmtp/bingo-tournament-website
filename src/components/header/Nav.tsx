@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
-export function Nav() {
+export const Nav: React.FC = () => {
   return (
     <Navigation>
       <Link to="/leaderboard">Leaderboard</Link>
@@ -10,7 +10,7 @@ export function Nav() {
       <Link to="/about">About</Link>
     </Navigation>
   );
-}
+};
 
 const Navigation = styled.nav`
   flex-direction: row;
