@@ -41,15 +41,11 @@ const DefaultButton = styled.a<ButtonLayoutProps>`
   align-items: center;
   justify-content: center;
   flex-grow: 1;
+  font-size: 0.9rem;
   padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
-  opacity: 0.9;
   transition: 0.1s;
-
-  &:hover {
-    opacity: 1;
-  }
 
   &:active {
     opacity: 0.7;
@@ -60,10 +56,6 @@ const DisabledButton = styled(DefaultButton)`
   --disabled-opacity: 0.3;
   opacity: var(--disabled-opacity);
   cursor: default;
-
-  &:hover {
-    opacity: var(--disabled-opacity);
-  }
 
   &:active {
     opacity: var(--disabled-opacity);

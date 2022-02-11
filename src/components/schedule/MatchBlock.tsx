@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { ScheduledMatch } from "../../domain/Schedule";
 import { DateTime } from "luxon";
 import { UrlButton } from "../forms/UrlButton";
+import { MdOutlineLiveTv } from "react-icons/md";
+import { IoLogoTwitch } from "react-icons/io";
 
 interface Props {
   match: ScheduledMatch;
@@ -32,6 +34,9 @@ export const MatchBlock: React.FC<Props> = ({ match }) => {
             "https://www.twitch.tv/" + match.restreamChannel
           }
         >
+          <IconDiv>
+            <IoLogoTwitch size={18} />
+          </IconDiv>
           Restream
         </UrlButton>
         <ButtonDiv>
@@ -39,6 +44,9 @@ export const MatchBlock: React.FC<Props> = ({ match }) => {
             color={"leafGreen"}
             url={`https://kadgar.net/live/${match.entrant1}/${match.entrant2}`}
           >
+            <IconDiv>
+              <MdOutlineLiveTv size={17} />
+            </IconDiv>
             Kadgar
           </UrlButton>
         </ButtonDiv>
@@ -92,4 +100,12 @@ const ButtonDiv = styled.div`
   flex-direction: row;
   margin-top: 8px;
   flex-grow: 1;
+`;
+
+const IconDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 1px;
+  margin-right: 5px;
 `;
