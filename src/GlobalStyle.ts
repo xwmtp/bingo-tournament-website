@@ -11,6 +11,13 @@ export const Colors = {
 
 export type ColorName = keyof typeof Colors;
 
+export const ScreenWidths = {
+  phone: 480,
+  tablet: 768,
+} as const;
+
+export type ScreenWidth = keyof typeof ScreenWidths;
+
 export const GlobalStyle = createGlobalStyle`
   * {
     margin: 0;
@@ -21,6 +28,10 @@ export const GlobalStyle = createGlobalStyle`
   html {
     height: 100%;
     overflow-y: scroll;
+    font-size: 100%;
+    @media (max-width: ${ScreenWidths["phone"]}px) {
+      font-size: 55%;
+    }
   }
 
   body {
@@ -42,7 +53,7 @@ export const GlobalStyle = createGlobalStyle`
     color: inherit;
     text-decoration: none;
   }
-  
+
   button {
     color: inherit;
     font-family: inherit;

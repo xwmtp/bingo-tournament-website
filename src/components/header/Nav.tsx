@@ -17,6 +17,6 @@ const Navigation = styled.nav`
 `;
 
 const Link = styled(NavLink)`
-  padding: 0px 10px;
-  font-size: 1.4rem;
+  padding: 0 10px;
+  font-size: 1.3rem;
 `;

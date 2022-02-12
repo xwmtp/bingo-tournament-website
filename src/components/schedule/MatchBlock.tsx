@@ -5,6 +5,7 @@ import { DateTime } from "luxon";
 import { UrlButton } from "../forms/UrlButton";
 import { MdOutlineLiveTv } from "react-icons/md";
 import { IoLogoTwitch } from "react-icons/io";
+import { DesktopOnly } from "../divs/DesktopOnly";
 
 interface Props {
   match: ScheduledMatch;
@@ -28,7 +29,7 @@ export const MatchBlock: React.FC<Props> = ({ match }) => {
 
       <StreamButtons>
         <UrlButton
-          color={"twitchPurple"}
+          $color={"twitchPurple"}
           url={
             match.restreamChannel &&
             "https://www.twitch.tv/" + match.restreamChannel
@@ -37,17 +38,17 @@ export const MatchBlock: React.FC<Props> = ({ match }) => {
           <IconDiv>
             <IoLogoTwitch size={18} />
           </IconDiv>
-          Restream
+          <ButtonText>Restream</ButtonText>
         </UrlButton>
         <ButtonDiv>
           <UrlButton
-            color={"leafGreen"}
+            $color={"leafGreen"}
             url={`https://kadgar.net/live/${match.entrant1}/${match.entrant2}`}
           >
             <IconDiv>
               <MdOutlineLiveTv size={17} />
             </IconDiv>
-            Kadgar
+            <ButtonText>Kadgar</ButtonText>
           </UrlButton>
         </ButtonDiv>
       </StreamButtons>
@@ -57,8 +58,9 @@ export const MatchBlock: React.FC<Props> = ({ match }) => {
 
 const Match = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-flow: row;
   align-items: center;
+  justify-content: space-around;
   background-color: #535959;
   border-radius: 10px;
   padding: 10px 0;
@@ -66,10 +68,10 @@ const Match = styled.div`
 `;
 
 const Entrants = styled.div`
-  min-width: 250px;
+  min-width: 14rem;
 
   p {
-    font-size: 18px;
+    font-size: 1.1rem;
     margin: 5px 0;
   }
 `;
@@ -78,21 +80,21 @@ const StartTime = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  min-width: 120px;
-  width: fit-content;
   margin: 0 10px;
-  font-size: 22px;
+  min-width: 4rem;
+  font-size: 1.4rem;
   font-weight: 600;
 `;
 
-const Round = styled.div`
-  min-width: 250px;
+const Round = styled(DesktopOnly)`
+  min-width: 120px;
 `;
 
 const StreamButtons = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin: 0 10px;
 `;
 
 const ButtonDiv = styled.div`
@@ -102,10 +104,12 @@ const ButtonDiv = styled.div`
   flex-grow: 1;
 `;
 
+const ButtonText = styled(DesktopOnly)`
+  margin-left: 5px;
+`;
+
 const IconDiv = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-top: 1px;
-  margin-right: 5px;
 `;

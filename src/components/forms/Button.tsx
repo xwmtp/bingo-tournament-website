@@ -8,32 +8,36 @@ export interface ButtonProps extends ButtonLayoutProps {
 }
 
 export interface ButtonLayoutProps {
-  color?: ColorName;
+  $color?: ColorName;
   disabled?: boolean;
 }
 
 export const Button: React.FC<ButtonProps> = ({
-  color,
   disabled,
   onClick,
   href,
   children,
+  $color,
 }) => {
   let StyledButton = DefaultButton;
   if (disabled) {
     StyledButton = DisabledButton;
   }
   return (
-    <StyledButton color={color} onClick={onClick} href={href} target={"_blank"}>
+    <StyledButton
+      $color={$color}
+      onClick={onClick}
+      href={href}
+      target={"_blank"}
+    >
       {children}
     </StyledButton>
   );
 };
 
 const DefaultButton = styled.a<ButtonLayoutProps>`
-  background-color: ${(props) => {
-    console.log(props.color);
-    return props.color ? Colors[props.color] : "black";
+  background-color: ${({ $color }) => {
+    return $color ? Colors[$color] : "black";
   }};
   border: none;
   display: flex;

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import React from "react";
 
 const user = {
   name: "scaramangado",
@@ -9,7 +10,7 @@ const user = {
 export const RaceTimeUser: React.FC = () => {
   return (
     <UserDiv>
-      <UserAvatar src={user.avatar}></UserAvatar>
+      <UserAvatar src={user.avatar} />
       <p>{user.name}</p>
     </UserDiv>
   );
@@ -22,7 +23,7 @@ const UserDiv = styled.div`
 `;
 
 const UserAvatar = styled.img`
-  --size: 40px;
+  --size: 3rem;
   width: var(--size);
   height: var(--size);
   border-radius: 50px;

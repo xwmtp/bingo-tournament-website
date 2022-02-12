@@ -38,11 +38,8 @@ export const SchedulePage: React.FC = () => {
   );
 
   return (
-    <Container width={1000}>
+    <Container title={"Schedule"}>
       <div>
-        <h1>Schedule</h1>
-        <p>Here comes the schedule</p>
-
         {Object.keys(matchesByDate).map((formattedDate) => {
           return (
             <MatchesByDate key={formattedDate}>
