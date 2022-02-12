@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import React from "react";
+import { FlexDiv } from "../divs/FlexDiv";
+import { DesktopOnly } from "../divs/DesktopOnly";
 
 const user = {
   name: "scaramangado",
@@ -9,18 +11,13 @@ const user = {
 
 export const RaceTimeUser: React.FC = () => {
   return (
-    <UserDiv>
+    <FlexDiv>
       <UserAvatar src={user.avatar} />
-      <p>{user.name}</p>
-    </UserDiv>
+
+      <DesktopOnly>{user.name}</DesktopOnly>
+    </FlexDiv>
   );
 };
-
-const UserDiv = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
 
 const UserAvatar = styled.img`
   --size: 3rem;

@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
+import { FlexDiv } from "./divs/FlexDiv";
 
 export const Page: React.FC = ({ children }) => {
   return <StyledPage>{children}</StyledPage>;
 };
 
-const StyledPage = styled.div`
-  display: flex;
+const StyledPage = styled(FlexDiv)`
   flex-flow: column;
-  align-items: center;
+  justify-content: start;
   padding: 20px;
   flex-grow: 1;
 `;

@@ -2,6 +2,7 @@ import { Nav } from "./Nav";
 import styled from "styled-components";
 import { Colors } from "../../GlobalStyle";
 import { RaceTimeUser } from "./RaceTimeUser";
+import { FlexDiv } from "../divs/FlexDiv";
 
 export function Header() {
   return (
@@ -14,19 +15,12 @@ export function Header() {
   );
 }
 
-const StyledHeader = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+const StyledHeader = styled(FlexDiv)`
   background-color: ${Colors.mossGreen};
   padding: 20px;
 `;
 
-const HeaderContent = styled.div`
+const HeaderContent = styled(FlexDiv)`
   width: 1200px;
-  display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  align-items: center;
 `;

@@ -6,6 +6,7 @@ import { UrlButton } from "../forms/UrlButton";
 import { MdOutlineLiveTv } from "react-icons/md";
 import { IoLogoTwitch } from "react-icons/io";
 import { DesktopOnly } from "../divs/DesktopOnly";
+import { FlexDiv } from "../divs/FlexDiv";
 
 interface Props {
   match: ScheduledMatch;
@@ -35,9 +36,9 @@ export const MatchBlock: React.FC<Props> = ({ match }) => {
             "https://www.twitch.tv/" + match.restreamChannel
           }
         >
-          <IconDiv>
+          <FlexDiv>
             <IoLogoTwitch size={18} />
-          </IconDiv>
+          </FlexDiv>
           <ButtonText>Restream</ButtonText>
         </UrlButton>
         <ButtonDiv>
@@ -45,9 +46,9 @@ export const MatchBlock: React.FC<Props> = ({ match }) => {
             $color={"leafGreen"}
             url={`https://kadgar.net/live/${match.entrant1}/${match.entrant2}`}
           >
-            <IconDiv>
+            <FlexDiv>
               <MdOutlineLiveTv size={17} />
-            </IconDiv>
+            </FlexDiv>
             <ButtonText>Kadgar</ButtonText>
           </UrlButton>
         </ButtonDiv>
@@ -56,10 +57,7 @@ export const MatchBlock: React.FC<Props> = ({ match }) => {
   );
 };
 
-const Match = styled.div`
-  display: flex;
-  flex-flow: row;
-  align-items: center;
+const Match = styled(FlexDiv)`
   justify-content: space-around;
   background-color: #535959;
   border-radius: 10px;
@@ -76,10 +74,7 @@ const Entrants = styled.div`
   }
 `;
 
-const StartTime = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+const StartTime = styled(FlexDiv)`
   margin: 0 10px;
   min-width: 4rem;
   font-size: 1.4rem;
@@ -90,26 +85,16 @@ const Round = styled(DesktopOnly)`
   min-width: 120px;
 `;
 
-const StreamButtons = styled.div`
-  display: flex;
+const StreamButtons = styled(FlexDiv)`
   flex-direction: column;
-  justify-content: center;
   margin: 0 10px;
 `;
 
 const ButtonDiv = styled.div`
-  display: flex;
-  flex-direction: row;
   margin-top: 8px;
-  flex-grow: 1;
+  width: 100%;
 `;
 
 const ButtonText = styled(DesktopOnly)`
   margin-left: 5px;
-`;
-
-const IconDiv = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
 `;
