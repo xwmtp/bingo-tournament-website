@@ -2,6 +2,7 @@ import { createGlobalStyle } from "styled-components";
 
 export const Colors = {
   mossGreen: "#2F4F4F",
+  brightMossGreen: "#6a8f88",
   leafGreen: "#297948",
   darkGrey: "#3b4141",
   mediumGray: "#464c4c",
@@ -58,6 +59,18 @@ export const GlobalStyle = createGlobalStyle`
     color: inherit;
     font-family: inherit;
     font-size: inherit;
+  }
+
+  input {
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    border: inherit;
+    box-shadow: none;
+    ::placeholder {
+      color: ${Colors.lightGray};
+      opacity: 1;
+    }
   }
 
 `;
