@@ -3,6 +3,7 @@ import { HashRouter, Route, Routes } from "react-router-dom";
 import { Header } from "./components/header/Header";
 import { SchedulePage } from "./pages/SchedulePage";
 import { Page } from "./components/Page";
+import { AddMatchPage } from "./pages/AddMatchPage";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Routes>
           <Route path={"/leaderboard"} />
           <Route path={"/schedule"} element={<SchedulePage />} />
+          <Route path={"/schedule/addmatch"} element={<AddMatchPage />} />
           <Route path={"/results"} />
           <Route path={"/about"} />
         </Routes>
