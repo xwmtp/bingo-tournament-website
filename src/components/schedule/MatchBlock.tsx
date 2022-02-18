@@ -5,8 +5,7 @@ import { DateTime } from "luxon";
 import { UrlButton } from "../forms/UrlButton";
 import { MdOutlineLiveTv } from "react-icons/md";
 import { IoLogoTwitch } from "react-icons/io";
-import { DesktopOnly } from "../divs/DesktopOnly";
-import { FlexDiv } from "../divs/FlexDiv";
+import { DesktopOnlyFlexDiv, FlexDiv } from "../divs/FlexDiv";
 
 interface Props {
   match: ScheduledMatch;
@@ -81,7 +80,7 @@ const StartTime = styled(FlexDiv)`
   font-weight: 600;
 `;
 
-const Round = styled(DesktopOnly)`
+const Round = styled(DesktopOnlyFlexDiv)`
   min-width: 120px;
 `;
 
@@ -95,6 +94,6 @@ const ButtonDiv = styled.div`
   width: 100%;
 `;
 
-const ButtonText = styled(DesktopOnly)`
+const ButtonText = styled(DesktopOnlyFlexDiv)`
   margin-left: 5px;
 `;
