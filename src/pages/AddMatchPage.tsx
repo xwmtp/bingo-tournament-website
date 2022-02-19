@@ -4,42 +4,42 @@ import { DateTime } from "luxon";
 import { Input } from "../components/forms/Input";
 
 export const AddMatchPage: React.FC = () => {
-  const [dateInput, setDateInput] = useState<DateTime>(DateTime.local());
-  const [timeInput, setTimeInput] = useState<DateTime>(DateTime.local());
-
-  console.log("date: " + dateInput.toLocaleString());
+  const [dateTimeInput, setDateTimeInput] = useState<DateTime>(
+    DateTime.local()
+  );
 
   return (
     <Container title={"Schedule new match"}>
       <Input
         type="date"
         className="form-control"
-        value={dateInput.toISODate()}
+        value={dateTimeInput.toISODate()}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-          console.log(event.target.value);
           const parsedDate = DateTime.fromISO(event.target.value);
           if (!parsedDate.isValid) {
-            console.log("invalid " + event.target.value);
             return;
           }
-          setDateInput(parsedDate);
+          setDateTimeInput(mergeDateAndTime(parsedDate, dateTimeInput));
         }}
       />
       <Input
         type="time"
         className="form-control"
-        value={dateInput.toFormat("HH:mm")}
+        value={dateTimeInput.toFormat("HH:mm")}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-          console.log(event.target.value);
-          const parsedDate = DateTime.fromISO(event.target.value);
-          if (!parsedDate.isValid) {
-            console.log("invalid " + event.target.value);
+          const parsedTime = DateTime.fromISO(event.target.value);
+          if (!parsedTime.isValid) {
             return;
           }
-          console.log(parsedDate.toLocaleString());
-          setDateInput(parsedDate);
+          setDateTimeInput(mergeDateAndTime(dateTimeInput, parsedTime));
         }}
       />
+      <p>{dateTimeInput.toLocaleString(DateTime.DATETIME_FULL)}</p>
     </Container>
   );
+};
+
+const mergeDateAndTime = (date: DateTime, time: DateTime): DateTime => {
+  const iso = date.toFormat("yyyy-MM-dd") + "T" + time.toFormat("HH:mm");
+  return DateTime.fromISO(iso);
 };
