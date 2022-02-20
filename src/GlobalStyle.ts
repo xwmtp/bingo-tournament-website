@@ -72,5 +72,10 @@ export const GlobalStyle = createGlobalStyle`
       opacity: 1;
     }
   }
+  
+  h4 {
+    font-weight: normal;
+    font-size: 1.2rem;
+  }
 
 `;

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import React from "react";
 import { FlexDiv } from "../divs/FlexDiv";
 import { DesktopOnly } from "../divs/DesktopOnly";
+import { NavLink } from "react-router-dom";
 
 const user = {
   name: "scaramangado",
@@ -11,11 +12,13 @@ const user = {
 
 export const RaceTimeUser: React.FC = () => {
   return (
-    <FlexDiv>
-      <UserAvatar src={user.avatar} />
+    <NavLink to="/profile/settings">
+      <FlexDiv>
+        <UserAvatar src={user.avatar} />
 
-      <DesktopOnly>{user.name}</DesktopOnly>
-    </FlexDiv>
+        <DesktopOnly>{user.name}</DesktopOnly>
+      </FlexDiv>
+    </NavLink>
   );
 };
 

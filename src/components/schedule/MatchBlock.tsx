@@ -29,7 +29,7 @@ export const MatchBlock: React.FC<Props> = ({ match }) => {
 
       <StreamButtons>
         <UrlButton
-          $color={"twitchPurple"}
+          color={"twitchPurple"}
           url={
             match.restreamChannel &&
             "https://www.twitch.tv/" + match.restreamChannel
@@ -42,7 +42,7 @@ export const MatchBlock: React.FC<Props> = ({ match }) => {
         </UrlButton>
         <ButtonDiv>
           <UrlButton
-            $color={"leafGreen"}
+            color={"leafGreen"}
             url={`https://kadgar.net/live/${match.entrant1}/${match.entrant2}`}
           >
             <FlexDiv>

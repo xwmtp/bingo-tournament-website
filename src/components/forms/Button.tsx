@@ -5,19 +5,25 @@ import { ColorName, Colors } from "../../GlobalStyle";
 export interface ButtonProps extends ButtonLayoutProps {
   onClick?: () => void;
   href?: string;
+  className?: string;
 }
 
 export interface ButtonLayoutProps {
-  $color?: ColorName;
+  color?: ColorName;
+  size?: ButtonSize;
   disabled?: boolean;
 }
+
+type ButtonSize = "normal" | "big";
 
 export const Button: React.FC<ButtonProps> = ({
   disabled,
   onClick,
   href,
   children,
-  $color,
+  className,
+  color,
+  size,
 }) => {
   let StyledButton = DefaultButton;
   if (disabled) {
@@ -25,10 +31,12 @@ export const Button: React.FC<ButtonProps> = ({
   }
   return (
     <StyledButton
-      $color={$color}
+      color={color}
+      size={size}
       onClick={onClick}
       href={href}
       target={"_blank"}
+      className={className}
     >
       {children}
     </StyledButton>
@@ -36,8 +44,8 @@ export const Button: React.FC<ButtonProps> = ({
 };
 
 const DefaultButton = styled.a<ButtonLayoutProps>`
-  background-color: ${({ $color }) => {
-    return $color ? Colors[$color] : "black";
+  background-color: ${({ color }) => {
+    return color ? Colors[color] : "black";
   }};
   border: none;
   display: flex;
@@ -45,7 +53,7 @@ const DefaultButton = styled.a<ButtonLayoutProps>`
   align-items: center;
   justify-content: center;
   flex-grow: 1;
-  font-size: 0.9rem;
+  font-size: ${({ size }) => fontSize(size || "normal")}rem;
   padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
@@ -65,3 +73,14 @@ const DisabledButton = styled(DefaultButton)`
     opacity: var(--disabled-opacity);
   }
 `;
+
+// in rem
+const fontSize = (size: ButtonSize): number => {
+  if (size === "normal") {
+    return 0.9;
+  }
+  if (size === "big") {
+    return 1.3;
+  }
+  return 0.9;
+};
