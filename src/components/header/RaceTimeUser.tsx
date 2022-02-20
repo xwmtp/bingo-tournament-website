@@ -3,20 +3,15 @@ import React from "react";
 import { FlexDiv } from "../divs/FlexDiv";
 import { DesktopOnly } from "../divs/DesktopOnly";
 import { NavLink } from "react-router-dom";
-
-const user = {
-  name: "scaramangado",
-  discriminator: 9143,
-  avatar: "https://racetime.gg/media/feynman_small.jpeg",
-};
+import { mockLoggedInUser } from "../../domain/MockData";
 
 export const RaceTimeUser: React.FC = () => {
   return (
     <NavLink to="/profile/settings">
       <FlexDiv>
-        <UserAvatar src={user.avatar} />
+        <UserAvatar src={mockLoggedInUser.avatar} />
 
-        <DesktopOnly>{user.name}</DesktopOnly>
+        <DesktopOnly>{mockLoggedInUser.name}</DesktopOnly>
       </FlexDiv>
     </NavLink>
   );
