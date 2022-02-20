@@ -6,6 +6,7 @@ import { UrlButton } from "../forms/UrlButton";
 import { MdOutlineLiveTv } from "react-icons/md";
 import { IoLogoTwitch } from "react-icons/io";
 import { DesktopOnlyFlexDiv, FlexDiv } from "../divs/FlexDiv";
+import { Colors } from "../../GlobalStyle";
 
 interface Props {
   match: ScheduledMatch;
@@ -56,7 +57,7 @@ export const MatchBlock: React.FC<Props> = ({ match }) => {
 
 const Match = styled(FlexDiv)`
   justify-content: space-around;
-  background-color: #535959;
+  background-color: ${Colors.lightGray};
   border-radius: 10px;
   padding: 10px 0;
   margin-top: 12px;

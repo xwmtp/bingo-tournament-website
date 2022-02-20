@@ -4,8 +4,8 @@ export const Colors = {
   mossGreen: "#2F4F4F",
   brightMossGreen: "#6a8f88",
   leafGreen: "#297948",
-  darkGrey: "#3b4141",
-  mediumGray: "#464c4c",
+  darkGrey: "#3A4040",
+  mediumGray: "#454B4B",
   lightGray: "#535959",
   twitchPurple: "#9146FF",
 } as const;
@@ -16,8 +16,6 @@ export const ScreenWidths = {
   phone: 480,
   tablet: 768,
 } as const;
-
-export type ScreenWidth = keyof typeof ScreenWidths;
 
 export const GlobalStyle = createGlobalStyle`
   * {
