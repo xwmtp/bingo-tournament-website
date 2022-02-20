@@ -15,9 +15,7 @@ export const MatchBlock: React.FC<Props> = ({ match }) => {
   return (
     <Match>
       <StartTime>
-        <p>
-          {match.startTime.setZone("EST").toLocaleString(DateTime.TIME_SIMPLE)}
-        </p>
+        <p>{match.startTime.toLocaleString(DateTime.TIME_SIMPLE)}</p>
       </StartTime>
       <Entrants>
         <p>{match.entrant1}</p>

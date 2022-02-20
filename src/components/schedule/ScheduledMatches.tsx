@@ -12,7 +12,6 @@ export const ScheduledMatches: React.FC<Props> = ({ matches }) => {
   const matchesByDate = groupBy(matches, (match: ScheduledMatch) =>
     match.startTime
       .setLocale("en-us")
-      .setZone("EST")
       .toLocaleString({ weekday: "long", month: "long", day: "numeric" })
   );
 
