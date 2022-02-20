@@ -5,8 +5,9 @@ export const Colors = {
   brightMossGreen: "#6a8f88",
   leafGreen: "#297948",
   darkGrey: "#3A4040",
-  mediumGray: "#454B4B",
+  mediumGrey: "#454B4B",
   lightGray: "#535959",
+  boxShadowGrey: "#383d3c",
   twitchPurple: "#9146FF",
 } as const;
 

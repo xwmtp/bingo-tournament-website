@@ -26,7 +26,8 @@ const StyledContainer = styled(FlexDiv)<Props>`
   justify-content: space-evenly;
   width: ${({ $width }) => $width || 1000}px;
   max-width: 90vw;
-  background-color: ${Colors.mediumGray};
+  background-color: ${Colors.mediumGrey};
   padding: 14px 20px;
   border-radius: 10px;
+  box-shadow: 5px 5px 5px ${Colors.boxShadowGrey};
 `;

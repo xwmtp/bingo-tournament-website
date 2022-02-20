@@ -36,14 +36,16 @@ const StyledContainer = styled.div<Props>`
 `;
 
 const StyledHeader = styled.div`
-  background-color: ${Colors.mediumGray};
+  background-color: ${Colors.mediumGrey};
   padding: 10px 20px;
   margin-bottom: 4px;
   border-radius: 10px 10px 0 0;
+  box-shadow: 5px 5px 5px ${Colors.boxShadowGrey};
 `;
 
 const StyledContent = styled.div<Props>`
-  background-color: ${Colors.mediumGray};
+  background-color: ${Colors.mediumGrey};
   padding: 20px;
   border-radius: ${({ title }) => (title ? "0 0" : "10px 10px")} 10px 10px;
+  box-shadow: 5px 5px 4px ${Colors.boxShadowGrey};
 `;
