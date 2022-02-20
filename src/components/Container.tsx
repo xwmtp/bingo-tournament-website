@@ -32,6 +32,7 @@ export const Container: React.FC<Props> = ({
 const StyledContainer = styled.div<Props>`
   width: ${({ $width }) => $width || 1000}px;
   max-width: 90vw;
+  margin-bottom: 25px;
 `;
 
 const StyledHeader = styled.div`

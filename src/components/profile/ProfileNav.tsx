@@ -13,7 +13,7 @@ export const ProfileNav: React.FC = () => {
 };
 
 const ProfileNavContainer = styled(NavContainer)`
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 `;
 
 const Link = styled(NavLink)`

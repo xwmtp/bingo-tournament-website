@@ -1,10 +1,8 @@
 import { Container } from "../components/Container";
-import { MatchBlock } from "../components/schedule/MatchBlock";
 import { DateTime } from "luxon";
-import { groupBy } from "../lib/groupBy";
 import React from "react";
-import styled from "styled-components";
 import { ScheduledMatch } from "../domain/Schedule";
+import { ScheduledMatches } from "../components/schedule/ScheduledMatches";
 
 const matches: ScheduledMatch[] = [
   {
@@ -30,38 +28,9 @@ const matches: ScheduledMatch[] = [
 ];
 
 export const SchedulePage: React.FC = () => {
-  const matchesByDate = groupBy(matches, (match) =>
-    match.startTime
-      .setLocale("en-us")
-      .setZone("EST")
-      .toLocaleString({ weekday: "long", month: "long", day: "numeric" })
-  );
-
   return (
     <Container title={"Schedule"}>
-      <div>
-        {Object.keys(matchesByDate).map((formattedDate) => {
-          return (
-            <MatchesByDate key={formattedDate}>
-              <h3>{formattedDate}</h3>
-              {matchesByDate[formattedDate].map((match) => (
-                <MatchBlock
-                  key={
-                    match.entrant1 +
-                    match.entrant2 +
-                    match.startTime.toLocaleString()
-                  }
-                  match={match}
-                />
-              ))}
-            </MatchesByDate>
-          );
-        })}
-      </div>
+      <ScheduledMatches matches={matches} />
     </Container>
   );
 };
-
-const MatchesByDate = styled.div`
-  margin-top: 20px;
-`;
