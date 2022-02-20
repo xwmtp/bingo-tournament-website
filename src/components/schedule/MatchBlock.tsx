@@ -42,7 +42,7 @@ export const MatchBlock: React.FC<Props> = ({ match }) => {
         </UrlButton>
         <ButtonDiv>
           <UrlButton
-            color={"leafGreen"}
+            color={"brightMossGreen"}
             url={`https://kadgar.net/live/${match.entrant1}/${match.entrant2}`}
           >
             <FlexDiv>
