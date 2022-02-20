@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { NavContainer } from "../NavContainer";
 import { NavLink } from "react-router-dom";
+import { Margins } from "../../GlobalStyle";
 
 export const ProfileNav: React.FC = () => {
   return (
@@ -13,7 +14,7 @@ export const ProfileNav: React.FC = () => {
 };
 
 const ProfileNavContainer = styled(NavContainer)`
-  margin-bottom: 25px;
+  margin-bottom: ${Margins.container}px;
 `;
 
 const Link = styled(NavLink)`

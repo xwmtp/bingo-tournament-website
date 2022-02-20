@@ -1,23 +1,23 @@
 import styled from "styled-components";
-import { Colors } from "../GlobalStyle";
 import React from "react";
+import { Colors, Margins } from "../GlobalStyle";
 
 interface Props {
   title?: string;
   size?: "normal" | "small";
   className?: string;
-  $width?: number;
+  width?: number;
 }
 
 export const Container: React.FC<Props> = ({
   title,
   size = "normal",
-  $width,
+  width,
   className,
   children,
 }) => {
   return (
-    <StyledContainer className={className} $width={$width}>
+    <StyledContainer className={className} width={width}>
       {title && (
         <StyledHeader>
           {size === "normal" ? <h2>{title}</h2> : <h3>{title}</h3>}
@@ -30,9 +30,9 @@ export const Container: React.FC<Props> = ({
 };
 
 const StyledContainer = styled.div<Props>`
-  width: ${({ $width }) => $width || 1000}px;
+  width: ${({ width }) => width || 1000}px;
   max-width: 90vw;
-  margin-bottom: 25px;
+  margin-bottom: ${Margins.container}px;
 `;
 
 const StyledHeader = styled.div`

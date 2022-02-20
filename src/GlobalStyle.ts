@@ -17,6 +17,10 @@ export const ScreenWidths = {
   tablet: 768,
 } as const;
 
+export const Margins = {
+  container: 24,
+};
+
 export const GlobalStyle = createGlobalStyle`
   * {
     margin: 0;
