@@ -11,11 +11,7 @@ export const AboutPage: React.FC = () => {
   return (
     <AboutPageDiv>
       <Container title={"About"} width={aboutWidth}>
-        <h2>Previous tournaments</h2>
-        <ul>
-          <li>2020</li>
-          <li>2021</li>
-        </ul>
+        <p> Welcome to the 2022 OoT Bingo Tournament!</p>
       </Container>
       <PreviousYearsContainer
         title={"Previous years"}
