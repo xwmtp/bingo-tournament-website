@@ -7,7 +7,7 @@ export const LoginButton: React.FC = () => {
     <div>
       <StyledLoginButton
         color={"brightMossGreen"}
-        url={"https://www.speedrun.com/"}
+        url={"http://localhost:8080/login/racetime"}
       >
         Login with racetime.gg
       </StyledLoginButton>
