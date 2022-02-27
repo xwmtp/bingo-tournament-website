@@ -1,5 +1,6 @@
 import { ScheduledMatch } from "./Schedule";
 import { DateTime } from "luxon";
+import { User } from "./User";
 
 export const mockMatches: ScheduledMatch[] = [
   new ScheduledMatch(
@@ -30,8 +31,9 @@ export const mockMatches: ScheduledMatch[] = [
   ),
 ];
 
-export const mockLoggedInUser = {
-  name: "scaramangado",
-  discriminator: 9143,
-  avatar: "https://racetime.gg/media/feynman_small.jpeg",
-};
+export const mockLoggedInUser = new User(
+  "wdm1LPWjGABEnVx6",
+  "scaramangado",
+  "https://racetime.gg/media/feynman_small.jpeg",
+  "scaramangado"
+);

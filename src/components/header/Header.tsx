@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Colors } from "../../GlobalStyle";
 import { RaceTimeUser } from "./RaceTimeUser";
 import { FlexDiv } from "../divs/FlexDiv";
+import { LoginButton } from "./LoginButton";
 
 export function Header() {
   return (
@@ -10,6 +11,7 @@ export function Header() {
       <HeaderContent>
         <Nav />
         <RaceTimeUser />
+        <LoginButton />
       </HeaderContent>
     </StyledHeader>
   );
