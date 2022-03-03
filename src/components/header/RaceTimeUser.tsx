@@ -3,15 +3,20 @@ import React from "react";
 import { FlexDiv } from "../divs/FlexDiv";
 import { DesktopOnly } from "../divs/DesktopOnly";
 import { NavLink } from "react-router-dom";
-import { mockLoggedInUser } from "../../domain/MockData";
+import { User } from "../../domain/User";
 
-export const RaceTimeUser: React.FC = () => {
+interface Props {
+  user: User;
+}
+
+export const RaceTimeUser: React.FC<Props> = ({ user }) => {
+  console.log("test");
+  console.log(user);
   return (
     <NavLink to="/profile/settings">
       <FlexDiv>
-        <UserAvatar src={mockLoggedInUser.avatar} />
-
-        <DesktopOnly>{mockLoggedInUser.name}</DesktopOnly>
+        <UserAvatar src={user.avatar} />
+        <DesktopOnly>{user.name}</DesktopOnly>
       </FlexDiv>
     </NavLink>
   );

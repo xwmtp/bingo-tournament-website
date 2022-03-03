@@ -4,14 +4,22 @@ import { Colors } from "../../GlobalStyle";
 import { RaceTimeUser } from "./RaceTimeUser";
 import { FlexDiv } from "../divs/FlexDiv";
 import { LoginButton } from "./LoginButton";
+import { UserContext } from "../../App";
+import { useContext } from "react";
 
 export function Header() {
+  const userContext = useContext(UserContext);
+  console.log("t1");
+
   return (
     <StyledHeader>
       <HeaderContent>
         <Nav />
-        <RaceTimeUser />
-        <LoginButton />
+        {userContext.user ? (
+          <RaceTimeUser user={userContext.user} />
+        ) : (
+          <LoginButton />
+        )}
       </HeaderContent>
     </StyledHeader>
   );

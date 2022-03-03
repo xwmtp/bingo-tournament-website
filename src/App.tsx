@@ -1,4 +1,10 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import { Header } from "./components/header/Header";
 import { SchedulePage } from "./pages/SchedulePage";
@@ -9,13 +15,14 @@ import { MyMatchesPage } from "./pages/MyMatchesPage";
 import { ProfileSettingsPage } from "./pages/ProfileSettingsPage";
 import { AboutPage } from "./pages/AboutPage";
 import { User } from "./domain/User";
+import { getApi } from "./api/api";
 
-interface UserContext {
+interface UserContextProps {
   user?: User;
   setUser: Dispatch<SetStateAction<User | undefined>>;
 }
 
-const userContext = React.createContext<UserContext>({
+export const UserContext = React.createContext<UserContextProps>({
   user: undefined,
   setUser: () => {},
 });
@@ -23,8 +30,24 @@ const userContext = React.createContext<UserContext>({
 function App() {
   const [user, setUser] = useState<User | undefined>(undefined);
 
+  const fetchUser = useCallback(() => {
+    getApi()
+      .getUser()
+      .then((fetchedUser) => {
+        setUser(fetchedUser);
+      })
+      .catch((error) => {
+        console.log("Could not fetch user " + error);
+        setUser(undefined);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetchUser();
+  }, [fetchUser]);
+
   return (
-    <userContext.Provider value={{ user: user, setUser: setUser }}>
+    <UserContext.Provider value={{ user: user, setUser: setUser }}>
       <HashRouter basename={"/"}>
         <Header />
         <Page>
@@ -42,7 +65,7 @@ function App() {
           </Routes>
         </Page>
       </HashRouter>
-    </userContext.Provider>
+    </UserContext.Provider>
   );
 }
 
