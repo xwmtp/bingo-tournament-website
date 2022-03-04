@@ -35,17 +35,22 @@ function App() {
   const [loadingUser, setLoadingUser] = useState<boolean>(true);
 
   const fetchUser = useCallback(() => {
-    getApi()
-      .getUser()
-      .then((fetchedUser) => {
-        setUser(fetchedUser);
-      })
-      .catch((error) => {
-        console.log("Could not fetch user " + error);
-        setUser(undefined);
-      })
-      .finally(() => setLoadingUser(false));
-  }, []);
+    if (!user) {
+      setLoadingUser(true);
+      console.log("fetching...");
+      getApi()
+        .getUser()
+        .then((fetchedUser) => {
+          console.log("found user!");
+          setUser(fetchedUser);
+        })
+        .catch((error) => {
+          console.log("Could not fetch user " + error);
+          setUser(undefined);
+        })
+        .finally(() => setLoadingUser(false));
+    }
+  }, [user]);
 
   useEffect(() => {
     fetchUser();

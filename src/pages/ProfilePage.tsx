@@ -1,12 +1,19 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
-import { ProfileNav } from "../components/profile/ProfileNav";
+import { TabSelector } from "../components/TabSelector";
+import { Margins } from "../GlobalStyle";
 
 export const ProfilePage: React.FC = () => {
   return (
     <ProfilePageDiv>
-      <ProfileNav />
+      <StyledTabSelector
+        tabOptions={[
+          { title: "Profile", to: "/profile/settings" },
+          { title: "Matches", to: "/profile/matches" },
+          { title: "Admin", to: "/profile/admin" },
+        ]}
+      />
       <Outlet />
     </ProfilePageDiv>
   );
@@ -14,4 +21,8 @@ export const ProfilePage: React.FC = () => {
 
 const ProfilePageDiv = styled.div`
   flex-direction: column;
+`;
+
+const StyledTabSelector = styled(TabSelector)`
+  margin-bottom: ${Margins.container}px;
 `;
