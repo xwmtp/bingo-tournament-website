@@ -16,19 +16,23 @@ import { ProfileSettingsPage } from "./pages/ProfileSettingsPage";
 import { AboutPage } from "./pages/AboutPage";
 import { User } from "./domain/User";
 import { getApi } from "./api/api";
+import { AdminPage } from "./pages/AdminPage";
 
-interface UserContextProps {
+export interface UserContextProps {
   user?: User;
+  loading: boolean;
   setUser: Dispatch<SetStateAction<User | undefined>>;
 }
 
 export const UserContext = React.createContext<UserContextProps>({
   user: undefined,
+  loading: true,
   setUser: () => {},
 });
 
 function App() {
   const [user, setUser] = useState<User | undefined>(undefined);
+  const [loadingUser, setLoadingUser] = useState<boolean>(true);
 
   const fetchUser = useCallback(() => {
     getApi()
@@ -39,7 +43,8 @@ function App() {
       .catch((error) => {
         console.log("Could not fetch user " + error);
         setUser(undefined);
-      });
+      })
+      .finally(() => setLoadingUser(false));
   }, []);
 
   useEffect(() => {
@@ -47,7 +52,9 @@ function App() {
   }, [fetchUser]);
 
   return (
-    <UserContext.Provider value={{ user: user, setUser: setUser }}>
+    <UserContext.Provider
+      value={{ user: user, setUser: setUser, loading: loadingUser }}
+    >
       <HashRouter basename={"/"}>
         <Header />
         <Page>
@@ -61,6 +68,7 @@ function App() {
             <Route path={"/profile"} element={<ProfilePage />}>
               <Route path={"settings"} element={<ProfileSettingsPage />} />
               <Route path={"matches"} element={<MyMatchesPage />} />
+              <Route path={"admin"} element={<AdminPage />} />
             </Route>
           </Routes>
         </Page>

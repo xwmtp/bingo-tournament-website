@@ -5,25 +5,34 @@ import { RaceTimeUser } from "./RaceTimeUser";
 import { FlexDiv } from "../divs/FlexDiv";
 import { LoginButton } from "./LoginButton";
 import { UserContext } from "../../App";
-import { useContext } from "react";
+import React, { useContext } from "react";
+import { User } from "../../domain/User";
 
-export function Header() {
+export const Header: React.FC = () => {
   const userContext = useContext(UserContext);
-  console.log("t1");
 
   return (
     <StyledHeader>
       <HeaderContent>
         <Nav />
-        {userContext.user ? (
-          <RaceTimeUser user={userContext.user} />
-        ) : (
-          <LoginButton />
-        )}
+        <LoginOrUser loading={userContext.loading} user={userContext.user} />
       </HeaderContent>
     </StyledHeader>
   );
-}
+};
+
+const LoginOrUser: React.FC<{ user: User | undefined; loading: boolean }> = ({
+  user,
+  loading,
+}) => {
+  if (user) {
+    return <RaceTimeUser user={user} />;
+  }
+  if (loading) {
+    return <></>;
+  }
+  return <LoginButton />;
+};
 
 const StyledHeader = styled(FlexDiv)`
   background-color: ${Colors.mossGreen};
