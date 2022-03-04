@@ -1,15 +1,16 @@
 import { DateTime } from "luxon";
+import { User } from "./User";
 
 export class ScheduledMatch {
   constructor(
-    public readonly entrant1: string,
-    public readonly entrant2: string,
+    public readonly entrant1: User,
+    public readonly entrant2: User,
     public readonly startTime: DateTime,
     public readonly round?: string,
     public readonly restreamChannel?: string
   ) {}
 
-  includesEntrant(entrant: string) {
-    return this.entrant1 === entrant || this.entrant2 === entrant;
+  includesEntrant(id: string) {
+    return this.entrant1.id === id || this.entrant2.id === id;
   }
 }

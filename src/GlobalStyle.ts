@@ -18,6 +18,11 @@ export const ScreenWidths = {
   tablet: 768,
 } as const;
 
+export const ScreenWidths2 = {
+  phone: `(max-width: 480px)`,
+  tablet: `(max-width: 768px)`,
+} as const;
+
 export const Margins = {
   container: 24,
 };
@@ -33,7 +38,7 @@ export const GlobalStyle = createGlobalStyle`
     height: 100%;
     overflow-y: scroll;
     font-size: 100%;
-    @media (max-width: ${ScreenWidths["phone"]}px) {
+    @media (max-width: ${ScreenWidths.phone}px) {
       font-size: 55%;
     }
   }
@@ -79,6 +84,12 @@ export const GlobalStyle = createGlobalStyle`
   h4 {
     font-weight: normal;
     font-size: 1.2rem;
+  }
+  
+  .desktopOnly {
+    @media ${ScreenWidths2.tablet} {
+      display: none;
+    }
   }
 
 `;

@@ -2,7 +2,7 @@ import { MatchBlock } from "./MatchBlock";
 import { groupBy } from "../../lib/groupBy";
 import React from "react";
 import styled from "styled-components";
-import { ScheduledMatch } from "../../domain/Schedule";
+import { ScheduledMatch } from "../../domain/Match";
 
 interface Props {
   matches: ScheduledMatch[];
@@ -24,8 +24,8 @@ export const ScheduledMatches: React.FC<Props> = ({ matches }) => {
             {matchesByDate[formattedDate].map((match) => (
               <MatchBlock
                 key={
-                  match.entrant1 +
-                  match.entrant2 +
+                  match.entrant1.id +
+                  match.entrant2.id +
                   match.startTime.toLocaleString()
                 }
                 match={match}

@@ -1,7 +1,7 @@
 import { Nav } from "./Nav";
 import styled from "styled-components";
 import { Colors } from "../../GlobalStyle";
-import { RaceTimeUser } from "./RaceTimeUser";
+import { LoggedInUserDisplay } from "./LoggedInUserDisplay";
 import { FlexDiv } from "../divs/FlexDiv";
 import { LoginButton } from "./LoginButton";
 import { UserContext } from "../../App";
@@ -26,7 +26,7 @@ const LoginOrUser: React.FC<{ user: User | undefined; loading: boolean }> = ({
   loading,
 }) => {
   if (user) {
-    return <RaceTimeUser user={user} />;
+    return <LoggedInUserDisplay user={user} />;
   }
   if (loading) {
     return <></>;

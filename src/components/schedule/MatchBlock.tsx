@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { ScheduledMatch } from "../../domain/Schedule";
+import { ScheduledMatch } from "../../domain/Match";
 import { DateTime } from "luxon";
 import { UrlButton } from "../forms/UrlButton";
 import { MdOutlineLiveTv } from "react-icons/md";
 import { IoLogoTwitch } from "react-icons/io";
 import { DesktopOnlyFlexDiv, FlexDiv } from "../divs/FlexDiv";
 import { Colors } from "../../GlobalStyle";
+import { EntrantDisplay } from "../EntrantDisplay";
 
 interface Props {
   match: ScheduledMatch;
@@ -18,14 +19,14 @@ export const MatchBlock: React.FC<Props> = ({ match }) => {
       <StartTime>
         <p>{match.startTime.toLocaleString(DateTime.TIME_SIMPLE)}</p>
       </StartTime>
+
       <Entrants>
-        <p>{match.entrant1}</p>
-        <p>{match.entrant2}</p>
+        <EntrantDisplay entrant={match.entrant1} />
+        <EntrantDisplay entrant={match.entrant2} />
       </Entrants>
       <Round>
         <p>{match.round}</p>
       </Round>
-
       <StreamButtons>
         <UrlButton
           color={"twitchPurple"}
@@ -42,7 +43,7 @@ export const MatchBlock: React.FC<Props> = ({ match }) => {
         <ButtonDiv>
           <UrlButton
             color={"brightMossGreen"}
-            url={`https://kadgar.net/live/${match.entrant1}/${match.entrant2}`}
+            url={`https://kadgar.net/live/${match.entrant1.twitchChannel}/${match.entrant2.twitchChannel}`}
           >
             <FlexDiv>
               <MdOutlineLiveTv size={17} />

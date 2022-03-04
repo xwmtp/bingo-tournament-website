@@ -23,7 +23,11 @@ export const TabSelector: React.FC<Props> = ({
   return (
     <Selector className={className} $width={$width}>
       {tabOptions.map((option) => {
-        return <TabOptionDiv to={option.to}>{option.title}</TabOptionDiv>;
+        return (
+          <TabOptionDiv key={option.title} to={option.to}>
+            {option.title}
+          </TabOptionDiv>
+        );
       })}
     </Selector>
   );
@@ -34,15 +38,15 @@ const TabOptionDiv: React.FC<{ to: string }> = ({ to, children }) => {
   const match = useMatch({ path: resolved.pathname, end: true });
 
   return (
-    <StyledTabOption to={to} isActive={!!match}>
+    <StyledTabOption to={to} $isActive={!!match}>
       {children}
     </StyledTabOption>
   );
 };
 
-const StyledTabOption = styled(NavLink)<{ isActive: boolean }>`
-  background-color: ${({ isActive }) =>
-    isActive ? Colors.brightMossGreen : "none"};
+const StyledTabOption = styled(NavLink)<{ $isActive: boolean }>`
+  background-color: ${({ $isActive }) =>
+    $isActive ? Colors.brightMossGreen : "none"};
   padding: 10px 10px;
   font-size: 1.3rem;
   display: flex;
