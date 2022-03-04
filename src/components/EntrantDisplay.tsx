@@ -20,4 +20,5 @@ const StyledEntrantDisplay = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  min-width: 12rem;
 `;
