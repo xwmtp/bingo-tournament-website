@@ -10,7 +10,7 @@ export class ScheduledMatch {
     public readonly restreamChannel?: string
   ) {}
 
-  includesEntrant(id: string) {
-    return this.entrant1.id === id || this.entrant2.id === id;
+  includesEntrant(entrant: User) {
+    return this.entrant1.id === entrant.id || this.entrant2.id === entrant.id;
   }
 }

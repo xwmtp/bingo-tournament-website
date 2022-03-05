@@ -1,10 +1,4 @@
-import React, {
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import { Header } from "./components/header/Header";
 import { SchedulePage } from "./pages/SchedulePage";
@@ -21,13 +15,13 @@ import { AdminPage } from "./pages/AdminPage";
 export interface UserContextProps {
   user?: User;
   loading: boolean;
-  setUser: Dispatch<SetStateAction<User | undefined>>;
+  fetchUser: () => void;
 }
 
 export const UserContext = React.createContext<UserContextProps>({
   user: undefined,
   loading: true,
-  setUser: () => {},
+  fetchUser: () => {},
 });
 
 function App() {
@@ -58,7 +52,7 @@ function App() {
 
   return (
     <UserContext.Provider
-      value={{ user: user, setUser: setUser, loading: loadingUser }}
+      value={{ user: user, fetchUser: fetchUser, loading: loadingUser }}
     >
       <HashRouter basename={"/"}>
         <Header />

@@ -22,7 +22,7 @@ export const mockMatches: ScheduledMatch[] = [
   ),
   new ScheduledMatch(
     new User(
-      "d17DexWEKg3ak64R",
+      "Yzk9QRd2XBoeaB0M",
       "xwillmarktheplace",
       "https://racetime.gg/media/Racetime.png",
       "https://www.twitch.tv/xwillmarktheplace"
@@ -91,7 +91,7 @@ export const mockAllUsers = [
     "https://www.twitch.tv/jenslang"
   ),
   new User(
-    "d17DexWEKg3ak64R",
+    "Yzk9QRd2XBoeaB0M",
     "xwillmarktheplace",
     "https://racetime.gg/media/Racetime.png",
     "https://www.twitch.tv/xwillmarktheplace"

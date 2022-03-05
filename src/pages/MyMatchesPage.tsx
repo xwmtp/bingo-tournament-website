@@ -6,7 +6,7 @@ import { mockLoggedInUser, mockMatches } from "../domain/MockData";
 
 export const MyMatchesPage: React.FC = () => {
   const userScheduledMatches = mockMatches.filter((match) =>
-    match.includesEntrant(mockLoggedInUser.id)
+    match.includesEntrant(mockLoggedInUser)
   );
 
   return (
