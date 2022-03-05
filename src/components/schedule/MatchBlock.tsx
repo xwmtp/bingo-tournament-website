@@ -1,6 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { isScheduled, Match, ScheduledMatch } from "../../domain/Match";
+import {
+  isScheduled,
+  ScheduledMatch,
+  UnscheduledMatch,
+} from "../../domain/Match";
 import { DateTime } from "luxon";
 import { UrlButton } from "../forms/UrlButton";
 import { MdOutlineLiveTv } from "react-icons/md";
@@ -12,7 +16,7 @@ import { EntrantDisplay } from "../EntrantDisplay";
 import { Button } from "../forms/Button";
 
 interface Props {
-  match: Match | ScheduledMatch;
+  match: UnscheduledMatch | ScheduledMatch;
 }
 
 export const MatchBlock: React.FC<Props> = ({ match }) => {

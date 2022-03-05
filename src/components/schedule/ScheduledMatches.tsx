@@ -22,14 +22,7 @@ export const ScheduledMatches: React.FC<Props> = ({ matches }) => {
           <MatchesByDate key={formattedDate}>
             <h3>{formattedDate}</h3>
             {matchesByDate[formattedDate].map((match) => (
-              <MatchBlock
-                key={
-                  match.entrant1.id +
-                  match.entrant2.id +
-                  match.startTime.toLocaleString()
-                }
-                match={match}
-              />
+              <MatchBlock key={match.id} match={match} />
             ))}
           </MatchesByDate>
         );

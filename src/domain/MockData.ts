@@ -1,9 +1,10 @@
-import { Match, ScheduledMatch } from "./Match";
+import { ScheduledMatch, UnscheduledMatch } from "./Match";
 import { DateTime } from "luxon";
 import { User } from "./User";
 
 export const mockScheduledMatches: ScheduledMatch[] = [
   new ScheduledMatch(
+    "m1",
     new User(
       "pRbOXG3ykOWZVKq1",
       "Fleush",
@@ -21,6 +22,7 @@ export const mockScheduledMatches: ScheduledMatch[] = [
     "xwillmarktheplace"
   ),
   new ScheduledMatch(
+    "m2",
     new User(
       "Yzk9QRd2XBoeaB0M",
       "xwillmarktheplace",
@@ -38,6 +40,7 @@ export const mockScheduledMatches: ScheduledMatch[] = [
     "ZeldaSpeedruns"
   ),
   new ScheduledMatch(
+    "m3",
     new User(
       "XGzr7pBMny3kqgyE",
       "juwk",
@@ -54,6 +57,7 @@ export const mockScheduledMatches: ScheduledMatch[] = [
     "Round 1"
   ),
   new ScheduledMatch(
+    "m4",
     new User(
       "d17DexWEKg3ak64R",
       "scaramanga",
@@ -71,8 +75,9 @@ export const mockScheduledMatches: ScheduledMatch[] = [
   ),
 ];
 
-export const mockUnscheduledMatches: Match[] = [
-  new Match(
+export const mockUnscheduledMatches: UnscheduledMatch[] = [
+  new UnscheduledMatch(
+    "u1",
     new User(
       "pRbOXG3ykOWZVKq1",
       "Fleush",
@@ -88,7 +93,8 @@ export const mockUnscheduledMatches: Match[] = [
     "Round 1",
     "xwillmarktheplace"
   ),
-  new Match(
+  new UnscheduledMatch(
+    "u2",
     new User(
       "Yzk9QRd2XBoeaB0M",
       "xwillmarktheplace",
@@ -104,7 +110,8 @@ export const mockUnscheduledMatches: Match[] = [
     "Round 1",
     "ZeldaSpeedruns"
   ),
-  new Match(
+  new UnscheduledMatch(
+    "u3",
     new User(
       "XGzr7pBMny3kqgyE",
       "juwk",
@@ -119,7 +126,8 @@ export const mockUnscheduledMatches: Match[] = [
     ),
     "Round 1"
   ),
-  new Match(
+  new UnscheduledMatch(
+    "u4",
     new User(
       "d17DexWEKg3ak64R",
       "scaramanga",
