@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import {
   isScheduled,
@@ -14,12 +14,15 @@ import { DesktopOnlyFlexDiv, FlexDiv } from "../divs/FlexDiv";
 import { Colors } from "../../GlobalStyle";
 import { EntrantDisplay } from "../EntrantDisplay";
 import { Button } from "../forms/Button";
+import { ScheduleModal } from "./ScheduleModal";
 
 interface Props {
   match: UnscheduledMatch | ScheduledMatch;
 }
 
 export const MatchBlock: React.FC<Props> = ({ match }) => {
+  const [showScheduleModal, setShowScheduleModal] = useState<boolean>(false);
+
   return (
     <MatchBlockContainer>
       <StartTimeContainer>
@@ -29,7 +32,7 @@ export const MatchBlock: React.FC<Props> = ({ match }) => {
           </StartTime>
         ) : (
           <FlexDiv>
-            <Button color={"coral"}>
+            <Button color={"coral"} onClick={() => setShowScheduleModal(true)}>
               <FlexDiv>
                 <BiCalendar size={18} />
               </FlexDiv>
@@ -71,6 +74,11 @@ export const MatchBlock: React.FC<Props> = ({ match }) => {
           </UrlButton>
         </ButtonMarginTop>
       </ButtonsDiv>
+
+      <ScheduleModal
+        visible={showScheduleModal}
+        onClose={() => setShowScheduleModal(false)}
+      />
     </MatchBlockContainer>
   );
 };

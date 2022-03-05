@@ -11,6 +11,7 @@ import { AboutPage } from "./pages/AboutPage";
 import { User } from "./domain/User";
 import { getApi } from "./api/api";
 import { AdminPage } from "./pages/AdminPage";
+import { ModalProvider } from "styled-react-modal";
 
 export interface UserContextProps {
   user?: User;
@@ -55,22 +56,24 @@ function App() {
       value={{ user: user, fetchUser: fetchUser, loading: loadingUser }}
     >
       <HashRouter basename={"/"}>
-        <Header />
-        <Page>
-          <Routes>
-            <Route path={"/leaderboard"} />
-            <Route path={"/schedule"} element={<SchedulePage />}>
-              <Route path={"addmatch"} element={<AddMatchPage />} />
-            </Route>
-            <Route path={"/results"} />
-            <Route path={"/about"} element={<AboutPage />} />
-            <Route path={"/profile"} element={<ProfilePage />}>
-              <Route path={"settings"} element={<ProfileSettingsPage />} />
-              <Route path={"matches"} element={<MyMatchesPage />} />
-              <Route path={"admin"} element={<AdminPage />} />
-            </Route>
-          </Routes>
-        </Page>
+        <ModalProvider>
+          <Header />
+          <Page>
+            <Routes>
+              <Route path={"/leaderboard"} />
+              <Route path={"/schedule"} element={<SchedulePage />}>
+                <Route path={"addmatch"} element={<AddMatchPage />} />
+              </Route>
+              <Route path={"/results"} />
+              <Route path={"/about"} element={<AboutPage />} />
+              <Route path={"/profile"} element={<ProfilePage />}>
+                <Route path={"settings"} element={<ProfileSettingsPage />} />
+                <Route path={"matches"} element={<MyMatchesPage />} />
+                <Route path={"admin"} element={<AdminPage />} />
+              </Route>
+            </Routes>
+          </Page>
+        </ModalProvider>
       </HashRouter>
     </UserContext.Provider>
   );
