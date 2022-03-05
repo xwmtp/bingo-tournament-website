@@ -1,24 +1,39 @@
 import React from "react";
 import styled from "styled-components";
-import { ScheduledMatch } from "../../domain/Match";
+import { isScheduled, Match, ScheduledMatch } from "../../domain/Match";
 import { DateTime } from "luxon";
 import { UrlButton } from "../forms/UrlButton";
 import { MdOutlineLiveTv } from "react-icons/md";
 import { IoLogoTwitch } from "react-icons/io";
+import { BiCalendar } from "react-icons/bi";
 import { DesktopOnlyFlexDiv, FlexDiv } from "../divs/FlexDiv";
 import { Colors } from "../../GlobalStyle";
 import { EntrantDisplay } from "../EntrantDisplay";
+import { Button } from "../forms/Button";
 
 interface Props {
-  match: ScheduledMatch;
+  match: Match | ScheduledMatch;
 }
 
 export const MatchBlock: React.FC<Props> = ({ match }) => {
   return (
-    <Match>
-      <StartTime>
-        <p>{match.startTime.toLocaleString(DateTime.TIME_SIMPLE)}</p>
-      </StartTime>
+    <MatchBlockContainer>
+      <StartTimeContainer>
+        {isScheduled(match) ? (
+          <StartTime>
+            <p>{match.startTime.toLocaleString(DateTime.TIME_SIMPLE)}</p>
+          </StartTime>
+        ) : (
+          <FlexDiv>
+            <Button color={"coral"}>
+              <FlexDiv>
+                <BiCalendar size={18} />
+              </FlexDiv>
+              <ButtonText>Pick time</ButtonText>
+            </Button>
+          </FlexDiv>
+        )}
+      </StartTimeContainer>
 
       <Entrants>
         <EntrantDisplay entrant={match.entrant1} />
@@ -27,7 +42,7 @@ export const MatchBlock: React.FC<Props> = ({ match }) => {
       <Round>
         <p>{match.round}</p>
       </Round>
-      <StreamButtons>
+      <ButtonsDiv>
         <UrlButton
           color={"twitchPurple"}
           url={
@@ -40,7 +55,7 @@ export const MatchBlock: React.FC<Props> = ({ match }) => {
           </FlexDiv>
           <ButtonText>Restream</ButtonText>
         </UrlButton>
-        <ButtonDiv>
+        <ButtonMarginTop>
           <UrlButton
             color={"brightMossGreen"}
             url={`https://kadgar.net/live/${match.entrant1.twitchChannel}/${match.entrant2.twitchChannel}`}
@@ -50,13 +65,13 @@ export const MatchBlock: React.FC<Props> = ({ match }) => {
             </FlexDiv>
             <ButtonText>Kadgar</ButtonText>
           </UrlButton>
-        </ButtonDiv>
-      </StreamButtons>
-    </Match>
+        </ButtonMarginTop>
+      </ButtonsDiv>
+    </MatchBlockContainer>
   );
 };
 
-const Match = styled(FlexDiv)`
+const MatchBlockContainer = styled(FlexDiv)`
   justify-content: space-around;
   background-color: ${Colors.lightGray};
   border-radius: 10px;
@@ -74,22 +89,24 @@ const Entrants = styled.div`
 `;
 
 const StartTime = styled(FlexDiv)`
-  margin: 0 10px;
-  min-width: 4rem;
   font-size: 1.4rem;
   font-weight: 600;
+`;
+
+const StartTimeContainer = styled(FlexDiv)`
+  min-width: 7.5rem;
 `;
 
 const Round = styled(DesktopOnlyFlexDiv)`
   min-width: 120px;
 `;
 
-const StreamButtons = styled(FlexDiv)`
+const ButtonsDiv = styled(FlexDiv)`
   flex-direction: column;
   margin: 0 10px;
 `;
 
-const ButtonDiv = styled.div`
+const ButtonMarginTop = styled.div`
   margin-top: 8px;
   width: 100%;
 `;

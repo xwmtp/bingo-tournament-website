@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const ScheduledMatches: React.FC<Props> = ({ matches }) => {
-  const matchesByDate = groupBy(matches, (match: ScheduledMatch) =>
+  const matchesByDate = groupBy(matches, (match) =>
     match.startTime
       .setLocale("en-us")
       .toLocaleString({ weekday: "long", month: "long", day: "numeric" })

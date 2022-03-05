@@ -9,6 +9,7 @@ export const Colors = {
   lightGray: "#535959",
   boxShadowGrey: "#383d3c",
   twitchPurple: "#9146FF",
+  coral: "#a15f4f",
 } as const;
 
 export type ColorName = keyof typeof Colors;

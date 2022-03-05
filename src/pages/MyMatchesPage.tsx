@@ -1,17 +1,33 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Container } from "../components/Container";
 import styled from "styled-components";
 import { ScheduledMatches } from "../components/schedule/ScheduledMatches";
-import { mockLoggedInUser, mockMatches } from "../domain/MockData";
+import {
+  mockScheduledMatches,
+  mockUnscheduledMatches,
+} from "../domain/MockData";
+import { UserContext } from "../App";
+import { UnscheduledMatches } from "../components/schedule/UnscheduledMatches";
 
 export const MyMatchesPage: React.FC = () => {
-  const userScheduledMatches = mockMatches.filter((match) =>
-    match.includesEntrant(mockLoggedInUser)
+  // const [matches, setMatches] = useState<ScheduledMatch[] | undefined>(
+  //   undefined
+  // );
+  // const [loading, setLoading] = useState<boolean>(true);
+  const userContext = useContext(UserContext);
+
+  const userScheduledMatches = mockScheduledMatches.filter((match) =>
+    match.includesEntrant(userContext.user?.id || "")
+  );
+  const userUnscheduledMatches = mockUnscheduledMatches.filter((match) =>
+    match.includesEntrant(userContext.user?.id || "")
   );
 
   return (
     <ProfilePageDiv>
-      <Container title={"Unscheduled"} size="small" />
+      <Container title={"Unscheduled"} size="small">
+        <UnscheduledMatches matches={userUnscheduledMatches} />
+      </Container>
       <Container title={"Scheduled"} size="small">
         <ScheduledMatches matches={userScheduledMatches} />
       </Container>
