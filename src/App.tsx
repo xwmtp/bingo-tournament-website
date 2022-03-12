@@ -9,9 +9,9 @@ import { MyMatchesPage } from "./pages/MyMatchesPage";
 import { ProfileSettingsPage } from "./pages/ProfileSettingsPage";
 import { AboutPage } from "./pages/AboutPage";
 import { User } from "./domain/User";
-import { getApi } from "./api/api";
 import { AdminPage } from "./pages/AdminPage";
 import { ModalProvider } from "styled-react-modal";
+import { getUser } from "./api/userApi";
 
 export interface UserContextProps {
   user?: User;
@@ -33,8 +33,7 @@ function App() {
     if (!user) {
       setLoadingUser(true);
       console.log("fetching...");
-      getApi()
-        .getUser()
+      getUser()
         .then((fetchedUser) => {
           console.log("found user!");
           setUser(fetchedUser);

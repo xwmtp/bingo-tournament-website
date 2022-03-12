@@ -178,8 +178,8 @@ export const mockAllUsers = [
 ];
 
 export const mockLoggedInUser = new User(
-  "wdm1LPWjGABEnVx6",
-  "scaramangado",
-  "https://racetime.gg/media/feynman_small.jpeg",
-  "scaramangado"
+  "Yzk9QRd2XBoeaB0M",
+  "xwillmarktheplace",
+  "https://racetime.gg/media/Racetime.png",
+  "https://www.twitch.tv/xwillmarktheplace"
 );
