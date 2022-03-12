@@ -16,7 +16,7 @@ export const ScheduledMatches: React.FC<Props> = ({ matches }) => {
   );
 
   return (
-    <div>
+    <>
       {Object.keys(matchesByDate).map((formattedDate) => {
         return (
           <MatchesByDate key={formattedDate}>
@@ -27,7 +27,7 @@ export const ScheduledMatches: React.FC<Props> = ({ matches }) => {
           </MatchesByDate>
         );
       })}
-    </div>
+    </>
   );
 };
 

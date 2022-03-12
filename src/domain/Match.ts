@@ -33,3 +33,18 @@ export function isScheduled(
 ): match is ScheduledMatch {
   return match instanceof ScheduledMatch;
 }
+
+export class MatchResult extends ScheduledMatch {
+  constructor(
+    id: string,
+    entrant1: User,
+    entrant2: User,
+    startTime: DateTime,
+    public readonly timeEntrant1: number,
+    public readonly timeEntrant2: number,
+    round?: string,
+    restreamChannel?: string
+  ) {
+    super(id, entrant1, entrant2, startTime, round, restreamChannel);
+  }
+}

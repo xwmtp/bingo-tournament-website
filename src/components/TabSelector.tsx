@@ -2,30 +2,35 @@ import styled from "styled-components";
 import React from "react";
 import { FlexDiv } from "./divs/FlexDiv";
 import { Colors } from "../GlobalStyle";
-import { NavLink, useMatch, useResolvedPath } from "react-router-dom";
 
 interface Props {
-  tabOptions: TabOption[];
-  $width?: number;
+  activeTab: string;
+  setActiveTab: (tabOption: string) => void;
+  tabOptions: string[];
+  width?: string;
+  fontSize?: string;
   className?: string;
-}
-
-interface TabOption {
-  title: string;
-  to: string;
 }
 
 export const TabSelector: React.FC<Props> = ({
   tabOptions,
-  $width,
+  activeTab,
+  setActiveTab,
+  width,
+  fontSize,
   className,
 }) => {
   return (
-    <Selector className={className} $width={$width}>
+    <Selector className={className} $width={width}>
       {tabOptions.map((option) => {
         return (
-          <TabOptionDiv key={option.title} to={option.to}>
-            {option.title}
+          <TabOptionDiv
+            key={option}
+            $isActive={option === activeTab}
+            $fontSize={fontSize}
+            onClick={() => setActiveTab(option)}
+          >
+            {option}
           </TabOptionDiv>
         );
       })}
@@ -33,34 +38,27 @@ export const TabSelector: React.FC<Props> = ({
   );
 };
 
-const TabOptionDiv: React.FC<{ to: string }> = ({ to, children }) => {
-  const resolved = useResolvedPath(to);
-  const match = useMatch({ path: resolved.pathname, end: true });
-
-  return (
-    <StyledTabOption to={to} $isActive={!!match}>
-      {children}
-    </StyledTabOption>
-  );
-};
-
-const StyledTabOption = styled(NavLink)<{ $isActive: boolean }>`
+const TabOptionDiv = styled.div<{
+  $isActive: boolean;
+  $fontSize?: string;
+}>`
   background-color: ${({ $isActive }) =>
     $isActive ? Colors.brightMossGreen : "none"};
   padding: 10px 10px;
-  font-size: 1.3rem;
+  font-size: ${({ $fontSize }) => $fontSize ?? "1.3rem"};
   display: flex;
   justify-content: center;
   border-radius: 10px;
   flex-grow: 1;
+  cursor: pointer;
 `;
 
-const Selector = styled(FlexDiv)<{
-  $width?: number;
+export const Selector = styled(FlexDiv)<{
+  $width?: string;
   className?: string;
 }>`
   justify-content: space-around;
-  width: ${({ $width }) => $width || 1000}px;
+  width: ${({ $width }) => $width || "100%"};
   max-width: 90vw;
   background-color: ${Colors.mediumGrey};
   padding: 5px;
