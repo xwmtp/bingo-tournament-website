@@ -87,6 +87,10 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 1.2rem;
   }
   
+  p {
+    line-height: 1.4rem;
+  }
+  
   .desktopOnly {
     @media ${ScreenWidths2.tablet} {
       display: none;
