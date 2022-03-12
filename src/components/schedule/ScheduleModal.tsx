@@ -24,7 +24,7 @@ export const ScheduleModal: React.FC<Props> = ({ visible, onClose }) => {
       onBackgroundClick={onClose}
       onEscapeKeydown={onClose}
     >
-      <StyledContainer title={"Pick date & time"} size="small" width={700}>
+      <StyledContainer title={"Pick date & time"} size="small" width={"700px"}>
         <ContainerContents>
           <p>
             {`Please schedule your match after agreeing on a time with your

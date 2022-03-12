@@ -46,5 +46,6 @@ const SignUpButton = styled(Button)`
 `;
 
 const ProfileSettingsPageDiv = styled.div`
+  width: 100%;
   flex-direction: column;
 `;

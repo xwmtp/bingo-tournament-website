@@ -6,7 +6,7 @@ interface Props {
   title?: string;
   size?: "normal" | "small";
   className?: string;
-  width?: number;
+  width?: string;
 }
 
 export const Container: React.FC<Props> = ({
@@ -30,8 +30,7 @@ export const Container: React.FC<Props> = ({
 };
 
 const StyledContainer = styled.div<Props>`
-  width: ${({ width }) => width || 1000}px;
-  max-width: 90vw;
+  width: ${({ width }) => width ?? "100%"};
   margin-bottom: ${Margins.container}px;
 `;
 

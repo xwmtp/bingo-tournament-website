@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import { Header } from "./components/header/Header";
 import { SchedulePage } from "./pages/SchedulePage";
-import { Page } from "./components/Page";
+import { Content } from "./components/Content";
 import { AddMatchPage } from "./pages/AddMatchPage";
 import { ProfilePage } from "./pages/ProfilePage";
 import { MyMatchesPage } from "./pages/MyMatchesPage";
@@ -12,6 +12,8 @@ import { User } from "./domain/User";
 import { AdminPage } from "./pages/AdminPage";
 import { ModalProvider } from "styled-react-modal";
 import { getUser } from "./api/userApi";
+import { ResultsPage } from "./pages/ResultsPage";
+import { Page } from "./components/Page";
 
 export interface UserContextProps {
   user?: User;
@@ -57,21 +59,23 @@ function App() {
       <HashRouter basename={"/"}>
         <ModalProvider>
           <Header />
-          <Page>
-            <Routes>
-              <Route path={"/leaderboard"} />
-              <Route path={"/schedule"} element={<SchedulePage />}>
-                <Route path={"addmatch"} element={<AddMatchPage />} />
-              </Route>
-              <Route path={"/results"} />
-              <Route path={"/about"} element={<AboutPage />} />
-              <Route path={"/profile"} element={<ProfilePage />}>
-                <Route path={"settings"} element={<ProfileSettingsPage />} />
-                <Route path={"matches"} element={<MyMatchesPage />} />
-                <Route path={"admin"} element={<AdminPage />} />
-              </Route>
-            </Routes>
-          </Page>
+          <Content>
+            <Page>
+              <Routes>
+                <Route path={"/leaderboard"} />
+                <Route path={"/schedule"} element={<SchedulePage />}>
+                  <Route path={"addmatch"} element={<AddMatchPage />} />
+                </Route>
+                <Route path={"/results"} element={<ResultsPage />} />
+                <Route path={"/about"} element={<AboutPage />} />
+                <Route path={"/profile"} element={<ProfilePage />}>
+                  <Route path={"settings"} element={<ProfileSettingsPage />} />
+                  <Route path={"matches"} element={<MyMatchesPage />} />
+                  <Route path={"admin"} element={<AdminPage />} />
+                </Route>
+              </Routes>
+            </Page>
+          </Content>
         </ModalProvider>
       </HashRouter>
     </UserContext.Provider>

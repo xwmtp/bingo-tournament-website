@@ -5,12 +5,12 @@ import { Margins } from "../GlobalStyle";
 import { PreviousYears } from "../components/about/PreviousYears";
 
 export const AboutPage: React.FC = () => {
-  const aboutWidth = 700 - Math.round(Margins.container / 2);
-  const previousYearsWidth = 1000 - aboutWidth - Margins.container;
+  //const aboutWidth = 700 - Math.round(Margins.container / 2);
+  //const previousYearsWidth = 1000 - aboutWidth - Margins.container;
 
   return (
     <AboutPageDiv>
-      <Container title={"About"} width={aboutWidth}>
+      <Container title={"About"} width={"70%"}>
         <p> Welcome to the 2022 OoT Bingo Tournament!</p>
 
         <p>
@@ -20,10 +20,7 @@ export const AboutPage: React.FC = () => {
           with similar scores. There will be 4 of these rounds.
         </p>
       </Container>
-      <PreviousYearsContainer
-        title={"Previous years"}
-        width={previousYearsWidth}
-      >
+      <PreviousYearsContainer title={"Previous years"} width={"30%"}>
         <PreviousYears />
       </PreviousYearsContainer>
     </AboutPageDiv>

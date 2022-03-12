@@ -1,12 +1,12 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
-import { TabSelector } from "../components/TabSelector";
+import { RouteTabSelector } from "../components/RouteTabSelector";
 import { Margins } from "../GlobalStyle";
 
 export const ProfilePage: React.FC = () => {
   return (
-    <ProfilePageDiv>
+    <>
       <StyledTabSelector
         tabOptions={[
           { title: "Profile", to: "/profile/settings" },
@@ -15,14 +15,10 @@ export const ProfilePage: React.FC = () => {
         ]}
       />
       <Outlet />
-    </ProfilePageDiv>
+    </>
   );
 };
 
-const ProfilePageDiv = styled.div`
-  flex-direction: column;
-`;
-
-const StyledTabSelector = styled(TabSelector)`
+const StyledTabSelector = styled(RouteTabSelector)`
   margin-bottom: ${Margins.container}px;
 `;
