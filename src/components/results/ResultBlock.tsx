@@ -5,7 +5,7 @@ import { UrlButton } from "../forms/UrlButton";
 import { IoLogoTwitch } from "react-icons/io";
 import { DesktopOnlyFlexDiv, FlexDiv } from "../divs/FlexDiv";
 import { Colors } from "../../GlobalStyle";
-import { EntrantDisplay } from "../EntrantDisplay";
+import { UserDisplay } from "../UserDisplay";
 import { Duration } from "luxon";
 
 interface Props {
@@ -13,35 +13,33 @@ interface Props {
 }
 
 export const ResultBlock: React.FC<Props> = ({ result }) => {
-  let winner;
-  let loser;
-  let winnerTime;
-  let loserTime;
-  if (result.timeEntrant1 <= result.timeEntrant2) {
-    winner = result.entrant1;
-    loser = result.entrant2;
-    winnerTime = result.timeEntrant1;
-    loserTime = result.timeEntrant2;
-  } else {
-    winner = result.entrant2;
-    loser = result.entrant1;
-    winnerTime = result.timeEntrant2;
-    loserTime = result.timeEntrant1;
-  }
-  const isTie = result.timeEntrant1 === result.timeEntrant2;
+  const entrant1 = result.entrants[0];
+  const entrant2 = result.entrants[1];
 
   return (
     <MatchBlockContainer>
       <Entrants>
         <EntrantResult>
-          <Rank>1.</Rank>
-          <EntrantDisplay entrant={winner} />{" "}
-          <p>{Duration.fromMillis(winnerTime * 1000).toFormat("h:mm:ss")}</p>
+          <Rank>{entrant1.result.rank}</Rank>
+          <UserDisplay user={entrant1.user} />
+          {entrant1.result.finishTime && (
+            <p>
+              {Duration.fromMillis(entrant1.result.finishTime * 1000).toFormat(
+                "h:mm:ss"
+              )}
+            </p>
+          )}
         </EntrantResult>
         <EntrantResult>
-          <Rank>{isTie ? "1." : "2."}</Rank>
-          <EntrantDisplay entrant={loser} />
-          <p>{Duration.fromMillis(loserTime * 1000).toFormat("h:mm:ss")}</p>
+          <Rank>{entrant2.result.rank}</Rank>
+          <UserDisplay user={entrant2.user} />
+          {entrant2.result.finishTime && (
+            <p>
+              {Duration.fromMillis(entrant2.result.finishTime * 1000).toFormat(
+                "h:mm:ss"
+              )}
+            </p>
+          )}
         </EntrantResult>
       </Entrants>
       <ButtonsDiv>

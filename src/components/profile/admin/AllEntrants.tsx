@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { EntrantDisplay } from "../../EntrantDisplay";
+import { UserDisplay } from "../../UserDisplay";
 import styled from "styled-components";
 import { User } from "../../../domain/User";
 import { getApi } from "../../../api/api";
@@ -35,7 +35,7 @@ export const AllEntrants: React.FC = () => {
       <p>Total entrants: {sortedEntrants.length}</p>
       <EntrantsList>
         {sortedEntrants.map((entrant) => (
-          <EntrantDisplay key={entrant.id} entrant={entrant} />
+          <UserDisplay key={entrant.id} user={entrant} />
         ))}
       </EntrantsList>
     </AllEntrantsDiv>

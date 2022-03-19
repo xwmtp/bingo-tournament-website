@@ -1,50 +1,45 @@
 import { DateTime } from "luxon";
 import { User } from "./User";
 
-export class UnscheduledMatch {
-  constructor(
-    public readonly id: string,
-    public readonly entrant1: User,
-    public readonly entrant2: User,
-    public readonly round?: string,
-    public readonly restreamChannel?: string
-  ) {}
-
-  includesEntrant(id: string): boolean {
-    return this.entrant1.id === id || this.entrant2.id === id;
-  }
+export interface Match<T extends Entrant> {
+  id: string;
+  entrants: T[];
+  round?: string;
+  restreamChannel?: string;
 }
 
-export class ScheduledMatch extends UnscheduledMatch {
-  constructor(
-    id: string,
-    entrant1: User,
-    entrant2: User,
-    public readonly startTime: DateTime,
-    round?: string,
-    restreamChannel?: string
-  ) {
-    super(id, entrant1, entrant2, round, restreamChannel);
-  }
+interface Scheduled {
+  scheduledTime: DateTime;
 }
 
-export function isScheduled(
-  match: UnscheduledMatch | ScheduledMatch
-): match is ScheduledMatch {
-  return match instanceof ScheduledMatch;
+export interface UnscheduledMatch extends Match<Entrant> {}
+
+export interface ScheduledMatch extends Match<Entrant>, Scheduled {}
+
+export interface MatchResult extends Match<EntrantWithResult>, Scheduled {}
+
+interface Entrant {
+  user: User;
 }
 
-export class MatchResult extends ScheduledMatch {
-  constructor(
-    id: string,
-    entrant1: User,
-    entrant2: User,
-    startTime: DateTime,
-    public readonly timeEntrant1: number,
-    public readonly timeEntrant2: number,
-    round?: string,
-    restreamChannel?: string
-  ) {
-    super(id, entrant1, entrant2, startTime, round, restreamChannel);
-  }
+interface EntrantWithResult extends Entrant {
+  result: EntrantResult;
+}
+
+interface EntrantResult {
+  status: "done" | "forfeit";
+  rank: number;
+  racetimeRank: number;
+  finishTime?: number;
+}
+
+export function isScheduled(match: any): match is Scheduled {
+  return !!match.scheduledTime;
+}
+
+export function includesEntrant<T extends Entrant>(
+  match: Match<T>,
+  id: string
+): boolean {
+  return match.entrants.some((entrant) => entrant.user.id === id);
 }

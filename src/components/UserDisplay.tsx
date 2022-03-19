@@ -4,14 +4,14 @@ import styled from "styled-components";
 import { Avatar } from "./Avatar";
 
 interface Props {
-  entrant: User;
+  user: User;
 }
 
-export const EntrantDisplay: React.FC<Props> = ({ entrant }) => {
+export const UserDisplay: React.FC<Props> = ({ user }) => {
   return (
     <StyledEntrantDisplay>
-      <Avatar src={entrant.avatar} $sizeRem={1.6} />
-      <p>{entrant.name}</p>
+      <Avatar src={user.avatar} $sizeRem={1.6} />
+      <p>{user.name}</p>
     </StyledEntrantDisplay>
   );
 };

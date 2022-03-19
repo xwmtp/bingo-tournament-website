@@ -12,7 +12,7 @@ import { IoLogoTwitch } from "react-icons/io";
 import { BiCalendar } from "react-icons/bi";
 import { DesktopOnlyFlexDiv, FlexDiv } from "../divs/FlexDiv";
 import { Colors } from "../../GlobalStyle";
-import { EntrantDisplay } from "../EntrantDisplay";
+import { UserDisplay } from "../UserDisplay";
 import { Button } from "../forms/Button";
 import { ScheduleModal } from "./ScheduleModal";
 
@@ -28,7 +28,7 @@ export const MatchBlock: React.FC<Props> = ({ match }) => {
       <StartTimeContainer>
         {isScheduled(match) ? (
           <StartTime>
-            <p>{match.startTime.toLocaleString(DateTime.TIME_SIMPLE)}</p>
+            <p>{match.scheduledTime.toLocaleString(DateTime.TIME_SIMPLE)}</p>
           </StartTime>
         ) : (
           <FlexDiv>
@@ -43,8 +43,8 @@ export const MatchBlock: React.FC<Props> = ({ match }) => {
       </StartTimeContainer>
 
       <Entrants>
-        <EntrantDisplay entrant={match.entrant1} />
-        <EntrantDisplay entrant={match.entrant2} />
+        <UserDisplay user={match.entrants[0].user} />
+        <UserDisplay user={match.entrants[1].user} />
       </Entrants>
       <Round>
         <p>{match.round}</p>
@@ -65,7 +65,7 @@ export const MatchBlock: React.FC<Props> = ({ match }) => {
         <ButtonMarginTop>
           <UrlButton
             color={"brightMossGreen"}
-            url={`https://kadgar.net/live/${match.entrant1.twitchChannel}/${match.entrant2.twitchChannel}`}
+            url={`https://kadgar.net/live/${match.entrants[0].user.twitchChannel}/${match.entrants[1].user.twitchChannel}`}
           >
             <FlexDiv>
               <MdOutlineLiveTv size={17} />

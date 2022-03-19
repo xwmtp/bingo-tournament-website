@@ -8,6 +8,7 @@ import {
 } from "../domain/MockData";
 import { UserContext } from "../App";
 import { UnscheduledMatches } from "../components/schedule/UnscheduledMatches";
+import { includesEntrant } from "../domain/Match";
 
 export const MyMatchesPage: React.FC = () => {
   // const [matches, setMatches] = useState<ScheduledMatch[] | undefined>(
@@ -17,10 +18,10 @@ export const MyMatchesPage: React.FC = () => {
   const userContext = useContext(UserContext);
 
   const userScheduledMatches = mockScheduledMatches.filter((match) =>
-    match.includesEntrant(userContext.user?.id || "")
+    includesEntrant(match, userContext.user?.id || "")
   );
   const userUnscheduledMatches = mockUnscheduledMatches.filter((match) =>
-    match.includesEntrant(userContext.user?.id || "")
+    includesEntrant(match, userContext.user?.id || "")
   );
 
   return (
