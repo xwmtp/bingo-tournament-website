@@ -6,7 +6,7 @@ import { IoLogoTwitch } from "react-icons/io";
 import { DesktopOnlyFlexDiv, FlexDiv } from "../divs/FlexDiv";
 import { Colors } from "../../GlobalStyle";
 import { UserDisplay } from "../UserDisplay";
-import { Duration } from "luxon";
+import { EntrantWithResult, getResultString } from "../../domain/Entrant";
 
 interface Props {
   result: MatchResult;
@@ -19,28 +19,8 @@ export const ResultBlock: React.FC<Props> = ({ result }) => {
   return (
     <MatchBlockContainer>
       <Entrants>
-        <EntrantResult>
-          <Rank>{entrant1.result.rank}</Rank>
-          <UserDisplay user={entrant1.user} />
-          {entrant1.result.finishTime && (
-            <p>
-              {Duration.fromMillis(entrant1.result.finishTime * 1000).toFormat(
-                "h:mm:ss"
-              )}
-            </p>
-          )}
-        </EntrantResult>
-        <EntrantResult>
-          <Rank>{entrant2.result.rank}</Rank>
-          <UserDisplay user={entrant2.user} />
-          {entrant2.result.finishTime && (
-            <p>
-              {Duration.fromMillis(entrant2.result.finishTime * 1000).toFormat(
-                "h:mm:ss"
-              )}
-            </p>
-          )}
-        </EntrantResult>
+        <ResultRow entrant={entrant1} />
+        <ResultRow entrant={entrant2} />
       </Entrants>
       <ButtonsDiv>
         <UrlButton
@@ -57,6 +37,18 @@ export const ResultBlock: React.FC<Props> = ({ result }) => {
         </UrlButton>
       </ButtonsDiv>
     </MatchBlockContainer>
+  );
+};
+
+export const ResultRow: React.FC<{ entrant: EntrantWithResult }> = ({
+  entrant,
+}) => {
+  return (
+    <EntrantResult>
+      <Rank>{`${entrant.result.rank}.`}</Rank>
+      <UserDisplay user={entrant.user} />
+      <p>{getResultString(entrant.result)}</p>
+    </EntrantResult>
   );
 };
 

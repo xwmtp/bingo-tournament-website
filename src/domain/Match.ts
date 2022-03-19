@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import { User } from "./User";
+import { Entrant, EntrantWithResult } from "./Entrant";
 
 export interface Match<T extends Entrant> {
   id: string;
@@ -17,21 +17,6 @@ export interface UnscheduledMatch extends Match<Entrant> {}
 export interface ScheduledMatch extends Match<Entrant>, Scheduled {}
 
 export interface MatchResult extends Match<EntrantWithResult>, Scheduled {}
-
-interface Entrant {
-  user: User;
-}
-
-interface EntrantWithResult extends Entrant {
-  result: EntrantResult;
-}
-
-interface EntrantResult {
-  status: "done" | "forfeit";
-  rank: number;
-  racetimeRank: number;
-  finishTime?: number;
-}
 
 export function isScheduled(match: any): match is Scheduled {
   return !!match.scheduledTime;
