@@ -15,5 +15,6 @@ export const AdminPage: React.FC = () => {
 };
 
 const AdminPageDiv = styled.div`
+  width: 100%;
   flex-direction: column;
 `;

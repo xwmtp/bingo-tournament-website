@@ -37,5 +37,6 @@ export const MyMatchesPage: React.FC = () => {
 };
 
 const ProfilePageDiv = styled.div`
+  width: 100%;
   flex-direction: column;
 `;
