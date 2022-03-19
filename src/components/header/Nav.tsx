@@ -32,7 +32,7 @@ const Navigation = styled.nav`
 `;
 
 const StyledLink = styled(NavLink)<{ $isActive: boolean }>`
-  padding: 0 10px;
+  padding: 10px;
   font-size: 1.3rem;
   text-decoration: ${({ $isActive }) => ($isActive ? "underline" : "none")};
 `;
