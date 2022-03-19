@@ -17,7 +17,7 @@ export const ResultBlock: React.FC<Props> = ({ result }) => {
   const entrant2 = result.entrants[1];
 
   return (
-    <MatchBlockContainer>
+    <ResultBlockContainer>
       <Entrants>
         <ResultRow entrant={entrant1} />
         <ResultRow entrant={entrant2} />
@@ -31,12 +31,12 @@ export const ResultBlock: React.FC<Props> = ({ result }) => {
           }
         >
           <FlexDiv>
-            <IoLogoTwitch size={18} />
+            <TwitchIcon />
           </FlexDiv>
           <ButtonText>Restream</ButtonText>
         </UrlButton>
       </ButtonsDiv>
-    </MatchBlockContainer>
+    </ResultBlockContainer>
   );
 };
 
@@ -52,11 +52,11 @@ export const ResultRow: React.FC<{ entrant: EntrantWithResult }> = ({
   );
 };
 
-const MatchBlockContainer = styled(FlexDiv)`
-  justify-content: space-around;
+const ResultBlockContainer = styled(FlexDiv)`
+  justify-content: space-between;
   background-color: ${Colors.lightGray};
   border-radius: 10px;
-  padding: 10px 0;
+  padding: 10px 50px;
   margin-top: 12px;
 `;
 
@@ -85,4 +85,8 @@ const ButtonsDiv = styled(FlexDiv)`
 
 const ButtonText = styled(DesktopOnlyFlexDiv)`
   margin-left: 5px;
+`;
+
+const TwitchIcon = styled(IoLogoTwitch)`
+  transform: scale(1.2);
 `;

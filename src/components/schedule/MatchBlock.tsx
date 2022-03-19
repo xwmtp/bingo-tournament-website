@@ -34,7 +34,7 @@ export const MatchBlock: React.FC<Props> = ({ match }) => {
           <FlexDiv>
             <Button color={"coral"} onClick={() => setShowScheduleModal(true)}>
               <FlexDiv>
-                <BiCalendar size={18} />
+                <CalendarIcon />
               </FlexDiv>
               <ButtonText>Pick time</ButtonText>
             </Button>
@@ -58,7 +58,7 @@ export const MatchBlock: React.FC<Props> = ({ match }) => {
           }
         >
           <FlexDiv>
-            <IoLogoTwitch size={18} />
+            <TwitchIcon />
           </FlexDiv>
           <ButtonText>Restream</ButtonText>
         </UrlButton>
@@ -68,7 +68,7 @@ export const MatchBlock: React.FC<Props> = ({ match }) => {
             url={`https://kadgar.net/live/${match.entrants[0].user.twitchChannel}/${match.entrants[1].user.twitchChannel}`}
           >
             <FlexDiv>
-              <MdOutlineLiveTv size={17} />
+              <KadgarIcon />
             </FlexDiv>
             <ButtonText>Kadgar</ButtonText>
           </UrlButton>
@@ -125,4 +125,16 @@ const ButtonMarginTop = styled.div`
 
 const ButtonText = styled(DesktopOnlyFlexDiv)`
   margin-left: 5px;
+`;
+
+const KadgarIcon = styled(MdOutlineLiveTv)`
+  transform: scale(1.2);
+`;
+
+const TwitchIcon = styled(IoLogoTwitch)`
+  transform: scale(1.2);
+`;
+
+const CalendarIcon = styled(BiCalendar)`
+  transform: scale(1.2);
 `;
