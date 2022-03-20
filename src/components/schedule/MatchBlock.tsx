@@ -46,9 +46,11 @@ export const MatchBlock: React.FC<Props> = ({ match }) => {
         <UserDisplay user={match.entrants[0].user} />
         <UserDisplay user={match.entrants[1].user} />
       </Entrants>
+
       <Round>
         <p>{match.round}</p>
       </Round>
+
       <ButtonsDiv>
         <UrlButton
           color={"twitchPurple"}
@@ -62,6 +64,7 @@ export const MatchBlock: React.FC<Props> = ({ match }) => {
           </FlexDiv>
           <ButtonText>Restream</ButtonText>
         </UrlButton>
+
         <ButtonMarginTop>
           <UrlButton
             color={"brightMossGreen"}

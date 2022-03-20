@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { MatchResult } from "../../domain/Match";
-import { UrlButton } from "../forms/UrlButton";
-import { IoLogoTwitch } from "react-icons/io";
-import { DesktopOnlyFlexDiv, FlexDiv } from "../divs/FlexDiv";
+import { FlexDiv } from "../divs/FlexDiv";
 import { Colors } from "../../GlobalStyle";
 import { UserDisplay } from "../UserDisplay";
 import { EntrantWithResult, getResultString } from "../../domain/Entrant";
+import { RacetimeButton } from "../forms/RacetimeButton";
+import { TwitchButton } from "../forms/TwitchButton";
 
 interface Props {
   result: MatchResult;
@@ -22,19 +22,22 @@ export const ResultBlock: React.FC<Props> = ({ result }) => {
         <ResultRow entrant={entrant1} />
         <ResultRow entrant={entrant2} />
       </Entrants>
+
       <ButtonsDiv>
-        <UrlButton
-          color={"twitchPurple"}
+        <StyledTwitchButton
+          text="Restream"
           url={
             result.restreamChannel &&
             "https://www.twitch.tv/" + result.restreamChannel
           }
-        >
-          <FlexDiv>
-            <TwitchIcon />
-          </FlexDiv>
-          <ButtonText>Restream</ButtonText>
-        </UrlButton>
+        />
+
+        <ButtonMarginTop>
+          <RacetimeButton
+            text="racetime.gg"
+            url={"https://www.racetime.gg/oot/" + result.id}
+          />
+        </ButtonMarginTop>
       </ButtonsDiv>
     </ResultBlockContainer>
   );
@@ -83,10 +86,11 @@ const ButtonsDiv = styled(FlexDiv)`
   margin: 0 10px;
 `;
 
-const ButtonText = styled(DesktopOnlyFlexDiv)`
-  margin-left: 5px;
+const ButtonMarginTop = styled.div`
+  margin-top: 8px;
+  width: 100%;
 `;
 
-const TwitchIcon = styled(IoLogoTwitch)`
-  transform: scale(1.2);
+const StyledTwitchButton = styled(TwitchButton)`
+  width: 100%;
 `;

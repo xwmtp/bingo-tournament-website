@@ -8,6 +8,9 @@ export const Colors = {
   mediumGrey: "#454B4B",
   lightGray: "#535959",
   boxShadowGrey: "#383d3c",
+  racetimeDarkGrey: "#3A4040",
+  racetimeLightGrey: "#a7babb",
+  racetimeGreen: "#26DB9AFF",
   twitchPurple: "#9146FF",
   coral: "#a15f4f",
 } as const;
@@ -49,7 +52,7 @@ export const GlobalStyle = createGlobalStyle`
     width: 100%;
     background-color: ${Colors.darkGrey};
     color: white;
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    font-family: Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   }
 

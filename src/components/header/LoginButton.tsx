@@ -1,18 +1,20 @@
-import styled from "styled-components";
 import React from "react";
-import { UrlButton } from "../forms/UrlButton";
+import { RacetimeButton } from "../forms/RacetimeButton";
+import styled from "styled-components";
 
 export const LoginButton: React.FC = () => {
   return (
-    <div>
-      <StyledLoginButton
-        color={"brightMossGreen"}
+    <ButtonDiv>
+      <RacetimeButton
+        text={"Login with racetime.gg"}
         url={"http://localhost:8080/login/racetime"}
       >
         Login with racetime.gg
-      </StyledLoginButton>
-    </div>
+      </RacetimeButton>
+    </ButtonDiv>
   );
 };
 
-const StyledLoginButton = styled(UrlButton)``;
+const ButtonDiv = styled.div`
+  margin: 0 10px;
+`;
