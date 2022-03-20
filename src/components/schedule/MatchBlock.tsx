@@ -3,6 +3,7 @@ import styled from "styled-components";
 import {
   isScheduled,
   ScheduledMatch,
+  standardMatchDuration,
   UnscheduledMatch,
 } from "../../domain/Match";
 import { DateTime } from "luxon";
@@ -20,11 +21,21 @@ interface Props {
   match: UnscheduledMatch | ScheduledMatch;
 }
 
+const now = DateTime.local(2022, 2, 4, 5, 50, 34);
+
 export const MatchBlock: React.FC<Props> = ({ match }) => {
   const [showScheduleModal, setShowScheduleModal] = useState<boolean>(false);
 
+  const isInProgress =
+    isScheduled(match) &&
+    match.scheduledTime < now &&
+    now < match.scheduledTime.plus(standardMatchDuration);
+
+  const isFinished =
+    isScheduled(match) && now > match.scheduledTime.plus(standardMatchDuration);
+
   return (
-    <MatchBlockContainer>
+    <MatchBlockContainer $isFinished={isFinished} $isInProgress={isInProgress}>
       <StartTimeContainer>
         {isScheduled(match) ? (
           <StartTime>
@@ -86,12 +97,18 @@ export const MatchBlock: React.FC<Props> = ({ match }) => {
   );
 };
 
-const MatchBlockContainer = styled(FlexDiv)`
+const MatchBlockContainer = styled(FlexDiv)<{
+  $isFinished: boolean;
+  $isInProgress: boolean;
+}>`
   justify-content: space-around;
   background-color: ${Colors.lightGray};
   border-radius: 10px;
   padding: 10px 0;
   margin-top: 12px;
+  opacity: ${({ $isFinished }) => ($isFinished ? "20%" : "100%")};
+  border: ${({ $isInProgress }) => ($isInProgress ? "4px" : "0px")} solid
+    ${Colors.brightMossGreen};
 `;
 
 const Entrants = styled.div`

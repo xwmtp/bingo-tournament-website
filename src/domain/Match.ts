@@ -1,4 +1,4 @@
-import { DateTime } from "luxon";
+import { DateTime, Duration } from "luxon";
 import { Entrant, EntrantWithResult } from "./Entrant";
 
 export interface Match<T extends Entrant> {
@@ -17,6 +17,11 @@ export interface UnscheduledMatch extends Match<Entrant> {}
 export interface ScheduledMatch extends Match<Entrant>, Scheduled {}
 
 export interface MatchResult extends Match<EntrantWithResult>, Scheduled {}
+
+export const standardMatchDuration = Duration.fromObject({
+  hours: 1,
+  minutes: 10,
+});
 
 export function isScheduled(match: any): match is Scheduled {
   return !!match.scheduledTime;

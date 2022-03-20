@@ -98,6 +98,30 @@ export const mockScheduledMatches: ScheduledMatch[] = [
     scheduledTime: DateTime.fromISO("2022-02-07T12:45:03Z"),
     round: "Round 1",
   },
+  {
+    id: "m5",
+    entrants: [
+      {
+        user: {
+          id: "XGzr7pBMny3kqgyE",
+          name: "juwk",
+          avatar: undefined,
+          twitchChannel: "https://www.twitch.tv/jenslang",
+        },
+      },
+      {
+        user: {
+          id: "rZyM4orRvRoqDJX0",
+          name: "jenslang",
+          avatar:
+            "https://racetime.gg/media/e0aaf3c8688abd0e58bed9d9f63de4ad.png",
+          twitchChannel: "https://www.twitch.tv/jenslang",
+        },
+      },
+    ],
+    scheduledTime: DateTime.fromISO("2022-02-04T03:30:03Z"),
+    round: "Round 1",
+  },
 ];
 
 export const mockUnscheduledMatches: UnscheduledMatch[] = [
@@ -304,7 +328,7 @@ export const mockMatchResults: MatchResult[] = [
     round: "Round 1",
   },
   {
-    id: "m4",
+    id: "r4",
     entrants: [
       {
         user: {

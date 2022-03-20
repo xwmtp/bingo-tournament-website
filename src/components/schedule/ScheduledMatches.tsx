@@ -3,13 +3,23 @@ import { groupBy } from "../../lib/groupBy";
 import React from "react";
 import styled from "styled-components";
 import { ScheduledMatch } from "../../domain/Match";
+import { DateTime } from "luxon";
 
 interface Props {
   matches: ScheduledMatch[];
 }
 
+const now = DateTime.local(2022, 2, 4, 6, 10, 0);
+
 export const ScheduledMatches: React.FC<Props> = ({ matches }) => {
-  const matchesByDate = groupBy(matches, (match) =>
+  const relevantMatches = matches.filter(
+    (match) => match.scheduledTime > now.startOf("day")
+  );
+  const sortedRelevantMatches = [...relevantMatches].sort(
+    (matchA, matchB) =>
+      matchA.scheduledTime.toMillis() - matchB.scheduledTime.toMillis()
+  );
+  const matchesByDate = groupBy(sortedRelevantMatches, (match) =>
     match.scheduledTime
       .setLocale("en-us")
       .toLocaleString({ weekday: "long", month: "long", day: "numeric" })
