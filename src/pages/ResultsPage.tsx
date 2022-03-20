@@ -30,4 +30,5 @@ export const ResultsPage: React.FC = () => {
 
 const StyledTabSelector = styled(TabSelector)`
   background-color: ${Colors.darkGrey};
+  margin-bottom: 20px;
 `;

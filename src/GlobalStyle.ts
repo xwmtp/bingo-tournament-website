@@ -22,11 +22,6 @@ export const ScreenWidths = {
   tablet: 768,
 } as const;
 
-export const ScreenWidths2 = {
-  phone: `(max-width: 480px)`,
-  tablet: `(max-width: 768px)`,
-} as const;
-
 export const Margins = {
   container: 24,
 };
@@ -95,7 +90,7 @@ export const GlobalStyle = createGlobalStyle`
   }
   
   .desktopOnly {
-    @media ${ScreenWidths2.tablet} {
+    @media (max-width: ${ScreenWidths.tablet}px) {
       display: none;
     }
   }

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { MatchResult } from "../../domain/Match";
 import { FlexDiv } from "../divs/FlexDiv";
-import { Colors } from "../../GlobalStyle";
+import { Colors, ScreenWidths } from "../../GlobalStyle";
 import { UserDisplay } from "../UserDisplay";
 import { EntrantWithResult, getResultString } from "../../domain/Entrant";
 import { RacetimeButton } from "../forms/RacetimeButton";
@@ -50,7 +50,8 @@ export const ResultRow: React.FC<{ entrant: EntrantWithResult }> = ({
     <EntrantResult>
       <Rank>{`${entrant.result.rank}.`}</Rank>
       <UserDisplay user={entrant.user} />
-      <p>{getResultString(entrant.result)}</p>
+
+      <RaceResult>{getResultString(entrant.result)}</RaceResult>
     </EntrantResult>
   );
 };
@@ -59,8 +60,11 @@ const ResultBlockContainer = styled(FlexDiv)`
   justify-content: space-between;
   background-color: ${Colors.lightGray};
   border-radius: 10px;
-  padding: 10px 50px;
+  padding: 10px 60px;
   margin-top: 12px;
+  @media (max-width: ${ScreenWidths.tablet}px) {
+    padding: 10px 20px;
+  }
 `;
 
 const EntrantResult = styled.div`
@@ -79,6 +83,13 @@ const Entrants = styled.div`
 
 const Rank = styled(FlexDiv)`
   margin-right: 14px;
+`;
+
+const RaceResult = styled(FlexDiv)`
+  margin-left: 30px;
+  @media (max-width: ${ScreenWidths.tablet}px) {
+    margin-left: 5px;
+  }
 `;
 
 const ButtonsDiv = styled(FlexDiv)`
