@@ -13,11 +13,11 @@ export const getUser = async (): Promise<User | undefined> => {
   }
 };
 
-const mapToUser = (userDto: UserDto): User => {
-  return new User(
-    userDto.id,
-    userDto.name,
-    userDto.avatar,
-    userDto.twitchChannel
-  );
+export const mapToUser = (userDto: UserDto): User => {
+  return {
+    id: userDto.id,
+    name: userDto.name,
+    avatar: userDto.avatar,
+    twitchChannel: userDto.twitchChannel,
+  };
 };
