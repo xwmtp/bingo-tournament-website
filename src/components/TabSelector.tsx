@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React from "react";
 import { FlexDiv } from "./divs/FlexDiv";
-import { Colors } from "../GlobalStyle";
+import { Colors, ScreenWidths } from "../GlobalStyle";
 
 interface Props {
   activeTab: string;
@@ -64,4 +64,7 @@ export const Selector = styled(FlexDiv)<{
   padding: 5px;
   border-radius: 10px;
   box-shadow: 5px 5px 5px ${Colors.boxShadowGrey};
+  @media (max-width: ${ScreenWidths.phone}px) {
+    max-width: 95vw;
+  }
 `;

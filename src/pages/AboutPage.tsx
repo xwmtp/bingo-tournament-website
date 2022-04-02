@@ -36,5 +36,5 @@ const AboutPageDiv = styled.div`
 `;
 
 const PreviousYearsContainer = styled(Container)`
-  margin-left: ${Margins.container}px;
+  margin-left: ${Margins.container}rem;
 `;

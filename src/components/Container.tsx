@@ -31,7 +31,7 @@ export const Container: React.FC<Props> = ({
 
 const StyledContainer = styled.div<Props>`
   width: ${({ width }) => width ?? "100%"};
-  margin-bottom: ${Margins.container}px;
+  margin-bottom: ${Margins.container}rem;
 `;
 
 const StyledHeader = styled.div`
@@ -44,7 +44,8 @@ const StyledHeader = styled.div`
 
 const StyledContent = styled.div<Props>`
   background-color: ${Colors.mediumGrey};
-  padding: 20px;
+  //padding: 20px;
+  padding: 1.2rem;
   border-radius: ${({ title }) => (title ? "0 0" : "10px 10px")} 10px 10px;
   box-shadow: 5px 5px 4px ${Colors.boxShadowGrey};
 `;

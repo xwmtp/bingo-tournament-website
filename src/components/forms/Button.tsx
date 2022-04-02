@@ -51,10 +51,12 @@ const DefaultButton = styled.a<ButtonLayoutProps>`
   display: flex;
   flex-direction: row;
   align-items: center;
+  min-height: ${({ size }) => height(size || "normal")}rem;
   justify-content: center;
   flex-grow: 1;
   font-size: ${({ size }) => fontSize(size || "normal")}rem;
-  padding: 5px 10px;
+  padding: 0.3rem 0.6rem;
+  //padding: 5px 0.6rem;
   border-radius: 5px;
   cursor: pointer;
   transition: 0.1s;
@@ -83,4 +85,15 @@ const fontSize = (size: ButtonSize): number => {
     return 1.3;
   }
   return 0.9;
+};
+
+// in rem
+const height = (size: ButtonSize): number => {
+  if (size === "normal") {
+    return 1.8;
+  }
+  if (size === "big") {
+    return 2.5;
+  }
+  return 1.8;
 };

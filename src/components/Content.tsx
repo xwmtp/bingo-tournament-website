@@ -10,6 +10,6 @@ const StyledPage = styled(FlexDiv)`
   width: 100%;
   flex-flow: column;
   justify-content: start;
-  padding: 20px;
+  padding: 1.2rem;
   flex-grow: 1;
 `;

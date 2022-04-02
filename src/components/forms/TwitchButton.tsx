@@ -13,16 +13,16 @@ interface Props {
 export const TwitchButton: React.FC<Props> = ({ text, url, className }) => {
   return (
     <UrlButton color={"twitchPurple"} url={url} className={className}>
-      <IconDiv>
+      <FlexDiv>
         <TwitchIcon />
-      </IconDiv>
-      <DesktopOnlyFlexDiv>{text}</DesktopOnlyFlexDiv>
+      </FlexDiv>
+      <TextDiv>{text}</TextDiv>
     </UrlButton>
   );
 };
 
-const IconDiv = styled(FlexDiv)`
-  margin-right: 5px;
+const TextDiv = styled(DesktopOnlyFlexDiv)`
+  margin-left: 5px;
 `;
 
 const TwitchIcon = styled(IoLogoTwitch)`

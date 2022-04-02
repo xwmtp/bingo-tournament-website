@@ -20,5 +20,5 @@ export const ProfilePage: React.FC = () => {
 };
 
 const StyledTabSelector = styled(RouteTabSelector)`
-  margin-bottom: ${Margins.container}px;
+  margin-bottom: ${Margins.container}rem;
 `;

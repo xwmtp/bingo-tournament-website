@@ -23,7 +23,7 @@ export const ScreenWidths = {
 } as const;
 
 export const Margins = {
-  container: 24,
+  container: 1.4,
 };
 
 export const GlobalStyle = createGlobalStyle`

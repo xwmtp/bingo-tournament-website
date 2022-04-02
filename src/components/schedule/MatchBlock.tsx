@@ -9,21 +9,22 @@ import {
 import { DateTime } from "luxon";
 import { UrlButton } from "../forms/UrlButton";
 import { MdOutlineLiveTv } from "react-icons/md";
-import { IoLogoTwitch } from "react-icons/io";
-import { BiCalendar } from "react-icons/bi";
+import { BiCalendar, BiPencil } from "react-icons/bi";
 import { DesktopOnlyFlexDiv, FlexDiv } from "../divs/FlexDiv";
 import { Colors } from "../../GlobalStyle";
 import { UserDisplay } from "../UserDisplay";
 import { Button } from "../forms/Button";
 import { ScheduleModal } from "./ScheduleModal";
+import { TwitchButton } from "../forms/TwitchButton";
 
 interface Props {
   match: UnscheduledMatch | ScheduledMatch;
+  editable?: boolean;
 }
 
-const now = DateTime.local(2022, 2, 4, 5, 50, 34);
+const now = DateTime.local(2021, 2, 4, 5, 50, 34);
 
-export const MatchBlock: React.FC<Props> = ({ match }) => {
+export const MatchBlock: React.FC<Props> = ({ match, editable }) => {
   const [showScheduleModal, setShowScheduleModal] = useState<boolean>(false);
 
   const isInProgress =
@@ -37,20 +38,29 @@ export const MatchBlock: React.FC<Props> = ({ match }) => {
   return (
     <MatchBlockContainer $isFinished={isFinished} $isInProgress={isInProgress}>
       <StartTimeContainer>
-        {isScheduled(match) ? (
-          <StartTime>
-            <p>{match.scheduledTime.toLocaleString(DateTime.TIME_SIMPLE)}</p>
-          </StartTime>
-        ) : (
-          <FlexDiv>
-            <Button color={"coral"} onClick={() => setShowScheduleModal(true)}>
-              <FlexDiv>
-                <CalendarIcon />
-              </FlexDiv>
-              <ButtonText>Pick time</ButtonText>
-            </Button>
-          </FlexDiv>
-        )}
+        <WithMaybeEditButton showButton={editable && isScheduled(match)}>
+          {isScheduled(match) ? (
+            <>
+              <StartTime>
+                <p>
+                  {match.scheduledTime.toLocaleString(DateTime.TIME_SIMPLE)}
+                </p>
+              </StartTime>
+            </>
+          ) : (
+            <FlexDiv>
+              <Button
+                color={"coral"}
+                onClick={() => setShowScheduleModal(true)}
+              >
+                <FlexDiv>
+                  <CalendarIcon />
+                </FlexDiv>
+                <ButtonText>Pick time</ButtonText>
+              </Button>
+            </FlexDiv>
+          )}
+        </WithMaybeEditButton>
       </StartTimeContainer>
 
       <Entrants>
@@ -62,19 +72,14 @@ export const MatchBlock: React.FC<Props> = ({ match }) => {
         <p>{match.round}</p>
       </Round>
 
-      <ButtonsDiv>
-        <UrlButton
-          color={"twitchPurple"}
+      <StreamButtonsDiv>
+        <TwitchButton
+          text="Restream"
           url={
             match.restreamChannel &&
             "https://www.twitch.tv/" + match.restreamChannel
           }
-        >
-          <FlexDiv>
-            <TwitchIcon />
-          </FlexDiv>
-          <ButtonText>Restream</ButtonText>
-        </UrlButton>
+        />
 
         <ButtonMarginTop>
           <UrlButton
@@ -87,13 +92,34 @@ export const MatchBlock: React.FC<Props> = ({ match }) => {
             <ButtonText>Kadgar</ButtonText>
           </UrlButton>
         </ButtonMarginTop>
-      </ButtonsDiv>
+      </StreamButtonsDiv>
 
       <ScheduleModal
         visible={showScheduleModal}
         onClose={() => setShowScheduleModal(false)}
       />
     </MatchBlockContainer>
+  );
+};
+
+const WithMaybeEditButton: React.FC<{ showButton?: boolean }> = ({
+  showButton,
+  children,
+}) => {
+  return (
+    <>
+      <Edit />
+      <WithMaybeEdit>{children}</WithMaybeEdit>
+      <Edit>
+        {showButton && (
+          <EditButton color={"coral"}>
+            <FlexDiv>
+              <PencilIcon />
+            </FlexDiv>
+          </EditButton>
+        )}
+      </Edit>
+    </>
   );
 };
 
@@ -111,6 +137,18 @@ const MatchBlockContainer = styled(FlexDiv)<{
     ${Colors.brightMossGreen};
 `;
 
+const Edit = styled(FlexDiv)`
+  width: 2rem;
+`;
+
+const EditButton = styled(Button)`
+  padding: 0.3rem 0.4rem;
+`;
+
+const WithMaybeEdit = styled(FlexDiv)`
+  margin: 0 0.7rem;
+`;
+
 const Entrants = styled.div`
   min-width: 14rem;
 
@@ -126,14 +164,14 @@ const StartTime = styled(FlexDiv)`
 `;
 
 const StartTimeContainer = styled(FlexDiv)`
-  min-width: 7.5rem;
+  min-width: 5rem;
 `;
 
 const Round = styled(DesktopOnlyFlexDiv)`
   min-width: 120px;
 `;
 
-const ButtonsDiv = styled(FlexDiv)`
+const StreamButtonsDiv = styled(FlexDiv)`
   flex-direction: column;
   margin: 0 10px;
 `;
@@ -151,10 +189,10 @@ const KadgarIcon = styled(MdOutlineLiveTv)`
   transform: scale(1.2);
 `;
 
-const TwitchIcon = styled(IoLogoTwitch)`
+const CalendarIcon = styled(BiCalendar)`
   transform: scale(1.2);
 `;
 
-const CalendarIcon = styled(BiCalendar)`
-  transform: scale(1.2);
+const PencilIcon = styled(BiPencil)`
+  transform: scale(1.3);
 `;
