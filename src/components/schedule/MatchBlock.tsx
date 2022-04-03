@@ -7,15 +7,14 @@ import {
   UnscheduledMatch,
 } from "../../domain/Match";
 import { DateTime } from "luxon";
-import { UrlButton } from "../forms/UrlButton";
-import { MdOutlineLiveTv } from "react-icons/md";
-import { BiCalendar, BiPencil } from "react-icons/bi";
 import { DesktopOnlyFlexDiv, FlexDiv } from "../divs/FlexDiv";
 import { Colors } from "../../GlobalStyle";
 import { UserDisplay } from "../UserDisplay";
-import { Button } from "../forms/Button";
 import { ScheduleModal } from "./ScheduleModal";
-import { TwitchButton } from "../forms/TwitchButton";
+import { TwitchButton } from "../forms/buttons/TwitchButton";
+import { KadgarButton } from "../forms/buttons/KadgarButton";
+import { EditButton } from "../forms/buttons/EditButton";
+import { ScheduleButton } from "../forms/buttons/ScheduleButton";
 
 interface Props {
   match: UnscheduledMatch | ScheduledMatch;
@@ -38,29 +37,17 @@ export const MatchBlock: React.FC<Props> = ({ match, editable }) => {
   return (
     <MatchBlockContainer $isFinished={isFinished} $isInProgress={isInProgress}>
       <StartTimeContainer>
-        <WithMaybeEditButton showButton={editable && isScheduled(match)}>
-          {isScheduled(match) ? (
-            <>
-              <StartTime>
-                <p>
-                  {match.scheduledTime.toLocaleString(DateTime.TIME_SIMPLE)}
-                </p>
-              </StartTime>
-            </>
-          ) : (
-            <FlexDiv>
-              <Button
-                color={"coral"}
-                onClick={() => setShowScheduleModal(true)}
-              >
-                <FlexDiv>
-                  <CalendarIcon />
-                </FlexDiv>
-                <ButtonText>Pick time</ButtonText>
-              </Button>
-            </FlexDiv>
-          )}
-        </WithMaybeEditButton>
+        {isScheduled(match) ? (
+          <WithMaybeEditButton showButton={editable && isScheduled(match)}>
+            <StartTime>
+              <p>{match.scheduledTime.toLocaleString(DateTime.TIME_SIMPLE)}</p>
+            </StartTime>
+          </WithMaybeEditButton>
+        ) : (
+          <FlexDiv>
+            <ScheduleButton onClick={() => setShowScheduleModal(true)} />
+          </FlexDiv>
+        )}
       </StartTimeContainer>
 
       <Entrants>
@@ -80,18 +67,9 @@ export const MatchBlock: React.FC<Props> = ({ match, editable }) => {
             "https://www.twitch.tv/" + match.restreamChannel
           }
         />
-
-        <ButtonMarginTop>
-          <UrlButton
-            color={"brightMossGreen"}
-            url={`https://kadgar.net/live/${match.entrants[0].user.twitchChannel}/${match.entrants[1].user.twitchChannel}`}
-          >
-            <FlexDiv>
-              <KadgarIcon />
-            </FlexDiv>
-            <ButtonText>Kadgar</ButtonText>
-          </UrlButton>
-        </ButtonMarginTop>
+        <KadgarButtonStyled
+          url={`https://kadgar.net/live/${match.entrants[0].user.twitchChannel}/${match.entrants[1].user.twitchChannel}`}
+        />
       </StreamButtonsDiv>
 
       <ScheduleModal
@@ -110,15 +88,7 @@ const WithMaybeEditButton: React.FC<{ showButton?: boolean }> = ({
     <>
       <Edit />
       <WithMaybeEdit>{children}</WithMaybeEdit>
-      <Edit>
-        {showButton && (
-          <EditButton color={"coral"}>
-            <FlexDiv>
-              <PencilIcon />
-            </FlexDiv>
-          </EditButton>
-        )}
-      </Edit>
+      <Edit>{showButton && <EditButton />}</Edit>
     </>
   );
 };
@@ -141,10 +111,6 @@ const Edit = styled(FlexDiv)`
   width: 2rem;
 `;
 
-const EditButton = styled(Button)`
-  padding: 0.3rem 0.4rem;
-`;
-
 const WithMaybeEdit = styled(FlexDiv)`
   margin: 0 0.7rem;
 `;
@@ -164,7 +130,7 @@ const StartTime = styled(FlexDiv)`
 `;
 
 const StartTimeContainer = styled(FlexDiv)`
-  min-width: 5rem;
+  min-width: 9.5rem;
 `;
 
 const Round = styled(DesktopOnlyFlexDiv)`
@@ -176,23 +142,7 @@ const StreamButtonsDiv = styled(FlexDiv)`
   margin: 0 10px;
 `;
 
-const ButtonMarginTop = styled.div`
+const KadgarButtonStyled = styled(KadgarButton)`
   margin-top: 8px;
   width: 100%;
-`;
-
-const ButtonText = styled(DesktopOnlyFlexDiv)`
-  margin-left: 5px;
-`;
-
-const KadgarIcon = styled(MdOutlineLiveTv)`
-  transform: scale(1.2);
-`;
-
-const CalendarIcon = styled(BiCalendar)`
-  transform: scale(1.2);
-`;
-
-const PencilIcon = styled(BiPencil)`
-  transform: scale(1.3);
 `;

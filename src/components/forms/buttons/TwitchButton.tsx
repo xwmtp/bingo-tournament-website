@@ -1,8 +1,7 @@
 import React from "react";
-import { UrlButton } from "./UrlButton";
-import { DesktopOnlyFlexDiv, FlexDiv } from "../divs/FlexDiv";
 import styled from "styled-components";
 import { IoLogoTwitch } from "react-icons/io";
+import { IconUrlButton } from "../IconButton";
 
 interface Props {
   text?: string;
@@ -12,18 +11,15 @@ interface Props {
 
 export const TwitchButton: React.FC<Props> = ({ text, url, className }) => {
   return (
-    <UrlButton color={"twitchPurple"} url={url} className={className}>
-      <FlexDiv>
-        <TwitchIcon />
-      </FlexDiv>
-      <TextDiv>{text}</TextDiv>
-    </UrlButton>
+    <IconUrlButton
+      text={text}
+      Icon={TwitchIcon}
+      url={url}
+      color={"twitchPurple"}
+      className={className}
+    />
   );
 };
-
-const TextDiv = styled(DesktopOnlyFlexDiv)`
-  margin-left: 5px;
-`;
 
 const TwitchIcon = styled(IoLogoTwitch)`
   transform: scale(1.2);

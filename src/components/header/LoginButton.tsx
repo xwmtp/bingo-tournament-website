@@ -1,5 +1,5 @@
 import React from "react";
-import { RacetimeButton } from "../forms/RacetimeButton";
+import { RacetimeButton } from "../forms/buttons/RacetimeButton";
 import styled from "styled-components";
 
 export const LoginButton: React.FC = () => {

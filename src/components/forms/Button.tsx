@@ -56,7 +56,6 @@ const DefaultButton = styled.a<ButtonLayoutProps>`
   flex-grow: 1;
   font-size: ${({ size }) => fontSize(size || "normal")}rem;
   padding: 0.3rem 0.6rem;
-  //padding: 5px 0.6rem;
   border-radius: 5px;
   cursor: pointer;
   transition: 0.1s;

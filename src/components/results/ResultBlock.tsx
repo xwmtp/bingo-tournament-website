@@ -5,8 +5,8 @@ import { FlexDiv } from "../divs/FlexDiv";
 import { Colors, ScreenWidths } from "../../GlobalStyle";
 import { UserDisplay } from "../UserDisplay";
 import { EntrantWithResult, getResultString } from "../../domain/Entrant";
-import { RacetimeButton } from "../forms/RacetimeButton";
-import { TwitchButton } from "../forms/TwitchButton";
+import { RacetimeButton } from "../forms/buttons/RacetimeButton";
+import { TwitchButton } from "../forms/buttons/TwitchButton";
 
 interface Props {
   result: MatchResult;
