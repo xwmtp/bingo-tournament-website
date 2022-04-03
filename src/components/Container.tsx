@@ -17,24 +17,24 @@ export const Container: React.FC<Props> = ({
   children,
 }) => {
   return (
-    <StyledContainer className={className} width={width}>
+    <ContainerStyled className={className} width={width}>
       {title && (
-        <StyledHeader>
+        <ContainerHeader>
           {size === "normal" ? <h2>{title}</h2> : <h3>{title}</h3>}
-        </StyledHeader>
+        </ContainerHeader>
       )}
 
-      <StyledContent title={title}>{children}</StyledContent>
-    </StyledContainer>
+      <Content title={title}>{children}</Content>
+    </ContainerStyled>
   );
 };
 
-const StyledContainer = styled.div<Props>`
+const ContainerStyled = styled.div<Props>`
   width: ${({ width }) => width ?? "100%"};
   margin-bottom: ${Margins.container}rem;
 `;
 
-const StyledHeader = styled.div`
+const ContainerHeader = styled.div`
   background-color: ${Colors.mediumGrey};
   padding: 10px 20px;
   margin-bottom: 4px;
@@ -42,7 +42,7 @@ const StyledHeader = styled.div`
   box-shadow: 5px 5px 5px ${Colors.boxShadowGrey};
 `;
 
-const StyledContent = styled.div<Props>`
+const Content = styled.div<Props>`
   background-color: ${Colors.mediumGrey};
   //padding: 20px;
   padding: 1.2rem;

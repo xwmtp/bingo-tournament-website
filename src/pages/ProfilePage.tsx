@@ -7,7 +7,7 @@ import { Margins } from "../GlobalStyle";
 export const ProfilePage: React.FC = () => {
   return (
     <>
-      <StyledTabSelector
+      <TabSelectorStyled
         tabOptions={[
           { title: "Profile", to: "/profile/settings" },
           { title: "Matches", to: "/profile/matches" },
@@ -19,6 +19,6 @@ export const ProfilePage: React.FC = () => {
   );
 };
 
-const StyledTabSelector = styled(RouteTabSelector)`
+const TabSelectorStyled = styled(RouteTabSelector)`
   margin-bottom: ${Margins.container}rem;
 `;

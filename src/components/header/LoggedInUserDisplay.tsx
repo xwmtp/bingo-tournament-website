@@ -13,15 +13,15 @@ interface Props {
 
 export const LoggedInUserDisplay: React.FC<Props> = ({ user }) => {
   return (
-    <StyledNavLink to="/profile/settings">
+    <NavLinkStyled to="/profile/settings">
       <FlexDiv>
         <Avatar src={user.avatar} $sizeRem={2} />
         <DesktopOnly>{truncateString(user.name, 24)}</DesktopOnly>
       </FlexDiv>
-    </StyledNavLink>
+    </NavLinkStyled>
   );
 };
 
-const StyledNavLink = styled(NavLink)`
+const NavLinkStyled = styled(NavLink)`
   padding: 10px;
 `;

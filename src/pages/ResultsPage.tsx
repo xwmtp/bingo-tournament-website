@@ -16,7 +16,7 @@ export const ResultsPage: React.FC = () => {
   return (
     <>
       <Container title={"Results"}>
-        <StyledTabSelector
+        <TabSelectorStyled
           activeTab={activeTab}
           setActiveTab={setActiveTab}
           tabOptions={["Round 1", "Round 2"]}
@@ -28,7 +28,7 @@ export const ResultsPage: React.FC = () => {
   );
 };
 
-const StyledTabSelector = styled(TabSelector)`
+const TabSelectorStyled = styled(TabSelector)`
   background-color: ${Colors.darkGrey};
   margin-bottom: 20px;
 `;

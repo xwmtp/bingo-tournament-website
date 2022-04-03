@@ -24,7 +24,7 @@ export const ResultBlock: React.FC<Props> = ({ result }) => {
       </Entrants>
 
       <ButtonsDiv>
-        <StyledTwitchButton
+        <TwitchButtonStyled
           text="Restream"
           url={
             result.restreamChannel &&
@@ -32,12 +32,10 @@ export const ResultBlock: React.FC<Props> = ({ result }) => {
           }
         />
 
-        <ButtonMarginTop>
-          <RacetimeButton
-            text="racetime.gg"
-            url={"https://www.racetime.gg/oot/" + result.id}
-          />
-        </ButtonMarginTop>
+        <RacetimeButtonStyled
+          text="racetime.gg"
+          url={"https://www.racetime.gg/oot/" + result.id}
+        />
       </ButtonsDiv>
     </ResultBlockContainer>
   );
@@ -97,11 +95,11 @@ const ButtonsDiv = styled(FlexDiv)`
   margin: 0 10px;
 `;
 
-const ButtonMarginTop = styled.div`
+const RacetimeButtonStyled = styled(RacetimeButton)`
   margin-top: 8px;
   width: 100%;
 `;
 
-const StyledTwitchButton = styled(TwitchButton)`
+const TwitchButtonStyled = styled(TwitchButton)`
   width: 100%;
 `;

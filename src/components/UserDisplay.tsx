@@ -11,14 +11,14 @@ interface Props {
 
 export const UserDisplay: React.FC<Props> = ({ user }) => {
   return (
-    <StyledEntrantDisplay>
+    <UserStyled>
       <Avatar src={user.avatar} $sizeRem={1.6} />
       <p>{truncateString(user.name, 20)}</p>
-    </StyledEntrantDisplay>
+    </UserStyled>
   );
 };
 
-const StyledEntrantDisplay = styled(FlexDiv)`
+const UserStyled = styled(FlexDiv)`
   justify-content: start;
   min-width: 13rem;
 `;

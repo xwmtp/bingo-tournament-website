@@ -2,13 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import { Colors } from "../../GlobalStyle";
 
-export const Input: React.FC<React.ComponentProps<typeof StyledInput>> = (
+export const Input: React.FC<React.ComponentProps<typeof InputStyled>> = (
   props
 ) => {
-  return <StyledInput {...props} />;
+  return <InputStyled {...props} />;
 };
 
-const StyledInput = styled.input`
+const InputStyled = styled.input`
   padding: 14px;
   border-radius: 10px;
   border: 3px solid ${Colors.lightGray};

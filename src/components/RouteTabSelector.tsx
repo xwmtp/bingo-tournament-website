@@ -48,13 +48,13 @@ const TabOptionNavLink: React.FC<{ to: string; $fontSize?: string }> = ({
   const match = useMatch({ path: resolved.pathname, end: true });
 
   return (
-    <StyledNavLink to={to} $isActive={!!match} $fontSize={$fontSize}>
+    <NavLinkStyled to={to} $isActive={!!match} $fontSize={$fontSize}>
       {children}
-    </StyledNavLink>
+    </NavLinkStyled>
   );
 };
 
-const StyledNavLink = styled(NavLink)<{
+const NavLinkStyled = styled(NavLink)<{
   $isActive: boolean;
   $fontSize?: string;
 }>`

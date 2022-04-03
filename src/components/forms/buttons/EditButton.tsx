@@ -11,7 +11,7 @@ interface Props {
 
 export const EditButton: React.FC<Props> = ({ text, onClick, className }) => {
   return (
-    <StyledEditButton
+    <EditButtonStyled
       color={"coral"}
       text={text}
       Icon={PencilIcon}
@@ -21,7 +21,7 @@ export const EditButton: React.FC<Props> = ({ text, onClick, className }) => {
   );
 };
 
-const StyledEditButton = styled(IconButton)`
+const EditButtonStyled = styled(IconButton)`
   padding: 0.3rem 0.4rem;
 `;
 

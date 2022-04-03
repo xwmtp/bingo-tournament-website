@@ -12,12 +12,12 @@ export const Header: React.FC = () => {
   const userContext = useContext(UserContext);
 
   return (
-    <StyledHeader>
+    <HeaderStyled>
       <HeaderContent>
         <Nav />
         <LoginOrUser loading={userContext.loading} user={userContext.user} />
       </HeaderContent>
-    </StyledHeader>
+    </HeaderStyled>
   );
 };
 
@@ -34,7 +34,7 @@ const LoginOrUser: React.FC<{ user: User | undefined; loading: boolean }> = ({
   return <LoginButton />;
 };
 
-const StyledHeader = styled(FlexDiv)`
+const HeaderStyled = styled(FlexDiv)`
   background-color: ${Colors.mossGreen};
   height: 72px;
 `;

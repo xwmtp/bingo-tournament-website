@@ -4,10 +4,10 @@ import { FlexDiv } from "./divs/FlexDiv";
 import { ScreenWidths } from "../GlobalStyle";
 
 export const Page: React.FC = ({ children }) => {
-  return <StyledPage>{children}</StyledPage>;
+  return <PageStyled>{children}</PageStyled>;
 };
 
-const StyledPage = styled(FlexDiv)`
+const PageStyled = styled(FlexDiv)`
   width: 1000px;
   flex-direction: column;
   max-width: 90vw;

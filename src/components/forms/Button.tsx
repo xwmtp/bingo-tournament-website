@@ -25,12 +25,12 @@ export const Button: React.FC<ButtonProps> = ({
   color,
   size,
 }) => {
-  let StyledButton = DefaultButton;
+  let ButtonStyled = DefaultButton;
   if (disabled) {
-    StyledButton = DisabledButton;
+    ButtonStyled = DisabledButton;
   }
   return (
-    <StyledButton
+    <ButtonStyled
       color={color}
       size={size}
       onClick={onClick}
@@ -39,7 +39,7 @@ export const Button: React.FC<ButtonProps> = ({
       className={className}
     >
       {children}
-    </StyledButton>
+    </ButtonStyled>
   );
 };
 

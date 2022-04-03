@@ -3,10 +3,10 @@ import styled from "styled-components";
 import { FlexDiv } from "./divs/FlexDiv";
 
 export const Content: React.FC = ({ children }) => {
-  return <StyledPage>{children}</StyledPage>;
+  return <PageStyled>{children}</PageStyled>;
 };
 
-const StyledPage = styled(FlexDiv)`
+const PageStyled = styled(FlexDiv)`
   width: 100%;
   flex-flow: column;
   justify-content: start;

@@ -19,12 +19,12 @@ export const ScheduleModal: React.FC<Props> = ({ visible, onClose }) => {
   );
 
   return (
-    <StyledModal
+    <ModalStyled
       isOpen={visible}
       onBackgroundClick={onClose}
       onEscapeKeydown={onClose}
     >
-      <StyledContainer title={"Pick date & time"} size="small" width={"700px"}>
+      <ContainerStyled title={"Pick date & time"} size="small" width={"700px"}>
         <ContainerContents>
           <p>
             {`Please schedule your match after agreeing on a time with your
@@ -66,8 +66,8 @@ export const ScheduleModal: React.FC<Props> = ({ visible, onClose }) => {
             Confirm
           </ConfirmButton>
         </ContainerContents>
-      </StyledContainer>
-    </StyledModal>
+      </ContainerStyled>
+    </ModalStyled>
   );
 };
 
@@ -76,7 +76,7 @@ const mergeDateAndTime = (date: DateTime, time: DateTime): DateTime => {
   return DateTime.fromISO(iso);
 };
 
-const StyledModal = Modal.styled`
+const ModalStyled = Modal.styled`
   position: absolute;
   top: 20%;
   border-radius: 10px;
@@ -84,7 +84,7 @@ const StyledModal = Modal.styled`
   background-color: ${Colors.darkGrey};
 `;
 
-const StyledContainer = styled(Container)`
+const ContainerStyled = styled(Container)`
   margin-bottom: 0;
 `;
 

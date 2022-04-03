@@ -21,9 +21,9 @@ const Link: React.FC<{ to: string; $fontSize?: string }> = ({
   const match = useMatch({ path: resolved.pathname, end: true });
 
   return (
-    <StyledLink to={to} $isActive={!!match}>
+    <LinkStyled to={to} $isActive={!!match}>
       {children}
-    </StyledLink>
+    </LinkStyled>
   );
 };
 
@@ -31,7 +31,7 @@ const Navigation = styled.nav`
   flex-direction: row;
 `;
 
-const StyledLink = styled(NavLink)<{ $isActive: boolean }>`
+const LinkStyled = styled(NavLink)<{ $isActive: boolean }>`
   padding: 10px;
   font-size: 1.3rem;
   text-decoration: ${({ $isActive }) => ($isActive ? "underline" : "none")};
