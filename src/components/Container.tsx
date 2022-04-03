@@ -36,16 +36,16 @@ const ContainerStyled = styled.div<Props>`
 
 const ContainerHeader = styled.div`
   background-color: ${Colors.mediumGrey};
-  padding: 10px 20px;
-  margin-bottom: 4px;
-  border-radius: 10px 10px 0 0;
-  box-shadow: 5px 5px 5px ${Colors.boxShadowGrey};
+  padding: 0.6rem 1.2rem;
+  margin-bottom: 0.3rem;
+  border-radius: 0.6rem 0.6rem 0 0;
+  box-shadow: 0.3rem 0.3rem 0.3rem ${Colors.boxShadowGrey};
 `;
 
 const Content = styled.div<Props>`
   background-color: ${Colors.mediumGrey};
-  //padding: 20px;
   padding: 1.2rem;
-  border-radius: ${({ title }) => (title ? "0 0" : "10px 10px")} 10px 10px;
-  box-shadow: 5px 5px 4px ${Colors.boxShadowGrey};
+  border-radius: ${({ title }) => (title ? "0 0" : "0.6rem 0.6rem")} 0.6rem
+    0.6rem;
+  box-shadow: 0.3rem 0.3rem 0.3rem ${Colors.boxShadowGrey};
 `;

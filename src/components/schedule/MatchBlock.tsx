@@ -7,14 +7,14 @@ import {
   UnscheduledMatch,
 } from "../../domain/Match";
 import { DateTime } from "luxon";
-import { DesktopOnlyFlexDiv, FlexDiv } from "../divs/FlexDiv";
-import { Colors } from "../../GlobalStyle";
+import { FlexDiv, WideScreenOnlyFlexDiv } from "../divs/FlexDiv";
+import { Colors, ScreenWidths } from "../../GlobalStyle";
 import { UserDisplay } from "../UserDisplay";
 import { ScheduleModal } from "./ScheduleModal";
 import { TwitchButton } from "../forms/buttons/TwitchButton";
 import { KadgarButton } from "../forms/buttons/KadgarButton";
-import { EditButton } from "../forms/buttons/EditButton";
 import { ScheduleButton } from "../forms/buttons/ScheduleButton";
+import { EditButton } from "../forms/buttons/EditButton";
 
 interface Props {
   match: UnscheduledMatch | ScheduledMatch;
@@ -38,11 +38,16 @@ export const MatchBlock: React.FC<Props> = ({ match, editable }) => {
     <MatchBlockContainer $isFinished={isFinished} $isInProgress={isInProgress}>
       <StartTimeContainer>
         {isScheduled(match) ? (
-          <WithMaybeEditButton showButton={editable && isScheduled(match)}>
+          <>
             <StartTime>
               <p>{match.scheduledTime.toLocaleString(DateTime.TIME_SIMPLE)}</p>
             </StartTime>
-          </WithMaybeEditButton>
+            {editable && (
+              <FlexDiv>
+                <EditButtonStyled />
+              </FlexDiv>
+            )}
+          </>
         ) : (
           <FlexDiv>
             <ScheduleButton onClick={() => setShowScheduleModal(true)} />
@@ -80,48 +85,43 @@ export const MatchBlock: React.FC<Props> = ({ match, editable }) => {
   );
 };
 
-const WithMaybeEditButton: React.FC<{ showButton?: boolean }> = ({
-  showButton,
-  children,
-}) => {
-  return (
-    <>
-      <Edit />
-      <WithMaybeEdit>{children}</WithMaybeEdit>
-      <Edit>{showButton && <EditButton />}</Edit>
-    </>
-  );
-};
-
 const MatchBlockContainer = styled(FlexDiv)<{
   $isFinished: boolean;
   $isInProgress: boolean;
 }>`
-  justify-content: space-around;
+  justify-content: space-between;
   background-color: ${Colors.lightGray};
-  border-radius: 10px;
-  padding: 10px 0;
-  margin-top: 12px;
+  border-radius: 0.6rem;
+  padding: 0.6rem 0.8rem;
+  margin-top: 0.7rem;
   opacity: ${({ $isFinished }) => ($isFinished ? "20%" : "100%")};
-  border: ${({ $isInProgress }) => ($isInProgress ? "4px" : "0px")} solid
+  border: ${({ $isInProgress }) => ($isInProgress ? "0.24rem" : "0")} solid
     ${Colors.brightMossGreen};
-`;
-
-const Edit = styled(FlexDiv)`
-  width: 2rem;
-`;
-
-const WithMaybeEdit = styled(FlexDiv)`
-  margin: 0 0.7rem;
 `;
 
 const Entrants = styled.div`
   min-width: 14rem;
+  margin: 0 0.3rem;
 
   p {
     font-size: 1.1rem;
-    margin: 5px 0;
+    margin: 0.3rem 0;
   }
+`;
+
+const StartTimeContainer = styled(FlexDiv)`
+  justify-content: flex-start;
+  min-width: 8.5rem;
+  padding-left: 2rem;
+
+  @media (max-width: ${ScreenWidths.tablet}px) {
+    padding-left: 0.6rem;
+    min-width: 7rem;
+  }
+`;
+
+const EditButtonStyled = styled(EditButton)`
+  margin-left: 0.5rem;
 `;
 
 const StartTime = styled(FlexDiv)`
@@ -129,20 +129,16 @@ const StartTime = styled(FlexDiv)`
   font-weight: 600;
 `;
 
-const StartTimeContainer = styled(FlexDiv)`
-  min-width: 9.5rem;
-`;
-
-const Round = styled(DesktopOnlyFlexDiv)`
-  min-width: 120px;
+const Round = styled(WideScreenOnlyFlexDiv)`
+  min-width: 7.2rem;
 `;
 
 const StreamButtonsDiv = styled(FlexDiv)`
   flex-direction: column;
-  margin: 0 10px;
+  margin: 0 0.6rem;
 `;
 
 const KadgarButtonStyled = styled(KadgarButton)`
-  margin-top: 8px;
+  margin-top: 0.5rem;
   width: 100%;
 `;

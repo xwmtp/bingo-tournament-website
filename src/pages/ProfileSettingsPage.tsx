@@ -42,7 +42,7 @@ const SignUpDiv = styled(FlexDiv)`
 `;
 
 const SignUpButton = styled(Button)`
-  margin: 20px 0;
+  margin: 1.2rem 0;
 `;
 
 const ProfileSettingsPageDiv = styled.div`

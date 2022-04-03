@@ -60,10 +60,10 @@ const NavLinkStyled = styled(NavLink)<{
 }>`
   background-color: ${({ $isActive }) =>
     $isActive ? Colors.brightMossGreen : "none"};
-  padding: 10px 10px;
+  padding: 0.6rem;
   font-size: ${({ $fontSize }) => $fontSize ?? "1.3rem"};
   display: flex;
   justify-content: center;
-  border-radius: 10px;
+  border-radius: 0.6rem;
   flex-grow: 1;
 `;

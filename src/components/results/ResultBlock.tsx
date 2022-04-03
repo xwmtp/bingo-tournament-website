@@ -57,11 +57,12 @@ export const ResultRow: React.FC<{ entrant: EntrantWithResult }> = ({
 const ResultBlockContainer = styled(FlexDiv)`
   justify-content: space-between;
   background-color: ${Colors.lightGray};
-  border-radius: 10px;
-  padding: 10px 60px;
-  margin-top: 12px;
-  @media (max-width: ${ScreenWidths.tablet}px) {
-    padding: 10px 20px;
+  border-radius: 0.6rem;
+  padding: 0.6rem 3.6rem;
+  margin-top: 0.7rem;
+  @media (min-width: ${ScreenWidths.phone +
+    1}px) and (max-width: ${ScreenWidths.tablet}px) {
+    padding: 0.6rem 1.2rem;
   }
 `;
 
@@ -75,28 +76,28 @@ const Entrants = styled.div`
 
   p {
     font-size: 1.1rem;
-    margin: 5px 0;
+    margin: 0.3rem 0;
   }
 `;
 
 const Rank = styled(FlexDiv)`
-  margin-right: 14px;
+  margin-right: 0.8rem;
 `;
 
 const RaceResult = styled(FlexDiv)`
-  margin-left: 30px;
+  margin-left: 1.8rem;
   @media (max-width: ${ScreenWidths.tablet}px) {
-    margin-left: 5px;
+    margin-left: 0.3rem;
   }
 `;
 
 const ButtonsDiv = styled(FlexDiv)`
   flex-direction: column;
-  margin: 0 10px;
+  margin: 0 0.6rem;
 `;
 
 const RacetimeButtonStyled = styled(RacetimeButton)`
-  margin-top: 8px;
+  margin-top: 0.5rem;
   width: 100%;
 `;
 

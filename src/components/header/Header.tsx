@@ -36,7 +36,8 @@ const LoginOrUser: React.FC<{ user: User | undefined; loading: boolean }> = ({
 
 const HeaderStyled = styled(FlexDiv)`
   background-color: ${Colors.mossGreen};
-  height: 72px;
+  padding: 0 0.6rem;
+  height: 4.3rem;
 `;
 
 const HeaderContent = styled(FlexDiv)`

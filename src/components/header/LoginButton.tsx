@@ -16,5 +16,5 @@ export const LoginButton: React.FC = () => {
 };
 
 const ButtonDiv = styled.div`
-  margin: 0 10px;
+  margin: 0 0.6rem;
 `;

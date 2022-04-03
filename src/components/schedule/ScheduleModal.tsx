@@ -79,13 +79,14 @@ const mergeDateAndTime = (date: DateTime, time: DateTime): DateTime => {
 const ModalStyled = Modal.styled`
   position: absolute;
   top: 20%;
-  border-radius: 10px;
-  padding: 20px;
+  border-radius: 0.6rem;
+  padding: 1.2rem;
   background-color: ${Colors.darkGrey};
 `;
 
 const ContainerStyled = styled(Container)`
   margin-bottom: 0;
+  max-width: 85vw;
 `;
 
 const ContainerContents = styled(FlexDiv)`
@@ -94,9 +95,9 @@ const ContainerContents = styled(FlexDiv)`
 `;
 
 const DateTimeInputs = styled(FlexDiv)`
-  margin: 30px 0;
+  margin: 1.8rem 0;
 `;
 
 const ConfirmButton = styled(Button)`
-  margin-top: 20px;
+  margin-top: 1.2rem;
 `;

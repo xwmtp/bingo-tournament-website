@@ -52,5 +52,5 @@ export const ScheduledMatches: React.FC<Props> = ({ matches }) => {
 };
 
 const MatchesByDate = styled.div<{ $isFirst: boolean }>`
-  margin-top: ${({ $isFirst }) => ($isFirst ? "0px" : "20px")};
+  margin-top: ${({ $isFirst }) => ($isFirst ? "0" : "1.2rem")};
 `;

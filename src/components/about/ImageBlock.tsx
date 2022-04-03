@@ -18,19 +18,19 @@ export const ImageBlock: React.FC<Props> = ({
 }) => {
   return (
     <a href={url} target={"_blank"} rel="noreferrer">
-      <PreviousYearDiv image={image} className={className}>
+      <ImageBlockStyled image={image} className={className}>
         <h2>{text}</h2>
-      </PreviousYearDiv>
+      </ImageBlockStyled>
     </a>
   );
 };
 
-const PreviousYearDiv = styled(FlexDiv)<{ image: string }>`
+const ImageBlockStyled = styled(FlexDiv)<{ image: string }>`
   flex-grow: 1;
   aspect-ratio: 1.3;
-  border: 2px solid ${Colors.lightGray};
-  border-radius: 10px;
-  box-shadow: 5px 5px 4px ${Colors.darkGrey};
+  border: 0.12rem solid ${Colors.lightGray};
+  border-radius: 0.6rem;
+  box-shadow: 0.3rem 0.3rem 0.3rem ${Colors.darkGrey};
   position: relative;
   background-image: url(${({ image }) => image});
   background-position: center;

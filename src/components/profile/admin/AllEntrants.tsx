@@ -50,5 +50,5 @@ const AllEntrantsDiv = styled.div`
 const EntrantsList = styled.div`
   display: flex;
   flex-flow: row wrap;
-  margin-top: 20px;
+  margin-top: 1.2rem;
 `;

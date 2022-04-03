@@ -1,6 +1,6 @@
 import React from "react";
 import { UrlButton } from "./UrlButton";
-import { DesktopOnlyFlexDiv, FlexDiv } from "../divs/FlexDiv";
+import { FlexDiv, WideScreenOnlyFlexDiv } from "../divs/FlexDiv";
 import styled from "styled-components";
 import { Button } from "./Button";
 import { ColorName } from "../../GlobalStyle";
@@ -55,11 +55,11 @@ const IconButtonContent: React.FC<ContentProps> = ({ Icon, text }) => {
   return (
     <FlexDiv>
       <Icon />
-      {text && <DesktopOnlyButtonText>{text}</DesktopOnlyButtonText>}
+      {text && <WideScreenOnlyButtonText>{text}</WideScreenOnlyButtonText>}
     </FlexDiv>
   );
 };
 
-const DesktopOnlyButtonText = styled(DesktopOnlyFlexDiv)`
-  margin-left: 5px;
+const WideScreenOnlyButtonText = styled(WideScreenOnlyFlexDiv)`
+  margin-left: 0.3rem;
 `;

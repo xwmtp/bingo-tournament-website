@@ -20,5 +20,5 @@ export const PreviousYears: React.FC = () => {
 };
 
 const ImageBlockBottomMargin = styled(ImageBlock)`
-  margin-bottom: 20px;
+  margin-bottom: 1.2rem;
 `;

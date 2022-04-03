@@ -44,11 +44,11 @@ const TabOptionDiv = styled.div<{
 }>`
   background-color: ${({ $isActive }) =>
     $isActive ? Colors.brightMossGreen : "none"};
-  padding: 10px 10px;
+  padding: 0.6rem;
   font-size: ${({ $fontSize }) => $fontSize ?? "1.3rem"};
   display: flex;
   justify-content: center;
-  border-radius: 10px;
+  border-radius: 0.6rem;
   flex-grow: 1;
   cursor: pointer;
 `;
@@ -61,9 +61,9 @@ export const Selector = styled(FlexDiv)<{
   width: ${({ $width }) => $width || "100%"};
   max-width: 90vw;
   background-color: ${Colors.mediumGrey};
-  padding: 5px;
-  border-radius: 10px;
-  box-shadow: 5px 5px 5px ${Colors.boxShadowGrey};
+  padding: 0.3rem;
+  border-radius: 0.6rem;
+  box-shadow: 0.3rem 0.3rem 0.3rem ${Colors.boxShadowGrey};
   @media (max-width: ${ScreenWidths.phone}px) {
     max-width: 95vw;
   }

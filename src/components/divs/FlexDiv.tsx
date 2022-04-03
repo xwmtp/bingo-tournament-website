@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React from "react";
-import { DesktopOnly } from "./DesktopOnly";
+import { WideScreenOnly } from "./WideScreenOnly";
 
 export const FlexDiv: React.FC<{
   className?: string;
@@ -8,13 +8,13 @@ export const FlexDiv: React.FC<{
   return <CenteredFlexDiv className={className}>{children}</CenteredFlexDiv>;
 };
 
-export const DesktopOnlyFlexDiv: React.FC<{
+export const WideScreenOnlyFlexDiv: React.FC<{
   className?: string;
 }> = ({ className, children }) => {
   return (
-    <CenteredFlexDesktopOnlyDiv className={className}>
+    <CenteredWideScreenOnlyDiv className={className}>
       {children}
-    </CenteredFlexDesktopOnlyDiv>
+    </CenteredWideScreenOnlyDiv>
   );
 };
 
@@ -25,7 +25,7 @@ const CenteredFlexDiv = styled.div`
   justify-content: center;
 `;
 
-const CenteredFlexDesktopOnlyDiv = styled(DesktopOnly)`
+const CenteredWideScreenOnlyDiv = styled(WideScreenOnly)`
   display: flex;
   flex-direction: row;
   align-items: center;

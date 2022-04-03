@@ -18,7 +18,8 @@ export const Colors = {
 export type ColorName = keyof typeof Colors;
 
 export const ScreenWidths = {
-  phone: 480,
+  smallPhone: 425,
+  phone: 500,
   tablet: 768,
 } as const;
 
@@ -74,23 +75,29 @@ export const GlobalStyle = createGlobalStyle`
     font-size: inherit;
     border: inherit;
     box-shadow: none;
+
     ::placeholder {
       color: ${Colors.lightGray};
       opacity: 1;
     }
   }
-  
+
   h4 {
     font-weight: normal;
     font-size: 1.2rem;
   }
-  
+
   p {
     line-height: 1.4rem;
   }
-  
-  .desktopOnly {
-    @media (max-width: ${ScreenWidths.tablet}px) {
+
+  .wideScreenOnly {
+    @media (min-width: ${ScreenWidths.phone + 1}px) and (max-width: ${
+  ScreenWidths.tablet
+}px) {
+      display: none;
+    }
+    @media (max-width: ${ScreenWidths.smallPhone}px) {
       display: none;
     }
   }

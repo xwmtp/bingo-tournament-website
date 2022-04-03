@@ -1,6 +1,6 @@
 import React from "react";
 import { FlexDiv } from "../divs/FlexDiv";
-import { DesktopOnly } from "../divs/DesktopOnly";
+import { WideScreenOnly } from "../divs/WideScreenOnly";
 import { NavLink } from "react-router-dom";
 import { User } from "../../domain/User";
 import { Avatar } from "../Avatar";
@@ -16,12 +16,12 @@ export const LoggedInUserDisplay: React.FC<Props> = ({ user }) => {
     <NavLinkStyled to="/profile/settings">
       <FlexDiv>
         <Avatar src={user.avatar} $sizeRem={2} />
-        <DesktopOnly>{truncateString(user.name, 24)}</DesktopOnly>
+        <WideScreenOnly>{truncateString(user.name, 24)}</WideScreenOnly>
       </FlexDiv>
     </NavLinkStyled>
   );
 };
 
 const NavLinkStyled = styled(NavLink)`
-  padding: 10px;
+  padding: 0.6rem;
 `;

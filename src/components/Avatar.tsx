@@ -14,6 +14,6 @@ const AvatarStyled = styled.img<{ $size: number }>`
   --size: ${({ $size }) => $size}rem;
   width: var(--size);
   height: var(--size);
-  border-radius: 50px;
-  margin-right: 10px;
+  border-radius: 10rem;
+  margin-right: 0.6rem;
 `;
