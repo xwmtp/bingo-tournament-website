@@ -15,6 +15,7 @@ import { TwitchButton } from "../forms/buttons/TwitchButton";
 import { KadgarButton } from "../forms/buttons/KadgarButton";
 import { ScheduleButton } from "../forms/buttons/ScheduleButton";
 import { EditButton } from "../forms/buttons/EditButton";
+import { EditModal } from "./EditModal";
 
 interface Props {
   match: UnscheduledMatch | ScheduledMatch;
@@ -25,6 +26,7 @@ const now = DateTime.local(2021, 2, 4, 5, 50, 34);
 
 export const MatchBlock: React.FC<Props> = ({ match, editable }) => {
   const [showScheduleModal, setShowScheduleModal] = useState<boolean>(false);
+  const [showEditModal, setShowEditModal] = useState<boolean>(false);
 
   const isInProgress =
     isScheduled(match) &&
@@ -44,7 +46,7 @@ export const MatchBlock: React.FC<Props> = ({ match, editable }) => {
             </StartTime>
             {editable && (
               <FlexDiv>
-                <EditButtonStyled />
+                <EditButtonStyled onClick={() => setShowEditModal(true)} />
               </FlexDiv>
             )}
           </>
@@ -80,6 +82,11 @@ export const MatchBlock: React.FC<Props> = ({ match, editable }) => {
       <ScheduleModal
         visible={showScheduleModal}
         onClose={() => setShowScheduleModal(false)}
+      />
+
+      <EditModal
+        visible={showEditModal}
+        onClose={() => setShowEditModal(false)}
       />
     </MatchBlockContainer>
   );

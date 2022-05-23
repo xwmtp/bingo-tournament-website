@@ -13,7 +13,7 @@ interface Props {
   onClose: () => void;
 }
 
-export const ScheduleModal: React.FC<Props> = ({ visible, onClose }) => {
+export const EditModal: React.FC<Props> = ({ visible, onClose }) => {
   const [dateTimeInput, setDateTimeInput] = useState<DateTime>(
     DateTime.local()
   );
@@ -24,10 +24,14 @@ export const ScheduleModal: React.FC<Props> = ({ visible, onClose }) => {
       onBackgroundClick={onClose}
       onEscapeKeydown={onClose}
     >
-      <ContainerStyled title={"Pick date & time"} size="small" width={"700px"}>
+      <ContainerStyled
+        title={"Update date & time"}
+        size="small"
+        width={"700px"}
+      >
         <ContainerContents>
           <p>
-            {`Please schedule your match after agreeing on a time with your
+            {`Please only change the date and time your match after agreeing with your
             opponent. Your detected timezone is ${DateTime.local().toFormat(
               "ZZZZ"
             )} (${DateTime.local().toFormat("ZZZZZ")}).`}
@@ -38,10 +42,10 @@ export const ScheduleModal: React.FC<Props> = ({ visible, onClose }) => {
             setDateTime={setDateTimeInput}
           />
 
-          <p>Schedule match for:</p>
+          <p>Change scheduled date & time to:</p>
           <h4>{dateTimeInput.toLocaleString(DateTime.DATETIME_FULL)}</h4>
           <ConfirmButton color={"brightMossGreen"} size={"big"}>
-            Confirm
+            Update
           </ConfirmButton>
         </ContainerContents>
       </ContainerStyled>
