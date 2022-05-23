@@ -1,13 +1,44 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Container } from "../components/Container";
 import { FlexDiv } from "../components/divs/FlexDiv";
 import styled from "styled-components";
 import { getApi } from "../api/api";
-import { UserContext } from "../App";
 import { Button } from "../components/forms/Button";
+import { useQuery } from "react-query";
+import { getUser } from "../api/userApi";
+import { User } from "../domain/User";
 
 export const ProfileSettingsPage: React.FC = () => {
-  const userContext = useContext(UserContext);
+  const {
+    data: user,
+    isLoading,
+    isError,
+  } = useQuery<User | undefined, Error>("user", getUser);
+
+  if (isLoading) {
+    return (
+      <ProfileSettingsPageDiv>
+        <Container>...</Container>
+      </ProfileSettingsPageDiv>
+    );
+  }
+
+  if (isError) {
+    return (
+      <ProfileSettingsPageDiv>
+        <Container>Something went wrong</Container>
+      </ProfileSettingsPageDiv>
+    );
+  }
+
+  if (!user) {
+    return (
+      <ProfileSettingsPageDiv>
+        <Container>Something went wrong</Container>
+      </ProfileSettingsPageDiv>
+    );
+  }
+
   return (
     <ProfileSettingsPageDiv>
       <Container>
@@ -16,7 +47,7 @@ export const ProfileSettingsPage: React.FC = () => {
           <SignUpButton
             color={"brightMossGreen"}
             size={"big"}
-            onClick={() => signUp(userContext.fetchUser)}
+            onClick={() => signUp(user)}
           >
             Sign up
           </SignUpButton>
@@ -26,11 +57,12 @@ export const ProfileSettingsPage: React.FC = () => {
   );
 };
 
-const signUp = (fetchUser: () => void) => {
+const signUp = (user: User) => {
   getApi()
     .signUp()
     .then(() => {
-      fetchUser();
+      // sign up user
+      console.log("signing up user " + user.id);
     })
     .catch((error) => {
       console.log("Could not sign up! " + error);

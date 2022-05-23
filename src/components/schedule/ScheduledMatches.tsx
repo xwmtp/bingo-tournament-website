@@ -1,10 +1,12 @@
 import { MatchBlock } from "./MatchBlock";
 import { groupBy } from "../../lib/groupBy";
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
 import { includesEntrant, ScheduledMatch } from "../../domain/Match";
 import { DateTime } from "luxon";
-import { UserContext } from "../../App";
+import { useQuery } from "react-query";
+import { User } from "../../domain/User";
+import { getUser } from "../../api/userApi";
 
 interface Props {
   matches: ScheduledMatch[];
@@ -13,7 +15,13 @@ interface Props {
 const now = DateTime.local(2021, 2, 4, 6, 10, 0);
 
 export const ScheduledMatches: React.FC<Props> = ({ matches }) => {
-  const userContext = useContext(UserContext);
+  const { data, isSuccess } = useQuery<User | undefined, Error>(
+    "user",
+    getUser
+  );
+
+  const user = isSuccess && data;
+
   const relevantMatches = matches.filter(
     (match) => match.scheduledTime > now.startOf("day")
   );
@@ -37,11 +45,7 @@ export const ScheduledMatches: React.FC<Props> = ({ matches }) => {
               <MatchBlock
                 key={match.id}
                 match={match}
-                editable={
-                  userContext.user
-                    ? includesEntrant(match, userContext.user.id)
-                    : false
-                }
+                editable={user ? includesEntrant(match, user.id) : false}
               />
             ))}
           </MatchesByDate>

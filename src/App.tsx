@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React from "react";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import { Header } from "./components/header/Header";
 import { SchedulePage } from "./pages/SchedulePage";
@@ -8,54 +8,24 @@ import { ProfilePage } from "./pages/ProfilePage";
 import { MyMatchesPage } from "./pages/MyMatchesPage";
 import { ProfileSettingsPage } from "./pages/ProfileSettingsPage";
 import { AboutPage } from "./pages/AboutPage";
-import { User } from "./domain/User";
 import { AdminPage } from "./pages/AdminPage";
 import { ModalProvider } from "styled-react-modal";
-import { getUser } from "./api/userApi";
 import { ResultsPage } from "./pages/ResultsPage";
 import { Page } from "./components/Page";
-
-export interface UserContextProps {
-  user?: User;
-  loading: boolean;
-  fetchUser: () => void;
-}
-
-export const UserContext = React.createContext<UserContextProps>({
-  user: undefined,
-  loading: true,
-  fetchUser: () => {},
-});
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 function App() {
-  const [user, setUser] = useState<User | undefined>(undefined);
-  const [loadingUser, setLoadingUser] = useState<boolean>(true);
-
-  const fetchUser = useCallback(() => {
-    if (!user) {
-      setLoadingUser(true);
-      console.log("fetching...");
-      getUser()
-        .then((fetchedUser) => {
-          console.log("found user!");
-          setUser(fetchedUser);
-        })
-        .catch((error) => {
-          console.log("Could not fetch user " + error);
-          setUser(undefined);
-        })
-        .finally(() => setLoadingUser(false));
-    }
-  }, [user]);
-
-  useEffect(() => {
-    fetchUser();
-  }, [fetchUser]);
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 1000 * 60,
+      },
+    },
+  });
 
   return (
-    <UserContext.Provider
-      value={{ user: user, fetchUser: fetchUser, loading: loadingUser }}
-    >
+    <QueryClientProvider client={queryClient}>
       <HashRouter basename={"/"}>
         <ModalProvider>
           <Header />
@@ -78,7 +48,8 @@ function App() {
           </Content>
         </ModalProvider>
       </HashRouter>
-    </UserContext.Provider>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 }
 

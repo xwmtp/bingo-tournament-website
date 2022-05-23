@@ -1,30 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { UserDisplay } from "../../UserDisplay";
 import styled from "styled-components";
 import { User } from "../../../domain/User";
-import { getApi } from "../../../api/api";
+import { useQuery } from "react-query";
+import { getAllEntrants } from "../../../api/entrantsApi";
 
 export const AllEntrants: React.FC = () => {
-  const [allEntrants, setAllEntrants] = useState<User[] | undefined>(undefined);
-  const [loading, setLoading] = useState<boolean>(true);
+  const { data, isLoading, isError } = useQuery<User[], Error>(
+    "allEntrants",
+    getAllEntrants
+  );
 
-  useEffect(() => {
-    getApi()
-      .getEntrants()
-      .then((entrants) => setAllEntrants(entrants))
-      .catch((error) => {
-        console.debug(error);
-        setAllEntrants(undefined);
-      })
-      .finally(() => setLoading(false));
-  }, []);
-
-  if (loading) {
+  if (isLoading) {
     return <p>loading...</p>;
   }
-  if (allEntrants === undefined) {
+  if (isError) {
     return <p>Could not load entrants</p>;
   }
+
+  const allEntrants = data ?? [];
 
   const sortedEntrants = allEntrants.sort((a, b) =>
     a.name.localeCompare(b.name)

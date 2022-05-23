@@ -4,37 +4,39 @@ import { Colors } from "../../GlobalStyle";
 import { LoggedInUserDisplay } from "./LoggedInUserDisplay";
 import { FlexDiv } from "../divs/FlexDiv";
 import { LoginButton } from "./LoginButton";
-import { UserContext } from "../../App";
-import React, { useContext } from "react";
+import React from "react";
 import { User } from "../../domain/User";
+import { useQuery } from "react-query";
+import { getUser } from "../../api/userApi";
 
 export const Header: React.FC = () => {
-  const userContext = useContext(UserContext);
-
   return (
     <HeaderStyled>
       <HeaderContent>
         <Nav />
-        <LoginOrUser loading={userContext.loading} user={userContext.user} />
+        <LoginOrUser />
       </HeaderContent>
     </HeaderStyled>
   );
 };
 
-const LoginOrUser: React.FC<{ user: User | undefined; loading: boolean }> = ({
-  user,
-  loading,
-}) => {
+const LoginOrUser: React.FC = () => {
+  const { data: user, isSuccess } = useQuery<User | undefined, Error>(
+    "user",
+    getUser
+  );
+
+  if (!isSuccess) {
+    return <></>;
+  }
   if (user) {
     return <LoggedInUserDisplay user={user} />;
-  }
-  if (loading) {
-    return <></>;
   }
   return <LoginButton />;
 };
 
 const HeaderStyled = styled(FlexDiv)`
+  flex-shrink: 0;
   background-color: ${Colors.mossGreen};
   padding: 0 0.6rem;
   height: 4.3rem;
