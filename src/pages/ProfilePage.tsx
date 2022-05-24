@@ -10,7 +10,7 @@ export const ProfilePage: React.FC = () => {
       <TabSelectorStyled
         tabOptions={[
           { title: "Profile", to: "/profile/settings" },
-          { title: "Matches", to: "/profile/matches" },
+          { title: "My Matches", to: "/profile/matches" },
           { title: "Admin", to: "/profile/admin" },
         ]}
       />

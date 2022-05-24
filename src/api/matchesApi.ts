@@ -9,7 +9,7 @@ import {
 import { Match, MatchResult, ScheduledMatch, UnscheduledMatch } from "../domain/Match";
 import { mapToUser } from "./userApi";
 import { Entrant, EntrantWithResult } from "../domain/Entrant";
-import { MatchState } from "@xwmtp/bingo-tournament";
+import { MatchState, NewMatch } from "@xwmtp/bingo-tournament";
 import { DateTime } from "luxon";
 
 const mockAllRaces = [...mockUnscheduledMatches, ...mockScheduledMatches, ...mockMatchResults];
@@ -56,6 +56,11 @@ export const getMatchResults = async (): Promise<MatchResult[]> => {
     console.log(error);
     return mockMatchResults;
   }
+};
+
+export const addMatches = async (newMatches: NewMatch[]): Promise<Match[]> => {
+  const addedMatches = await getApi().addMatches({ requestBody: newMatches });
+  return addedMatches.map(mapToMatch);
 };
 
 const mapToMatch = (matchDto: MatchDto): Match => {

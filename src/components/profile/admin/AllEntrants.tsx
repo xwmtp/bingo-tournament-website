@@ -4,20 +4,23 @@ import styled from "styled-components";
 import { User } from "../../../domain/User";
 import { useQuery } from "react-query";
 import { getAllEntrants } from "../../../api/entrantsApi";
+import { mockAllUsers } from "../../../domain/MockData";
 
 export const AllEntrants: React.FC = () => {
-  const { data, isLoading, isError } = useQuery<User[], Error>("allEntrants", getAllEntrants);
+  const { data, isLoading, isError, isIdle } = useQuery<User[], Error>(
+    "allEntrants",
+    getAllEntrants,
+    { initialData: mockAllUsers }
+  );
 
-  if (isLoading) {
+  if (isLoading || isIdle) {
     return <p>loading...</p>;
   }
   if (isError) {
     return <p>Could not load entrants</p>;
   }
 
-  const allEntrants = data ?? [];
-
-  const sortedEntrants = allEntrants.sort((a, b) => a.name.localeCompare(b.name));
+  const sortedEntrants = data.sort((a, b) => a.name.localeCompare(b.name));
 
   return (
     <AllEntrantsDiv>
