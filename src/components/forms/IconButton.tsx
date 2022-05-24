@@ -37,13 +37,7 @@ export const IconButton: React.FC<DefaultButtonProps> = ({
   );
 };
 
-export const IconUrlButton: React.FC<UrlButtonProps> = ({
-  Icon,
-  color,
-  text,
-  url,
-  className,
-}) => {
+export const IconUrlButton: React.FC<UrlButtonProps> = ({ Icon, color, text, url, className }) => {
   return (
     <UrlButton color={color} url={url} className={className}>
       <IconButtonContent Icon={Icon} text={text} />

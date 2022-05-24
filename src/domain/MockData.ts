@@ -65,8 +65,7 @@ export const mockScheduledMatches: ScheduledMatch[] = [
         user: {
           id: "rZyM4orRvRoqDJX0",
           name: "jenslang",
-          avatar:
-            "https://racetime.gg/media/e0aaf3c8688abd0e58bed9d9f63de4ad.png",
+          avatar: "https://racetime.gg/media/e0aaf3c8688abd0e58bed9d9f63de4ad.png",
           twitchChannel: "https://www.twitch.tv/jenslang",
         },
       },
@@ -89,8 +88,7 @@ export const mockScheduledMatches: ScheduledMatch[] = [
         user: {
           id: "rZyM4orRvRoqDJX0",
           name: "jenslang",
-          avatar:
-            "https://racetime.gg/media/e0aaf3c8688abd0e58bed9d9f63de4ad.png",
+          avatar: "https://racetime.gg/media/e0aaf3c8688abd0e58bed9d9f63de4ad.png",
           twitchChannel: "https://www.twitch.tv/jenslang",
         },
       },
@@ -113,8 +111,7 @@ export const mockScheduledMatches: ScheduledMatch[] = [
         user: {
           id: "rZyM4orRvRoqDJX0",
           name: "jenslang",
-          avatar:
-            "https://racetime.gg/media/e0aaf3c8688abd0e58bed9d9f63de4ad.png",
+          avatar: "https://racetime.gg/media/e0aaf3c8688abd0e58bed9d9f63de4ad.png",
           twitchChannel: "https://www.twitch.tv/jenslang",
         },
       },
@@ -186,8 +183,7 @@ export const mockUnscheduledMatches: UnscheduledMatch[] = [
         user: {
           id: "rZyM4orRvRoqDJX0",
           name: "jenslang",
-          avatar:
-            "https://racetime.gg/media/e0aaf3c8688abd0e58bed9d9f63de4ad.png",
+          avatar: "https://racetime.gg/media/e0aaf3c8688abd0e58bed9d9f63de4ad.png",
           twitchChannel: "https://www.twitch.tv/jenslang",
         },
       },
@@ -209,8 +205,7 @@ export const mockUnscheduledMatches: UnscheduledMatch[] = [
         user: {
           id: "rZyM4orRvRoqDJX0",
           name: "jenslang",
-          avatar:
-            "https://racetime.gg/media/e0aaf3c8688abd0e58bed9d9f63de4ad.png",
+          avatar: "https://racetime.gg/media/e0aaf3c8688abd0e58bed9d9f63de4ad.png",
           twitchChannel: "https://www.twitch.tv/jenslang",
         },
       },
@@ -312,8 +307,7 @@ export const mockMatchResults: MatchResult[] = [
         user: {
           id: "rZyM4orRvRoqDJX0",
           name: "jenslang",
-          avatar:
-            "https://racetime.gg/media/e0aaf3c8688abd0e58bed9d9f63de4ad.png",
+          avatar: "https://racetime.gg/media/e0aaf3c8688abd0e58bed9d9f63de4ad.png",
           twitchChannel: "https://www.twitch.tv/jenslang",
         },
         result: {
@@ -349,8 +343,7 @@ export const mockMatchResults: MatchResult[] = [
         user: {
           id: "rZyM4orRvRoqDJX0",
           name: "jenslang",
-          avatar:
-            "https://racetime.gg/media/e0aaf3c8688abd0e58bed9d9f63de4ad.png",
+          avatar: "https://racetime.gg/media/e0aaf3c8688abd0e58bed9d9f63de4ad.png",
           twitchChannel: "https://www.twitch.tv/jenslang",
         },
         result: {

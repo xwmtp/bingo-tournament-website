@@ -13,10 +13,7 @@ export const Nav: React.FC = () => {
   );
 };
 
-const Link: React.FC<{ to: string; $fontSize?: string }> = ({
-  to,
-  children,
-}) => {
+const Link: React.FC<{ to: string; $fontSize?: string }> = ({ to, children }) => {
   const resolved = useResolvedPath(to);
   const match = useMatch({ path: resolved.pathname, end: true });
 

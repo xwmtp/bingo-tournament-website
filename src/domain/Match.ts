@@ -29,9 +29,6 @@ export function isScheduled(match: any): match is Scheduled {
   return !!match.scheduledTime;
 }
 
-export function includesEntrant<T extends Entrant>(
-  match: BaseMatch<T>,
-  id: string
-): boolean {
+export function includesEntrant<T extends Entrant>(match: BaseMatch<T>, id: string): boolean {
   return match.entrants.some((entrant) => entrant.user.id === id);
 }

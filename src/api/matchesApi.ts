@@ -1,31 +1,18 @@
 import { getApi } from "./api";
-import {
-  mockMatchResults,
-  mockScheduledMatches,
-  mockUnscheduledMatches,
-} from "../domain/MockData";
+import { mockMatchResults, mockScheduledMatches, mockUnscheduledMatches } from "../domain/MockData";
 import { Match as MatchDto } from "@xwmtp/bingo-tournament/dist/models/Match";
 import {
   Entrant as EntrantDto,
   EntrantStatusEnum,
 } from "@xwmtp/bingo-tournament/dist/models/Entrant";
 
-import {
-  Match,
-  MatchResult,
-  ScheduledMatch,
-  UnscheduledMatch,
-} from "../domain/Match";
+import { Match, MatchResult, ScheduledMatch, UnscheduledMatch } from "../domain/Match";
 import { mapToUser } from "./userApi";
 import { Entrant, EntrantWithResult } from "../domain/Entrant";
 import { MatchState } from "@xwmtp/bingo-tournament";
 import { DateTime } from "luxon";
 
-const mockAllRaces = [
-  ...mockUnscheduledMatches,
-  ...mockScheduledMatches,
-  ...mockMatchResults,
-];
+const mockAllRaces = [...mockUnscheduledMatches, ...mockScheduledMatches, ...mockMatchResults];
 
 export const getAllMatches = async (): Promise<Match[]> => {
   try {
@@ -78,9 +65,7 @@ const mapToMatch = (matchDto: MatchDto): Match => {
     entrants: matchDto.entrants.map(mapToEntrant),
     round: matchDto.round,
     restreamChannel: "",
-    scheduledTime: matchDto.sceduledTime
-      ? DateTime.fromJSDate(matchDto.sceduledTime)
-      : undefined,
+    scheduledTime: matchDto.sceduledTime ? DateTime.fromJSDate(matchDto.sceduledTime) : undefined,
   };
 };
 

@@ -19,9 +19,7 @@ export const Container: React.FC<Props> = ({
   return (
     <ContainerStyled className={className} width={width}>
       {title && (
-        <ContainerHeader>
-          {size === "normal" ? <h2>{title}</h2> : <h3>{title}</h3>}
-        </ContainerHeader>
+        <ContainerHeader>{size === "normal" ? <h2>{title}</h2> : <h3>{title}</h3>}</ContainerHeader>
       )}
 
       <Content title={title}>{children}</Content>
@@ -45,7 +43,6 @@ const ContainerHeader = styled.div`
 const Content = styled.div<Props>`
   background-color: ${Colors.mediumGrey};
   padding: 1.2rem;
-  border-radius: ${({ title }) => (title ? "0 0" : "0.6rem 0.6rem")} 0.6rem
-    0.6rem;
+  border-radius: ${({ title }) => (title ? "0 0" : "0.6rem 0.6rem")} 0.6rem 0.6rem;
   box-shadow: 0.3rem 0.3rem 0.3rem ${Colors.boxShadowGrey};
 `;

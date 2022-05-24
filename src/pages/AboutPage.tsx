@@ -14,10 +14,9 @@ export const AboutPage: React.FC = () => {
         <p> Welcome to the 2022 OoT Bingo Tournament!</p>
 
         <p>
-          During this stage, every week, each player will be paired with another
-          player for a bingo match. This pairing is calculated according to the
-          points you have gathered so far, meaning you will play against people
-          with similar scores. There will be 4 of these rounds.
+          During this stage, every week, each player will be paired with another player for a bingo
+          match. This pairing is calculated according to the points you have gathered so far,
+          meaning you will play against people with similar scores. There will be 4 of these rounds.
         </p>
       </Container>
       <PreviousYearsContainer title={"Previous years"} width={"30%"}>

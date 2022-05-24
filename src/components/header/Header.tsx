@@ -21,10 +21,7 @@ export const Header: React.FC = () => {
 };
 
 const LoginOrUser: React.FC = () => {
-  const { data: user, isSuccess } = useQuery<User | undefined, Error>(
-    "user",
-    getUser
-  );
+  const { data: user, isSuccess } = useQuery<User | undefined, Error>("user", getUser);
 
   if (!isSuccess) {
     return <></>;

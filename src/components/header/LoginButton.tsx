@@ -5,10 +5,7 @@ import styled from "styled-components";
 export const LoginButton: React.FC = () => {
   return (
     <ButtonDiv>
-      <RacetimeButton
-        text={"Login with racetime.gg"}
-        url={"http://localhost:8080/login/racetime"}
-      >
+      <RacetimeButton text={"Login with racetime.gg"} url={"http://localhost:8080/login/racetime"}>
         Login with racetime.gg
       </RacetimeButton>
     </ButtonDiv>

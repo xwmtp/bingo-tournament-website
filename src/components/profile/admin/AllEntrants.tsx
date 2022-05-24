@@ -6,10 +6,7 @@ import { useQuery } from "react-query";
 import { getAllEntrants } from "../../../api/entrantsApi";
 
 export const AllEntrants: React.FC = () => {
-  const { data, isLoading, isError } = useQuery<User[], Error>(
-    "allEntrants",
-    getAllEntrants
-  );
+  const { data, isLoading, isError } = useQuery<User[], Error>("allEntrants", getAllEntrants);
 
   if (isLoading) {
     return <p>loading...</p>;
@@ -20,9 +17,7 @@ export const AllEntrants: React.FC = () => {
 
   const allEntrants = data ?? [];
 
-  const sortedEntrants = allEntrants.sort((a, b) =>
-    a.name.localeCompare(b.name)
-  );
+  const sortedEntrants = allEntrants.sort((a, b) => a.name.localeCompare(b.name));
 
   return (
     <AllEntrantsDiv>

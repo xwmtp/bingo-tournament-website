@@ -16,21 +16,12 @@ interface TabOption {
   to: string;
 }
 
-export const RouteTabSelector: React.FC<Props> = ({
-  tabOptions,
-  width,
-  fontSize,
-  className,
-}) => {
+export const RouteTabSelector: React.FC<Props> = ({ tabOptions, width, fontSize, className }) => {
   return (
     <Selector className={className} $width={width}>
       {tabOptions.map((option) => {
         return (
-          <TabOptionNavLink
-            key={option.title}
-            to={option.to}
-            $fontSize={fontSize}
-          >
+          <TabOptionNavLink key={option.title} to={option.to} $fontSize={fontSize}>
             {option.title}
           </TabOptionNavLink>
         );
@@ -58,8 +49,7 @@ const NavLinkStyled = styled(NavLink)<{
   $isActive: boolean;
   $fontSize?: string;
 }>`
-  background-color: ${({ $isActive }) =>
-    $isActive ? Colors.brightMossGreen : "none"};
+  background-color: ${({ $isActive }) => ($isActive ? Colors.brightMossGreen : "none")};
   padding: 0.6rem;
   font-size: ${({ $fontSize }) => $fontSize ?? "1.3rem"};
   display: flex;

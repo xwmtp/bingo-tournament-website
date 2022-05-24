@@ -4,9 +4,7 @@ import { DateTime } from "luxon";
 import { Input } from "../components/forms/Input";
 
 export const AddMatchPage: React.FC = () => {
-  const [dateTimeInput, setDateTimeInput] = useState<DateTime>(
-    DateTime.local()
-  );
+  const [dateTimeInput, setDateTimeInput] = useState<DateTime>(DateTime.local());
 
   return (
     <Container title={"Schedule new match"}>

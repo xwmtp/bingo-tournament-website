@@ -33,8 +33,7 @@ export const MatchBlock: React.FC<Props> = ({ match, editable }) => {
     match.scheduledTime < now &&
     now < match.scheduledTime.plus(standardMatchDuration);
 
-  const isFinished =
-    isScheduled(match) && now > match.scheduledTime.plus(standardMatchDuration);
+  const isFinished = isScheduled(match) && now > match.scheduledTime.plus(standardMatchDuration);
 
   return (
     <MatchBlockContainer $isFinished={isFinished} $isInProgress={isInProgress}>
@@ -69,25 +68,16 @@ export const MatchBlock: React.FC<Props> = ({ match, editable }) => {
       <StreamButtonsDiv>
         <TwitchButton
           text="Restream"
-          url={
-            match.restreamChannel &&
-            "https://www.twitch.tv/" + match.restreamChannel
-          }
+          url={match.restreamChannel && "https://www.twitch.tv/" + match.restreamChannel}
         />
         <KadgarButtonStyled
           url={`https://kadgar.net/live/${match.entrants[0].user.twitchChannel}/${match.entrants[1].user.twitchChannel}`}
         />
       </StreamButtonsDiv>
 
-      <ScheduleModal
-        visible={showScheduleModal}
-        onClose={() => setShowScheduleModal(false)}
-      />
+      <ScheduleModal visible={showScheduleModal} onClose={() => setShowScheduleModal(false)} />
 
-      <EditModal
-        visible={showEditModal}
-        onClose={() => setShowEditModal(false)}
-      />
+      <EditModal visible={showEditModal} onClose={() => setShowEditModal(false)} />
     </MatchBlockContainer>
   );
 };

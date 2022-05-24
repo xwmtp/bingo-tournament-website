@@ -9,11 +9,7 @@ import { getUser } from "../api/userApi";
 import { User } from "../domain/User";
 
 export const ProfileSettingsPage: React.FC = () => {
-  const {
-    data: user,
-    isLoading,
-    isError,
-  } = useQuery<User | undefined, Error>("user", getUser);
+  const { data: user, isLoading, isError } = useQuery<User | undefined, Error>("user", getUser);
 
   if (isLoading) {
     return (
@@ -44,11 +40,7 @@ export const ProfileSettingsPage: React.FC = () => {
       <Container>
         <SignUpDiv>
           <h4>Sign up now for the 2022 OoT Bingo Tournament is now open! </h4>
-          <SignUpButton
-            color={"brightMossGreen"}
-            size={"big"}
-            onClick={() => signUp(user)}
-          >
+          <SignUpButton color={"brightMossGreen"} size={"big"} onClick={() => signUp(user)}>
             Sign up
           </SignUpButton>
         </SignUpDiv>

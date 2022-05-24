@@ -9,11 +9,7 @@ interface Props {
   className?: string;
 }
 
-export const ScheduleButton: React.FC<Props> = ({
-  text,
-  onClick,
-  className,
-}) => {
+export const ScheduleButton: React.FC<Props> = ({ text, onClick, className }) => {
   return (
     <IconButton
       text={text ?? "Pick time"}

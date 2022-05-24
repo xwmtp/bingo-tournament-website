@@ -10,12 +10,7 @@ interface Props {
   className?: string;
 }
 
-export const ImageBlock: React.FC<Props> = ({
-  url,
-  image,
-  text,
-  className,
-}) => {
+export const ImageBlock: React.FC<Props> = ({ url, image, text, className }) => {
   return (
     <a href={url} target={"_blank"} rel="noreferrer">
       <ImageBlockStyled image={image} className={className}>

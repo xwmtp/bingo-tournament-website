@@ -14,21 +14,11 @@ interface Props {
 }
 
 export const EditModal: React.FC<Props> = ({ visible, onClose }) => {
-  const [dateTimeInput, setDateTimeInput] = useState<DateTime>(
-    DateTime.local()
-  );
+  const [dateTimeInput, setDateTimeInput] = useState<DateTime>(DateTime.local());
 
   return (
-    <ModalStyled
-      isOpen={visible}
-      onBackgroundClick={onClose}
-      onEscapeKeydown={onClose}
-    >
-      <ContainerStyled
-        title={"Update date & time"}
-        size="small"
-        width={"700px"}
-      >
+    <ModalStyled isOpen={visible} onBackgroundClick={onClose} onEscapeKeydown={onClose}>
+      <ContainerStyled title={"Update date & time"} size="small" width={"700px"}>
         <ContainerContents>
           <p>
             {`Please only change the date and time your match after agreeing with your
@@ -37,10 +27,7 @@ export const EditModal: React.FC<Props> = ({ visible, onClose }) => {
             )} (${DateTime.local().toFormat("ZZZZZ")}).`}
           </p>
 
-          <DateTimeInput
-            dateTime={dateTimeInput}
-            setDateTime={setDateTimeInput}
-          />
+          <DateTimeInput dateTime={dateTimeInput} setDateTime={setDateTimeInput} />
 
           <p>Change scheduled date & time to:</p>
           <h4>{dateTimeInput.toLocaleString(DateTime.DATETIME_FULL)}</h4>

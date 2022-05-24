@@ -15,19 +15,13 @@ interface Props {
 const now = DateTime.local(2021, 2, 4, 6, 10, 0);
 
 export const ScheduledMatches: React.FC<Props> = ({ matches }) => {
-  const { data, isSuccess } = useQuery<User | undefined, Error>(
-    "user",
-    getUser
-  );
+  const { data, isSuccess } = useQuery<User | undefined, Error>("user", getUser);
 
   const user = isSuccess && data;
 
-  const relevantMatches = matches.filter(
-    (match) => match.scheduledTime > now.startOf("day")
-  );
+  const relevantMatches = matches.filter((match) => match.scheduledTime > now.startOf("day"));
   const sortedRelevantMatches = [...relevantMatches].sort(
-    (matchA, matchB) =>
-      matchA.scheduledTime.toMillis() - matchB.scheduledTime.toMillis()
+    (matchA, matchB) => matchA.scheduledTime.toMillis() - matchB.scheduledTime.toMillis()
   );
   const matchesByDate = groupBy(sortedRelevantMatches, (match) =>
     match.scheduledTime

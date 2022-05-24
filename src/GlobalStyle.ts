@@ -92,9 +92,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .wideScreenOnly {
-    @media (min-width: ${ScreenWidths.phone + 1}px) and (max-width: ${
-  ScreenWidths.tablet
-}px) {
+    @media (min-width: ${ScreenWidths.phone + 1}px) and (max-width: ${ScreenWidths.tablet}px) {
       display: none;
     }
     @media (max-width: ${ScreenWidths.smallPhone}px) {

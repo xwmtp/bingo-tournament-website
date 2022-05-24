@@ -11,11 +11,7 @@ export const FlexDiv: React.FC<{
 export const WideScreenOnlyFlexDiv: React.FC<{
   className?: string;
 }> = ({ className, children }) => {
-  return (
-    <CenteredWideScreenOnlyDiv className={className}>
-      {children}
-    </CenteredWideScreenOnlyDiv>
-  );
+  return <CenteredWideScreenOnlyDiv className={className}>{children}</CenteredWideScreenOnlyDiv>;
 };
 
 const CenteredFlexDiv = styled.div`

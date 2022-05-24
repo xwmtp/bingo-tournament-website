@@ -26,24 +26,16 @@ export const ResultBlock: React.FC<Props> = ({ result }) => {
       <ButtonsDiv>
         <TwitchButtonStyled
           text="Restream"
-          url={
-            result.restreamChannel &&
-            "https://www.twitch.tv/" + result.restreamChannel
-          }
+          url={result.restreamChannel && "https://www.twitch.tv/" + result.restreamChannel}
         />
 
-        <RacetimeButtonStyled
-          text="racetime.gg"
-          url={"https://www.racetime.gg/oot/" + result.id}
-        />
+        <RacetimeButtonStyled text="racetime.gg" url={"https://www.racetime.gg/oot/" + result.id} />
       </ButtonsDiv>
     </ResultBlockContainer>
   );
 };
 
-export const ResultRow: React.FC<{ entrant: EntrantWithResult }> = ({
-  entrant,
-}) => {
+export const ResultRow: React.FC<{ entrant: EntrantWithResult }> = ({ entrant }) => {
   return (
     <EntrantResult>
       <Rank>{`${entrant.result.rank}.`}</Rank>
@@ -60,8 +52,7 @@ const ResultBlockContainer = styled(FlexDiv)`
   border-radius: 0.6rem;
   padding: 0.6rem 3.6rem;
   margin-top: 0.7rem;
-  @media (min-width: ${ScreenWidths.phone +
-    1}px) and (max-width: ${ScreenWidths.tablet}px) {
+  @media (min-width: ${ScreenWidths.phone + 1}px) and (max-width: ${ScreenWidths.tablet}px) {
     padding: 0.6rem 1.2rem;
   }
 `;

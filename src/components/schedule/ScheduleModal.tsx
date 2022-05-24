@@ -14,16 +14,10 @@ interface Props {
 }
 
 export const ScheduleModal: React.FC<Props> = ({ visible, onClose }) => {
-  const [dateTimeInput, setDateTimeInput] = useState<DateTime>(
-    DateTime.local()
-  );
+  const [dateTimeInput, setDateTimeInput] = useState<DateTime>(DateTime.local());
 
   return (
-    <ModalStyled
-      isOpen={visible}
-      onBackgroundClick={onClose}
-      onEscapeKeydown={onClose}
-    >
+    <ModalStyled isOpen={visible} onBackgroundClick={onClose} onEscapeKeydown={onClose}>
       <ContainerStyled title={"Pick date & time"} size="small" width={"700px"}>
         <ContainerContents>
           <p>
@@ -33,10 +27,7 @@ export const ScheduleModal: React.FC<Props> = ({ visible, onClose }) => {
             )} (${DateTime.local().toFormat("ZZZZZ")}).`}
           </p>
 
-          <DateTimeInput
-            dateTime={dateTimeInput}
-            setDateTime={setDateTimeInput}
-          />
+          <DateTimeInput dateTime={dateTimeInput} setDateTime={setDateTimeInput} />
 
           <p>Schedule match for:</p>
           <h4>{dateTimeInput.toLocaleString(DateTime.DATETIME_FULL)}</h4>

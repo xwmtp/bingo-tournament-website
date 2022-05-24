@@ -2,9 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Colors } from "../../GlobalStyle";
 
-export const Input: React.FC<React.ComponentProps<typeof InputStyled>> = (
-  props
-) => {
+export const Input: React.FC<React.ComponentProps<typeof InputStyled>> = (props) => {
   return <InputStyled {...props} />;
 };
 
