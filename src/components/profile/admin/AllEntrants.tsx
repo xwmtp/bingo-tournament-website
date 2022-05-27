@@ -4,13 +4,11 @@ import styled from "styled-components";
 import { User } from "../../../domain/User";
 import { useQuery } from "react-query";
 import { getAllEntrants } from "../../../api/entrantsApi";
-import { mockAllUsers } from "../../../domain/MockData";
 
 export const AllEntrants: React.FC = () => {
   const { data, isLoading, isError, isIdle } = useQuery<User[], Error>(
     "allEntrants",
-    getAllEntrants,
-    { initialData: mockAllUsers }
+    getAllEntrants
   );
 
   if (isLoading || isIdle) {
