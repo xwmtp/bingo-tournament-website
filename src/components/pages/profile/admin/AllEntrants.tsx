@@ -1,9 +1,9 @@
 import React from "react";
-import { UserDisplay } from "../../UserDisplay";
+import { UserDisplay } from "../../../UserDisplay";
 import styled from "styled-components";
-import { User } from "../../../domain/User";
+import { User } from "../../../../domain/User";
 import { useQuery } from "react-query";
-import { getAllEntrants } from "../../../api/entrantsApi";
+import { getAllEntrants } from "../../../../api/entrantsApi";
 
 export const AllEntrants: React.FC = () => {
   const { data, isLoading, isError, isIdle } = useQuery<User[], Error>(

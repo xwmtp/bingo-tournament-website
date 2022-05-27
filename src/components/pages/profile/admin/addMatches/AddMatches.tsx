@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useQuery } from "react-query";
-import { User } from "../../../../domain/User";
-import { getAllEntrants } from "../../../../api/entrantsApi";
-import { UserDisplay } from "../../../UserDisplay";
-import { FlexDiv } from "../../../divs/FlexDiv";
-import { EntrantInputField } from "../../../forms/EntrantInputField";
-import { Input } from "../../../forms/Input";
-import { Button } from "../../../forms/Button";
+import { User } from "../../../../../domain/User";
+import { getAllEntrants } from "../../../../../api/entrantsApi";
+import { UserDisplay } from "../../../../UserDisplay";
+import { FlexDiv } from "../../../../divs/FlexDiv";
+import { EntrantInputField } from "../../../../forms/EntrantInputField";
+import { Input } from "../../../../forms/Input";
+import { Button } from "../../../../forms/Button";
 import { MatchesToAdd, MatchToAdd } from "./MatchesToAdd";
 
 const maxMatchesAtOnce = 25;

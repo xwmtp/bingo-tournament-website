@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { MatchResult } from "../../domain/Match";
-import { FlexDiv } from "../divs/FlexDiv";
-import { Colors, ScreenWidths } from "../../GlobalStyle";
-import { UserDisplay } from "../UserDisplay";
-import { EntrantWithResult, getResultString } from "../../domain/Entrant";
-import { RacetimeButton } from "../forms/buttons/RacetimeButton";
-import { TwitchButton } from "../forms/buttons/TwitchButton";
+import { MatchResult } from "../../../domain/Match";
+import { FlexDiv } from "../../divs/FlexDiv";
+import { Colors, ScreenWidths } from "../../../GlobalStyle";
+import { UserDisplay } from "../../UserDisplay";
+import { EntrantWithResult, getResultString } from "../../../domain/Entrant";
+import { RacetimeButton } from "../../forms/buttons/RacetimeButton";
+import { TwitchButton } from "../../forms/buttons/TwitchButton";
 
 interface Props {
   result: MatchResult;

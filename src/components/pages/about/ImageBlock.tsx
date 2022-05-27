@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { FlexDiv } from "../divs/FlexDiv";
-import { Colors } from "../../GlobalStyle";
+import { FlexDiv } from "../../divs/FlexDiv";
+import { Colors } from "../../../GlobalStyle";
 
 interface Props {
   url: string;

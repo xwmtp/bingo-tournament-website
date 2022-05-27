@@ -1,12 +1,12 @@
 import { MatchBlock } from "./MatchBlock";
-import { groupBy } from "../../lib/groupBy";
+import { groupBy } from "../../../../lib/groupBy";
 import React from "react";
 import styled from "styled-components";
-import { includesEntrant, ScheduledMatch } from "../../domain/Match";
+import { includesEntrant, ScheduledMatch } from "../../../../domain/Match";
 import { DateTime } from "luxon";
 import { useQuery } from "react-query";
-import { User } from "../../domain/User";
-import { getUser } from "../../api/userApi";
+import { User } from "../../../../domain/User";
+import { getUser } from "../../../../api/userApi";
 
 interface Props {
   matches: ScheduledMatch[];

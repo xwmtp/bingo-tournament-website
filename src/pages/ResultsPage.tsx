@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Colors } from "../GlobalStyle";
 import { TabSelector } from "../components/TabSelector";
 import { mockMatchResults } from "../domain/MockData";
-import { MatchResults } from "../components/results/MatchResults";
+import { MatchResults } from "../components/pages/results/MatchResults";
 
 export const ResultsPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>("Round 1");

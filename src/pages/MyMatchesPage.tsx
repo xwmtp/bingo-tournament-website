@@ -1,9 +1,9 @@
 import React from "react";
 import { Container } from "../components/Container";
 import styled from "styled-components";
-import { ScheduledMatches } from "../components/schedule/ScheduledMatches";
+import { ScheduledMatches } from "../components/pages/profile/schedule/ScheduledMatches";
 import { mockScheduledMatches, mockUnscheduledMatches } from "../domain/MockData";
-import { UnscheduledMatches } from "../components/schedule/UnscheduledMatches";
+import { UnscheduledMatches } from "../components/pages/profile/schedule/UnscheduledMatches";
 import { includesEntrant } from "../domain/Match";
 import { useQuery } from "react-query";
 import { User } from "../domain/User";

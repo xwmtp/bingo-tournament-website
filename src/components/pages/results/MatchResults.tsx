@@ -1,5 +1,5 @@
 import React from "react";
-import { MatchResult } from "../../domain/Match";
+import { MatchResult } from "../../../domain/Match";
 import { ResultBlock } from "./ResultBlock";
 
 interface Props {

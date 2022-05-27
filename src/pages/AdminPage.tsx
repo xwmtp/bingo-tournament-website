@@ -1,10 +1,10 @@
 import React from "react";
 import { Container } from "../components/Container";
 import styled from "styled-components";
-import { AllEntrants } from "../components/profile/admin/AllEntrants";
+import { AllEntrants } from "../components/pages/profile/admin/AllEntrants";
 import { mockUnscheduledMatches } from "../domain/MockData";
-import { UnscheduledMatches } from "../components/schedule/UnscheduledMatches";
-import { AddMatches } from "../components/profile/admin/addMatches/AddMatches";
+import { UnscheduledMatches } from "../components/pages/profile/schedule/UnscheduledMatches";
+import { AddMatches } from "../components/pages/profile/admin/addMatches/AddMatches";
 
 export const AdminPage: React.FC = () => {
   const allUnscheduledMatches = mockUnscheduledMatches;

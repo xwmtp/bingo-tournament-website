@@ -2,7 +2,7 @@ import { Container } from "../components/Container";
 import React from "react";
 import styled from "styled-components";
 import { Margins } from "../GlobalStyle";
-import { PreviousYears } from "../components/about/PreviousYears";
+import { PreviousYears } from "../components/pages/about/PreviousYears";
 
 export const AboutPage: React.FC = () => {
   //const aboutWidth = 700 - Math.round(Margins.container / 2);
