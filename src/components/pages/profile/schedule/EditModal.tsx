@@ -16,7 +16,7 @@ export const EditModal: React.FC<Props> = ({ visible, onClose }) => {
   const [dateTimeInput, setDateTimeInput] = useState<DateTime>(DateTime.local());
 
   return (
-    <Modal isOpen={visible} onBackgroundClick={onClose} onEscapeKeydown={onClose}>
+    <Modal isOpen={visible} onClose={onClose}>
       <ContainerStyled title={"Update date & time"} size="small" width={"700px"}>
         <ContainerContents>
           <p>

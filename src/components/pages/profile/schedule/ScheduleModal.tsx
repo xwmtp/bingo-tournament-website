@@ -16,7 +16,7 @@ export const ScheduleModal: React.FC<Props> = ({ visible, onClose }) => {
   const [dateTimeInput, setDateTimeInput] = useState<DateTime>(DateTime.local());
 
   return (
-    <Modal isOpen={visible} onBackgroundClick={onClose} onEscapeKeydown={onClose}>
+    <Modal isOpen={visible} onClose={onClose}>
       <ContainerStyled title={"Pick date & time"} size="small" width={"700px"}>
         <ContainerContents>
           <p>

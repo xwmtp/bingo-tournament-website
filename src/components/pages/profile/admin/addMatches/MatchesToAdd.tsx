@@ -13,7 +13,7 @@ export interface MatchToAdd {
 
 interface Props {
   matchesToAdd: MatchToAdd[];
-  onRemoveMatch: (index: number) => void;
+  onRemoveMatch?: (index: number) => void;
 }
 
 export const MatchesToAdd: React.FC<Props> = ({ matchesToAdd, onRemoveMatch }) => {
@@ -26,7 +26,7 @@ export const MatchesToAdd: React.FC<Props> = ({ matchesToAdd, onRemoveMatch }) =
       {matchesToAdd.map((matchToAdd, index) => {
         return (
           <Match key={index}>
-            <DeleteButtonStyled onClick={() => onRemoveMatch(index)} />
+            {onRemoveMatch && <DeleteButtonStyled onClick={() => onRemoveMatch(index)} />}
             <UserDisplay user={matchToAdd.entrant1} />
             <UserDisplay user={matchToAdd.entrant2} />
             <p>{matchToAdd.round}</p>

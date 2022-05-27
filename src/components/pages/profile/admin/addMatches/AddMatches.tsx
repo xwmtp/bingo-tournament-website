@@ -9,6 +9,7 @@ import { EntrantInputField } from "../../../../forms/EntrantInputField";
 import { Input } from "../../../../forms/Input";
 import { Button } from "../../../../forms/Button";
 import { MatchesToAdd, MatchToAdd } from "./MatchesToAdd";
+import { ConfirmMatchesToAddModal } from "./ConfirmMatchesToAddModal";
 
 const maxMatchesAtOnce = 25;
 
@@ -19,6 +20,7 @@ export const AddMatches: React.FC = () => {
     isSuccess,
   } = useQuery<User[], Error>("allEntrants", getAllEntrants);
   const [matchesToAdd, setMatchesToAdd] = useState<MatchToAdd[]>([]);
+  const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false);
 
   const [entrant1, setEntrant1] = useState<User | undefined>(undefined);
   const [entrant2, setEntrant2] = useState<User | undefined>(undefined);
@@ -97,10 +99,21 @@ export const AddMatches: React.FC = () => {
         color={"coral"}
         onClick={addMatch}
       >
-        {matchesToAdd.length < maxMatchesAtOnce ? "Add match" : "Max matches"}
+        +
       </AddMatchButton>
 
       <MatchesToAdd matchesToAdd={matchesToAdd} onRemoveMatch={removeMatch} />
+      {matchesToAdd.length > 0 && (
+        <AddMatchesButton color={"brightMossGreen"} onClick={() => setShowConfirmModal(true)}>
+          {`Add ${matchesToAdd.length} match${matchesToAdd.length > 1 ? "es" : ""}`}
+        </AddMatchesButton>
+      )}
+
+      <ConfirmMatchesToAddModal
+        matchesToAdd={matchesToAdd}
+        isOpen={showConfirmModal}
+        onClose={() => setShowConfirmModal(false)}
+      />
     </AddMatchesDiv>
   );
 };
@@ -129,5 +142,10 @@ const InputField = styled(Input)`
 const AddMatchButton = styled(Button)`
   margin-left: 21rem;
   margin-top: 0.5rem;
+  width: 2rem;
+`;
+
+const AddMatchesButton = styled(Button)`
+  margin-top: 1rem;
   width: 8rem;
 `;
