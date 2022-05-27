@@ -19,9 +19,17 @@ export const EntrantInputField: React.FC<Props> = ({
   const [input, setInput] = useState<string>(initialInput);
 
   useEffect(() => {
-    const matchingEntrant = allEntrants.find(
+    let matchingEntrant = allEntrants.find(
       (entrant) => entrant.name.toLowerCase() === input.toLowerCase()
     );
+    if (!matchingEntrant) {
+      const entrantsStartingWithInput = allEntrants.filter((entrant) =>
+        entrant.name.toLowerCase().startsWith(input.toLowerCase())
+      );
+      if (entrantsStartingWithInput.length === 1) {
+        matchingEntrant = entrantsStartingWithInput[0];
+      }
+    }
     onEntrantChange(matchingEntrant);
   }, [allEntrants, input, onEntrantChange]);
 

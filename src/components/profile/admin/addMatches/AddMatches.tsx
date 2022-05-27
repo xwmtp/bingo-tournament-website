@@ -8,7 +8,9 @@ import { FlexDiv } from "../../../divs/FlexDiv";
 import { EntrantInputField } from "../../../forms/EntrantInputField";
 import { Input } from "../../../forms/Input";
 import { Button } from "../../../forms/Button";
-import { MatchesToAdd } from "./MatchesToAdd";
+import { MatchesToAdd, MatchToAdd } from "./MatchesToAdd";
+
+const maxMatchesAtOnce = 25;
 
 export const AddMatches: React.FC = () => {
   const {
@@ -16,7 +18,7 @@ export const AddMatches: React.FC = () => {
     isError,
     isSuccess,
   } = useQuery<User[], Error>("allEntrants", getAllEntrants);
-  const [matchesToAdd, setMatchesToAdd] = useState<MatchesToAdd[]>([]);
+  const [matchesToAdd, setMatchesToAdd] = useState<MatchToAdd[]>([]);
 
   const [entrant1, setEntrant1] = useState<User | undefined>(undefined);
   const [entrant2, setEntrant2] = useState<User | undefined>(undefined);
@@ -41,6 +43,15 @@ export const AddMatches: React.FC = () => {
           entrant2: entrant2,
           round: inputRound,
         },
+      ]);
+    }
+  };
+
+  const removeMatch = (index: number) => {
+    if (validInput) {
+      setMatchesToAdd((matches) => [
+        ...matches.slice(0, index),
+        ...matches.slice(index + 1, matches.length),
       ]);
     }
   };
@@ -81,11 +92,15 @@ export const AddMatches: React.FC = () => {
         <p>{inputRound}</p>
       </InputRow>
 
-      <AddMatchButton disabled={!validInput} color={"coral"} onClick={addMatch}>
-        Add match
+      <AddMatchButton
+        disabled={!validInput || matchesToAdd.length >= maxMatchesAtOnce}
+        color={"coral"}
+        onClick={addMatch}
+      >
+        {matchesToAdd.length < maxMatchesAtOnce ? "Add match" : "Max matches"}
       </AddMatchButton>
 
-      <MatchesToAdd matchesToAdd={matchesToAdd} />
+      <MatchesToAdd matchesToAdd={matchesToAdd} onRemoveMatch={removeMatch} />
     </AddMatchesDiv>
   );
 };
