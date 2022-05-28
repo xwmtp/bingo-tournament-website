@@ -2,14 +2,8 @@ import { UserDisplay } from "../../../../UserDisplay";
 import React from "react";
 import styled from "styled-components";
 import { FlexDiv } from "../../../../divs/FlexDiv";
-import { User } from "../../../../../domain/User";
 import { DeleteButton } from "../../../../forms/buttons/DeleteButton";
-
-export interface MatchToAdd {
-  entrant1: User;
-  entrant2: User;
-  round: string;
-}
+import { MatchToAdd } from "../../../../../domain/Match";
 
 interface Props {
   matchesToAdd: MatchToAdd[];

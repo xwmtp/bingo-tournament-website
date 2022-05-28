@@ -1,8 +1,11 @@
 import React from "react";
 import { Modal } from "../../../../Modal";
-import { MatchesToAdd, MatchToAdd } from "./MatchesToAdd";
+import { MatchesToAdd } from "./MatchesToAdd";
 import { Button } from "../../../../forms/Button";
 import styled from "styled-components";
+import { MatchToAdd } from "../../../../../domain/Match";
+import { addMatches } from "../../../../../api/matchesApi";
+import { useMutation, useQueryClient } from "react-query";
 
 interface Props {
   matchesToAdd: MatchToAdd[];
@@ -11,19 +14,54 @@ interface Props {
 }
 
 export const ConfirmMatchesToAddModal: React.FC<Props> = ({ matchesToAdd, isOpen, onClose }) => {
+  const queryClient = useQueryClient();
+  const addMatchesMutation = useMutation(addMatches, {
+    onSuccess: (data) => {
+      // successful mutation
+      if (data.length === matchesToAdd.length) {
+        queryClient.invalidateQueries("unscheduledMatches");
+      }
+    },
+  });
+
+  const buttonDisabled = addMatchesMutation.isLoading || addMatchesMutation.isSuccess;
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalContent>
+        <p>{addMatchesMutation.status}</p>
         <p>{`Are you sure you want to add these ${matchesToAdd.length} match${
           matchesToAdd.length > 1 ? "es" : ""
         }?`}</p>
         <MatchesToAdd matchesToAdd={matchesToAdd} />
-        <ConfirmButton color={"brightMossGreen"} size={"big"}>
-          Confirm
+        <ConfirmButton
+          disabled={buttonDisabled}
+          color={"brightMossGreen"}
+          size={"big"}
+          onClick={() => {
+            if (!buttonDisabled) {
+              addMatchesMutation.mutate(matchesToAdd);
+            }
+          }}
+        >
+          {buttonText(addMatchesMutation.status)}
         </ConfirmButton>
       </ModalContent>
     </Modal>
   );
+};
+
+const buttonText = (status: "idle" | "loading" | "error" | "success") => {
+  switch (status) {
+    case "idle":
+      return "Confirm";
+    case "loading":
+      return "Adding...";
+    case "error":
+      return "Retry";
+    case "success":
+      return "Added!";
+  }
 };
 
 const ModalContent = styled.div`

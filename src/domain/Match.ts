@@ -1,5 +1,6 @@
 import { DateTime, Duration } from "luxon";
 import { Entrant, EntrantWithResult } from "./Entrant";
+import { User } from "./User";
 
 interface BaseMatch<T extends Entrant> {
   id: string;
@@ -31,4 +32,10 @@ export function isScheduled(match: any): match is Scheduled {
 
 export function includesEntrant<T extends Entrant>(match: BaseMatch<T>, id: string): boolean {
   return match.entrants.some((entrant) => entrant.user.id === id);
+}
+
+export interface MatchToAdd {
+  entrant1: User;
+  entrant2: User;
+  round: string;
 }

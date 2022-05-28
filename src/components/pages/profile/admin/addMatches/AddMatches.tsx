@@ -8,8 +8,9 @@ import { FlexDiv } from "../../../../divs/FlexDiv";
 import { EntrantInputField } from "../../../../forms/EntrantInputField";
 import { Input } from "../../../../forms/Input";
 import { Button } from "../../../../forms/Button";
-import { MatchesToAdd, MatchToAdd } from "./MatchesToAdd";
+import { MatchesToAdd } from "./MatchesToAdd";
 import { ConfirmMatchesToAddModal } from "./ConfirmMatchesToAddModal";
+import { MatchToAdd } from "../../../../../domain/Match";
 
 const maxMatchesAtOnce = 25;
 
