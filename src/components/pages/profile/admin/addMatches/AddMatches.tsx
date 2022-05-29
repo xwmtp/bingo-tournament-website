@@ -8,7 +8,7 @@ import { FlexDiv } from "../../../../divs/FlexDiv";
 import { EntrantInputField } from "../../../../forms/EntrantInputField";
 import { Input } from "../../../../forms/Input";
 import { Button } from "../../../../forms/Button";
-import { MatchesToAdd } from "./MatchesToAdd";
+import { MatchesToAddList } from "./MatchesToAddList";
 import { ConfirmMatchesToAddModal } from "./ConfirmMatchesToAddModal";
 import { MatchToAdd } from "../../../../../domain/Match";
 
@@ -103,6 +103,8 @@ export const AddMatches: React.FC = () => {
         +
       </AddMatchButton>
 
+      {matchesToAdd.length > 0 && <h3>Matches to add</h3>}
+
       <MatchesToAdd matchesToAdd={matchesToAdd} onRemoveMatch={removeMatch} />
       {matchesToAdd.length > 0 && (
         <AddMatchesButton color={"brightMossGreen"} onClick={() => setShowConfirmModal(true)}>
@@ -138,6 +140,10 @@ const InputField = styled(Input)`
   width: 15rem;
   margin-right: 1rem;
   font-size: 1rem;
+`;
+
+const MatchesToAdd = styled(MatchesToAddList)`
+  margin-top: 1rem;
 `;
 
 const AddMatchButton = styled(Button)`

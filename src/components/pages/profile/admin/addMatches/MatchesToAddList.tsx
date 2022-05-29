@@ -8,15 +8,15 @@ import { MatchToAdd } from "../../../../../domain/Match";
 interface Props {
   matchesToAdd: MatchToAdd[];
   onRemoveMatch?: (index: number) => void;
+  className?: string;
 }
 
-export const MatchesToAdd: React.FC<Props> = ({ matchesToAdd, onRemoveMatch }) => {
+export const MatchesToAddList: React.FC<Props> = ({ matchesToAdd, onRemoveMatch, className }) => {
   if (matchesToAdd.length === 0) {
     return <></>;
   }
   return (
-    <Matches>
-      <h3>Matches to add</h3>
+    <Matches className={className}>
       {matchesToAdd.map((matchToAdd, index) => {
         return (
           <Match key={index}>
@@ -33,7 +33,6 @@ export const MatchesToAdd: React.FC<Props> = ({ matchesToAdd, onRemoveMatch }) =
 
 const Matches = styled.div`
   flex-direction: column;
-  margin-top: 1rem;
 `;
 
 const Match = styled(FlexDiv)`

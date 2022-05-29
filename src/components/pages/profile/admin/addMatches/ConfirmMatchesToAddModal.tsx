@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal } from "../../../../Modal";
-import { MatchesToAdd } from "./MatchesToAdd";
+import { MatchesToAddList } from "./MatchesToAddList";
 import { Button } from "../../../../forms/Button";
 import styled from "styled-components";
 import { MatchToAdd } from "../../../../../domain/Match";
@@ -20,6 +20,7 @@ export const ConfirmMatchesToAddModal: React.FC<Props> = ({ matchesToAdd, isOpen
       // successful mutation
       if (data.length === matchesToAdd.length) {
         queryClient.invalidateQueries("unscheduledMatches");
+        onClose();
       }
     },
   });
@@ -29,7 +30,6 @@ export const ConfirmMatchesToAddModal: React.FC<Props> = ({ matchesToAdd, isOpen
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalContent>
-        <p>{addMatchesMutation.status}</p>
         <p>{`Are you sure you want to add these ${matchesToAdd.length} match${
           matchesToAdd.length > 1 ? "es" : ""
         }?`}</p>
@@ -68,6 +68,10 @@ const ModalContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+const MatchesToAdd = styled(MatchesToAddList)`
+  margin-top: 1rem;
 `;
 
 const ConfirmButton = styled(Button)`
