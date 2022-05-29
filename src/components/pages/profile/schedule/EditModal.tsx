@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Container } from "../../../Container";
 import styled from "styled-components";
 import { DateTime } from "luxon";
 import { FlexDiv } from "../../../divs/FlexDiv";
@@ -16,33 +15,26 @@ export const EditModal: React.FC<Props> = ({ visible, onClose }) => {
   const [dateTimeInput, setDateTimeInput] = useState<DateTime>(DateTime.local());
 
   return (
-    <Modal isOpen={visible} onClose={onClose}>
-      <ContainerStyled title={"Update date & time"} size="small" width={"700px"}>
-        <ContainerContents>
-          <p>
-            {`Please only change the date and time your match after agreeing with your
+    <Modal title={"Update date & time"} isOpen={visible} onClose={onClose}>
+      <ContainerContents>
+        <p>
+          {`Please only change the date and time your match after agreeing with your
             opponent. Your detected timezone is ${DateTime.local().toFormat(
               "ZZZZ"
             )} (${DateTime.local().toFormat("ZZZZZ")}).`}
-          </p>
+        </p>
 
-          <DateTimeInput dateTime={dateTimeInput} setDateTime={setDateTimeInput} />
+        <DateTimeInput dateTime={dateTimeInput} setDateTime={setDateTimeInput} />
 
-          <p>Change scheduled date & time to:</p>
-          <h4>{dateTimeInput.toLocaleString(DateTime.DATETIME_FULL)}</h4>
-          <ConfirmButton color={"brightMossGreen"} size={"big"}>
-            Update
-          </ConfirmButton>
-        </ContainerContents>
-      </ContainerStyled>
+        <p>Change scheduled date & time to:</p>
+        <h4>{dateTimeInput.toLocaleString(DateTime.DATETIME_FULL)}</h4>
+        <ConfirmButton color={"brightMossGreen"} size={"big"}>
+          Update
+        </ConfirmButton>
+      </ContainerContents>
     </Modal>
   );
 };
-
-const ContainerStyled = styled(Container)`
-  margin-bottom: 0;
-  max-width: 85vw;
-`;
 
 const ContainerContents = styled(FlexDiv)`
   display: flex;
