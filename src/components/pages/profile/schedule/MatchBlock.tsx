@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import {
+  isFinished,
+  isInProgress,
   isScheduled,
   ScheduledMatch,
-  standardMatchDuration,
   UnscheduledMatch,
 } from "../../../../domain/Match";
 import { DateTime } from "luxon";
@@ -22,21 +23,15 @@ interface Props {
   editable?: boolean;
 }
 
-const now = DateTime.local(2021, 2, 4, 5, 50, 34);
-
 export const MatchBlock: React.FC<Props> = ({ match, editable }) => {
   const [showScheduleModal, setShowScheduleModal] = useState<boolean>(false);
   const [showEditModal, setShowEditModal] = useState<boolean>(false);
 
-  const isInProgress =
-    isScheduled(match) &&
-    match.scheduledTime < now &&
-    now < match.scheduledTime.plus(standardMatchDuration);
-
-  const isFinished = isScheduled(match) && now > match.scheduledTime.plus(standardMatchDuration);
-
   return (
-    <MatchBlockContainer $isFinished={isFinished} $isInProgress={isInProgress}>
+    <MatchBlockContainer
+      $isFinished={isScheduled(match) && isFinished(match)}
+      $isInProgress={isScheduled(match) && isInProgress(match)}
+    >
       <StartTimeContainer>
         {isScheduled(match) ? (
           <>

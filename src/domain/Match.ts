@@ -34,6 +34,22 @@ export function includesEntrant<T extends Entrant>(match: BaseMatch<T>, id: stri
   return match.entrants.some((entrant) => entrant.user.id === id);
 }
 
+export function isInProgress(match: ScheduledMatch): boolean {
+  // todo: use DateTime.local()
+  const now = DateTime.local(2022, 2, 1, 6, 10, 0);
+  return match.scheduledTime < now && now < match.scheduledTime.plus(standardMatchDuration);
+}
+
+export function isFinished(match: ScheduledMatch): boolean {
+  // todo: use DateTime.local()
+  const now = DateTime.local(2022, 2, 1, 6, 10, 0);
+  console.log("\n" + match.id);
+  console.log(match.scheduledTime.plus(standardMatchDuration));
+  console.log(now);
+  console.log("is finished? " + (match.scheduledTime.plus(standardMatchDuration) < now));
+  return match.scheduledTime.plus(standardMatchDuration) < now;
+}
+
 export interface MatchToAdd {
   entrant1: User;
   entrant2: User;

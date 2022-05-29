@@ -46,7 +46,7 @@ export const mockScheduledMatches: ScheduledMatch[] = [
         },
       },
     ],
-    scheduledTime: DateTime.fromISO("2022-02-04T04:45:03Z"),
+    scheduledTime: DateTime.fromISO("2022-01-01T04:45:03Z"),
     round: "Round 1",
     restreamChannel: "ZeldaSpeedruns",
   },
@@ -118,6 +118,30 @@ export const mockScheduledMatches: ScheduledMatch[] = [
     ],
     scheduledTime: DateTime.fromISO("2022-02-04T03:30:03Z"),
     round: "Round 1",
+  },
+  {
+    id: "m6",
+    entrants: [
+      {
+        user: {
+          id: "Yzk9QRd2XBoeaB0M",
+          name: "xwillmarktheplace",
+          avatar: "https://racetime.gg/media/Racetime.png",
+          twitchChannel: "https://www.twitch.tv/xwillmarktheplace",
+        },
+      },
+      {
+        user: {
+          id: "XGzr7pBMny3kqgyE",
+          name: "juwk",
+          avatar: undefined,
+          twitchChannel: "https://www.twitch.tv/jenslang",
+        },
+      },
+    ],
+    scheduledTime: DateTime.fromISO("2022-02-19T10:30:03Z"),
+    round: "Round 2",
+    restreamChannel: undefined,
   },
 ];
 

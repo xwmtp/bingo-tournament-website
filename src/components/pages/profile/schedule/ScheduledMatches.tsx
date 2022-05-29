@@ -12,7 +12,7 @@ interface Props {
   matches: ScheduledMatch[];
 }
 
-const now = DateTime.local(2021, 2, 4, 6, 10, 0);
+const now = DateTime.local(2022, 2, 1, 6, 10, 0);
 
 export const ScheduledMatches: React.FC<Props> = ({ matches }) => {
   const { data, isSuccess } = useQuery<User | undefined, Error>("user", getUser);
