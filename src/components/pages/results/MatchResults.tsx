@@ -1,5 +1,5 @@
 import React from "react";
-import { MatchResult } from "../../../domain/Match";
+import { MatchResult, sortByScheduledTime } from "../../../domain/Match";
 import { ResultBlock } from "./ResultBlock";
 import { FlexDiv } from "../../divs/FlexDiv";
 import styled from "styled-components";
@@ -17,9 +17,7 @@ export const MatchResults: React.FC<Props> = ({ results }) => {
     );
   }
 
-  const sortedResults = [...results].sort(
-    (a, b) => b.scheduledTime.toMillis() - a.scheduledTime.toMillis()
-  );
+  const sortedResults = sortByScheduledTime(results, true);
 
   return (
     <>

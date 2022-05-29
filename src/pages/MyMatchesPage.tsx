@@ -10,6 +10,7 @@ import { User } from "../domain/User";
 import { getUser } from "../api/userApi";
 import { FlexDiv } from "../components/divs/FlexDiv";
 import { MatchResults } from "../components/pages/results/MatchResults";
+import { MatchesByDate } from "../components/MatchesByDate";
 
 export const MyMatchesPage: React.FC = () => {
   // const [matches, setMatches] = useState<ScheduledMatch[] | undefined>(
@@ -35,11 +36,19 @@ export const MyMatchesPage: React.FC = () => {
   const noMatchesToDisplay =
     !hasUnscheduledMatches && !hasScheduledMatches && !hasUnrecordedMatches && !hasResults;
 
+  if (noMatchesToDisplay && !userQuery.isLoading) {
+    return (
+      <Container size="small">
+        <NoMatches>No matches to display</NoMatches>
+      </Container>
+    );
+  }
+
   return (
     <ProfilePageDiv>
       {hasUnrecordedMatches && (
         <Container title={"Unrecorded"} size="small">
-          <ScheduledMatches matches={myUnrecordedMatches} />
+          <MatchesByDate scheduledMatches={myUnrecordedMatches} />;
         </Container>
       )}
       {hasUnscheduledMatches && (
@@ -55,11 +64,6 @@ export const MyMatchesPage: React.FC = () => {
       {hasResults && (
         <Container title={"Results"} size="small">
           <MatchResults results={myResults} />
-        </Container>
-      )}
-      {noMatchesToDisplay && !userQuery.isLoading && (
-        <Container size="small">
-          <NoMatches>No matches to display</NoMatches>
         </Container>
       )}
     </ProfilePageDiv>

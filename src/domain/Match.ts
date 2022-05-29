@@ -50,6 +50,19 @@ export function isFinished(match: ScheduledMatch): boolean {
   return match.scheduledTime.plus(standardMatchDuration) < now;
 }
 
+export function sortByScheduledTime<T extends Scheduled>(
+  scheduledItems: T[],
+  reverse?: boolean
+): T[] {
+  return [...scheduledItems].sort((itemA, itemB) => {
+    const difference = itemB.scheduledTime.toMillis() - itemA.scheduledTime.toMillis();
+    if (reverse) {
+      return -difference;
+    }
+    return difference;
+  });
+}
+
 export interface MatchToAdd {
   entrant1: User;
   entrant2: User;
