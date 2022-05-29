@@ -8,6 +8,7 @@ import { includesEntrant } from "../domain/Match";
 import { useQuery } from "react-query";
 import { User } from "../domain/User";
 import { getUser } from "../api/userApi";
+import { FlexDiv } from "../components/divs/FlexDiv";
 
 export const MyMatchesPage: React.FC = () => {
   // const [matches, setMatches] = useState<ScheduledMatch[] | undefined>(
@@ -23,14 +24,27 @@ export const MyMatchesPage: React.FC = () => {
     includesEntrant(match, user?.id || "")
   );
 
+  const hasUnscheduledMatches = userUnscheduledMatches.length > 0;
+  const hasScheduledMatches = userScheduledMatches.length > 0;
+  const noMatchesToDisplay = !hasUnscheduledMatches && !hasScheduledMatches;
+
   return (
     <ProfilePageDiv>
-      <Container title={"Unscheduled"} size="small">
-        <UnscheduledMatches matches={userUnscheduledMatches} />
-      </Container>
-      <Container title={"Scheduled"} size="small">
-        <ScheduledMatches matches={userScheduledMatches} />
-      </Container>
+      {hasUnscheduledMatches && (
+        <Container title={"Unscheduled"} size="small">
+          <UnscheduledMatches matches={userUnscheduledMatches} />
+        </Container>
+      )}
+      {hasScheduledMatches && (
+        <Container title={"Scheduled"} size="small">
+          <ScheduledMatches matches={userScheduledMatches} />
+        </Container>
+      )}
+      {noMatchesToDisplay && (
+        <Container size="small">
+          <NoMatches>No matches to display</NoMatches>
+        </Container>
+      )}
     </ProfilePageDiv>
   );
 };
@@ -38,4 +52,9 @@ export const MyMatchesPage: React.FC = () => {
 const ProfilePageDiv = styled.div`
   width: 100%;
   flex-direction: column;
+`;
+
+const NoMatches = styled(FlexDiv)`
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 `;
