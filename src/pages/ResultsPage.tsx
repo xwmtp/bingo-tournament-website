@@ -5,6 +5,8 @@ import { Colors } from "../GlobalStyle";
 import { TabSelector } from "../components/TabSelector";
 import { mockMatchResults } from "../domain/MockData";
 import { MatchResults } from "../components/pages/results/MatchResults";
+import { onlyUnique } from "../lib/onlyUnique";
+import { capitalize } from "../lib/stringHelpers";
 
 export const ResultsPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>("Round 1");
@@ -13,18 +15,23 @@ export const ResultsPage: React.FC = () => {
     return <></>;
   }
 
+  const uniqueRounds = mockMatchResults
+    .map((result) => result.round?.toLowerCase())
+    .filter((round): round is string => !!round)
+    .filter(onlyUnique)
+    .map((round) => capitalize(round));
+  const tabMatches = mockMatchResults.filter((result) => result.round === activeTab);
+
   return (
-    <>
-      <Container title={"Results"}>
-        <TabSelectorStyled
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-          tabOptions={["Round 1", "Round 2"]}
-          fontSize={"1rem"}
-        />
-        <MatchResults results={mockMatchResults} />
-      </Container>
-    </>
+    <Container title={"Results"}>
+      <TabSelectorStyled
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        tabOptions={uniqueRounds}
+        fontSize={"1rem"}
+      />
+      <MatchResults results={tabMatches} />
+    </Container>
   );
 };
 
