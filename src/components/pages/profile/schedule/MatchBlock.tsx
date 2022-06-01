@@ -21,16 +21,17 @@ import { EditModal } from "./EditModal";
 interface Props {
   match: UnscheduledMatch | ScheduledMatch;
   editable?: boolean;
+  displayStatus?: boolean;
 }
 
-export const MatchBlock: React.FC<Props> = ({ match, editable }) => {
+export const MatchBlock: React.FC<Props> = ({ match, editable, displayStatus }) => {
   const [showScheduleModal, setShowScheduleModal] = useState<boolean>(false);
   const [showEditModal, setShowEditModal] = useState<boolean>(false);
 
   return (
     <MatchBlockContainer
-      $isFinished={isScheduled(match) && isFinished(match)}
-      $isInProgress={isScheduled(match) && isInProgress(match)}
+      $displayAsFinished={!!displayStatus && isScheduled(match) && isFinished(match)}
+      $displayAsInProgress={!!displayStatus && isScheduled(match) && isInProgress(match)}
     >
       <StartTimeContainer>
         {isScheduled(match) ? (
@@ -78,16 +79,16 @@ export const MatchBlock: React.FC<Props> = ({ match, editable }) => {
 };
 
 const MatchBlockContainer = styled(FlexDiv)<{
-  $isFinished: boolean;
-  $isInProgress: boolean;
+  $displayAsFinished: boolean;
+  $displayAsInProgress: boolean;
 }>`
   justify-content: space-between;
   background-color: ${Colors.lightGray};
   border-radius: 0.6rem;
   padding: 0.6rem 0.8rem;
   margin-top: 0.7rem;
-  opacity: ${({ $isFinished }) => ($isFinished ? "20%" : "100%")};
-  border: ${({ $isInProgress }) => ($isInProgress ? "0.24rem" : "0")} solid
+  opacity: ${({ $displayAsFinished }) => ($displayAsFinished ? "20%" : "100%")};
+  border: ${({ $displayAsInProgress }) => ($displayAsInProgress ? "0.24rem" : "0")} solid
     ${Colors.brightMossGreen};
 `;
 

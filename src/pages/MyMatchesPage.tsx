@@ -10,7 +10,7 @@ import { User } from "../domain/User";
 import { getUser } from "../api/userApi";
 import { FlexDiv } from "../components/divs/FlexDiv";
 import { MatchResults } from "../components/pages/results/MatchResults";
-import { MatchesByDate } from "../components/MatchesByDate";
+import { UnrecordedMatches } from "../components/pages/profile/admin/addMatches/UnrecordedMatches";
 
 export const MyMatchesPage: React.FC = () => {
   // const [matches, setMatches] = useState<ScheduledMatch[] | undefined>(
@@ -48,12 +48,12 @@ export const MyMatchesPage: React.FC = () => {
     <ProfilePageDiv>
       {hasUnrecordedMatches && (
         <Container title={"Unrecorded"} size="small">
-          <MatchesByDate scheduledMatches={myUnrecordedMatches} />;
+          <UnrecordedMatches scheduledMatches={myUnrecordedMatches} />
         </Container>
       )}
       {hasUnscheduledMatches && (
         <Container title={"Unscheduled"} size="small">
-          <UnscheduledMatches matches={myUnscheduledMatches} />
+          <UnscheduledMatches unscheduledMatches={myUnscheduledMatches} />
         </Container>
       )}
       {hasScheduledMatches && (

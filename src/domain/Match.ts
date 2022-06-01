@@ -52,11 +52,11 @@ export function isFinished(match: ScheduledMatch): boolean {
 
 export function sortByScheduledTime<T extends Scheduled>(
   scheduledItems: T[],
-  reverse?: boolean
+  descending?: boolean
 ): T[] {
   return [...scheduledItems].sort((itemA, itemB) => {
-    const difference = itemB.scheduledTime.toMillis() - itemA.scheduledTime.toMillis();
-    if (reverse) {
+    const difference = itemA.scheduledTime.toMillis() - itemB.scheduledTime.toMillis();
+    if (descending) {
       return -difference;
     }
     return difference;

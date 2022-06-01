@@ -13,5 +13,7 @@ export const ScheduledMatches: React.FC<Props> = ({ matches }) => {
   const relevantMatches = matches.filter((match) => match.scheduledTime > now.startOf("day"));
   const sortedRelevantMatches = sortByScheduledTime(relevantMatches);
 
-  return <MatchesByDate scheduledMatches={sortedRelevantMatches} />;
+  return (
+    <MatchesByDate scheduledMatches={sortedRelevantMatches} displayStatusOnMatchBlock={true} />
+  );
 };

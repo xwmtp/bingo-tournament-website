@@ -9,9 +9,10 @@ import { getUser } from "../api/userApi";
 
 interface Props {
   scheduledMatches: ScheduledMatch[];
+  displayStatusOnMatchBlock?: boolean;
 }
 
-export const MatchesByDate: React.FC<Props> = ({ scheduledMatches }) => {
+export const MatchesByDate: React.FC<Props> = ({ scheduledMatches, displayStatusOnMatchBlock }) => {
   const { data, isSuccess } = useQuery<User | undefined, Error>("user", getUser);
 
   const user = isSuccess && data;
@@ -33,6 +34,7 @@ export const MatchesByDate: React.FC<Props> = ({ scheduledMatches }) => {
                 key={match.id}
                 match={match}
                 editable={user ? includesEntrant(match, user.id) : false}
+                displayStatus={displayStatusOnMatchBlock}
               />
             ))}
           </DateGroup>
