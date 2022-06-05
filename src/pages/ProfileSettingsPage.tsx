@@ -4,12 +4,11 @@ import { FlexDiv } from "../components/divs/FlexDiv";
 import styled from "styled-components";
 import { getApi } from "../api/api";
 import { Button } from "../components/forms/Button";
-import { useQuery } from "react-query";
-import { getUser } from "../api/userApi";
+import { useUser } from "../api/userApi";
 import { User } from "../domain/User";
 
 export const ProfileSettingsPage: React.FC = () => {
-  const { data: user, isLoading, isError } = useQuery<User | undefined, Error>("user", getUser);
+  const { data: user, isLoading, isError } = useUser();
 
   if (isLoading) {
     return (

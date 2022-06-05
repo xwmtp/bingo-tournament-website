@@ -5,57 +5,62 @@ import {
   EntrantStatusEnum,
 } from "@xwmtp/bingo-tournament/dist/models/Entrant";
 import { Match as MatchDto } from "@xwmtp/bingo-tournament/dist/models/Match";
-
-import { Match, MatchResult, MatchToAdd, ScheduledMatch, UnscheduledMatch } from "../domain/Match";
+import {
+  includesEntrant,
+  isMatchResult,
+  isScheduledMatch,
+  isUnscheduledMatch,
+  Match,
+  MatchToAdd,
+} from "../domain/Match";
 import { mapToUser } from "./userApi";
 import { Entrant, EntrantWithResult } from "../domain/Entrant";
-import { MatchState, NewMatch as NewMatchDto } from "@xwmtp/bingo-tournament";
+import { NewMatch as NewMatchDto } from "@xwmtp/bingo-tournament";
 import { DateTime } from "luxon";
+import { useQuery } from "react-query";
 
-const mockAllRaces = [...mockUnscheduledMatches, ...mockScheduledMatches, ...mockMatchResults];
+const mockAllMatches = [...mockUnscheduledMatches, ...mockScheduledMatches, ...mockMatchResults];
 
-export const getAllMatches = async (): Promise<Match[]> => {
+const getAllMatches = async (): Promise<Match[]> => {
   try {
-    const matchDtos = await getApi().getAllRaces();
+    const matchDtos = await getApi().getAllMatches();
     return matchDtos.map(mapToMatch);
   } catch (error) {
     console.log(error);
-    return mockAllRaces;
+    console.log("Returning mock data with all matches");
+    return mockAllMatches;
   }
 };
 
-export const getUnscheduledMatches = async (): Promise<UnscheduledMatch[]> => {
-  try {
-    const matchDtos = await getApi().getAllRaces({ filter: MatchState.New });
-    return matchDtos.map(mapToMatch);
-  } catch (error) {
-    console.log(error);
-    return mockAllRaces;
-  }
+export const useAllMatches = () => {
+  return useQuery<Match[], Error>("allMatches", getAllMatches);
 };
 
-export const getScheduledMatches = async (): Promise<ScheduledMatch[]> => {
-  try {
-    const matchDtos = await getApi().getAllRaces({
-      filter: MatchState.Scheduled,
-    });
-    return matchDtos.map(mapToMatch) as ScheduledMatch[];
-  } catch (error) {
-    console.log(error);
-    return mockScheduledMatches;
-  }
+export function useFilteredMatches<T extends Match>(
+  filterFn: (match: Match) => match is T,
+  entrantId?: string
+) {
+  return useQuery<Match[], Error, T[]>("allMatches", getAllMatches, {
+    select: (data) => {
+      const filtered = data.filter(filterFn);
+      if (entrantId) {
+        return filtered.filter((match) => includesEntrant(match, entrantId));
+      }
+      return filtered;
+    },
+  });
+}
+
+export const useScheduledMatches = (entrantId?: string) => {
+  return useFilteredMatches(isScheduledMatch, entrantId);
 };
 
-export const getMatchResults = async (): Promise<MatchResult[]> => {
-  try {
-    const matchDtos = await getApi().getAllRaces({
-      filter: MatchState.Finished,
-    });
-    return matchDtos.map(mapToMatch) as MatchResult[];
-  } catch (error) {
-    console.log(error);
-    return mockMatchResults;
-  }
+export const useUnscheduledMatches = (entrantId?: string) => {
+  return useFilteredMatches(isUnscheduledMatch, entrantId);
+};
+
+export const useMatchResults = (entrantId?: string) => {
+  return useFilteredMatches(isMatchResult, entrantId);
 };
 
 export const addMatches = async (matchesToAdd: MatchToAdd[]): Promise<Match[]> => {

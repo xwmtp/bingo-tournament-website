@@ -30,6 +30,18 @@ export function isScheduled(match: any): match is Scheduled {
   return !!match.scheduledTime;
 }
 
+export function isUnscheduledMatch(match: Match): match is UnscheduledMatch {
+  return !isScheduled(match);
+}
+
+export function isScheduledMatch(match: Match): match is ScheduledMatch {
+  return isScheduled(match) && !isMatchResult(match);
+}
+
+export function isMatchResult(match: Match): match is MatchResult {
+  return match.entrants.length > 0 && match.entrants.every((entrant) => "result" in entrant);
+}
+
 export function includesEntrant<T extends Entrant>(match: BaseMatch<T>, id: string): boolean {
   return match.entrants.some((entrant) => entrant.user.id === id);
 }
@@ -43,11 +55,11 @@ export function isInProgress(match: ScheduledMatch): boolean {
 export function isFinished(match: ScheduledMatch): boolean {
   // todo: use DateTime.local()
   const now = DateTime.local(2022, 2, 1, 6, 10, 0);
-  console.log("\n" + match.id);
-  console.log(match.scheduledTime.plus(standardMatchDuration));
-  console.log(now);
-  console.log("is finished? " + (match.scheduledTime.plus(standardMatchDuration) < now));
   return match.scheduledTime.plus(standardMatchDuration) < now;
+}
+
+export function isNotFinished(match: ScheduledMatch): boolean {
+  return !isFinished(match);
 }
 
 export function sortByScheduledTime<T extends Scheduled>(

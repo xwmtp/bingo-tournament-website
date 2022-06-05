@@ -2,14 +2,15 @@ import React from "react";
 import { Container } from "../components/Container";
 import styled from "styled-components";
 import { AllEntrants } from "../components/pages/profile/admin/AllEntrants";
-import { mockScheduledMatches, mockUnscheduledMatches } from "../domain/MockData";
 import { UnscheduledMatches } from "../components/pages/profile/schedule/UnscheduledMatches";
 import { AddMatches } from "../components/pages/profile/admin/addMatches/AddMatches";
 import { UnrecordedMatches } from "../components/pages/profile/admin/addMatches/UnrecordedMatches";
+import { useScheduledMatches, useUnscheduledMatches } from "../api/matchesApi";
 
 export const AdminPage: React.FC = () => {
-  const allUnscheduledMatches = mockUnscheduledMatches;
-  const allScheduledMatches = mockScheduledMatches;
+  const { data: allScheduledMatches } = useScheduledMatches();
+  const { data: allUnscheduledMatches } = useUnscheduledMatches();
+
   return (
     <AdminPageDiv>
       <Container title={"All entrants"} size="small">
@@ -19,10 +20,10 @@ export const AdminPage: React.FC = () => {
         <AddMatches />
       </Container>
       <Container title={"All unrecorded matches"} size="small">
-        <UnrecordedMatches scheduledMatches={allScheduledMatches} />
+        {allScheduledMatches && <UnrecordedMatches scheduledMatches={allScheduledMatches} />}
       </Container>
       <Container title={"All unscheduled matches"} size="small">
-        <UnscheduledMatches unscheduledMatches={allUnscheduledMatches} />
+        {allUnscheduledMatches && <UnscheduledMatches unscheduledMatches={allUnscheduledMatches} />}
       </Container>
     </AdminPageDiv>
   );

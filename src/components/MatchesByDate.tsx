@@ -3,9 +3,7 @@ import { MatchBlock } from "./pages/profile/schedule/MatchBlock";
 import { includesEntrant, ScheduledMatch } from "../domain/Match";
 import { groupBy } from "../lib/groupBy";
 import styled from "styled-components";
-import { useQuery } from "react-query";
-import { User } from "../domain/User";
-import { getUser } from "../api/userApi";
+import { useUser } from "../api/userApi";
 
 interface Props {
   scheduledMatches: ScheduledMatch[];
@@ -13,7 +11,7 @@ interface Props {
 }
 
 export const MatchesByDate: React.FC<Props> = ({ scheduledMatches, displayStatusOnMatchBlock }) => {
-  const { data, isSuccess } = useQuery<User | undefined, Error>("user", getUser);
+  const { data, isSuccess } = useUser();
 
   const user = isSuccess && data;
 

@@ -1,16 +1,19 @@
 import { getApi } from "./api";
 import { User as UserDto } from "@xwmtp/bingo-tournament";
 import { User } from "../domain/User";
-import { mockLoggedInUser } from "../domain/MockData";
+import { useQuery } from "react-query";
 
-export const getUser = async (): Promise<User | undefined> => {
+const getUser = async (): Promise<User | undefined> => {
   try {
     const userDto = await getApi().getUser();
     return mapToUser(userDto);
   } catch (error) {
-    console.log(error);
-    return mockLoggedInUser;
+    console.log("No logged in user found");
   }
+};
+
+export const useUser = () => {
+  return useQuery<User | undefined, Error>("user", getUser);
 };
 
 export const mapToUser = (userDto: UserDto): User => {

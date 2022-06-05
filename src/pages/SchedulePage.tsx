@@ -1,12 +1,14 @@
 import { Container } from "../components/Container";
 import React from "react";
 import { ScheduledMatches } from "../components/pages/profile/schedule/ScheduledMatches";
-import { mockScheduledMatches } from "../domain/MockData";
+import { useScheduledMatches } from "../api/matchesApi";
 
 export const SchedulePage: React.FC = () => {
+  const { data: scheduledMatches } = useScheduledMatches();
+
   return (
     <Container title={"Schedule"}>
-      <ScheduledMatches matches={mockScheduledMatches} />
+      {scheduledMatches && <ScheduledMatches matches={scheduledMatches} />}
     </Container>
   );
 };

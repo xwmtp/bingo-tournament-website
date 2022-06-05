@@ -2,41 +2,34 @@ import React from "react";
 import { Container } from "../components/Container";
 import styled from "styled-components";
 import { ScheduledMatches } from "../components/pages/profile/schedule/ScheduledMatches";
-import { mockMatchResults, mockScheduledMatches, mockUnscheduledMatches } from "../domain/MockData";
 import { UnscheduledMatches } from "../components/pages/profile/schedule/UnscheduledMatches";
-import { includesEntrant, isFinished } from "../domain/Match";
-import { useQuery } from "react-query";
-import { User } from "../domain/User";
-import { getUser } from "../api/userApi";
+import { isFinished, isNotFinished } from "../domain/Match";
+import { useUser } from "../api/userApi";
 import { FlexDiv } from "../components/divs/FlexDiv";
 import { MatchResults } from "../components/pages/results/MatchResults";
 import { UnrecordedMatches } from "../components/pages/profile/admin/addMatches/UnrecordedMatches";
+import { useMatchResults, useScheduledMatches, useUnscheduledMatches } from "../api/matchesApi";
 
 export const MyMatchesPage: React.FC = () => {
-  // const [matches, setMatches] = useState<ScheduledMatch[] | undefined>(
-  //   undefined
-  // );
-  const userQuery = useQuery<User | undefined, Error>("user", getUser);
-  const user = userQuery.isSuccess ? userQuery.data : undefined;
+  const { data: user, isLoading } = useUser();
 
-  const myResults = mockMatchResults.filter((match) => includesEntrant(match, user?.id || ""));
-  // assuming scheduledMatches does not include results
-  const myScheduledMatches = mockScheduledMatches.filter((match) =>
-    includesEntrant(match, user?.id || "")
-  );
-  const myUnscheduledMatches = mockUnscheduledMatches.filter((match) =>
-    includesEntrant(match, user?.id || "")
-  );
-  const myUnrecordedMatches = myScheduledMatches.filter(isFinished);
+  const { data: myScheduledMatches } = useScheduledMatches(user?.id);
+  const { data: myUnscheduledMatches } = useUnscheduledMatches(user?.id);
+  const { data: myMatchResults } = useMatchResults(user?.id);
 
-  const hasUnscheduledMatches = myUnscheduledMatches.length > 0;
-  const hasScheduledMatches = myScheduledMatches.length > 0;
-  const hasUnrecordedMatches = myUnrecordedMatches.length > 0;
-  const hasResults = myResults.length > 0;
+  // matches that have been scheduled but not finished
+  const myUnfinishedMatches = myScheduledMatches?.filter(isNotFinished);
+  // matches that have been scheduled, finished (according to the scheduled time) but not recorded yet
+  const myUnrecordedMatches = myScheduledMatches?.filter(isFinished);
+
+  const hasUnscheduledMatches = myUnscheduledMatches && myUnscheduledMatches.length > 0;
+  const hasUnfinished = myUnfinishedMatches && myUnfinishedMatches.length > 0;
+  const hasUnrecordedMatches = myUnrecordedMatches && myUnrecordedMatches.length > 0;
+  const hasResults = myMatchResults && myMatchResults.length > 0;
   const noMatchesToDisplay =
-    !hasUnscheduledMatches && !hasScheduledMatches && !hasUnrecordedMatches && !hasResults;
+    !hasUnscheduledMatches && !hasUnfinished && !hasUnrecordedMatches && !hasResults;
 
-  if (noMatchesToDisplay && !userQuery.isLoading) {
+  if (noMatchesToDisplay && isLoading) {
     return (
       <Container size="small">
         <NoMatches>No matches to display</NoMatches>
@@ -56,14 +49,14 @@ export const MyMatchesPage: React.FC = () => {
           <UnscheduledMatches unscheduledMatches={myUnscheduledMatches} />
         </Container>
       )}
-      {hasScheduledMatches && (
+      {hasUnfinished && (
         <Container title={"Scheduled"} size="small">
-          <ScheduledMatches matches={myScheduledMatches} />
+          <ScheduledMatches matches={myUnfinishedMatches} />
         </Container>
       )}
       {hasResults && (
         <Container title={"Results"} size="small">
-          <MatchResults results={myResults} />
+          <MatchResults results={myMatchResults} />
         </Container>
       )}
     </ProfilePageDiv>

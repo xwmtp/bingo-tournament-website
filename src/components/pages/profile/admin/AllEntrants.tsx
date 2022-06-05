@@ -1,15 +1,10 @@
 import React from "react";
 import { UserDisplay } from "../../../UserDisplay";
 import styled from "styled-components";
-import { User } from "../../../../domain/User";
-import { useQuery } from "react-query";
-import { getAllEntrants } from "../../../../api/entrantsApi";
+import { useAllEntrants } from "../../../../api/entrantsApi";
 
 export const AllEntrants: React.FC = () => {
-  const { data, isLoading, isError, isIdle } = useQuery<User[], Error>(
-    "allEntrants",
-    getAllEntrants
-  );
+  const { data, isLoading, isError, isIdle } = useAllEntrants();
 
   if (isLoading || isIdle) {
     return <p>loading...</p>;

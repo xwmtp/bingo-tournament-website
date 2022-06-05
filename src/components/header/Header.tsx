@@ -5,9 +5,7 @@ import { LoggedInUserDisplay } from "./LoggedInUserDisplay";
 import { FlexDiv } from "../divs/FlexDiv";
 import { LoginButton } from "./LoginButton";
 import React from "react";
-import { User } from "../../domain/User";
-import { useQuery } from "react-query";
-import { getUser } from "../../api/userApi";
+import { useUser } from "../../api/userApi";
 
 export const Header: React.FC = () => {
   return (
@@ -21,9 +19,9 @@ export const Header: React.FC = () => {
 };
 
 const LoginOrUser: React.FC = () => {
-  const { data: user, isSuccess } = useQuery<User | undefined, Error>("user", getUser);
+  const { data: user, isLoading } = useUser();
 
-  if (!isSuccess) {
+  if (isLoading) {
     return <></>;
   }
   if (user) {

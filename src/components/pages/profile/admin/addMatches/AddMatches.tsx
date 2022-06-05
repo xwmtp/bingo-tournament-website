@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useQuery } from "react-query";
 import { User } from "../../../../../domain/User";
-import { getAllEntrants } from "../../../../../api/entrantsApi";
 import { UserDisplay } from "../../../../UserDisplay";
 import { FlexDiv } from "../../../../divs/FlexDiv";
 import { EntrantInputField } from "../../../../forms/EntrantInputField";
@@ -11,15 +9,12 @@ import { Button } from "../../../../forms/Button";
 import { MatchesToAddList } from "./MatchesToAddList";
 import { ConfirmMatchesToAddModal } from "./ConfirmMatchesToAddModal";
 import { MatchToAdd } from "../../../../../domain/Match";
+import { useAllEntrants } from "../../../../../api/entrantsApi";
 
 const maxMatchesAtOnce = 25;
 
 export const AddMatches: React.FC = () => {
-  const {
-    data: allEntrants,
-    isError,
-    isSuccess,
-  } = useQuery<User[], Error>("allEntrants", getAllEntrants);
+  const { data: allEntrants, isError, isSuccess } = useAllEntrants();
   const [matchesToAdd, setMatchesToAdd] = useState<MatchToAdd[]>([]);
   const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false);
 

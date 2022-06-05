@@ -2,8 +2,9 @@ import { User } from "../domain/User";
 import { getApi } from "./api";
 import { mapToUser } from "./userApi";
 import { mockAllUsers } from "../domain/MockData";
+import { useQuery } from "react-query";
 
-export const getAllEntrants = async (): Promise<User[]> => {
+const getAllEntrants = async (): Promise<User[]> => {
   try {
     const entrantDtos = await getApi().getEntrants();
     return entrantDtos.map(mapToUser);
@@ -12,4 +13,8 @@ export const getAllEntrants = async (): Promise<User[]> => {
     return mockAllUsers;
     //throw error;
   }
+};
+
+export const useAllEntrants = () => {
+  return useQuery<User[], Error>("allEntrants", getAllEntrants);
 };
