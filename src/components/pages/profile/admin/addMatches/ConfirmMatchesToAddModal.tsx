@@ -19,7 +19,7 @@ export const ConfirmMatchesToAddModal: React.FC<Props> = ({ matchesToAdd, isOpen
     onSuccess: (data) => {
       // successful mutation
       if (data.length === matchesToAdd.length) {
-        queryClient.invalidateQueries("unscheduledMatches");
+        queryClient.invalidateQueries("allMatches");
         onClose();
       }
     },

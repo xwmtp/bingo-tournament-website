@@ -16,6 +16,10 @@ export const useUser = () => {
   return useQuery<User | undefined, Error>("user", getUser);
 };
 
+export const signUp = async () => {
+  await getApi().signUp();
+}
+
 export const mapToUser = (userDto: UserDto): User => {
   return {
     id: userDto.id,
