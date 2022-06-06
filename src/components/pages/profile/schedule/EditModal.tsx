@@ -16,7 +16,7 @@ interface Props {
 }
 
 export const EditModal: React.FC<Props> = ({ match, visible, onClose }) => {
-  const [dateTimeInput, setDateTimeInput] = useState<DateTime>(DateTime.local());
+  const [dateTimeInput, setDateTimeInput] = useState<DateTime>(match.scheduledTime);
 
   const queryClient = useQueryClient();
   const matchMutation = useMutation(updateMatchTime, {
