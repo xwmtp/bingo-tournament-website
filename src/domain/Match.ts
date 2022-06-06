@@ -80,3 +80,8 @@ export interface MatchToAdd {
   entrant2: User;
   round: string;
 }
+
+export interface NewMatchTime {
+  id: string;
+  scheduledTime: DateTime;
+}

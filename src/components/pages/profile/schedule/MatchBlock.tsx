@@ -25,8 +25,10 @@ interface Props {
 }
 
 export const MatchBlock: React.FC<Props> = ({ match, editable, displayStatus }) => {
-  const [showScheduleModal, setShowScheduleModal] = useState<boolean>(false);
-  const [showEditModal, setShowEditModal] = useState<boolean>(false);
+  const [scheduleModalMatch, setScheduleModalMatch] = useState<UnscheduledMatch | undefined>(
+    undefined
+  );
+  const [editModalMatch, setEditModalMatch] = useState<ScheduledMatch | undefined>(undefined);
 
   return (
     <MatchBlockContainer
@@ -41,13 +43,13 @@ export const MatchBlock: React.FC<Props> = ({ match, editable, displayStatus }) 
             </StartTime>
             {editable && (
               <FlexDiv>
-                <EditButtonStyled onClick={() => setShowEditModal(true)} />
+                <EditButtonStyled onClick={() => setEditModalMatch(match)} />
               </FlexDiv>
             )}
           </>
         ) : (
           <FlexDiv>
-            <ScheduleButton onClick={() => setShowScheduleModal(true)} />
+            <ScheduleButton onClick={() => setScheduleModalMatch(match)} />
           </FlexDiv>
         )}
       </StartTimeContainer>
@@ -74,9 +76,21 @@ export const MatchBlock: React.FC<Props> = ({ match, editable, displayStatus }) 
         />
       </StreamButtonsDiv>
 
-      <ScheduleModal visible={showScheduleModal} onClose={() => setShowScheduleModal(false)} />
+      {scheduleModalMatch && (
+        <ScheduleModal
+          match={scheduleModalMatch}
+          visible={!!scheduleModalMatch}
+          onClose={() => setScheduleModalMatch(undefined)}
+        />
+      )}
 
-      <EditModal visible={showEditModal} onClose={() => setShowEditModal(false)} />
+      {editModalMatch && (
+        <EditModal
+          match={editModalMatch}
+          visible={!!editModalMatch}
+          onClose={() => setEditModalMatch(undefined)}
+        />
+      )}
     </MatchBlockContainer>
   );
 };

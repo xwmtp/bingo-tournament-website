@@ -1,11 +1,12 @@
 import React from "react";
 import { Modal } from "../../../../Modal";
 import { MatchesToAddList } from "./MatchesToAddList";
-import { Button } from "../../../../forms/Button";
 import styled from "styled-components";
 import { MatchToAdd } from "../../../../../domain/Match";
 import { addMatches } from "../../../../../api/matchesApi";
 import { useMutation, useQueryClient } from "react-query";
+import { MutationButton } from "../../../../forms/buttons/MutationButton";
+import { ErrorText } from "../../../../forms/ErrorText";
 
 interface Props {
   matchesToAdd: MatchToAdd[];
@@ -32,42 +33,31 @@ export const ConfirmMatchesToAddModal: React.FC<Props> = ({
     },
   });
 
-  const buttonDisabled = addMatchesMutation.isLoading;
+  const internalOnClose = () => {
+    addMatchesMutation.reset();
+    onClose();
+  };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={internalOnClose}>
       <ModalContent>
         <p>{`Are you sure you want to add these ${matchesToAdd.length} match${
           matchesToAdd.length > 1 ? "es" : ""
         }?`}</p>
         <MatchesToAdd matchesToAdd={matchesToAdd} />
-        <ConfirmButton
-          disabled={buttonDisabled}
+
+        {addMatchesMutation.isError && <ErrorText text="Something went wrong" />}
+
+        <MutationButtonStyled
+          mutationStatus={addMatchesMutation.status}
+          onIdleText="Confirm"
           color={"brightMossGreen"}
           size={"big"}
-          onClick={() => {
-            if (!buttonDisabled) {
-              addMatchesMutation.mutate(matchesToAdd);
-            }
-          }}
-        >
-          {buttonText(addMatchesMutation.status)}
-        </ConfirmButton>
+          onClick={() => addMatchesMutation.mutate(matchesToAdd)}
+        />
       </ModalContent>
     </Modal>
   );
-};
-
-const buttonText = (status: "idle" | "loading" | "error" | "success") => {
-  switch (status) {
-    case "idle":
-    case "success":
-      return "Confirm";
-    case "loading":
-      return "Adding...";
-    case "error":
-      return "Retry";
-  }
 };
 
 const ModalContent = styled.div`
@@ -80,7 +70,6 @@ const MatchesToAdd = styled(MatchesToAddList)`
   margin-top: 1rem;
 `;
 
-const ConfirmButton = styled(Button)`
-  flex-grow: 0;
+const MutationButtonStyled = styled(MutationButton)`
   margin-top: 1.2rem;
 `;

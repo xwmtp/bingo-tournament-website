@@ -16,9 +16,14 @@ export const useUser = () => {
 };
 
 export const signUp = async () => {
+  await sleep(2000);
   await getApi().signUp();
 };
 
 export const withdraw = async () => {
   await getApi().withdraw();
 };
+
+function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}

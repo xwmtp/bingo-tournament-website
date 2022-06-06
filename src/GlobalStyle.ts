@@ -14,6 +14,7 @@ export const Colors = {
   racetimeGreen: "#26DB9AFF",
   twitchPurple: "#9146FF",
   coral: "#a15f4f",
+  brightCoral: "#ef8b73",
 } as const;
 
 export type ColorName = keyof typeof Colors;

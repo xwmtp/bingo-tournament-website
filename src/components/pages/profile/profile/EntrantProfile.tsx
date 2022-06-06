@@ -4,10 +4,10 @@ import { User } from "../../../../domain/User";
 import { Avatar } from "../../../Avatar";
 import styled from "styled-components";
 import { Colors } from "../../../../GlobalStyle";
-import { Button } from "../../../forms/Button";
 import { useMutation, useQueryClient } from "react-query";
 import { withdraw } from "../../../../api/userApi";
 import { FlexDiv } from "../../../divs/FlexDiv";
+import { MutationButton } from "../../../forms/buttons/MutationButton";
 
 interface Props {
   user: User;
@@ -20,7 +20,6 @@ export const EntrantProfile: React.FC<Props> = ({ user }) => {
       queryClient.invalidateQueries("user");
     },
   });
-  const buttonDisabled = withdrawMutation.isLoading || withdrawMutation.isSuccess;
 
   return (
     <Container>
@@ -34,32 +33,16 @@ export const EntrantProfile: React.FC<Props> = ({ user }) => {
           </NameAndRole>
         </UserDiv>
 
-        <WithdrawButton
-          disabled={buttonDisabled}
+        <MutationButton
+          mutationStatus={withdrawMutation.status}
+          onIdleText="Withdraw from tournament"
           color={"coral"}
           size={"normal"}
-          onClick={() => {
-            !buttonDisabled && withdrawMutation.mutate();
-          }}
-        >
-          {withdrawButtonText(withdrawMutation.status)}
-        </WithdrawButton>
+          onClick={withdrawMutation.mutate}
+        />
       </Profile>
     </Container>
   );
-};
-
-const withdrawButtonText = (status: "idle" | "loading" | "error" | "success") => {
-  switch (status) {
-    case "idle":
-      return "Withdraw from tournament";
-    case "loading":
-      return "...";
-    case "error":
-      return "Retry withdraw from tournament";
-    case "success":
-      return "";
-  }
 };
 
 const Profile = styled(FlexDiv)`
@@ -80,10 +63,4 @@ const NameAndRole = styled.div`
 
 const Role = styled.p`
   color: ${Colors.brighterMossGreen};
-`;
-
-const WithdrawButton = styled(Button)`
-  width: 12rem;
-  margin: 1.2rem 0;
-  flex-grow: 0;
 `;

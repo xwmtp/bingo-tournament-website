@@ -2,20 +2,42 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { DateTime } from "luxon";
 import { FlexDiv } from "../../../divs/FlexDiv";
-import { Button } from "../../../forms/Button";
 import { DateTimeInput } from "../../../forms/DateTimeInput";
 import { Modal } from "../../../Modal";
+import { useMutation, useQueryClient } from "react-query";
+import { updateMatchTime } from "../../../../api/matchesApi";
+import { MutationButton } from "../../../forms/buttons/MutationButton";
+import { UnscheduledMatch } from "../../../../domain/Match";
 
 interface Props {
+  match: UnscheduledMatch;
   visible: boolean;
   onClose: () => void;
 }
 
-export const ScheduleModal: React.FC<Props> = ({ visible, onClose }) => {
+export const ScheduleModal: React.FC<Props> = ({ match, visible, onClose }) => {
   const [dateTimeInput, setDateTimeInput] = useState<DateTime>(DateTime.local());
 
+  const queryClient = useQueryClient();
+  const matchMutation = useMutation(updateMatchTime, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("allMatches");
+      onClose();
+    },
+  });
+
+  const updateMatch = {
+    matchId: match.id,
+    newTime: dateTimeInput,
+  };
+
+  const internalOnClose = () => {
+    matchMutation.reset();
+    onClose();
+  };
+
   return (
-    <Modal title={"Pick date & time"} isOpen={visible} onClose={onClose}>
+    <Modal title={"Pick date & time"} isOpen={visible} onClose={internalOnClose}>
       <ContainerContents>
         <p>
           {`Please schedule your match after agreeing on a time with your
@@ -28,9 +50,12 @@ export const ScheduleModal: React.FC<Props> = ({ visible, onClose }) => {
 
         <p>Schedule match for:</p>
         <h4>{dateTimeInput.toLocaleString(DateTime.DATETIME_FULL)}</h4>
-        <ConfirmButton color={"brightMossGreen"} size={"big"}>
-          Confirm
-        </ConfirmButton>
+        <ConfirmButton
+          mutationStatus={matchMutation.status}
+          color={"brightMossGreen"}
+          size={"big"}
+          onClick={() => matchMutation.mutate(updateMatch)}
+        />
       </ContainerContents>
     </Modal>
   );
@@ -41,6 +66,6 @@ const ContainerContents = styled(FlexDiv)`
   flex-direction: column;
 `;
 
-const ConfirmButton = styled(Button)`
+const ConfirmButton = styled(MutationButton)`
   margin-top: 1.2rem;
 `;

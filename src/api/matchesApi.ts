@@ -18,7 +18,6 @@ const mockAllMatches = [...mockUnscheduledMatches, ...mockScheduledMatches, ...m
 const getAllMatches = async (): Promise<Match[]> => {
   try {
     const matchDtos = await getApi().getAllMatches();
-    console.log(JSON.stringify(matchDtos, null, 1));
     return matchDtos.map(mapToMatch);
   } catch (error) {
     console.log(error);
@@ -62,6 +61,28 @@ export const addMatches = async (matchesToAdd: MatchToAdd[]): Promise<Match[]> =
   const newMatches = matchesToAdd.map(mapToNewMatchDto);
   const addedMatches = await getApi().addMatches({ requestBody: newMatches });
   return addedMatches.map(mapToMatch);
+};
+
+export const updateMatchTime = async (updateMatch: {
+  matchId: string;
+  newTime: DateTime;
+}): Promise<Match> => {
+  const updatedMatchDto = await getApi().updateMatch({
+    matchId: updateMatch.matchId,
+    updateMatch: { scheduledTime: updateMatch.newTime.toJSDate() },
+  });
+  return mapToMatch(updatedMatchDto);
+};
+
+export const updateMatchRacetimeId = async (
+  matchId: string,
+  newRacetimeId: string
+): Promise<Match> => {
+  const updatedMatchDto = await getApi().updateMatch({
+    matchId: matchId,
+    updateMatch: { racetimeId: newRacetimeId },
+  });
+  return mapToMatch(updatedMatchDto);
 };
 
 const mapToNewMatchDto = (matchToAdd: MatchToAdd): NewMatchDto => {
