@@ -111,6 +111,7 @@ export const AddMatches: React.FC = () => {
         matchesToAdd={matchesToAdd}
         isOpen={showConfirmModal}
         onClose={() => setShowConfirmModal(false)}
+        onSuccess={() => setMatchesToAdd([])}
       />
     </AddMatchesDiv>
   );

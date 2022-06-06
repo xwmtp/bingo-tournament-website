@@ -16,6 +16,7 @@ export const MyMatchesPage: React.FC = () => {
   const { data: myScheduledMatches } = useScheduledMatches(user?.id);
   const { data: myUnscheduledMatches } = useUnscheduledMatches(user?.id);
   const { data: myMatchResults } = useMatchResults(user?.id);
+  //console.log(JSON.stringify(myMatchResults, null, 1));
 
   // matches that have been scheduled but not finished
   const myUnfinishedMatches = myScheduledMatches?.filter(isNotFinished);

@@ -1,11 +1,6 @@
 import { getApi } from "./api";
 import { mockMatchResults, mockScheduledMatches, mockUnscheduledMatches } from "../domain/MockData";
 import {
-  Entrant as EntrantDto,
-  EntrantStatusEnum,
-} from "@xwmtp/bingo-tournament/dist/models/Entrant";
-import { Match as MatchDto } from "@xwmtp/bingo-tournament/dist/models/Match";
-import {
   includesEntrant,
   isMatchResult,
   isScheduledMatch,
@@ -15,15 +10,21 @@ import {
 } from "../domain/Match";
 import { mapToUser } from "./userApi";
 import { Entrant, EntrantWithResult } from "../domain/Entrant";
-import { NewMatch as NewMatchDto } from "@xwmtp/bingo-tournament";
 import { DateTime } from "luxon";
 import { useQuery } from "react-query";
+import {
+  Entrant as EntrantDto,
+  EntrantState,
+  Match as MatchDto,
+  NewMatch as NewMatchDto,
+} from "@xwmtp/bingo-tournament";
 
 const mockAllMatches = [...mockUnscheduledMatches, ...mockScheduledMatches, ...mockMatchResults];
 
 const getAllMatches = async (): Promise<Match[]> => {
   try {
     const matchDtos = await getApi().getAllMatches();
+    console.log(JSON.stringify(matchDtos, null, 1));
     return matchDtos.map(mapToMatch);
   } catch (error) {
     console.log(error);
@@ -84,7 +85,7 @@ const mapToMatch = (matchDto: MatchDto): Match => {
     entrants: matchDto.entrants.map(mapToEntrant),
     round: matchDto.round,
     restreamChannel: "",
-    scheduledTime: matchDto.sceduledTime ? DateTime.fromJSDate(matchDto.sceduledTime) : undefined,
+    scheduledTime: matchDto.scheduledTime ? DateTime.fromJSDate(matchDto.scheduledTime) : undefined,
   };
 };
 
@@ -92,13 +93,13 @@ const mapToEntrant = (entrantDto: EntrantDto): Entrant | EntrantWithResult => {
   const entrant = {
     user: mapToUser(entrantDto.user),
   };
-  if (entrantDto.status === EntrantStatusEnum.PreRace) {
+  if (entrantDto.state === EntrantState.PreRace) {
     return entrant;
   } else {
     return {
       ...entrant,
       result: {
-        status: EntrantStatusEnum.Finished ? "done" : "forfeit",
+        status: EntrantState.Finished ? "done" : "forfeit",
         racetimeRank: entrantDto.racetimePlace ?? 0,
         rank: entrantDto.racetimePlace ?? 0,
         finishTime: entrantDto.finishTimeSeconds,

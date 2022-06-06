@@ -11,15 +11,22 @@ interface Props {
   matchesToAdd: MatchToAdd[];
   isOpen: boolean;
   onClose: () => void;
+  onSuccess: () => void;
 }
 
-export const ConfirmMatchesToAddModal: React.FC<Props> = ({ matchesToAdd, isOpen, onClose }) => {
+export const ConfirmMatchesToAddModal: React.FC<Props> = ({
+  matchesToAdd,
+  isOpen,
+  onClose,
+  onSuccess,
+}) => {
   const queryClient = useQueryClient();
   const addMatchesMutation = useMutation(addMatches, {
     onSuccess: (data) => {
       // successful mutation
       if (data.length === matchesToAdd.length) {
         queryClient.invalidateQueries("allMatches");
+        onSuccess();
         onClose();
       }
     },
