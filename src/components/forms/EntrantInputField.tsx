@@ -22,7 +22,7 @@ export const EntrantInputField: React.FC<Props> = ({
     let matchingEntrant = allEntrants.find(
       (entrant) => entrant.name.toLowerCase() === input.toLowerCase()
     );
-    if (!matchingEntrant) {
+    if (!matchingEntrant && input !== "") {
       const entrantsStartingWithInput = allEntrants.filter((entrant) =>
         entrant.name.toLowerCase().startsWith(input.toLowerCase())
       );

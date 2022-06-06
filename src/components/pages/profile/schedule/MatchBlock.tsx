@@ -53,8 +53,9 @@ export const MatchBlock: React.FC<Props> = ({ match, editable, displayStatus }) 
       </StartTimeContainer>
 
       <Entrants>
-        <UserDisplay user={match.entrants[0].user} />
-        <UserDisplay user={match.entrants[1].user} />
+        {match.entrants.map((entrant) => (
+          <UserDisplay key={match.id + entrant.user.id} user={entrant.user} />
+        ))}
       </Entrants>
 
       <Round>
@@ -67,7 +68,9 @@ export const MatchBlock: React.FC<Props> = ({ match, editable, displayStatus }) 
           url={match.restreamChannel && "https://www.twitch.tv/" + match.restreamChannel}
         />
         <KadgarButtonStyled
-          url={`https://kadgar.net/live/${match.entrants[0].user.twitchChannel}/${match.entrants[1].user.twitchChannel}`}
+          url={`https://kadgar.net/live/${match.entrants
+            .map((entrant) => entrant.user.twitchChannel)
+            .join("/")}`}
         />
       </StreamButtonsDiv>
 

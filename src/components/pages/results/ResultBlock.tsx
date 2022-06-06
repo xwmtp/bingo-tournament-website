@@ -13,14 +13,12 @@ interface Props {
 }
 
 export const ResultBlock: React.FC<Props> = ({ result }) => {
-  const entrant1 = result.entrants[0];
-  const entrant2 = result.entrants[1];
-
   return (
     <ResultBlockContainer>
       <Entrants>
-        <ResultRow entrant={entrant1} />
-        <ResultRow entrant={entrant2} />
+        {result.entrants.map((entrant) => (
+          <ResultRow key={result.id + entrant.user.id} entrant={entrant} />
+        ))}
       </Entrants>
 
       <ButtonsDiv>
