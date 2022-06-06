@@ -8,16 +8,10 @@ import {
   Match,
   MatchToAdd,
 } from "../domain/Match";
-import { mapToUser } from "./userApi";
-import { Entrant, EntrantWithResult } from "../domain/Entrant";
+import { mapToEntrant } from "../domain/Entrant";
 import { DateTime } from "luxon";
 import { useQuery } from "react-query";
-import {
-  Entrant as EntrantDto,
-  EntrantState,
-  Match as MatchDto,
-  NewMatch as NewMatchDto,
-} from "@xwmtp/bingo-tournament";
+import { Match as MatchDto, NewMatch as NewMatchDto } from "@xwmtp/bingo-tournament";
 
 const mockAllMatches = [...mockUnscheduledMatches, ...mockScheduledMatches, ...mockMatchResults];
 
@@ -87,23 +81,4 @@ const mapToMatch = (matchDto: MatchDto): Match => {
     restreamChannel: "",
     scheduledTime: matchDto.scheduledTime ? DateTime.fromJSDate(matchDto.scheduledTime) : undefined,
   };
-};
-
-const mapToEntrant = (entrantDto: EntrantDto): Entrant | EntrantWithResult => {
-  const entrant = {
-    user: mapToUser(entrantDto.user),
-  };
-  if (entrantDto.state === EntrantState.PreRace) {
-    return entrant;
-  } else {
-    return {
-      ...entrant,
-      result: {
-        status: EntrantState.Finished ? "done" : "forfeit",
-        racetimeRank: entrantDto.racetimePlace ?? 0,
-        rank: entrantDto.racetimePlace ?? 0,
-        finishTime: entrantDto.finishTimeSeconds,
-      },
-    };
-  }
 };

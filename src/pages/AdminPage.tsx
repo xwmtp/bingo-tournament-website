@@ -6,10 +6,27 @@ import { UnscheduledMatches } from "../components/pages/profile/schedule/Unsched
 import { AddMatches } from "../components/pages/profile/admin/addMatches/AddMatches";
 import { UnrecordedMatches } from "../components/pages/profile/admin/addMatches/UnrecordedMatches";
 import { useScheduledMatches, useUnscheduledMatches } from "../api/matchesApi";
+import { useUser } from "../api/userApi";
+import { isAdmin } from "../domain/User";
 
 export const AdminPage: React.FC = () => {
+  const { data: user } = useUser();
   const { data: allScheduledMatches } = useScheduledMatches();
   const { data: allUnscheduledMatches } = useUnscheduledMatches();
+
+  if (!user) {
+    return <></>;
+  }
+
+  if (!isAdmin(user)) {
+    return (
+      <AdminPageDiv>
+        <Container>
+          <p>This page is admin only</p>
+        </Container>
+      </AdminPageDiv>
+    );
+  }
 
   return (
     <AdminPageDiv>

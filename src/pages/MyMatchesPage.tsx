@@ -11,12 +11,11 @@ import { UnrecordedMatches } from "../components/pages/profile/admin/addMatches/
 import { useMatchResults, useScheduledMatches, useUnscheduledMatches } from "../api/matchesApi";
 
 export const MyMatchesPage: React.FC = () => {
-  const { data: user, isLoading } = useUser();
+  const { data: user } = useUser();
 
   const { data: myScheduledMatches } = useScheduledMatches(user?.id);
   const { data: myUnscheduledMatches } = useUnscheduledMatches(user?.id);
   const { data: myMatchResults } = useMatchResults(user?.id);
-  //console.log(JSON.stringify(myMatchResults, null, 1));
 
   // matches that have been scheduled but not finished
   const myUnfinishedMatches = myScheduledMatches?.filter(isNotFinished);
@@ -30,10 +29,14 @@ export const MyMatchesPage: React.FC = () => {
   const noMatchesToDisplay =
     !hasUnscheduledMatches && !hasUnfinished && !hasUnrecordedMatches && !hasResults;
 
-  if (noMatchesToDisplay && isLoading) {
+  if (!user) {
+    return <></>;
+  }
+
+  if (noMatchesToDisplay) {
     return (
       <Container size="small">
-        <NoMatches>No matches to display</NoMatches>
+        <NoMatches>No matches to display (yet)</NoMatches>
       </Container>
     );
   }

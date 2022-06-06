@@ -1,6 +1,5 @@
 import { getApi } from "./api";
-import { User as UserDto } from "@xwmtp/bingo-tournament";
-import { User } from "../domain/User";
+import { mapToUser, User } from "../domain/User";
 import { useQuery } from "react-query";
 
 const getUser = async (): Promise<User | undefined> => {
@@ -18,13 +17,8 @@ export const useUser = () => {
 
 export const signUp = async () => {
   await getApi().signUp();
-}
+};
 
-export const mapToUser = (userDto: UserDto): User => {
-  return {
-    id: userDto.id,
-    name: userDto.name,
-    avatar: userDto.avatar,
-    twitchChannel: userDto.twitchChannel,
-  };
+export const withdraw = async () => {
+  await getApi().withdraw();
 };

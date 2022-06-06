@@ -32,7 +32,7 @@ export const ConfirmMatchesToAddModal: React.FC<Props> = ({
     },
   });
 
-  const buttonDisabled = addMatchesMutation.isLoading || addMatchesMutation.isSuccess;
+  const buttonDisabled = addMatchesMutation.isLoading;
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -61,13 +61,12 @@ export const ConfirmMatchesToAddModal: React.FC<Props> = ({
 const buttonText = (status: "idle" | "loading" | "error" | "success") => {
   switch (status) {
     case "idle":
+    case "success":
       return "Confirm";
     case "loading":
       return "Adding...";
     case "error":
       return "Retry";
-    case "success":
-      return "Added!";
   }
 };
 
