@@ -3,6 +3,7 @@ import { createGlobalStyle } from "styled-components";
 export const Colors = {
   mossGreen: "#2F4F4F",
   brightMossGreen: "#6a8f88",
+  brighterMossGreen: "#9acbb9",
   darkGrey: "#3A4040",
   mediumGrey: "#454B4B",
   lightGray: "#535959",

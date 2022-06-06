@@ -3,33 +3,39 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Colors } from "../GlobalStyle";
 import { TabSelector } from "../components/TabSelector";
-import { mockMatchResults } from "../domain/MockData";
 import { MatchResults } from "../components/pages/results/MatchResults";
 import { onlyUnique } from "../lib/onlyUnique";
 import { capitalize } from "../lib/stringHelpers";
+import { useMatchResults } from "../api/matchesApi";
 
 export const ResultsPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>("Round 1");
 
-  if (!activeTab) {
+  const { data: matchResults, isSuccess } = useMatchResults();
+
+  if (!activeTab || !isSuccess) {
     return <></>;
   }
 
-  const uniqueRounds = mockMatchResults
+  const uniqueRounds = matchResults
     .map((result) => result.round?.toLowerCase())
     .filter((round): round is string => !!round)
     .filter(onlyUnique)
     .map((round) => capitalize(round));
-  const tabMatches = mockMatchResults.filter((result) => result.round === activeTab);
+
+  const tabMatches = matchResults.filter((result) => result.round === activeTab);
+  const showTabSelector = uniqueRounds.length > 1;
 
   return (
     <Container title={"Results"}>
-      <TabSelectorStyled
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        tabOptions={uniqueRounds}
-        fontSize={"1rem"}
-      />
+      {showTabSelector && (
+        <TabSelectorStyled
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          tabOptions={uniqueRounds}
+          fontSize={"1rem"}
+        />
+      )}
       <MatchResults results={tabMatches} />
     </Container>
   );
