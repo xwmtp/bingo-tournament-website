@@ -5,9 +5,12 @@ import { FlexDiv } from "../../../divs/FlexDiv";
 import { DateTimeInput } from "../../../forms/DateTimeInput";
 import { Modal } from "../../../Modal";
 import { useMutation, useQueryClient } from "react-query";
-import { updateMatchTime } from "../../../../api/matchesApi";
+import { deleteMatches, updateMatchTime } from "../../../../api/matchesApi";
 import { ScheduledMatch } from "../../../../domain/Match";
 import { MutationButton } from "../../../forms/buttons/MutationButton";
+import { useUser } from "../../../../api/userApi";
+import { isAdmin } from "../../../../domain/User";
+import { Container } from "../../../Container";
 
 interface Props {
   match: ScheduledMatch;
@@ -18,8 +21,17 @@ interface Props {
 export const EditModal: React.FC<Props> = ({ match, visible, onClose }) => {
   const [dateTimeInput, setDateTimeInput] = useState<DateTime>(match.scheduledTime);
 
+  const { data: user } = useUser();
+
   const queryClient = useQueryClient();
-  const matchMutation = useMutation(updateMatchTime, {
+  const updateTimeMutation = useMutation(updateMatchTime, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("allMatches");
+      onClose();
+    },
+  });
+
+  const deleteMatchMutation = useMutation(deleteMatches, {
     onSuccess: () => {
       queryClient.invalidateQueries("allMatches");
       onClose();
@@ -32,7 +44,8 @@ export const EditModal: React.FC<Props> = ({ match, visible, onClose }) => {
   };
 
   const internalOnClose = () => {
-    matchMutation.reset();
+    updateTimeMutation.reset();
+    deleteMatchMutation.reset();
     onClose();
   };
 
@@ -52,12 +65,26 @@ export const EditModal: React.FC<Props> = ({ match, visible, onClose }) => {
         <h4>{dateTimeInput.toLocaleString(DateTime.DATETIME_FULL)}</h4>
 
         <ConfirmButton
-          mutationStatus={matchMutation.status}
+          mutationStatus={updateTimeMutation.status}
           onIdleText={"Update"}
           color={"brightMossGreen"}
           size={"big"}
-          onClick={() => matchMutation.mutate(updateMatch)}
+          onClick={() => updateTimeMutation.mutate(updateMatch)}
         />
+
+        {!!user && isAdmin(user) && (
+          <AdminOnlyDiv title="Admin only" size="small" backgroundColor="lightGray">
+            <p>Click the button to completely remove this match from the database.</p>
+
+            <DeleteMatchButton
+              mutationStatus={deleteMatchMutation.status}
+              onIdleText={"DELETE MATCH"}
+              color={"coral"}
+              size={"big"}
+              onClick={() => deleteMatchMutation.mutate([match.id])}
+            />
+          </AdminOnlyDiv>
+        )}
       </ContainerContents>
     </Modal>
   );
@@ -69,5 +96,14 @@ const ContainerContents = styled(FlexDiv)`
 `;
 
 const ConfirmButton = styled(MutationButton)`
+  margin-top: 1.2rem;
+`;
+
+const AdminOnlyDiv = styled(Container)`
+  margin-top: 2rem;
+  flex-direction: column;
+`;
+
+const DeleteMatchButton = styled(MutationButton)`
   margin-top: 1.2rem;
 `;

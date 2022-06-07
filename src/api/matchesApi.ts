@@ -85,6 +85,10 @@ export const updateMatchRacetimeId = async (
   return mapToMatch(updatedMatchDto);
 };
 
+export const deleteMatches = async (matchIds: string[]): Promise<void> => {
+  return await getApi().deleteMatches({ requestBody: matchIds });
+};
+
 const mapToNewMatchDto = (matchToAdd: MatchToAdd): NewMatchDto => {
   // todo calculate entrant ranks manually
   return {
