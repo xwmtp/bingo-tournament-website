@@ -4,6 +4,7 @@ import { includesEntrant, ScheduledMatch } from "../domain/Match";
 import { groupBy } from "../lib/groupBy";
 import styled from "styled-components";
 import { useUser } from "../api/userApi";
+import { isAdmin } from "../domain/User";
 
 interface Props {
   scheduledMatches: ScheduledMatch[];
@@ -31,7 +32,7 @@ export const MatchesByDate: React.FC<Props> = ({ scheduledMatches, displayStatus
               <MatchBlock
                 key={match.id}
                 match={match}
-                editable={user ? includesEntrant(match, user.id) : false}
+                editable={user && (isAdmin(user) || includesEntrant(match, user.id))}
                 displayStatus={displayStatusOnMatchBlock}
               />
             ))}
