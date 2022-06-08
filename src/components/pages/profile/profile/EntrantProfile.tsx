@@ -1,25 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container } from "../../../Container";
 import { User } from "../../../../domain/User";
 import { Avatar } from "../../../Avatar";
 import styled from "styled-components";
 import { Colors } from "../../../../GlobalStyle";
-import { useMutation, useQueryClient } from "react-query";
-import { withdraw } from "../../../../api/userApi";
 import { FlexDiv } from "../../../divs/FlexDiv";
-import { MutationButton } from "../../../forms/buttons/MutationButton";
+import { Button } from "../../../forms/Button";
+import { ConfirmWithdrawalModal } from "./ConfirmWithdrawalModal";
 
 interface Props {
   user: User;
 }
 
 export const EntrantProfile: React.FC<Props> = ({ user }) => {
-  const queryClient = useQueryClient();
-  const withdrawMutation = useMutation(withdraw, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("user");
-    },
-  });
+  const [showWithdrawModal, setShowWithdrawModal] = useState<boolean>(false);
 
   return (
     <Container>
@@ -33,14 +27,15 @@ export const EntrantProfile: React.FC<Props> = ({ user }) => {
           </NameAndRole>
         </UserDiv>
 
-        <MutationButton
-          mutationStatus={withdrawMutation.status}
-          onIdleText="Withdraw from tournament"
-          color={"coral"}
-          size={"normal"}
-          onClick={withdrawMutation.mutate}
-        />
+        <WithdrawButton size="normal" color={"coral"} onClick={() => setShowWithdrawModal(true)}>
+          Withdraw from tournament
+        </WithdrawButton>
       </Profile>
+
+      <ConfirmWithdrawalModal
+        visible={showWithdrawModal}
+        onClose={() => setShowWithdrawModal(false)}
+      />
     </Container>
   );
 };
@@ -63,4 +58,8 @@ const NameAndRole = styled.div`
 
 const Role = styled.p`
   color: ${Colors.brighterMossGreen};
+`;
+
+const WithdrawButton = styled(Button)`
+  flex-grow: 0;
 `;
