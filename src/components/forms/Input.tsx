@@ -1,8 +1,11 @@
-import React from "react";
+import React, { DetailedHTMLProps, InputHTMLAttributes } from "react";
 import styled from "styled-components";
 import { Colors } from "../../GlobalStyle";
 
-export const Input: React.FC<React.ComponentProps<typeof InputStyled>> = (props) => {
+type Props = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+
+export const Input: React.FC<Props> = (props) => {
+  // @ts-ignore
   return <InputStyled {...props} />;
 };
 

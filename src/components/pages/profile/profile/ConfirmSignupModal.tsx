@@ -7,6 +7,7 @@ import { MutationButton } from "../../../forms/buttons/MutationButton";
 import { ErrorText } from "../../../general/ErrorText";
 import { NavLink } from "react-router-dom";
 import { Colors } from "../../../../GlobalStyle";
+import { ExternalLink } from "../../../general/ExternalLink";
 
 interface Props {
   visible: boolean;
@@ -39,15 +40,9 @@ export const ConfirmSignupModal: React.FC<Props> = ({ visible, onClose }) => {
 
       <p>
         In particular, you should have completed at least 1 regular Bingo race on{" "}
-        <UrlLink
-          href="https://racetime.gg/oot/leaderboards"
-          target={"_blank"}
-          rel="noopener noreferrer"
-        >
-          Racetime.gg
-        </UrlLink>{" "}
-        before the start of the tournament, for the sake of seeding. If you haven't yet, you may
-        join now and complete your first race later as long as it's before the tournament start.
+        <ExternalLink url="https://racetime.gg/oot/leaderboards">Racetime.gg</ExternalLink> before
+        the start of the tournament, for the sake of seeding. If you haven't yet, you may join now
+        and complete your first race later as long as it's before the tournament start.
       </p>
       {signUpMutation.isError && <ErrorText>Could not sign up, please try again later.</ErrorText>}
       <ConfirmButton
@@ -66,11 +61,6 @@ const ConfirmButton = styled(MutationButton)`
 `;
 
 const Link = styled(NavLink)`
-  font-weight: bold;
-  color: ${Colors.brighterMossGreen};
-`;
-
-const UrlLink = styled.a`
   font-weight: bold;
   color: ${Colors.brighterMossGreen};
 `;

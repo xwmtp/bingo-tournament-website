@@ -32,9 +32,9 @@ export const MutationButton: React.FC<Props> = (props) => {
       <ButtonStyled
         {...props}
         className={undefined}
-        disabled={buttonDisabled}
+        disabled={props.disabled}
         onClick={() => {
-          if (!buttonDisabled && props.onClick) {
+          if (!buttonDisabled && !props.disabled && props.onClick) {
             props.onClick();
           }
         }}

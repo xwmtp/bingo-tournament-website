@@ -74,13 +74,13 @@ export const updateMatchTime = async (updateMatch: {
   return mapToMatch(updatedMatchDto);
 };
 
-export const updateMatchRacetimeId = async (
-  matchId: string,
-  newRacetimeId: string
-): Promise<Match> => {
+export const updateMatchRacetimeId = async (updateMatch: {
+  matchId: string;
+  newRacetimeId: string;
+}): Promise<Match> => {
   const updatedMatchDto = await getApi().updateMatch({
-    matchId: matchId,
-    updateMatch: { racetimeId: newRacetimeId },
+    matchId: updateMatch.matchId,
+    updateMatch: { racetimeId: updateMatch.newRacetimeId },
   });
   return mapToMatch(updatedMatchDto);
 };

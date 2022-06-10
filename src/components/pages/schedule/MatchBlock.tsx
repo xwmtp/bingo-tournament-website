@@ -18,6 +18,7 @@ import { ScheduleButton } from "../../forms/buttons/ScheduleButton";
 import { EditButton } from "../../forms/buttons/EditButton";
 import { EditModal } from "./EditModal";
 import { RecordButton } from "../../forms/buttons/RecordButton";
+import { RecordModal } from "./RecordModal";
 
 interface Props {
   match: UnscheduledMatch | ScheduledMatch;
@@ -30,6 +31,7 @@ export const MatchBlock: React.FC<Props> = ({ match, editable, displayStatus }) 
     undefined
   );
   const [editModalMatch, setEditModalMatch] = useState<ScheduledMatch | undefined>(undefined);
+  const [recordModalMatch, setRecordModalMatch] = useState<ScheduledMatch | undefined>(undefined);
 
   return (
     <MatchBlockContainer
@@ -49,7 +51,7 @@ export const MatchBlock: React.FC<Props> = ({ match, editable, displayStatus }) 
             )}
             {editable && isFinished(match) && (
               <FlexDiv>
-                <RecordButtonStyled onClick={() => setEditModalMatch(match)} />
+                <RecordButtonStyled onClick={() => setRecordModalMatch(match)} />
               </FlexDiv>
             )}
           </>
@@ -95,6 +97,14 @@ export const MatchBlock: React.FC<Props> = ({ match, editable, displayStatus }) 
           match={editModalMatch}
           visible={!!editModalMatch}
           onClose={() => setEditModalMatch(undefined)}
+        />
+      )}
+
+      {recordModalMatch && (
+        <RecordModal
+          match={recordModalMatch}
+          visible={!!recordModalMatch}
+          onClose={() => setRecordModalMatch(undefined)}
         />
       )}
     </MatchBlockContainer>
