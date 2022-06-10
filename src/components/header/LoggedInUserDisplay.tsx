@@ -1,11 +1,9 @@
 import React from "react";
 import { FlexDiv } from "../divs/FlexDiv";
-import { WideScreenOnly } from "../divs/WideScreenOnly";
 import { NavLink } from "react-router-dom";
 import { User } from "../../domain/User";
-import { Avatar } from "../Avatar";
-import { truncateString } from "../../lib/stringHelpers";
 import styled from "styled-components";
+import { UserDisplay } from "../UserDisplay";
 
 interface Props {
   user: User;
@@ -15,8 +13,7 @@ export const LoggedInUserDisplay: React.FC<Props> = ({ user }) => {
   return (
     <NavLinkStyled to="/profile/settings">
       <FlexDiv>
-        <Avatar src={user.avatar} $sizeRem={2} />
-        <WideScreenOnly>{truncateString(user.name, 24)}</WideScreenOnly>
+        <UserStyled user={user} size="big" wideScreenOnlyName={true} />
       </FlexDiv>
     </NavLinkStyled>
   );
@@ -24,4 +21,9 @@ export const LoggedInUserDisplay: React.FC<Props> = ({ user }) => {
 
 const NavLinkStyled = styled(NavLink)`
   padding: 0.6rem;
+`;
+
+const UserStyled = styled(UserDisplay)`
+  justify-content: start;
+  min-width: 1rem;
 `;

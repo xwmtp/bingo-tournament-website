@@ -1,17 +1,21 @@
 import { DateTime, Duration } from "luxon";
-import { Entrant, EntrantWithResult } from "./Entrant";
+import { Entrant, EntrantWithResult, mapToEntrant } from "./Entrant";
 import { User } from "./User";
+import { Match as MatchDto } from "@xwmtp/bingo-tournament/dist/models/Match";
 
 interface BaseMatch<T extends Entrant> {
   id: string;
   entrants: T[];
   round?: string;
   restreamChannel?: string;
+  racetimeId?: string;
 }
 
 interface Scheduled {
   scheduledTime: DateTime;
 }
+
+export type Match = UnscheduledMatch | ScheduledMatch | MatchResult;
 
 export interface UnscheduledMatch extends BaseMatch<Entrant> {}
 
@@ -19,7 +23,11 @@ export interface ScheduledMatch extends BaseMatch<Entrant>, Scheduled {}
 
 export interface MatchResult extends BaseMatch<EntrantWithResult>, Scheduled {}
 
-export type Match = UnscheduledMatch | ScheduledMatch | MatchResult;
+export interface MatchToAdd {
+  entrant1: User;
+  entrant2: User;
+  round: string;
+}
 
 export const standardMatchDuration = Duration.fromObject({
   hours: 1,
@@ -73,13 +81,14 @@ export function sortByScheduledTime<T extends Scheduled>(
   });
 }
 
-export interface MatchToAdd {
-  entrant1: User;
-  entrant2: User;
-  round: string;
-}
-
-export interface NewMatchTime {
-  id: string;
-  scheduledTime: DateTime;
-}
+export const mapToMatch = (matchDto: MatchDto): Match => {
+  // todo calculate entrant ranks manually
+  return {
+    id: matchDto.id,
+    entrants: matchDto.entrants.map((entrant) => mapToEntrant(entrant, matchDto.entrants)),
+    round: matchDto.round,
+    restreamChannel: matchDto.restreamChannel,
+    racetimeId: matchDto.racetimeId,
+    scheduledTime: matchDto.scheduledTime ? DateTime.fromJSDate(matchDto.scheduledTime) : undefined,
+  };
+};

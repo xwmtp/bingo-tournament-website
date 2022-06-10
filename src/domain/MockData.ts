@@ -272,7 +272,8 @@ export const mockMatchResults: MatchResult[] = [
           twitchChannel: "https://www.twitch.tv/happyfleush",
         },
         result: {
-          status: "done",
+          resultStatus: "win",
+          hasForfeited: false,
           finishTime: 4976,
           rank: 1,
           racetimeRank: 1,
@@ -287,7 +288,8 @@ export const mockMatchResults: MatchResult[] = [
           twitchChannel: "https://www.twitch.tv/matttinthehat",
         },
         result: {
-          status: "forfeit",
+          resultStatus: "loss",
+          hasForfeited: true,
           rank: 2,
           racetimeRank: 2,
         },
@@ -309,7 +311,8 @@ export const mockMatchResults: MatchResult[] = [
           twitchChannel: "https://www.twitch.tv/xwillmarktheplace",
         },
         result: {
-          status: "done",
+          resultStatus: "win",
+          hasForfeited: false,
           finishTime: 4511,
           rank: 1,
           racetimeRank: 1,
@@ -324,10 +327,11 @@ export const mockMatchResults: MatchResult[] = [
           twitchChannel: "https://www.twitch.tv/scaramangado",
         },
         result: {
-          status: "done",
+          resultStatus: "loss",
+          hasForfeited: false,
           finishTime: 4739,
-          rank: 1,
-          racetimeRank: 1,
+          rank: 2,
+          racetimeRank: 2,
         },
       },
     ],
@@ -347,7 +351,8 @@ export const mockMatchResults: MatchResult[] = [
           twitchChannel: "https://www.twitch.tv/jenslang",
         },
         result: {
-          status: "done",
+          resultStatus: "win",
+          hasForfeited: false,
           finishTime: 4497,
           rank: 1,
           racetimeRank: 1,
@@ -362,7 +367,8 @@ export const mockMatchResults: MatchResult[] = [
           twitchChannel: "https://www.twitch.tv/jenslang",
         },
         result: {
-          status: "done",
+          resultStatus: "loss",
+          hasForfeited: false,
           finishTime: 4497,
           rank: 2,
           racetimeRank: 2,
@@ -384,7 +390,8 @@ export const mockMatchResults: MatchResult[] = [
           twitchChannel: "https://www.twitch.tv/scaramangado",
         },
         result: {
-          status: "done",
+          resultStatus: "win",
+          hasForfeited: false,
           finishTime: 4710,
           rank: 1,
           racetimeRank: 1,
@@ -400,7 +407,8 @@ export const mockMatchResults: MatchResult[] = [
           twitchChannel: "https://www.twitch.tv/jenslang",
         },
         result: {
-          status: "done",
+          resultStatus: "loss",
+          hasForfeited: false,
           finishTime: 4756,
           rank: 2,
           racetimeRank: 2,
@@ -422,13 +430,13 @@ export const mockMatchResults: MatchResult[] = [
           twitchChannel: "https://www.twitch.tv/scaramangado",
         },
         result: {
-          status: "done",
+          resultStatus: "win",
+          hasForfeited: false,
           finishTime: 4610,
           rank: 1,
           racetimeRank: 1,
         },
       },
-
       {
         user: {
           id: "rZyM4orRvRoqDJX0",
@@ -438,7 +446,8 @@ export const mockMatchResults: MatchResult[] = [
           twitchChannel: "https://www.twitch.tv/jenslang",
         },
         result: {
-          status: "done",
+          resultStatus: "loss",
+          hasForfeited: false,
           finishTime: 4766,
           rank: 2,
           racetimeRank: 2,

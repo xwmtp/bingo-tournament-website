@@ -14,6 +14,7 @@ import { ResultsPage } from "./pages/ResultsPage";
 import { Page } from "./components/Page";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import { LeaderboardPage } from "./pages/LeaderboardPage";
 
 function App() {
   const queryClient = new QueryClient({
@@ -32,7 +33,8 @@ function App() {
           <Content>
             <Page>
               <Routes>
-                <Route path={"/leaderboard"} />
+                <Route path={"/"} element={<LeaderboardPage />} />
+                <Route path={"/leaderboard"} element={<LeaderboardPage />} />
                 <Route path={"/schedule"} element={<SchedulePage />}>
                   <Route path={"addmatch"} element={<AddMatchPage />} />
                 </Route>

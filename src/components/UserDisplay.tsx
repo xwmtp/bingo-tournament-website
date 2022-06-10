@@ -4,16 +4,26 @@ import styled from "styled-components";
 import { Avatar } from "./Avatar";
 import { truncateString } from "../lib/stringHelpers";
 import { FlexDiv } from "./divs/FlexDiv";
+import { WideScreenOnly } from "./divs/WideScreenOnly";
 
 interface Props {
   user: User;
+  size?: "big" | "normal";
+  wideScreenOnlyName?: boolean;
+  className?: string;
 }
 
-export const UserDisplay: React.FC<Props> = ({ user }) => {
+export const UserDisplay: React.FC<Props> = ({ user, size, wideScreenOnlyName, className }) => {
+  const avatarSize = size === "big" ? 2.1 : 1.6;
+
+  const NameWrapper = wideScreenOnlyName ? WideScreenOnly : React.Fragment;
+
   return (
-    <UserStyled>
-      <Avatar src={user.avatar} $sizeRem={1.6} />
-      <p>{truncateString(user.name, 20)}</p>
+    <UserStyled className={className}>
+      <Avatar src={user.avatar} $sizeRem={avatarSize} />
+      <NameWrapper>
+        <Name $marginLeft={avatarSize * 0.375}>{truncateString(user.name, 20)}</Name>
+      </NameWrapper>
     </UserStyled>
   );
 };
@@ -21,4 +31,9 @@ export const UserDisplay: React.FC<Props> = ({ user }) => {
 const UserStyled = styled(FlexDiv)`
   justify-content: start;
   min-width: 13rem;
+`;
+
+const Name = styled.p<{ $marginLeft: number }>`
+  margin-left: ${({ $marginLeft }) => $marginLeft}rem;
+  font-size: 1rem;
 `;

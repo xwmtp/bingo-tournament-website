@@ -5,13 +5,13 @@ import {
   isMatchResult,
   isScheduledMatch,
   isUnscheduledMatch,
+  mapToMatch,
   Match,
   MatchToAdd,
 } from "../domain/Match";
-import { mapToEntrant } from "../domain/Entrant";
 import { DateTime } from "luxon";
 import { useQuery } from "react-query";
-import { Match as MatchDto, NewMatch as NewMatchDto } from "@xwmtp/bingo-tournament";
+import { NewMatch as NewMatchDto } from "@xwmtp/bingo-tournament";
 
 const mockAllMatches = [...mockUnscheduledMatches, ...mockScheduledMatches, ...mockMatchResults];
 
@@ -94,16 +94,5 @@ const mapToNewMatchDto = (matchToAdd: MatchToAdd): NewMatchDto => {
   return {
     entrantIds: [matchToAdd.entrant1.id, matchToAdd.entrant2.id],
     round: matchToAdd.round,
-  };
-};
-
-const mapToMatch = (matchDto: MatchDto): Match => {
-  // todo calculate entrant ranks manually
-  return {
-    id: matchDto.id,
-    entrants: matchDto.entrants.map(mapToEntrant),
-    round: matchDto.round,
-    restreamChannel: "",
-    scheduledTime: matchDto.scheduledTime ? DateTime.fromJSDate(matchDto.scheduledTime) : undefined,
   };
 };
