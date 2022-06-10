@@ -8,10 +8,10 @@ interface Props {
 
 export const UnscheduledMatches: React.FC<Props> = ({ unscheduledMatches }) => {
   return (
-    <div>
+    <>
       {unscheduledMatches.map((match) => {
         return <MatchBlock key={match.id} match={match} />;
       })}
-    </div>
+    </>
   );
 };

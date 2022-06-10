@@ -1,8 +1,7 @@
 import React from "react";
 import { MatchResult, sortByScheduledTime } from "../../../domain/Match";
 import { ResultBlock } from "./ResultBlock";
-import { FlexDiv } from "../../divs/FlexDiv";
-import styled from "styled-components";
+import { NothingToDisplay } from "../../general/NothingToDisplay";
 
 interface Props {
   results: MatchResult[];
@@ -11,9 +10,9 @@ interface Props {
 export const MatchResults: React.FC<Props> = ({ results }) => {
   if (results.length === 0) {
     return (
-      <NoResults>
+      <NothingToDisplay>
         <p>No recorded results yet.</p>
-      </NoResults>
+      </NothingToDisplay>
     );
   }
 
@@ -27,8 +26,3 @@ export const MatchResults: React.FC<Props> = ({ results }) => {
     </>
   );
 };
-
-const NoResults = styled(FlexDiv)`
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-`;

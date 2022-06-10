@@ -5,10 +5,10 @@ import { ScheduledMatches } from "../components/pages/schedule/ScheduledMatches"
 import { UnscheduledMatches } from "../components/pages/schedule/UnscheduledMatches";
 import { isFinished, isNotFinished } from "../domain/Match";
 import { useUser } from "../api/userApi";
-import { FlexDiv } from "../components/divs/FlexDiv";
 import { MatchResults } from "../components/pages/results/MatchResults";
 import { UnrecordedMatches } from "../components/pages/profile/admin/addMatches/UnrecordedMatches";
 import { useMatchResults, useScheduledMatches, useUnscheduledMatches } from "../api/matchesApi";
+import { NothingToDisplay } from "../components/general/NothingToDisplay";
 
 export const MyMatchesPage: React.FC = () => {
   const { data: user } = useUser();
@@ -36,7 +36,7 @@ export const MyMatchesPage: React.FC = () => {
   if (noMatchesToDisplay) {
     return (
       <Container size="small">
-        <NoMatches>No matches to display (yet)</NoMatches>
+        <NothingToDisplay>No matches to display (yet)</NothingToDisplay>
       </Container>
     );
   }
@@ -70,9 +70,4 @@ export const MyMatchesPage: React.FC = () => {
 const ProfilePageDiv = styled.div`
   width: 100%;
   flex-direction: column;
-`;
-
-const NoMatches = styled(FlexDiv)`
-  margin-top: 1rem;
-  margin-bottom: 1rem;
 `;

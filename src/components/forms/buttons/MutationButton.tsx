@@ -2,7 +2,7 @@ import React from "react";
 import { Button, ButtonProps } from "../Button";
 import { QueryStatus } from "react-query";
 import styled from "styled-components";
-import { Spinner } from "../Spinner";
+import { Spinner } from "../../general/Spinner";
 import { FlexDiv } from "../../divs/FlexDiv";
 
 interface Props extends ButtonProps {

@@ -3,11 +3,11 @@ import styled from "styled-components";
 import { Colors } from "../../GlobalStyle";
 
 interface Props {
-  text: string;
+  children: string;
 }
 
-export const ErrorText: React.FC<Props> = ({ text }) => {
-  return <ErrorStyled>{text}</ErrorStyled>;
+export const ErrorText: React.FC<Props> = ({ children }) => {
+  return <ErrorStyled>{children}</ErrorStyled>;
 };
 
 const ErrorStyled = styled.p`
