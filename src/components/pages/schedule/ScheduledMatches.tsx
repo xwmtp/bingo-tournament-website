@@ -1,7 +1,7 @@
 import React from "react";
-import { ScheduledMatch, sortByScheduledTime } from "../../../../domain/Match";
+import { ScheduledMatch, sortByScheduledTime } from "../../../domain/Match";
 import { DateTime } from "luxon";
-import { MatchesByDate } from "../../../MatchesByDate";
+import { MatchesByDate } from "../../MatchesByDate";
 
 interface Props {
   matches: ScheduledMatch[];

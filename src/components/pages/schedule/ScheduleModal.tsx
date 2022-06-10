@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { DateTime } from "luxon";
-import { FlexDiv } from "../../../divs/FlexDiv";
-import { DateTimeInput } from "../../../forms/DateTimeInput";
-import { Modal } from "../../../Modal";
+import { FlexDiv } from "../../divs/FlexDiv";
+import { DateTimeInput } from "../../forms/DateTimeInput";
+import { Modal } from "../../Modal";
 import { useMutation, useQueryClient } from "react-query";
-import { updateMatchTime } from "../../../../api/matchesApi";
-import { MutationButton } from "../../../forms/buttons/MutationButton";
-import { UnscheduledMatch } from "../../../../domain/Match";
+import { updateMatchTime } from "../../../api/matchesApi";
+import { MutationButton } from "../../forms/buttons/MutationButton";
+import { UnscheduledMatch } from "../../../domain/Match";
 
 interface Props {
   match: UnscheduledMatch;

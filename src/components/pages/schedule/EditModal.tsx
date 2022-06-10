@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { DateTime } from "luxon";
-import { FlexDiv } from "../../../divs/FlexDiv";
-import { DateTimeInput } from "../../../forms/DateTimeInput";
-import { Modal } from "../../../Modal";
+import { FlexDiv } from "../../divs/FlexDiv";
+import { DateTimeInput } from "../../forms/DateTimeInput";
+import { Modal } from "../../Modal";
 import { useMutation, useQueryClient } from "react-query";
-import { deleteMatches, updateMatchTime } from "../../../../api/matchesApi";
-import { ScheduledMatch } from "../../../../domain/Match";
-import { MutationButton } from "../../../forms/buttons/MutationButton";
-import { useUser } from "../../../../api/userApi";
-import { isAdmin } from "../../../../domain/User";
-import { Container } from "../../../Container";
+import { deleteMatches, updateMatchTime } from "../../../api/matchesApi";
+import { ScheduledMatch } from "../../../domain/Match";
+import { MutationButton } from "../../forms/buttons/MutationButton";
+import { useUser } from "../../../api/userApi";
+import { isAdmin } from "../../../domain/User";
+import { Container } from "../../Container";
 
 interface Props {
   match: ScheduledMatch;

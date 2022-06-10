@@ -1,8 +1,8 @@
 import React from "react";
 import { Container } from "../components/Container";
 import styled from "styled-components";
-import { ScheduledMatches } from "../components/pages/profile/schedule/ScheduledMatches";
-import { UnscheduledMatches } from "../components/pages/profile/schedule/UnscheduledMatches";
+import { ScheduledMatches } from "../components/pages/schedule/ScheduledMatches";
+import { UnscheduledMatches } from "../components/pages/schedule/UnscheduledMatches";
 import { isFinished, isNotFinished } from "../domain/Match";
 import { useUser } from "../api/userApi";
 import { FlexDiv } from "../components/divs/FlexDiv";

@@ -2,7 +2,7 @@ import React from "react";
 import { Container } from "../components/Container";
 import styled from "styled-components";
 import { AllEntrants } from "../components/pages/profile/admin/AllEntrants";
-import { UnscheduledMatches } from "../components/pages/profile/schedule/UnscheduledMatches";
+import { UnscheduledMatches } from "../components/pages/schedule/UnscheduledMatches";
 import { AddMatches } from "../components/pages/profile/admin/addMatches/AddMatches";
 import { UnrecordedMatches } from "../components/pages/profile/admin/addMatches/UnrecordedMatches";
 import { useScheduledMatches, useUnscheduledMatches } from "../api/matchesApi";

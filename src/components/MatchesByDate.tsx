@@ -1,5 +1,5 @@
 import React from "react";
-import { MatchBlock } from "./pages/profile/schedule/MatchBlock";
+import { MatchBlock } from "./pages/schedule/MatchBlock";
 import { includesEntrant, ScheduledMatch } from "../domain/Match";
 import { groupBy } from "../lib/groupBy";
 import styled from "styled-components";

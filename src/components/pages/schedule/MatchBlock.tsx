@@ -6,18 +6,18 @@ import {
   isScheduled,
   ScheduledMatch,
   UnscheduledMatch,
-} from "../../../../domain/Match";
+} from "../../../domain/Match";
 import { DateTime } from "luxon";
-import { FlexDiv, WideScreenOnlyFlexDiv } from "../../../divs/FlexDiv";
-import { Colors, ScreenWidths } from "../../../../GlobalStyle";
-import { UserDisplay } from "../../../UserDisplay";
+import { FlexDiv, WideScreenOnlyFlexDiv } from "../../divs/FlexDiv";
+import { Colors, ScreenWidths } from "../../../GlobalStyle";
+import { UserDisplay } from "../../UserDisplay";
 import { ScheduleModal } from "./ScheduleModal";
-import { TwitchButton } from "../../../forms/buttons/TwitchButton";
-import { KadgarButton } from "../../../forms/buttons/KadgarButton";
-import { ScheduleButton } from "../../../forms/buttons/ScheduleButton";
-import { EditButton } from "../../../forms/buttons/EditButton";
+import { TwitchButton } from "../../forms/buttons/TwitchButton";
+import { KadgarButton } from "../../forms/buttons/KadgarButton";
+import { ScheduleButton } from "../../forms/buttons/ScheduleButton";
+import { EditButton } from "../../forms/buttons/EditButton";
 import { EditModal } from "./EditModal";
-import { RecordButton } from "../../../forms/buttons/RecordButton";
+import { RecordButton } from "../../forms/buttons/RecordButton";
 
 interface Props {
   match: UnscheduledMatch | ScheduledMatch;

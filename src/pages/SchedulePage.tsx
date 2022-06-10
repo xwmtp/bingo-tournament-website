@@ -1,6 +1,6 @@
 import { Container } from "../components/Container";
 import React from "react";
-import { ScheduledMatches } from "../components/pages/profile/schedule/ScheduledMatches";
+import { ScheduledMatches } from "../components/pages/schedule/ScheduledMatches";
 import { useScheduledMatches } from "../api/matchesApi";
 
 export const SchedulePage: React.FC = () => {
