@@ -16,6 +16,7 @@ interface ButtonProps extends ContentProps {
 }
 
 interface DefaultButtonProps extends ButtonProps {
+  label?: string;
   onClick?: () => void;
 }
 
@@ -25,13 +26,14 @@ interface UrlButtonProps extends ButtonProps {
 
 export const IconButton: React.FC<DefaultButtonProps> = ({
   Icon,
+  label,
   color,
   text,
   onClick,
   className,
 }) => {
   return (
-    <Button color={color} onClick={onClick} className={className}>
+    <Button label={label} color={color} onClick={onClick} className={className}>
       <IconButtonContent Icon={Icon} text={text} />
     </Button>
   );

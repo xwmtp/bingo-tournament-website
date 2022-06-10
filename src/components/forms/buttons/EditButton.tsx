@@ -12,6 +12,7 @@ interface Props {
 export const EditButton: React.FC<Props> = ({ text, onClick, className }) => {
   return (
     <EditButtonStyled
+      label="Edit"
       color={"coral"}
       text={text}
       Icon={PencilIcon}

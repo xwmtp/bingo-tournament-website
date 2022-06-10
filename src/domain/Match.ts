@@ -47,14 +47,12 @@ export function includesEntrant<T extends Entrant>(match: BaseMatch<T>, id: stri
 }
 
 export function isInProgress(match: ScheduledMatch): boolean {
-  // todo: use DateTime.local()
-  const now = DateTime.local(2022, 2, 1, 6, 10, 0);
+  const now = DateTime.local();
   return match.scheduledTime < now && now < match.scheduledTime.plus(standardMatchDuration);
 }
 
 export function isFinished(match: ScheduledMatch): boolean {
-  // todo: use DateTime.local()
-  const now = DateTime.local(2022, 2, 1, 6, 10, 0);
+  const now = DateTime.local();
   return match.scheduledTime.plus(standardMatchDuration) < now;
 }
 

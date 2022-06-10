@@ -17,6 +17,7 @@ import { KadgarButton } from "../../../forms/buttons/KadgarButton";
 import { ScheduleButton } from "../../../forms/buttons/ScheduleButton";
 import { EditButton } from "../../../forms/buttons/EditButton";
 import { EditModal } from "./EditModal";
+import { RecordButton } from "../../../forms/buttons/RecordButton";
 
 interface Props {
   match: UnscheduledMatch | ScheduledMatch;
@@ -41,9 +42,14 @@ export const MatchBlock: React.FC<Props> = ({ match, editable, displayStatus }) 
             <StartTime>
               <p>{match.scheduledTime.toLocaleString(DateTime.TIME_SIMPLE)}</p>
             </StartTime>
-            {editable && (
+            {editable && !isFinished(match) && (
               <FlexDiv>
                 <EditButtonStyled onClick={() => setEditModalMatch(match)} />
+              </FlexDiv>
+            )}
+            {editable && isFinished(match) && (
+              <FlexDiv>
+                <RecordButtonStyled onClick={() => setEditModalMatch(match)} />
               </FlexDiv>
             )}
           </>
@@ -104,7 +110,7 @@ const MatchBlockContainer = styled(FlexDiv)<{
   border-radius: 0.6rem;
   padding: 0.6rem 0.8rem;
   margin-top: 0.7rem;
-  opacity: ${({ $displayAsFinished }) => ($displayAsFinished ? "20%" : "100%")};
+  opacity: ${({ $displayAsFinished }) => ($displayAsFinished ? "30%" : "100%")};
   border: ${({ $displayAsInProgress }) => ($displayAsInProgress ? "0.24rem" : "0")} solid
     ${Colors.brightMossGreen};
 `;
@@ -131,6 +137,10 @@ const StartTimeContainer = styled(FlexDiv)`
 `;
 
 const EditButtonStyled = styled(EditButton)`
+  margin-left: 0.5rem;
+`;
+
+const RecordButtonStyled = styled(RecordButton)`
   margin-left: 0.5rem;
 `;
 

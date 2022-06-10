@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { BiTrash } from "react-icons/bi";
+import { BiSave } from "react-icons/bi";
 import { IconButton } from "../IconButton";
 
 interface Props {
@@ -9,11 +9,11 @@ interface Props {
   className?: string;
 }
 
-export const DeleteButton: React.FC<Props> = ({ text, onClick, className }) => {
+export const RecordButton: React.FC<Props> = ({ text, onClick, className }) => {
   return (
-    <DeleteButtonStyled
-      label="Delete"
-      color={"coral"}
+    <RecordButtonStyled
+      label="Record"
+      color={"brightMossGreen"}
       text={text}
       Icon={PencilIcon}
       onClick={onClick}
@@ -22,10 +22,10 @@ export const DeleteButton: React.FC<Props> = ({ text, onClick, className }) => {
   );
 };
 
-const DeleteButtonStyled = styled(IconButton)`
-  flex-grow: 0;
+const RecordButtonStyled = styled(IconButton)`
+  padding: 0.3rem 0.4rem;
 `;
 
-const PencilIcon = styled(BiTrash)`
+const PencilIcon = styled(BiSave)`
   transform: scale(1.3);
 `;

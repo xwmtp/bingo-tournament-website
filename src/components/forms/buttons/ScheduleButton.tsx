@@ -12,6 +12,7 @@ interface Props {
 export const ScheduleButton: React.FC<Props> = ({ text, onClick, className }) => {
   return (
     <IconButton
+      label="Schedule"
       text={text ?? "Pick time"}
       Icon={CalendarIcon}
       onClick={onClick}

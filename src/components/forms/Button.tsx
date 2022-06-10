@@ -3,6 +3,7 @@ import React from "react";
 import { ColorName, Colors } from "../../GlobalStyle";
 
 export interface ButtonProps extends ButtonLayoutProps {
+  label?: string;
   onClick?: () => void;
   href?: string;
   className?: string;
@@ -18,6 +19,7 @@ type ButtonSize = "normal" | "big";
 
 export const Button: React.FC<ButtonProps> = ({
   disabled,
+  label,
   onClick,
   href,
   children,
@@ -31,6 +33,7 @@ export const Button: React.FC<ButtonProps> = ({
   }
   return (
     <ButtonStyled
+      title={label}
       color={color}
       size={size}
       onClick={onClick}
