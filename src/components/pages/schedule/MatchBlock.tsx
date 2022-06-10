@@ -38,12 +38,9 @@ export const MatchBlock: React.FC<Props> = ({ match, editable, displayStatus }) 
       $displayAsFinished={!!displayStatus && isScheduled(match) && isFinished(match)}
       $displayAsInProgress={!!displayStatus && isScheduled(match) && isInProgress(match)}
     >
-      <StartTimeContainer>
-        {isScheduled(match) ? (
-          <>
-            <StartTime>
-              <p>{match.scheduledTime.toLocaleString(DateTime.TIME_SIMPLE)}</p>
-            </StartTime>
+      {isScheduled(match) ? (
+        <StartTimeContainer>
+          <ActionButton>
             {editable && !isFinished(match) && (
               <FlexDiv>
                 <EditButtonStyled onClick={() => setEditModalMatch(match)} />
@@ -54,13 +51,19 @@ export const MatchBlock: React.FC<Props> = ({ match, editable, displayStatus }) 
                 <RecordButtonStyled onClick={() => setRecordModalMatch(match)} />
               </FlexDiv>
             )}
-          </>
-        ) : (
-          <FlexDiv>
-            <ScheduleButton onClick={() => setScheduleModalMatch(match)} />
-          </FlexDiv>
-        )}
-      </StartTimeContainer>
+          </ActionButton>
+
+          <StartTime>
+            <p>{match.scheduledTime.toLocaleString(DateTime.TIME_SIMPLE)}</p>
+          </StartTime>
+
+          <ActionButton />
+        </StartTimeContainer>
+      ) : (
+        <PickTimeContainer>
+          <ScheduleButton onClick={() => setScheduleModalMatch(match)} />
+        </PickTimeContainer>
+      )}
 
       <Entrants>
         {match.entrants.map((entrant) => (
@@ -118,7 +121,7 @@ const MatchBlockContainer = styled(FlexDiv)<{
   justify-content: space-between;
   background-color: ${Colors.lightGray};
   border-radius: 0.6rem;
-  padding: 0.6rem 0.8rem;
+  padding: 0.6rem 1rem;
   margin-top: 0.7rem;
   opacity: ${({ $displayAsFinished }) => ($displayAsFinished ? "30%" : "100%")};
   border: ${({ $displayAsInProgress }) => ($displayAsInProgress ? "0.24rem" : "0")} solid
@@ -138,20 +141,23 @@ const Entrants = styled.div`
 const StartTimeContainer = styled(FlexDiv)`
   justify-content: flex-start;
   min-width: 8.5rem;
-  padding-left: 2rem;
 
   @media (max-width: ${ScreenWidths.tablet}px) {
-    padding-left: 0.6rem;
     min-width: 7rem;
   }
 `;
 
-const EditButtonStyled = styled(EditButton)`
-  margin-left: 0.5rem;
+const PickTimeContainer = styled(StartTimeContainer)`
+  justify-content: flex-start;
 `;
 
-const RecordButtonStyled = styled(RecordButton)`
-  margin-left: 0.5rem;
+const EditButtonStyled = styled(EditButton)``;
+
+const RecordButtonStyled = styled(RecordButton)``;
+
+const ActionButton = styled(FlexDiv)`
+  justify-content: flex-start;
+  width: 2.4rem;
 `;
 
 const StartTime = styled(FlexDiv)`
@@ -165,7 +171,6 @@ const Round = styled(WideScreenOnlyFlexDiv)`
 
 const StreamButtonsDiv = styled(FlexDiv)`
   flex-direction: column;
-  margin: 0 0.6rem;
 `;
 
 const KadgarButtonStyled = styled(KadgarButton)`

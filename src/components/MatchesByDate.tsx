@@ -5,7 +5,6 @@ import { groupBy } from "../lib/groupBy";
 import styled from "styled-components";
 import { useUser } from "../api/userApi";
 import { isAdmin } from "../domain/User";
-import { DateTime } from "luxon";
 
 interface Props {
   scheduledMatches: ScheduledMatch[];
@@ -17,16 +16,12 @@ export const MatchesByDate: React.FC<Props> = ({ scheduledMatches, displayStatus
 
   const user = isSuccess && data;
 
-  const matchesByDate = groupBy(
-    scheduledMatches,
-    (match) =>
-      match.scheduledTime.setLocale("en-us").toLocaleString({
-        weekday: "long",
-        month: "long",
-        day: "numeric",
-      }) +
-      " - " +
-      match.scheduledTime.setLocale("en-us").toLocaleString(DateTime.TIME_SIMPLE)
+  const matchesByDate = groupBy(scheduledMatches, (match) =>
+    match.scheduledTime.setLocale("en-us").toLocaleString({
+      weekday: "long",
+      month: "long",
+      day: "numeric",
+    })
   );
 
   return (

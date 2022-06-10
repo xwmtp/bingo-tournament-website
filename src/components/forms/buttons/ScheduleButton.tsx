@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { IconButton } from "../IconButton";
 import { BiCalendar } from "react-icons/bi";
+import { IconButton } from "../IconButton";
 
 interface Props {
   text?: string;
@@ -11,7 +11,7 @@ interface Props {
 
 export const ScheduleButton: React.FC<Props> = ({ text, onClick, className }) => {
   return (
-    <IconButton
+    <ScheduleButtonStyled
       label="Schedule"
       text={text ?? "Pick time"}
       Icon={CalendarIcon}
@@ -21,6 +21,10 @@ export const ScheduleButton: React.FC<Props> = ({ text, onClick, className }) =>
     />
   );
 };
+
+const ScheduleButtonStyled = styled(IconButton)`
+  flex-grow: 0;
+`;
 
 const CalendarIcon = styled(BiCalendar)`
   transform: scale(1.2);
