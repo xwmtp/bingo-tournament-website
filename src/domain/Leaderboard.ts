@@ -30,14 +30,19 @@ const createEmptyEntry = (user: User): LeaderboardEntry => {
   };
 };
 
-export const toLeaderboardEntries = (allResults: MatchResult[]) => {
+export const toLeaderboardEntries = (allEntrantsUsers: User[], allResults: MatchResult[]) => {
   let entries: { [key: string]: LeaderboardEntry } = {};
+
+  for (const entrantUser of allEntrantsUsers) {
+    entries[entrantUser.id] = createEmptyEntry(entrantUser);
+  }
+
   for (const result of allResults) {
     for (const entrant of result.entrants) {
-      if (!(entrant.user.id in entries)) {
-        entries[entrant.user.id] = createEmptyEntry(entrant.user);
-      }
       const entry = entries[entrant.user.id];
+      if (!entry) {
+        continue;
+      }
       entry.roundsPlayed += 1;
       entry.points += RESULT_POINTS[entrant.result.resultStatus];
       entry.forfeits += entrant.result.hasForfeited ? 1 : 0;

@@ -1,23 +1,52 @@
 import { Container } from "../components/Container";
 import React from "react";
 import { toLeaderboardEntries } from "../domain/Leaderboard";
-import { mockMatchResults } from "../domain/MockData";
+import { mockAllUsers, mockMatchResults } from "../domain/MockData";
 import { UserDisplay } from "../components/UserDisplay";
 import styled from "styled-components";
 import { FlexDiv } from "../components/divs/FlexDiv";
 import { Colors } from "../GlobalStyle";
 import { useUser } from "../api/userApi";
 import { Duration } from "luxon";
+import { useAllEntrants } from "../api/entrantsApi";
+import { NothingToDisplay } from "../components/general/NothingToDisplay";
 
 export const LeaderboardPage: React.FC = () => {
   const { data: user } = useUser();
-  const entries = toLeaderboardEntries(mockMatchResults);
+  const { data: allEntrants } = useAllEntrants();
+
+  const title = "Leaderboard";
+
+  if (!allEntrants) {
+    return (
+      <Container title={title}>
+        <NothingToDisplay>
+          <p>Cannot display leaderboard.</p>
+        </NothingToDisplay>
+      </Container>
+    );
+  }
+
+  const entries = toLeaderboardEntries(mockAllUsers, mockMatchResults);
   const sortedEntries = entries.sort((a, b) => b.points - a.points);
 
+  if (entries.length === 0) {
+    return (
+      <Container title={title}>
+        <NothingToDisplay>
+          <p>No entrants to display (yet).</p>
+        </NothingToDisplay>
+      </Container>
+    );
+  }
+
   return (
-    <Container title="Leaderboard">
+    <Container title={title}>
       <LeaderboardHeader>
-        <RankAndUser />
+        <HiddenRankAndUser>
+          <Rank>0</Rank>
+          <UserDisplay size="big" user={entries[0].user} wideScreenOnlyName={true} />
+        </HiddenRankAndUser>
 
         <Number>Points</Number>
         <Time>Median</Time>
@@ -33,7 +62,7 @@ export const LeaderboardPage: React.FC = () => {
           >
             <RankAndUser>
               <Rank>{index + 1}</Rank>
-              <UserDisplay size="big" user={entry.user} />
+              <UserDisplay size="big" user={entry.user} wideScreenOnlyName={true} />
             </RankAndUser>
 
             <Number>{entry.points}</Number>
@@ -72,7 +101,10 @@ const LeaderboardEntry = styled(FlexDiv)<{
 
 const RankAndUser = styled(FlexDiv)`
   justify-content: flex-start;
-  min-width: 17rem;
+`;
+
+const HiddenRankAndUser = styled(RankAndUser)`
+  visibility: hidden;
 `;
 
 const Number = styled.p`
