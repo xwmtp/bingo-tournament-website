@@ -11,6 +11,7 @@ import { useAllEntrants } from "../api/entrantsApi";
 import { NothingToDisplay } from "../components/general/NothingToDisplay";
 import { useMatchResults } from "../api/matchesApi";
 import { Block } from "../components/Block";
+import { WideScreenOnly } from "../components/divs/WideScreenOnly";
 
 export const LeaderboardPage: React.FC = () => {
   const { data: user } = useUser();
@@ -53,7 +54,9 @@ export const LeaderboardPage: React.FC = () => {
         <Number>Points</Number>
         <Time>Median</Time>
         <Number>Rounds</Number>
-        <Number>Forfeits</Number>
+        <WideScreenOnly>
+          <Number>Forfeits</Number>
+        </WideScreenOnly>
       </LeaderboardHeader>
 
       {sortedEntries.map((entry, index) => {
@@ -74,7 +77,9 @@ export const LeaderboardPage: React.FC = () => {
                 : "--:--:--"}
             </Time>
             <Number>{entry.roundsPlayed}</Number>
-            <Number>{entry.forfeits}</Number>
+            <WideScreenOnly>
+              <Number>{entry.forfeits}</Number>
+            </WideScreenOnly>
           </LeaderboardEntry>
         );
       })}

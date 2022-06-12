@@ -24,6 +24,5 @@ const NavLinkStyled = styled(NavLink)`
 `;
 
 const UserStyled = styled(UserDisplay)`
-  justify-content: start;
   min-width: 1rem;
 `;

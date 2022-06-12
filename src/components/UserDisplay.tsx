@@ -30,10 +30,10 @@ export const UserDisplay: React.FC<Props> = ({ user, size, wideScreenOnlyName, c
 
 const UserStyled = styled(FlexDiv)`
   justify-content: start;
-  min-width: 13rem;
 `;
 
 const Name = styled.p<{ $marginLeft: number }>`
   margin-left: ${({ $marginLeft }) => $marginLeft}rem;
   font-size: 1rem;
+  min-width: 10rem;
 `;
