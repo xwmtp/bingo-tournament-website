@@ -80,11 +80,7 @@ export const MatchBlock: React.FC<Props> = ({ match, editable, displayStatus }) 
           text="Restream"
           url={match.restreamChannel && "https://www.twitch.tv/" + match.restreamChannel}
         />
-        <KadgarButtonStyled
-          url={`https://kadgar.net/live/${match.entrants
-            .map((entrant) => entrant.user.twitchChannel)
-            .join("/")}`}
-        />
+        <KadgarButtonStyled users={match.entrants.map((entrant) => entrant.user)} />
       </StreamButtonsDiv>
 
       {scheduleModalMatch && (
