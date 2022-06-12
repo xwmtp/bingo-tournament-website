@@ -69,7 +69,8 @@ const Entrants = styled.div`
 
   p {
     font-size: 1.1rem;
-    margin: 0.3rem 0;
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
   }
 `;
 

@@ -55,9 +55,10 @@ export const RecordModal: React.FC<Props> = ({ match, visible, onClose }) => {
             type="text"
             maxLength={70}
             value={racetimeInput}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              setRacetimeInput(event.target.value)
-            }
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setRacetimeInput(event.target.value);
+              updateRacetimeIdMutation.reset();
+            }}
             placeholder={`https://racetime.gg/${tournamentSettings.RACETIME_CATEGORY}/bingo-tourney-1234`}
           />
         </InputRow>
