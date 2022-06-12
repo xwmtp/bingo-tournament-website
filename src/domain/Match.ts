@@ -1,7 +1,10 @@
 import { DateTime, Duration } from "luxon";
-import { Entrant, EntrantWithResult, mapToEntrant } from "./Entrant";
+import { Entrant, EntrantWithResult, mapToEntrant, RankStatus } from "./Entrant";
 import { User } from "./User";
 import { Match as MatchDto } from "@xwmtp/bingo-tournament/dist/models/Match";
+import { MatchState } from "@xwmtp/bingo-tournament";
+import { Entrant as EntrantDto } from "@xwmtp/bingo-tournament/dist/models/Entrant";
+import { tournamentSettings } from "../TournamentSetings";
 
 interface BaseMatch<T extends Entrant> {
   id: string;
@@ -83,12 +86,71 @@ export function sortByScheduledTime<T extends Scheduled>(
 
 export const mapToMatch = (matchDto: MatchDto): Match => {
   // todo calculate entrant ranks manually
+
+  const entrantRanks =
+    matchDto.state === MatchState.Finished ? calculateRanks(matchDto.entrants) : {};
+
   return {
     id: matchDto.id,
-    entrants: matchDto.entrants.map((entrant) => mapToEntrant(entrant, matchDto.entrants)),
+    entrants: matchDto.entrants.map((entrant) =>
+      mapToEntrant(
+        entrant,
+        matchDto.entrants,
+        entrantRanks[entrant.user.id],
+        calculateRankStatus(entrant, matchDto.entrants)
+      )
+    ),
     round: matchDto.round,
     restreamChannel: matchDto.restreamChannel,
     racetimeId: matchDto.racetimeId,
     scheduledTime: matchDto.scheduledTime ? DateTime.fromJSDate(matchDto.scheduledTime) : undefined,
   };
+};
+
+const calculateRankStatus = (
+  entrantDto: EntrantDto,
+  allEntrantDtos: EntrantDto[]
+): RankStatus | undefined => {
+  const timeEntrant = entrantDto.finishTimeSeconds;
+  if (!timeEntrant) {
+    return undefined;
+  }
+  const timesOpponents = allEntrantDtos
+    .filter((entrant) => entrant.user.id !== entrantDto.user.id)
+    .map((entrant) => entrant.finishTimeSeconds);
+  if (timesOpponents.every((opponentTime) => (opponentTime ?? Number.MAX_VALUE) > timeEntrant)) {
+    return "win";
+  }
+  if (timesOpponents.some((opponentTime) => (opponentTime ?? Number.MAX_VALUE) === timeEntrant)) {
+    return "tie";
+  }
+  return "loss";
+};
+
+const calculateRanks = (allEntrantDtos: EntrantDto[]) => {
+  const ranksByEntrantId: { [key: string]: number } = {};
+  for (const entrantDto of allEntrantDtos) {
+    ranksByEntrantId[entrantDto.user.id] = 0;
+  }
+
+  const sortObjects = allEntrantDtos.map((entrantDto) => {
+    return {
+      id: entrantDto.user.id,
+      time: entrantDto.finishTimeSeconds || tournamentSettings.FORFEIT_TIME,
+    };
+  });
+
+  const sortedObjects = sortObjects.sort((a, b) => (b.time = a.time));
+
+  let rank = 1;
+  let prevObject = undefined;
+  for (const obj of sortedObjects) {
+    if (prevObject && obj.time !== prevObject.time) {
+      rank += 1;
+    }
+    ranksByEntrantId[obj.id] = rank;
+    prevObject = obj;
+  }
+
+  return ranksByEntrantId;
 };

@@ -30,7 +30,9 @@ export const getResultString = (result: EntrantResult): string => {
 
 export const mapToEntrant = (
   entrantDto: EntrantDto,
-  allEntrantDtos: EntrantDto[]
+  allEntrantDtos: EntrantDto[],
+  rank?: number,
+  rankStatus?: RankStatus
 ): Entrant | EntrantWithResult => {
   const entrant = {
     user: mapToUser(entrantDto.user),
@@ -42,9 +44,9 @@ export const mapToEntrant = (
       ...entrant,
       result: {
         hasForfeited: entrantDto.state === EntrantState.DidNotFinish,
-        resultStatus: calculateRankStatus(entrantDto, allEntrantDtos) ?? "loss",
+        resultStatus: rankStatus ?? "loss",
         racetimeRank: entrantDto.racetimePlace ?? 0,
-        rank: entrantDto.racetimePlace ?? 0,
+        rank: rank ?? 0,
         finishTime:
           entrantDto.state === EntrantState.Finished
             ? entrantDto.finishTimeSeconds ?? 0
@@ -52,24 +54,4 @@ export const mapToEntrant = (
       },
     };
   }
-};
-
-const calculateRankStatus = (
-  entrantDto: EntrantDto,
-  allEntrantDtos: EntrantDto[]
-): RankStatus | undefined => {
-  const timeEntrant = entrantDto.finishTimeSeconds;
-  if (!timeEntrant) {
-    return undefined;
-  }
-  const timesOpponents = allEntrantDtos
-    .filter((entrant) => entrant.user.id !== entrantDto.user.id)
-    .map((entrant) => entrant.finishTimeSeconds);
-  if (timesOpponents.every((opponentTime) => (opponentTime ?? Number.MAX_VALUE) > timeEntrant)) {
-    return "win";
-  }
-  if (timesOpponents.some((opponentTime) => (opponentTime ?? Number.MAX_VALUE) === timeEntrant)) {
-    return "tie";
-  }
-  return "loss";
 };
