@@ -68,7 +68,7 @@ export const RecordModal: React.FC<Props> = ({ match, visible, onClose }) => {
         {updateRacetimeIdMutation.isError && (
           <ErrorText>
             {`Could not record the race. Please confirm that the Racetime id '${racetimeId}' is
-            correct.`}
+            correct, that the race has been recorded on Racetime already, and that all entrants of the match are in the race.`}
           </ErrorText>
         )}
 
