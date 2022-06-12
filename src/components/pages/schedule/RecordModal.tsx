@@ -9,6 +9,7 @@ import { MutationButton } from "../../forms/buttons/MutationButton";
 import { Input } from "../../forms/Input";
 import { ExternalLink } from "../../general/ExternalLink";
 import { ErrorText } from "../../general/ErrorText";
+import { tournamentSettings } from "../../../TournamentSetings";
 
 interface Props {
   match: ScheduledMatch;
@@ -43,8 +44,10 @@ export const RecordModal: React.FC<Props> = ({ match, visible, onClose }) => {
       <ContainerContents>
         <p>
           Paste the url of the{" "}
-          <ExternalLink url="https://racetime.gg/oot">Racetime.gg</ExternalLink> race belonging to
-          this match to save the results.
+          <ExternalLink url={`https://racetime.gg/${tournamentSettings.RACETIME_CATEGORY}`}>
+            Racetime.gg
+          </ExternalLink>{" "}
+          race belonging to this match to save the results.
         </p>
 
         <InputRow>
@@ -55,7 +58,7 @@ export const RecordModal: React.FC<Props> = ({ match, visible, onClose }) => {
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
               setRacetimeInput(event.target.value)
             }
-            placeholder="https://racetime.gg/oot/bingo-tourney-1234"
+            placeholder={`https://racetime.gg/${tournamentSettings.RACETIME_CATEGORY}/bingo-tourney-1234`}
           />
         </InputRow>
 
@@ -83,10 +86,9 @@ export const RecordModal: React.FC<Props> = ({ match, visible, onClose }) => {
 
 const extractRacetimeId = (input: string): string | undefined => {
   const racetimeIdRegex = /[A-Za-z]+-[A-Za-z]+-\d{4}/g;
-  const gameSlug = "oot";
   const matchingStrings = input.match(racetimeIdRegex);
   if (matchingStrings && matchingStrings.length > 0) {
-    return `${gameSlug}/${matchingStrings[0]}`;
+    return `${tournamentSettings.RACETIME_CATEGORY}/${matchingStrings[0]}`;
   }
 };
 

@@ -7,6 +7,7 @@ import { UserDisplay } from "../../UserDisplay";
 import { EntrantWithResult, getResultString } from "../../../domain/Entrant";
 import { RacetimeButton } from "../../forms/buttons/RacetimeButton";
 import { TwitchButton } from "../../forms/buttons/TwitchButton";
+import { tournamentSettings } from "../../../TournamentSetings";
 
 interface Props {
   result: MatchResult;
@@ -27,7 +28,10 @@ export const ResultBlock: React.FC<Props> = ({ result }) => {
           url={result.restreamChannel && "https://www.twitch.tv/" + result.restreamChannel}
         />
 
-        <RacetimeButtonStyled text="racetime.gg" url={"https://www.racetime.gg/oot/" + result.id} />
+        <RacetimeButtonStyled
+          text="racetime.gg"
+          url={`https://www.racetime.gg/${tournamentSettings.RACETIME_CATEGORY}/${result.id}`}
+        />
       </ButtonsDiv>
     </ResultBlockContainer>
   );

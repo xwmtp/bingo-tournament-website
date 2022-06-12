@@ -45,7 +45,10 @@ export const mapToEntrant = (
         resultStatus: calculateRankStatus(entrantDto, allEntrantDtos) ?? "loss",
         racetimeRank: entrantDto.racetimePlace ?? 0,
         rank: entrantDto.racetimePlace ?? 0,
-        finishTime: entrantDto.finishTimeSeconds,
+        finishTime:
+          entrantDto.state === EntrantState.Finished
+            ? entrantDto.finishTimeSeconds ?? 0
+            : entrantDto.finishTimeSeconds,
       },
     };
   }

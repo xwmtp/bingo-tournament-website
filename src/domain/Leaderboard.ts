@@ -1,7 +1,8 @@
 import { User } from "./User";
-import { Duration } from "luxon";
 import { MatchResult } from "./Match";
 import { RankStatus } from "./Entrant";
+import { tournamentSettings } from "../TournamentSetings";
+import { calculateMedian } from "../lib/timeHelpers";
 
 const RESULT_POINTS: { [key in RankStatus]: number } = {
   win: 3,
@@ -14,16 +15,18 @@ export interface LeaderboardEntry {
   roundsPlayed: number;
   forfeits: number;
   points: number;
-  median?: Duration;
+  median?: number;
+  finishTimes: number[];
 }
 
-const createEmptyEntry = (user: User) => {
+const createEmptyEntry = (user: User): LeaderboardEntry => {
   return {
     user: user,
     roundsPlayed: 0,
     forfeits: 0,
     points: 0,
     median: undefined,
+    finishTimes: [],
   };
 };
 
@@ -39,7 +42,13 @@ export const toLeaderboardEntries = (allResults: MatchResult[]) => {
       entry.points += RESULT_POINTS[entrant.result.resultStatus];
       entry.forfeits += entrant.result.hasForfeited ? 1 : 0;
       // todo median
+      entry.finishTimes.push(
+        entrant.result.hasForfeited ? tournamentSettings.FORFEIT_TIME : entrant.result.finishTime!
+      );
     }
+  }
+  for (const entrantId in entries) {
+    entries[entrantId].median = calculateMedian(entries[entrantId].finishTimes);
   }
   return Object.values(entries);
 };
