@@ -44,7 +44,7 @@ export const ResultsPage: React.FC = () => {
           fontSize={"1rem"}
         />
       )}
-      <MatchResults results={tabMatches} />
+      <MatchResults results={tabMatches} highlightUserResult={true} />
     </Container>
   );
 };

@@ -20,6 +20,10 @@ export interface EntrantResult {
 
 export type RankStatus = "win" | "loss" | "tie";
 
+export const hasResult = (entrant: Entrant | EntrantWithResult): entrant is EntrantWithResult => {
+  return "result" in entrant && !!entrant.result;
+};
+
 export const getResultString = (result: EntrantResult): string => {
   if (result.finishTime) {
     return Duration.fromMillis(result.finishTime * 1000).toFormat("h:mm:ss");

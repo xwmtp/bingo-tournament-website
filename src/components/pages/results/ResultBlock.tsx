@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { MatchResult } from "../../../domain/Match";
+import { includesEntrant, MatchResult } from "../../../domain/Match";
 import { FlexDiv } from "../../divs/FlexDiv";
 import { Colors, ScreenWidths } from "../../../GlobalStyle";
 import { UserDisplay } from "../../UserDisplay";
@@ -8,14 +8,21 @@ import { EntrantWithResult, getResultString } from "../../../domain/Entrant";
 import { RacetimeButton } from "../../forms/buttons/RacetimeButton";
 import { TwitchButton } from "../../forms/buttons/TwitchButton";
 import { tournamentSettings } from "../../../TournamentSetings";
+import { useUser } from "../../../api/userApi";
+import { Block } from "../../Block";
 
 interface Props {
   result: MatchResult;
+  highlightUser?: boolean;
 }
 
-export const ResultBlock: React.FC<Props> = ({ result }) => {
+export const ResultBlock: React.FC<Props> = ({ result, highlightUser }) => {
+  const { data: user } = useUser();
+
   return (
-    <ResultBlockContainer>
+    <ResultBlockContainer
+      $displayAsLoggedInUser={!!highlightUser && !!user && includesEntrant(result, user.id)}
+    >
       <Entrants>
         {result.entrants.map((entrant) => (
           <ResultRow key={result.id + entrant.user.id} entrant={entrant} />
@@ -40,23 +47,22 @@ export const ResultBlock: React.FC<Props> = ({ result }) => {
 export const ResultRow: React.FC<{ entrant: EntrantWithResult }> = ({ entrant }) => {
   return (
     <EntrantResult>
-      <Rank>{`${entrant.result.rank}.`}</Rank>
-      <UserDisplay user={entrant.user} />
+      <RankAndUser>
+        <Rank>{entrant.result.rank}</Rank>
+        <UserDisplay user={entrant.user} />
+      </RankAndUser>
 
       <RaceResult>{getResultString(entrant.result)}</RaceResult>
     </EntrantResult>
   );
 };
 
-const ResultBlockContainer = styled(FlexDiv)`
+const ResultBlockContainer = styled(Block)<{
+  $displayAsLoggedInUser: boolean;
+}>`
   justify-content: space-between;
-  background-color: ${Colors.lightGray};
-  border-radius: 0.6rem;
-  padding: 0.6rem 3.6rem;
-  margin-top: 0.7rem;
-  @media (min-width: ${ScreenWidths.phone + 1}px) and (max-width: ${ScreenWidths.tablet}px) {
-    padding: 0.6rem 1.2rem;
-  }
+  background-color: ${({ $displayAsLoggedInUser }) =>
+    $displayAsLoggedInUser ? Colors.brightGrey : Colors.lightGray};
 `;
 
 const EntrantResult = styled.div`
@@ -74,10 +80,6 @@ const Entrants = styled.div`
   }
 `;
 
-const Rank = styled(FlexDiv)`
-  margin-right: 0.8rem;
-`;
-
 const RaceResult = styled(FlexDiv)`
   margin-left: 1.8rem;
   @media (max-width: ${ScreenWidths.tablet}px) {
@@ -87,7 +89,6 @@ const RaceResult = styled(FlexDiv)`
 
 const ButtonsDiv = styled(FlexDiv)`
   flex-direction: column;
-  margin: 0 0.6rem;
 `;
 
 const RacetimeButtonStyled = styled(RacetimeButton)`
@@ -97,4 +98,14 @@ const RacetimeButtonStyled = styled(RacetimeButton)`
 
 const TwitchButtonStyled = styled(TwitchButton)`
   width: 100%;
+`;
+
+const RankAndUser = styled(FlexDiv)`
+  justify-content: flex-start;
+`;
+
+const Rank = styled.p`
+  margin-right: 1.5rem;
+  text-align: center;
+  min-width: 2rem;
 `;

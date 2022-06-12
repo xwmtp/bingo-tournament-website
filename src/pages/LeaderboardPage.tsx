@@ -1,7 +1,6 @@
 import { Container } from "../components/Container";
 import React from "react";
 import { toLeaderboardEntries } from "../domain/Leaderboard";
-import { mockAllUsers, mockMatchResults } from "../domain/MockData";
 import { UserDisplay } from "../components/UserDisplay";
 import styled from "styled-components";
 import { FlexDiv } from "../components/divs/FlexDiv";
@@ -10,14 +9,17 @@ import { useUser } from "../api/userApi";
 import { Duration } from "luxon";
 import { useAllEntrants } from "../api/entrantsApi";
 import { NothingToDisplay } from "../components/general/NothingToDisplay";
+import { useMatchResults } from "../api/matchesApi";
+import { Block } from "../components/Block";
 
 export const LeaderboardPage: React.FC = () => {
   const { data: user } = useUser();
   const { data: allEntrants } = useAllEntrants();
+  const { data: matchResults } = useMatchResults();
 
   const title = "Leaderboard";
 
-  if (!allEntrants) {
+  if (!allEntrants || !matchResults) {
     return (
       <Container title={title}>
         <NothingToDisplay>
@@ -27,7 +29,7 @@ export const LeaderboardPage: React.FC = () => {
     );
   }
 
-  const entries = toLeaderboardEntries(mockAllUsers, mockMatchResults);
+  const entries = toLeaderboardEntries(allEntrants, matchResults);
   const sortedEntries = entries.sort((a, b) => b.points - a.points);
 
   if (entries.length === 0) {
@@ -80,23 +82,21 @@ export const LeaderboardPage: React.FC = () => {
   );
 };
 
-const LeaderboardHeader = styled(FlexDiv)`
+const LeaderboardHeader = styled(Block)`
   justify-content: space-between;
-  padding: 0.6rem 2rem;
+  background-color: transparent;
+  margin-top: 0;
   font-weight: bold;
+  font-size: 1rem;
 `;
 
-const LeaderboardEntry = styled(FlexDiv)<{
+const LeaderboardEntry = styled(Block)<{
   $displayAsLoggedInUser: boolean;
 }>`
   justify-content: space-between;
-  background-color: ${Colors.lightGray};
-  border-radius: 0.6rem;
-  padding: 0.6rem ${({ $displayAsLoggedInUser }) => ($displayAsLoggedInUser ? 1.76 : 2)}rem;
-  margin-top: 0.7rem;
+  background-color: ${({ $displayAsLoggedInUser }) =>
+    $displayAsLoggedInUser ? Colors.brightGrey : Colors.lightGray};
   font-size: 1.1rem;
-  border: ${({ $displayAsLoggedInUser }) => ($displayAsLoggedInUser ? "0.24rem" : "0")} solid
-    ${Colors.brightMossGreen};
 `;
 
 const RankAndUser = styled(FlexDiv)`
@@ -117,7 +117,7 @@ const Time = styled.p`
   min-width: 6rem;
 `;
 
-const Rank = styled(Number)`
+const Rank = styled.p`
   text-align: center;
   min-width: 2rem;
   margin-right: 1.5rem;

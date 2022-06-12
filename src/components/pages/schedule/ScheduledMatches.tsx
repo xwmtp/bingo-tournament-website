@@ -5,15 +5,19 @@ import { MatchesByDate } from "../../MatchesByDate";
 
 interface Props {
   matches: ScheduledMatch[];
+  displayStatusOnMatchBlocks?: boolean;
 }
 
-const now = DateTime.local(2022, 2, 1, 6, 10, 0);
-
-export const ScheduledMatches: React.FC<Props> = ({ matches }) => {
-  const relevantMatches = matches.filter((match) => match.scheduledTime > now.startOf("day"));
+export const ScheduledMatches: React.FC<Props> = ({ matches, displayStatusOnMatchBlocks }) => {
+  const relevantMatches = matches.filter(
+    (match) => match.scheduledTime > DateTime.local().startOf("day")
+  );
   const sortedRelevantMatches = sortByScheduledTime(relevantMatches);
 
   return (
-    <MatchesByDate scheduledMatches={sortedRelevantMatches} displayStatusOnMatchBlock={true} />
+    <MatchesByDate
+      scheduledMatches={sortedRelevantMatches}
+      displayStatusOnMatchBlock={displayStatusOnMatchBlocks}
+    />
   );
 };

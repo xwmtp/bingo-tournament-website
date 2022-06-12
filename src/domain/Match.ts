@@ -1,5 +1,5 @@
 import { DateTime, Duration } from "luxon";
-import { Entrant, EntrantWithResult, mapToEntrant, RankStatus } from "./Entrant";
+import { Entrant, EntrantWithResult, hasResult, mapToEntrant, RankStatus } from "./Entrant";
 import { User } from "./User";
 import { Match as MatchDto } from "@xwmtp/bingo-tournament/dist/models/Match";
 import { MatchState } from "@xwmtp/bingo-tournament";
@@ -90,15 +90,19 @@ export const mapToMatch = (matchDto: MatchDto): Match => {
   const entrantRanks =
     matchDto.state === MatchState.Finished ? calculateRanks(matchDto.entrants) : {};
 
+  const entrants = matchDto.entrants.map((entrant) =>
+    mapToEntrant(
+      entrant,
+      matchDto.entrants,
+      entrantRanks[entrant.user.id],
+      calculateRankStatus(entrant, matchDto.entrants)
+    )
+  );
+
   return {
     id: matchDto.id,
-    entrants: matchDto.entrants.map((entrant) =>
-      mapToEntrant(
-        entrant,
-        matchDto.entrants,
-        entrantRanks[entrant.user.id],
-        calculateRankStatus(entrant, matchDto.entrants)
-      )
+    entrants: [...entrants].sort((a, b) =>
+      hasResult(a) && hasResult(b) ? a.result.rank - b.result.rank : 0
     ),
     round: matchDto.round,
     restreamChannel: matchDto.restreamChannel,
@@ -140,17 +144,22 @@ const calculateRanks = (allEntrantDtos: EntrantDto[]) => {
     };
   });
 
-  const sortedObjects = sortObjects.sort((a, b) => (b.time = a.time));
+  const sortedObjects = sortObjects.sort((a, b) => a.time - b.time);
 
   let rank = 1;
   let prevObject = undefined;
   for (const obj of sortedObjects) {
+    console.log("\n prevobj " + JSON.stringify(prevObject) + " obj " + JSON.stringify(obj));
     if (prevObject && obj.time !== prevObject.time) {
       rank += 1;
+      console.log("plus 1");
     }
     ranksByEntrantId[obj.id] = rank;
+
     prevObject = obj;
   }
+
+  console.log(JSON.stringify(ranksByEntrantId, null, 1));
 
   return ranksByEntrantId;
 };

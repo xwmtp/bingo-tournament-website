@@ -8,7 +8,9 @@ export const SchedulePage: React.FC = () => {
 
   return (
     <Container title={"Schedule"}>
-      {scheduledMatches && <ScheduledMatches matches={scheduledMatches} />}
+      {scheduledMatches && (
+        <ScheduledMatches matches={scheduledMatches} displayStatusOnMatchBlocks={true} />
+      )}
     </Container>
   );
 };

@@ -57,5 +57,5 @@ const IconButtonContent: React.FC<ContentProps> = ({ Icon, text }) => {
 };
 
 const WideScreenOnlyButtonText = styled(WideScreenOnlyFlexDiv)`
-  margin-left: 0.3rem;
+  margin-left: 0.35rem;
 `;

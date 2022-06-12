@@ -5,9 +5,10 @@ import { NothingToDisplay } from "../../general/NothingToDisplay";
 
 interface Props {
   results: MatchResult[];
+  highlightUserResult?: boolean;
 }
 
-export const MatchResults: React.FC<Props> = ({ results }) => {
+export const MatchResults: React.FC<Props> = ({ results, highlightUserResult }) => {
   if (results.length === 0) {
     return (
       <NothingToDisplay>
@@ -21,7 +22,7 @@ export const MatchResults: React.FC<Props> = ({ results }) => {
   return (
     <>
       {sortedResults.map((result) => {
-        return <ResultBlock key={result.id} result={result} />;
+        return <ResultBlock key={result.id} result={result} highlightUser={highlightUserResult} />;
       })}
     </>
   );

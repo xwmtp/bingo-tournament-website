@@ -90,7 +90,6 @@ export const deleteMatches = async (matchIds: string[]): Promise<void> => {
 };
 
 const mapToNewMatchDto = (matchToAdd: MatchToAdd): NewMatchDto => {
-  // todo calculate entrant ranks manually
   return {
     entrantIds: [matchToAdd.entrant1.id, matchToAdd.entrant2.id],
     round: matchToAdd.round,

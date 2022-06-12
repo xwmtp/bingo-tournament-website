@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import {
+  includesEntrant,
   isFinished,
   isInProgress,
   isScheduled,
@@ -19,6 +20,8 @@ import { EditButton } from "../../forms/buttons/EditButton";
 import { EditModal } from "./EditModal";
 import { RecordButton } from "../../forms/buttons/RecordButton";
 import { RecordModal } from "./RecordModal";
+import { useUser } from "../../../api/userApi";
+import { Block } from "../../Block";
 
 interface Props {
   match: UnscheduledMatch | ScheduledMatch;
@@ -27,6 +30,7 @@ interface Props {
 }
 
 export const MatchBlock: React.FC<Props> = ({ match, editable, displayStatus }) => {
+  const { data: user } = useUser();
   const [scheduleModalMatch, setScheduleModalMatch] = useState<UnscheduledMatch | undefined>(
     undefined
   );
@@ -37,6 +41,7 @@ export const MatchBlock: React.FC<Props> = ({ match, editable, displayStatus }) 
     <MatchBlockContainer
       $displayAsFinished={!!displayStatus && isScheduled(match) && isFinished(match)}
       $displayAsInProgress={!!displayStatus && isScheduled(match) && isInProgress(match)}
+      $displayAsLoggedInUser={!!displayStatus && !!user && includesEntrant(match, user.id)}
     >
       {isScheduled(match) ? (
         <StartTimeContainer>
@@ -110,15 +115,13 @@ export const MatchBlock: React.FC<Props> = ({ match, editable, displayStatus }) 
   );
 };
 
-const MatchBlockContainer = styled(FlexDiv)<{
+const MatchBlockContainer = styled(Block)<{
   $displayAsFinished: boolean;
   $displayAsInProgress: boolean;
+  $displayAsLoggedInUser: boolean;
 }>`
-  justify-content: space-between;
-  background-color: ${Colors.lightGray};
-  border-radius: 0.6rem;
-  padding: 0.6rem 1rem;
-  margin-top: 0.7rem;
+  background-color: ${({ $displayAsLoggedInUser }) =>
+    $displayAsLoggedInUser ? Colors.brightGrey : Colors.lightGray};
   opacity: ${({ $displayAsFinished }) => ($displayAsFinished ? "30%" : "100%")};
   border: ${({ $displayAsInProgress }) => ($displayAsInProgress ? "0.24rem" : "0")} solid
     ${Colors.brightMossGreen};
