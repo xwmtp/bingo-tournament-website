@@ -7,7 +7,6 @@ import { UserDisplay } from "../../UserDisplay";
 import { EntrantWithResult, getResultString } from "../../../domain/Entrant";
 import { RacetimeButton } from "../../forms/buttons/RacetimeButton";
 import { TwitchButton } from "../../forms/buttons/TwitchButton";
-import { tournamentSettings } from "../../../TournamentSetings";
 import { useUser } from "../../../api/userApi";
 import { Block } from "../../Block";
 
@@ -37,7 +36,7 @@ export const ResultBlock: React.FC<Props> = ({ result, highlightUser }) => {
 
         <RacetimeButtonStyled
           text="racetime.gg"
-          url={`https://www.racetime.gg/${tournamentSettings.RACETIME_CATEGORY}/${result.id}`}
+          url={`https://www.racetime.gg/${result.racetimeId}`}
         />
       </ButtonsDiv>
     </ResultBlockContainer>
