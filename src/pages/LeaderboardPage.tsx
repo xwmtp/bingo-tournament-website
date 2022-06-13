@@ -15,10 +15,14 @@ import { WideScreenOnly } from "../components/divs/WideScreenOnly";
 
 export const LeaderboardPage: React.FC = () => {
   const { data: user } = useUser();
-  const { data: allEntrants } = useAllEntrants();
-  const { data: matchResults } = useMatchResults();
+  const { data: allEntrants, isLoading: isLoadingEntrants } = useAllEntrants();
+  const { data: matchResults, isLoading: isLoadingMatches } = useMatchResults();
 
   const title = "Leaderboard";
+
+  if (isLoadingEntrants || isLoadingMatches) {
+    return <Container title={title} />;
+  }
 
   if (!allEntrants || !matchResults) {
     return (
