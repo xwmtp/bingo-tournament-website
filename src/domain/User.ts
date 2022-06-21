@@ -9,7 +9,7 @@ export interface User {
   twitchChannel?: string;
 }
 
-export type Role = "admin" | "entrant";
+export type Role = "admin" | "entrant" | "restreamer";
 
 export const isEntrant = (user: User): boolean => {
   return user.roles.includes("entrant");

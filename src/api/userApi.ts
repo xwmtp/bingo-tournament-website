@@ -16,6 +16,7 @@ export const useUser = () => {
 };
 
 export const signUp = async () => {
+  // todo remove sleep
   await sleep(2000);
   await getApi().signUp();
 };
@@ -23,6 +24,10 @@ export const signUp = async () => {
 export const withdraw = async () => {
   await getApi().withdraw();
 };
+
+export const addRole = async () => {};
+
+export const removeRole = async () => {};
 
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));

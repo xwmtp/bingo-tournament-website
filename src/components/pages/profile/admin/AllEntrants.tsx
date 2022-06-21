@@ -20,7 +20,7 @@ export const AllEntrants: React.FC = () => {
       <p>Total entrants: {sortedEntrants.length}</p>
       <EntrantsList>
         {sortedEntrants.map((entrant) => (
-          <UserDisplay key={entrant.id} user={entrant} />
+          <UserDisplayStyled key={entrant.id} user={entrant} />
         ))}
       </EntrantsList>
     </AllEntrantsDiv>
@@ -35,5 +35,8 @@ const AllEntrantsDiv = styled.div`
 const EntrantsList = styled.div`
   display: flex;
   flex-flow: row wrap;
-  margin-top: 1.2rem;
+`;
+
+const UserDisplayStyled = styled(UserDisplay)`
+  margin-top: 0.7rem;
 `;

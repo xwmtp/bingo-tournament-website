@@ -8,6 +8,7 @@ import { UnrecordedMatches } from "../components/pages/profile/admin/addMatches/
 import { useScheduledMatches, useUnscheduledMatches } from "../api/matchesApi";
 import { useUser } from "../api/userApi";
 import { isAdmin } from "../domain/User";
+import { EditRoles } from "../components/pages/profile/admin/editRoles/EditRoles";
 
 export const AdminPage: React.FC = () => {
   const { data: user } = useUser();
@@ -35,6 +36,9 @@ export const AdminPage: React.FC = () => {
       </Container>
       <Container title={"Add new matches"} size="small">
         <AddMatches />
+      </Container>
+      <Container title={"Edit roles"} size="small">
+        <EditRoles />
       </Container>
       <Container title={"All unrecorded matches"} size="small">
         {allScheduledMatches && <UnrecordedMatches scheduledMatches={allScheduledMatches} />}
