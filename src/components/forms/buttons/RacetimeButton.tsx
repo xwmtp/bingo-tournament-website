@@ -20,7 +20,7 @@ export const RacetimeButton: React.FC<Props> = ({ text, url, className }) => {
 };
 
 const WideScreenOnlyButtonText = styled(WideScreenOnly)`
-  font-family: Roboto Slab, sans-serif;
+  font-family: Roboto Slab, serif;
   color: white;
   margin-left: 0.3rem;
 `;

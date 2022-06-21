@@ -499,7 +499,7 @@ export const mockAllUsers: User[] = [
 
 export const mockLoggedInUser: User = {
   id: "Yzk9QRd2XBoeaB0M",
-  roles: ["entrant"],
+  roles: ["entrant", "admin"],
   name: "xwillmarktheplace",
   avatar: "https://racetime.gg/media/Racetime.png",
   twitchChannel: "https://www.twitch.tv/xwillmarktheplace",

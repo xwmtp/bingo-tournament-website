@@ -46,16 +46,12 @@ export const MatchBlock: React.FC<Props> = ({ match, editable, displayStatus }) 
       {isScheduled(match) ? (
         <StartTimeContainer>
           <ActionButton>
-            {editable && !isFinished(match) && (
-              <FlexDiv>
-                <EditButtonStyled onClick={() => setEditModalMatch(match)} />
-              </FlexDiv>
-            )}
-            {editable && isFinished(match) && (
-              <FlexDiv>
+            <VerticalButtonsDiv>
+              {editable && <EditButton onClick={() => setEditModalMatch(match)} />}
+              {editable && isFinished(match) && (
                 <RecordButtonStyled onClick={() => setRecordModalMatch(match)} />
-              </FlexDiv>
-            )}
+              )}
+            </VerticalButtonsDiv>
           </ActionButton>
 
           <StartTime>
@@ -80,13 +76,13 @@ export const MatchBlock: React.FC<Props> = ({ match, editable, displayStatus }) 
         <p>{match.round}</p>
       </Round>
 
-      <StreamButtonsDiv>
+      <VerticalButtonsDiv>
         <TwitchButton
           text="Restream"
           url={match.restreamChannel && "https://www.twitch.tv/" + match.restreamChannel}
         />
         <KadgarButtonStyled users={match.entrants.map((entrant) => entrant.user)} />
-      </StreamButtonsDiv>
+      </VerticalButtonsDiv>
 
       {scheduleModalMatch && (
         <ScheduleModal
@@ -151,10 +147,6 @@ const PickTimeContainer = styled(StartTimeContainer)`
   justify-content: flex-start;
 `;
 
-const EditButtonStyled = styled(EditButton)``;
-
-const RecordButtonStyled = styled(RecordButton)``;
-
 const ActionButton = styled(FlexDiv)`
   justify-content: flex-start;
   width: 2.4rem;
@@ -169,11 +161,16 @@ const Round = styled(WideScreenOnlyFlexDiv)`
   min-width: 7.2rem;
 `;
 
-const StreamButtonsDiv = styled(FlexDiv)`
+const VerticalButtonsDiv = styled(FlexDiv)`
   flex-direction: column;
 `;
 
 const KadgarButtonStyled = styled(KadgarButton)`
+  margin-top: 0.5rem;
+  width: 100%;
+`;
+
+const RecordButtonStyled = styled(RecordButton)`
   margin-top: 0.5rem;
   width: 100%;
 `;
