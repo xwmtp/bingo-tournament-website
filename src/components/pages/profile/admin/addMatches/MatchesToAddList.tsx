@@ -22,7 +22,7 @@ export const MatchesToAddList: React.FC<Props> = ({ matchesToAdd, onRemoveMatch,
           <Match key={index}>
             {onRemoveMatch && <DeleteButtonStyled onClick={() => onRemoveMatch(index)} />}
             <UserDisplay user={matchToAdd.entrant1} />
-            <UserDisplay user={matchToAdd.entrant2} />
+            {matchToAdd.entrant2 && <UserDisplay user={matchToAdd.entrant2} />}
             <p>{matchToAdd.round}</p>
           </Match>
         );

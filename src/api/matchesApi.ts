@@ -90,8 +90,12 @@ export const deleteMatches = async (matchIds: string[]): Promise<void> => {
 };
 
 const mapToNewMatchDto = (matchToAdd: MatchToAdd): NewMatchDto => {
+  const entrantIds = [matchToAdd.entrant1.id];
+  if (matchToAdd.entrant2) {
+    entrantIds.push(matchToAdd.entrant2.id);
+  }
   return {
-    entrantIds: [matchToAdd.entrant1.id, matchToAdd.entrant2.id],
+    entrantIds: entrantIds,
     round: matchToAdd.round,
   };
 };

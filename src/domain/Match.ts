@@ -26,9 +26,10 @@ export interface ScheduledMatch extends BaseMatch<Entrant>, Scheduled {}
 
 export interface MatchResult extends BaseMatch<EntrantWithResult>, Scheduled {}
 
+// matches with 1 entrant are allowed
 export interface MatchToAdd {
   entrant1: User;
-  entrant2: User;
+  entrant2?: User;
   round: string;
 }
 

@@ -23,7 +23,7 @@ export const AddMatches: React.FC = () => {
 
   const [inputRound, setInputRound] = useState<string>("");
 
-  const validInput = !!entrant1 && !!entrant2 && !!inputRound;
+  const validInput = !!entrant1 && !!inputRound;
 
   if (isError) {
     return <p>Could not load entrants</p>;
