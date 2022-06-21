@@ -1,6 +1,6 @@
 import { Container } from "../components/Container";
 import React from "react";
-import { toLeaderboardEntries } from "../domain/Leaderboard";
+import { LeaderboardEntry, toLeaderboardEntries } from "../domain/Leaderboard";
 import { UserDisplay } from "../components/UserDisplay";
 import styled from "styled-components";
 import { FlexDiv } from "../components/divs/FlexDiv";
@@ -12,6 +12,7 @@ import { NothingToDisplay } from "../components/general/NothingToDisplay";
 import { useMatchResults } from "../api/matchesApi";
 import { Block } from "../components/Block";
 import { WideScreenOnly } from "../components/divs/WideScreenOnly";
+import { tournamentSettings } from "../TournamentSetings";
 
 export const LeaderboardPage: React.FC = () => {
   const { data: user } = useUser();
@@ -35,7 +36,7 @@ export const LeaderboardPage: React.FC = () => {
   }
 
   const entries = toLeaderboardEntries(allEntrants, matchResults);
-  const sortedEntries = entries.sort((a, b) => b.points - a.points);
+  const sortedEntries = sortLeaderboardEntries(entries);
 
   if (entries.length === 0) {
     return (
@@ -65,7 +66,7 @@ export const LeaderboardPage: React.FC = () => {
 
       {sortedEntries.map((entry, index) => {
         return (
-          <LeaderboardEntry
+          <LeaderboardEntryBlock
             key={index}
             $displayAsLoggedInUser={!!user && entry.user.id === user.id}
           >
@@ -84,11 +85,25 @@ export const LeaderboardPage: React.FC = () => {
             <WideScreenOnly>
               <Number>{entry.forfeits}</Number>
             </WideScreenOnly>
-          </LeaderboardEntry>
+          </LeaderboardEntryBlock>
         );
       })}
     </Container>
   );
+};
+
+const emptyMedian = tournamentSettings.FORFEIT_TIME;
+
+const sortLeaderboardEntries = (entries: LeaderboardEntry[]) => {
+  return [...entries].sort((a, b) => {
+    if (a.points !== b.points) {
+      return b.points - a.points;
+    }
+    if (a.median !== b.median) {
+      return (a.median ?? emptyMedian) - (b.median ?? emptyMedian);
+    }
+    return a.user.name.toLowerCase().localeCompare(b.user.name.toLowerCase());
+  });
 };
 
 const LeaderboardHeader = styled(Block)`
@@ -99,7 +114,7 @@ const LeaderboardHeader = styled(Block)`
   font-size: 1rem;
 `;
 
-const LeaderboardEntry = styled(Block)<{
+const LeaderboardEntryBlock = styled(Block)<{
   $displayAsLoggedInUser: boolean;
 }>`
   justify-content: space-between;
