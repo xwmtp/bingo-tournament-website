@@ -1,5 +1,4 @@
 import { getApi } from "./api";
-import { mockMatchResults, mockScheduledMatches, mockUnscheduledMatches } from "../domain/MockData";
 import {
   includesEntrant,
   isMatchResult,
@@ -12,17 +11,18 @@ import {
 import { DateTime } from "luxon";
 import { useQuery } from "react-query";
 import { NewMatch as NewMatchDto } from "@xwmtp/bingo-tournament";
-
-const mockAllMatches = [...mockUnscheduledMatches, ...mockScheduledMatches, ...mockMatchResults];
+import { websiteSettings } from "../Settings";
+import { mockAllMatches } from "../domain/MockData";
 
 const getAllMatches = async (): Promise<Match[]> => {
   try {
     const matchDtos = await getApi().getAllMatches();
     return matchDtos.map(mapToMatch);
   } catch (error) {
-    console.log(error);
-    console.log("Returning mock data with all matches");
-    return mockAllMatches;
+    if (websiteSettings.USE_MOCK_DATA) {
+      return mockAllMatches;
+    }
+    throw error;
   }
 };
 
@@ -81,6 +81,17 @@ export const updateMatchRacetimeId = async (updateMatch: {
   const updatedMatchDto = await getApi().updateMatch({
     matchId: updateMatch.matchId,
     updateMatch: { racetimeId: updateMatch.newRacetimeId },
+  });
+  return mapToMatch(updatedMatchDto);
+};
+
+export const updateMatchRestream = async (updateMatch: {
+  matchId: string;
+  restreamChannel: string;
+}): Promise<Match> => {
+  const updatedMatchDto = await getApi().updateMatch({
+    matchId: updateMatch.matchId,
+    updateMatch: {}, //todo{ restream: updateMatch.restreamChannel },
   });
   return mapToMatch(updatedMatchDto);
 };

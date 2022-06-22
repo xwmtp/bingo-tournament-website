@@ -499,6 +499,12 @@ export const mockAllUsers: User[] = [
   },
 ];
 
+export const mockAllMatches = [
+  ...mockUnscheduledMatches,
+  ...mockScheduledMatches,
+  ...mockMatchResults,
+];
+
 export const mockLoggedInUser: User = {
   id: "Yzk9QRd2XBoeaB0M",
   roles: [Role.Entrant, Role.Admin],

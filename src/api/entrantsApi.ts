@@ -2,6 +2,7 @@ import { mapToUser, User } from "../domain/User";
 import { getApi } from "./api";
 import { mockAllUsers } from "../domain/MockData";
 import { useQuery } from "react-query";
+import { websiteSettings } from "../Settings";
 
 const getAllEntrants = async (): Promise<User[]> => {
   try {
@@ -9,8 +10,10 @@ const getAllEntrants = async (): Promise<User[]> => {
     return entrantDtos.map(mapToUser);
   } catch (error) {
     console.log(error);
-    return mockAllUsers;
-    //throw error;
+    if (websiteSettings.USE_MOCK_DATA) {
+      return mockAllUsers;
+    }
+    throw error;
   }
 };
 

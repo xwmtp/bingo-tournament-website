@@ -8,4 +8,5 @@ export const websiteSettings = {
     "https://github.com/xwmtp/bingo2022/blob/assets/images/avatars/neutralAvatar.png?raw=true",
   LOGIN_URL: process.env.REACT_APP_LOGIN_URL,
   BACKEND_URL: process.env.REACT_APP_BACKEND_URL,
+  USE_MOCK_DATA: process.env.REACT_APP_USE_MOCK_DATA_FALLBACK,
 } as const;
