@@ -33,7 +33,7 @@ export const ResultsPage: React.FC = () => {
   if (isError) {
     return (
       <Container title={title}>
-        <NothingToDisplay>There are no results to display (yet).</NothingToDisplay>
+        <NothingToDisplay>Something went wrong while loading the results.</NothingToDisplay>
       </Container>
     );
   }

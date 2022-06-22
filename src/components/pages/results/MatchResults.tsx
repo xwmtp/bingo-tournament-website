@@ -10,11 +10,7 @@ interface Props {
 
 export const MatchResults: React.FC<Props> = ({ results, highlightUserResult }) => {
   if (results.length === 0) {
-    return (
-      <NothingToDisplay>
-        <p>No recorded results yet.</p>
-      </NothingToDisplay>
-    );
+    return <NothingToDisplay>No recorded results yet.</NothingToDisplay>;
   }
 
   const sortedResults = sortByScheduledTime(results, true);

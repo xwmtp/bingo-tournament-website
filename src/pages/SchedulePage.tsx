@@ -2,6 +2,7 @@ import { Container } from "../components/Container";
 import React from "react";
 import { useScheduledMatches } from "../api/matchesApi";
 import { NothingToDisplay } from "../components/general/NothingToDisplay";
+import { ScheduledMatches } from "../components/pages/schedule/ScheduledMatches";
 
 export const SchedulePage: React.FC = () => {
   const { data: scheduledMatches, isError } = useScheduledMatches();
@@ -26,7 +27,7 @@ export const SchedulePage: React.FC = () => {
 
   return (
     <Container title={title}>
-      <NothingToDisplay>There are no current scheduled matches.</NothingToDisplay>
+      <ScheduledMatches matches={scheduledMatches} displayStatusOnMatchBlocks={true} />
     </Container>
   );
 };
