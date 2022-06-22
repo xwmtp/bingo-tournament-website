@@ -10,11 +10,14 @@ interface Props {
 export const Logo: React.FC<Props> = ({ className }) => {
   return (
     <FlexDiv className={className}>
-      <ImageStyled
-        title="Bingo 2022"
-        alt="Bombbag logo"
-        src="https://github.com/xwmtp/bingo2022/blob/assets/images/logos/bombbag.png?raw=true"
-      />
+      <ImageContainer>
+        <ImageStyled
+          title="Bingo 2022"
+          alt="Bombbag logo"
+          src="https://github.com/xwmtp/bingo2022/blob/assets/images/logos/bombbag.png?raw=true"
+        />
+      </ImageContainer>
+
       <WideScreenOnly>
         <h3>Bingo 2022</h3>
       </WideScreenOnly>
@@ -22,7 +25,12 @@ export const Logo: React.FC<Props> = ({ className }) => {
   );
 };
 
-const ImageStyled = styled.img`
+const ImageContainer = styled(FlexDiv)`
+  width: 3rem;
   height: 3rem;
-  margin-right: 0.8rem;
+  margin-right: 0.2rem;
+`;
+
+const ImageStyled = styled.img`
+  height: 100%;
 `;
