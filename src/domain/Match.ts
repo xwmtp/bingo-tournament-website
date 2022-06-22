@@ -4,7 +4,7 @@ import { User } from "./User";
 import { Match as MatchDto } from "@xwmtp/bingo-tournament/dist/models/Match";
 import { MatchState } from "@xwmtp/bingo-tournament";
 import { Entrant as EntrantDto } from "@xwmtp/bingo-tournament/dist/models/Entrant";
-import { tournamentSettings } from "../TournamentSetings";
+import { tournamentSettings } from "../Settings";
 
 interface BaseMatch<T extends Entrant> {
   id: string;

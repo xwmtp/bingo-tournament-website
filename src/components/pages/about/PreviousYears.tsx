@@ -8,12 +8,16 @@ export const PreviousYears: React.FC = () => {
       <ImageBlockBottomMargin
         text={"2021"}
         url={"https://xwmtp.github.io/bingo2021/"}
-        image={"https://nextcloud.scaramangado.de/s/9SgC5w4szkEjsEg/preview"}
+        image={
+          "https://raw.githubusercontent.com/xwmtp/bingo2022/assets/images/previousYears/2021/background_480p.png"
+        }
       />
       <ImageBlock
         text={"2020"}
         url={"https://xwmtp.github.io/bingo2020/"}
-        image={"https://nextcloud.scaramangado.de/s/2QJMtmxoDJR55Pk/preview"}
+        image={
+          "https://raw.githubusercontent.com/xwmtp/bingo2022/assets/images/previousYears/2020/background_480p.png"
+        }
       />
     </>
   );

@@ -8,7 +8,7 @@ import { ErrorText } from "../../../general/ErrorText";
 import { NavLink } from "react-router-dom";
 import { Colors } from "../../../../GlobalStyle";
 import { ExternalLink } from "../../../general/ExternalLink";
-import { tournamentSettings } from "../../../../TournamentSetings";
+import { tournamentSettings } from "../../../../Settings";
 
 interface Props {
   visible: boolean;

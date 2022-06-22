@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Margins } from "../GlobalStyle";
 import { PreviousYears } from "../components/pages/about/PreviousYears";
 import { ExternalLink } from "../components/general/ExternalLink";
-import { tournamentSettings } from "../TournamentSetings";
+import { tournamentSettings } from "../Settings";
 import { InternalLink } from "../components/general/InternalLink";
 
 export const AboutPage: React.FC = () => {

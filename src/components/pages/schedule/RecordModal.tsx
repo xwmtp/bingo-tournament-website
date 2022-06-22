@@ -9,7 +9,7 @@ import { MutationButton } from "../../forms/buttons/MutationButton";
 import { Input } from "../../forms/Input";
 import { ExternalLink } from "../../general/ExternalLink";
 import { ErrorText } from "../../general/ErrorText";
-import { tournamentSettings } from "../../../TournamentSetings";
+import { tournamentSettings } from "../../../Settings";
 
 interface Props {
   match: ScheduledMatch;

@@ -12,7 +12,7 @@ import { NothingToDisplay } from "../components/general/NothingToDisplay";
 import { useMatchResults } from "../api/matchesApi";
 import { Block } from "../components/Block";
 import { WideScreenOnly } from "../components/divs/WideScreenOnly";
-import { tournamentSettings } from "../TournamentSetings";
+import { tournamentSettings } from "../Settings";
 
 export const LeaderboardPage: React.FC = () => {
   const { data: user } = useUser();

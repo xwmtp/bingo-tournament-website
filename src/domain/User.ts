@@ -1,11 +1,12 @@
 import { User as UserDto } from "@xwmtp/bingo-tournament/dist/models/User";
 import { Role as RoleDto } from "@xwmtp/bingo-tournament";
+import { websiteSettings } from "../Settings";
 
 export interface User {
   id: string;
   name: string;
   roles: Role[];
-  avatar?: string;
+  avatar: string;
   twitchChannel?: string;
 }
 
@@ -24,7 +25,7 @@ export const mapToUser = (userDto: UserDto): User => {
     id: userDto.id,
     name: userDto.name,
     roles: userDto.roles?.map(mapToRole) ?? [],
-    avatar: userDto.avatar,
+    avatar: userDto.avatar || websiteSettings.DEFAULT_AVATAR,
     twitchChannel: userDto.twitchChannel,
   };
 };

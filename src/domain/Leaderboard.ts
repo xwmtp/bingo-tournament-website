@@ -1,7 +1,7 @@
 import { User } from "./User";
 import { MatchResult } from "./Match";
 import { RankStatus } from "./Entrant";
-import { tournamentSettings } from "../TournamentSetings";
+import { tournamentSettings } from "../Settings";
 import { calculateMedian } from "../lib/timeHelpers";
 
 const RESULT_POINTS: { [key in RankStatus]: number } = {

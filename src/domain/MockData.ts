@@ -1,6 +1,7 @@
 import { MatchResult, ScheduledMatch, UnscheduledMatch } from "./Match";
 import { DateTime } from "luxon";
 import { User } from "./User";
+import { websiteSettings } from "../Settings";
 
 export const mockScheduledMatches: ScheduledMatch[] = [
   {
@@ -20,7 +21,7 @@ export const mockScheduledMatches: ScheduledMatch[] = [
           id: "VXY0eABdn7oLKPnz",
           roles: ["entrant"],
           name: "MatttInTheHat",
-          avatar: undefined,
+          avatar: websiteSettings.DEFAULT_AVATAR,
           twitchChannel: "https://www.twitch.tv/matttinthehat",
         },
       },
@@ -63,7 +64,7 @@ export const mockScheduledMatches: ScheduledMatch[] = [
           id: "XGzr7pBMny3kqgyE",
           roles: ["entrant"],
           name: "juwk",
-          avatar: undefined,
+          avatar: websiteSettings.DEFAULT_AVATAR,
           twitchChannel: "https://www.twitch.tv/jenslang",
         },
       },
@@ -113,7 +114,7 @@ export const mockScheduledMatches: ScheduledMatch[] = [
           id: "XGzr7pBMny3kqgyE",
           roles: ["entrant"],
           name: "juwk",
-          avatar: undefined,
+          avatar: websiteSettings.DEFAULT_AVATAR,
           twitchChannel: "https://www.twitch.tv/jenslang",
         },
       },
@@ -147,7 +148,7 @@ export const mockScheduledMatches: ScheduledMatch[] = [
           id: "XGzr7pBMny3kqgyE",
           roles: ["entrant"],
           name: "juwk",
-          avatar: undefined,
+          avatar: websiteSettings.DEFAULT_AVATAR,
           twitchChannel: "https://www.twitch.tv/jenslang",
         },
       },
@@ -176,7 +177,7 @@ export const mockUnscheduledMatches: UnscheduledMatch[] = [
           id: "VXY0eABdn7oLKPnz",
           roles: ["entrant"],
           name: "MatttInTheHat",
-          avatar: undefined,
+          avatar: websiteSettings.DEFAULT_AVATAR,
           twitchChannel: "https://www.twitch.tv/matttinthehat",
         },
       },
@@ -217,7 +218,7 @@ export const mockUnscheduledMatches: UnscheduledMatch[] = [
           id: "XGzr7pBMny3kqgyE",
           roles: ["entrant"],
           name: "juwk",
-          avatar: undefined,
+          avatar: websiteSettings.DEFAULT_AVATAR,
           twitchChannel: "https://www.twitch.tv/jenslang",
         },
       },
@@ -284,7 +285,7 @@ export const mockMatchResults: MatchResult[] = [
           id: "VXY0eABdn7oLKPnz",
           roles: ["entrant"],
           name: "MatttInTheHat",
-          avatar: undefined,
+          avatar: websiteSettings.DEFAULT_AVATAR,
           twitchChannel: "https://www.twitch.tv/matttinthehat",
         },
         result: {
@@ -347,7 +348,7 @@ export const mockMatchResults: MatchResult[] = [
           id: "XGzr7pBMny3kqgyE",
           roles: ["entrant"],
           name: "juwk",
-          avatar: undefined,
+          avatar: websiteSettings.DEFAULT_AVATAR,
           twitchChannel: "https://www.twitch.tv/jenslang",
         },
         result: {
@@ -478,7 +479,7 @@ export const mockAllUsers: User[] = [
     id: "XGzr7pBMny3kqgyE",
     roles: ["entrant"],
     name: "juwk",
-    avatar: undefined,
+    avatar: websiteSettings.DEFAULT_AVATAR,
     twitchChannel: "https://www.twitch.tv/jenslang",
   },
   {
