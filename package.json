@@ -1,16 +1,15 @@
 {
   "name": "bingo2022",
-  "homepage": "https://xwmtp.github.io/bingo2022",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "env-cmd -f .env react-scripts start",
+    "build": "env-cmd -f .env.prod react-scripts build",
+    "test": "env-cmd -f .env react-scripts test",
     "eject": "react-scripts eject",
     "pretty": "prettier --write \"src/**/*.ts\" \"src/**/*.tsx\"",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "predeploy": "env-cmd -f .env.prod npm run build",
+    "deploy": "env-cmd -f .env.prod gh-pages -d build"
   },
   "dependencies": {
     "@types/styled-react-modal": "^1.2.2",
@@ -37,6 +36,7 @@
     "@types/react-dom": "^17.0.14",
     "@types/react-router-dom": "^5.3.3",
     "@types/styled-components": "^5.1.24",
+    "env-cmd": "^10.1.0",
     "eslint": "^8.11.0",
     "gh-pages": "^4.0.0",
     "prettier": "^2.6.0"
