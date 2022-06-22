@@ -4,11 +4,12 @@ import { useAllEntrants } from "../../../../../api/entrantsApi";
 import { EntrantInputField } from "../../../../forms/EntrantInputField";
 import { UserDisplay } from "../../../../UserDisplay";
 import { FlexDiv } from "../../../../divs/FlexDiv";
-import { Role, User } from "../../../../../domain/User";
+import { User } from "../../../../../domain/User";
 import { RoleButton } from "./RoleButton";
+import { Role } from "@xwmtp/bingo-tournament";
 
-const allRoles: Role[] = ["admin", "entrant", "restreamer"];
-const editableRoles: Role[] = ["entrant", "restreamer"];
+const allRoles = Object.values(Role);
+const uneditableRoles = [Role.Admin];
 
 export const EditRoles: React.FC = () => {
   const { data: allEntrants, isError, isSuccess } = useAllEntrants();
@@ -40,7 +41,7 @@ export const EditRoles: React.FC = () => {
               key={role}
               role={role}
               userHasRole={selectedUser?.roles.includes(role)}
-              isEditable={editableRoles.includes(role)}
+              isEditable={!uneditableRoles.includes(role)}
               onClick={() => {}}
             />
           ))}

@@ -2,6 +2,7 @@ import { MatchResult, ScheduledMatch, UnscheduledMatch } from "./Match";
 import { DateTime } from "luxon";
 import { User } from "./User";
 import { websiteSettings } from "../Settings";
+import { Role } from "@xwmtp/bingo-tournament";
 
 export const mockScheduledMatches: ScheduledMatch[] = [
   {
@@ -10,7 +11,7 @@ export const mockScheduledMatches: ScheduledMatch[] = [
       {
         user: {
           id: "pRbOXG3ykOWZVKq1",
-          roles: ["entrant"],
+          roles: [Role.Entrant],
           name: "Fleush",
           avatar: "https://racetime.gg/media/noscara1.png",
           twitchChannel: "https://www.twitch.tv/happyfleush",
@@ -19,7 +20,7 @@ export const mockScheduledMatches: ScheduledMatch[] = [
       {
         user: {
           id: "VXY0eABdn7oLKPnz",
-          roles: ["entrant"],
+          roles: [Role.Entrant],
           name: "MatttInTheHat",
           avatar: websiteSettings.DEFAULT_AVATAR,
           twitchChannel: "https://www.twitch.tv/matttinthehat",
@@ -36,7 +37,7 @@ export const mockScheduledMatches: ScheduledMatch[] = [
       {
         user: {
           id: "Yzk9QRd2XBoeaB0M",
-          roles: ["entrant"],
+          roles: [Role.Entrant],
           name: "xwillmarktheplace",
           avatar: "https://racetime.gg/media/Racetime.png",
           twitchChannel: "https://www.twitch.tv/xwillmarktheplace",
@@ -45,7 +46,7 @@ export const mockScheduledMatches: ScheduledMatch[] = [
       {
         user: {
           id: "d17DexWEKg3ak64R",
-          roles: ["entrant"],
+          roles: [Role.Entrant],
           name: "scaramanga",
           avatar: "https://racetime.gg/media/feynman_small.jpeg",
           twitchChannel: "https://www.twitch.tv/scaramangado",
@@ -62,7 +63,7 @@ export const mockScheduledMatches: ScheduledMatch[] = [
       {
         user: {
           id: "XGzr7pBMny3kqgyE",
-          roles: ["entrant"],
+          roles: [Role.Entrant],
           name: "juwk",
           avatar: websiteSettings.DEFAULT_AVATAR,
           twitchChannel: "https://www.twitch.tv/jenslang",
@@ -71,7 +72,7 @@ export const mockScheduledMatches: ScheduledMatch[] = [
       {
         user: {
           id: "rZyM4orRvRoqDJX0",
-          roles: ["entrant"],
+          roles: [Role.Entrant],
           name: "jenslang",
           avatar: "https://racetime.gg/media/e0aaf3c8688abd0e58bed9d9f63de4ad.png",
           twitchChannel: "https://www.twitch.tv/jenslang",
@@ -87,7 +88,7 @@ export const mockScheduledMatches: ScheduledMatch[] = [
       {
         user: {
           id: "d17DexWEKg3ak64R",
-          roles: ["entrant"],
+          roles: [Role.Entrant],
           name: "scaramanga",
           avatar: "https://racetime.gg/media/feynman_small.jpeg",
           twitchChannel: "https://www.twitch.tv/scaramangado",
@@ -96,7 +97,7 @@ export const mockScheduledMatches: ScheduledMatch[] = [
       {
         user: {
           id: "rZyM4orRvRoqDJX0",
-          roles: ["entrant"],
+          roles: [Role.Entrant],
           name: "jenslang",
           avatar: "https://racetime.gg/media/e0aaf3c8688abd0e58bed9d9f63de4ad.png",
           twitchChannel: "https://www.twitch.tv/jenslang",
@@ -112,7 +113,7 @@ export const mockScheduledMatches: ScheduledMatch[] = [
       {
         user: {
           id: "XGzr7pBMny3kqgyE",
-          roles: ["entrant"],
+          roles: [Role.Entrant],
           name: "juwk",
           avatar: websiteSettings.DEFAULT_AVATAR,
           twitchChannel: "https://www.twitch.tv/jenslang",
@@ -121,7 +122,7 @@ export const mockScheduledMatches: ScheduledMatch[] = [
       {
         user: {
           id: "rZyM4orRvRoqDJX0",
-          roles: ["entrant"],
+          roles: [Role.Entrant],
           name: "jenslang",
           avatar: "https://racetime.gg/media/e0aaf3c8688abd0e58bed9d9f63de4ad.png",
           twitchChannel: "https://www.twitch.tv/jenslang",
@@ -137,7 +138,7 @@ export const mockScheduledMatches: ScheduledMatch[] = [
       {
         user: {
           id: "Yzk9QRd2XBoeaB0M",
-          roles: ["entrant"],
+          roles: [Role.Entrant],
           name: "xwillmarktheplace",
           avatar: "https://racetime.gg/media/Racetime.png",
           twitchChannel: "https://www.twitch.tv/xwillmarktheplace",
@@ -146,7 +147,7 @@ export const mockScheduledMatches: ScheduledMatch[] = [
       {
         user: {
           id: "XGzr7pBMny3kqgyE",
-          roles: ["entrant"],
+          roles: [Role.Entrant],
           name: "juwk",
           avatar: websiteSettings.DEFAULT_AVATAR,
           twitchChannel: "https://www.twitch.tv/jenslang",
@@ -166,7 +167,7 @@ export const mockUnscheduledMatches: UnscheduledMatch[] = [
       {
         user: {
           id: "pRbOXG3ykOWZVKq1",
-          roles: ["entrant"],
+          roles: [Role.Entrant],
           name: "Fleush",
           avatar: "https://racetime.gg/media/noscara1.png",
           twitchChannel: "https://www.twitch.tv/happyfleush",
@@ -175,7 +176,7 @@ export const mockUnscheduledMatches: UnscheduledMatch[] = [
       {
         user: {
           id: "VXY0eABdn7oLKPnz",
-          roles: ["entrant"],
+          roles: [Role.Entrant],
           name: "MatttInTheHat",
           avatar: websiteSettings.DEFAULT_AVATAR,
           twitchChannel: "https://www.twitch.tv/matttinthehat",
@@ -191,7 +192,7 @@ export const mockUnscheduledMatches: UnscheduledMatch[] = [
       {
         user: {
           id: "Yzk9QRd2XBoeaB0M",
-          roles: ["entrant"],
+          roles: [Role.Entrant],
           name: "xwillmarktheplace",
           avatar: "https://racetime.gg/media/Racetime.png",
           twitchChannel: "https://www.twitch.tv/xwillmarktheplace",
@@ -200,7 +201,7 @@ export const mockUnscheduledMatches: UnscheduledMatch[] = [
       {
         user: {
           id: "d17DexWEKg3ak64R",
-          roles: ["entrant"],
+          roles: [Role.Entrant],
           name: "scaramanga",
           avatar: "https://racetime.gg/media/feynman_small.jpeg",
           twitchChannel: "https://www.twitch.tv/scaramangado",
@@ -216,7 +217,7 @@ export const mockUnscheduledMatches: UnscheduledMatch[] = [
       {
         user: {
           id: "XGzr7pBMny3kqgyE",
-          roles: ["entrant"],
+          roles: [Role.Entrant],
           name: "juwk",
           avatar: websiteSettings.DEFAULT_AVATAR,
           twitchChannel: "https://www.twitch.tv/jenslang",
@@ -225,7 +226,7 @@ export const mockUnscheduledMatches: UnscheduledMatch[] = [
       {
         user: {
           id: "rZyM4orRvRoqDJX0",
-          roles: ["entrant"],
+          roles: [Role.Entrant],
           name: "jenslang",
           avatar: "https://racetime.gg/media/e0aaf3c8688abd0e58bed9d9f63de4ad.png",
           twitchChannel: "https://www.twitch.tv/jenslang",
@@ -240,7 +241,7 @@ export const mockUnscheduledMatches: UnscheduledMatch[] = [
       {
         user: {
           id: "d17DexWEKg3ak64R",
-          roles: ["entrant"],
+          roles: [Role.Entrant],
           name: "scaramanga",
           avatar: "https://racetime.gg/media/feynman_small.jpeg",
           twitchChannel: "https://www.twitch.tv/scaramangado",
@@ -249,7 +250,7 @@ export const mockUnscheduledMatches: UnscheduledMatch[] = [
       {
         user: {
           id: "rZyM4orRvRoqDJX0",
-          roles: ["entrant"],
+          roles: [Role.Entrant],
           name: "jenslang",
           avatar: "https://racetime.gg/media/e0aaf3c8688abd0e58bed9d9f63de4ad.png",
           twitchChannel: "https://www.twitch.tv/jenslang",
@@ -267,7 +268,7 @@ export const mockMatchResults: MatchResult[] = [
       {
         user: {
           id: "pRbOXG3ykOWZVKq1",
-          roles: ["entrant"],
+          roles: [Role.Entrant],
           name: "Fleush",
           avatar: "https://racetime.gg/media/noscara1.png",
           twitchChannel: "https://www.twitch.tv/happyfleush",
@@ -283,7 +284,7 @@ export const mockMatchResults: MatchResult[] = [
       {
         user: {
           id: "VXY0eABdn7oLKPnz",
-          roles: ["entrant"],
+          roles: [Role.Entrant],
           name: "MatttInTheHat",
           avatar: websiteSettings.DEFAULT_AVATAR,
           twitchChannel: "https://www.twitch.tv/matttinthehat",
@@ -306,7 +307,7 @@ export const mockMatchResults: MatchResult[] = [
       {
         user: {
           id: "5BRGVMd30E368Lzv",
-          roles: ["entrant"],
+          roles: [Role.Entrant],
           name: "xwillmarktheplace",
           avatar: "https://racetime.gg/media/Racetime.png",
           twitchChannel: "https://www.twitch.tv/xwillmarktheplace",
@@ -322,7 +323,7 @@ export const mockMatchResults: MatchResult[] = [
       {
         user: {
           id: "d17DexWEKg3ak64R",
-          roles: ["entrant"],
+          roles: [Role.Entrant],
           name: "scaramanga",
           avatar: "https://racetime.gg/media/feynman_small.jpeg",
           twitchChannel: "https://www.twitch.tv/scaramangado",
@@ -346,7 +347,7 @@ export const mockMatchResults: MatchResult[] = [
       {
         user: {
           id: "XGzr7pBMny3kqgyE",
-          roles: ["entrant"],
+          roles: [Role.Entrant],
           name: "juwk",
           avatar: websiteSettings.DEFAULT_AVATAR,
           twitchChannel: "https://www.twitch.tv/jenslang",
@@ -362,7 +363,7 @@ export const mockMatchResults: MatchResult[] = [
       {
         user: {
           id: "rZyM4orRvRoqDJX0",
-          roles: ["entrant"],
+          roles: [Role.Entrant],
           name: "jenslang",
           avatar: "https://racetime.gg/media/e0aaf3c8688abd0e58bed9d9f63de4ad.png",
           twitchChannel: "https://www.twitch.tv/jenslang",
@@ -385,7 +386,7 @@ export const mockMatchResults: MatchResult[] = [
       {
         user: {
           id: "d17DexWEKg3ak64R",
-          roles: ["entrant"],
+          roles: [Role.Entrant],
           name: "scaramanga",
           avatar: "https://racetime.gg/media/feynman_small.jpeg",
           twitchChannel: "https://www.twitch.tv/scaramangado",
@@ -402,7 +403,7 @@ export const mockMatchResults: MatchResult[] = [
       {
         user: {
           id: "rZyM4orRvRoqDJX0",
-          roles: ["entrant"],
+          roles: [Role.Entrant],
           name: "jenslang",
           avatar: "https://racetime.gg/media/e0aaf3c8688abd0e58bed9d9f63de4ad.png",
           twitchChannel: "https://www.twitch.tv/jenslang",
@@ -425,7 +426,7 @@ export const mockMatchResults: MatchResult[] = [
       {
         user: {
           id: "d17DexWEKg3ak64R",
-          roles: ["entrant"],
+          roles: [Role.Entrant],
           name: "scaramanga",
           avatar: "https://racetime.gg/media/feynman_small.jpeg",
           twitchChannel: "https://www.twitch.tv/scaramangado",
@@ -441,7 +442,7 @@ export const mockMatchResults: MatchResult[] = [
       {
         user: {
           id: "rZyM4orRvRoqDJX0",
-          roles: ["entrant"],
+          roles: [Role.Entrant],
           name: "jenslang",
           avatar: "https://racetime.gg/media/e0aaf3c8688abd0e58bed9d9f63de4ad.png",
           twitchChannel: "https://www.twitch.tv/jenslang",
@@ -463,35 +464,35 @@ export const mockMatchResults: MatchResult[] = [
 export const mockAllUsers: User[] = [
   {
     id: "pRbOXG3ykOWZVKq1",
-    roles: ["entrant"],
+    roles: [Role.Entrant],
     name: "Fleush",
     avatar: "https://racetime.gg/media/noscara1.png",
     twitchChannel: "https://www.twitch.tv/happyfleush",
   },
   {
     id: "wdm1LPWjGABEnVx6",
-    roles: ["entrant"],
+    roles: [Role.Entrant],
     name: "scaramanga",
     avatar: "https://racetime.gg/media/feynman_small.jpeg",
     twitchChannel: "https://www.twitch.tv/scaramangado",
   },
   {
     id: "XGzr7pBMny3kqgyE",
-    roles: ["entrant"],
+    roles: [Role.Entrant],
     name: "juwk",
     avatar: websiteSettings.DEFAULT_AVATAR,
     twitchChannel: "https://www.twitch.tv/jenslang",
   },
   {
     id: "Yzk9QRd2XBoeaB0M",
-    roles: ["entrant", "admin"],
+    roles: [Role.Entrant, Role.Admin],
     name: "xwillmarktheplace",
     avatar: "https://racetime.gg/media/Racetime.png",
     twitchChannel: "https://www.twitch.tv/xwillmarktheplace",
   },
   {
     id: "rZyM4orRvRoqDJX0",
-    roles: ["entrant"],
+    roles: [Role.Entrant],
     name: "jenslang",
     avatar: "https://racetime.gg/media/e0aaf3c8688abd0e58bed9d9f63de4ad.png",
     twitchChannel: "https://www.twitch.tv/jenslang",
@@ -500,7 +501,7 @@ export const mockAllUsers: User[] = [
 
 export const mockLoggedInUser: User = {
   id: "Yzk9QRd2XBoeaB0M",
-  roles: ["entrant", "admin"],
+  roles: [Role.Entrant, Role.Admin],
   name: "xwillmarktheplace",
   avatar: "https://racetime.gg/media/Racetime.png",
   twitchChannel: "https://www.twitch.tv/xwillmarktheplace",
