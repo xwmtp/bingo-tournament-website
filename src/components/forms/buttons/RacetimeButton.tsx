@@ -13,7 +13,13 @@ interface Props {
 
 export const RacetimeButton: React.FC<Props> = ({ text, url, sameTab, className }) => {
   return (
-    <UrlButton color={"racetimeDarkGrey"} url={url} sameTab={sameTab} className={className}>
+    <UrlButton
+      disabled={!url}
+      color={"racetimeDarkGrey"}
+      url={url}
+      sameTab={sameTab}
+      className={className}
+    >
       <RacetimeLogo />
       {text && <WideScreenOnlyButtonText>{text}</WideScreenOnlyButtonText>}
     </UrlButton>
