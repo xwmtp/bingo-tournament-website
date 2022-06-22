@@ -89,6 +89,7 @@ export const updateMatchRestream = async (updateMatch: {
   matchId: string;
   restreamChannel: string;
 }): Promise<Match> => {
+  throw Error("not implemented");
   const updatedMatchDto = await getApi().updateMatch({
     matchId: updateMatch.matchId,
     updateMatch: {}, //todo{ restream: updateMatch.restreamChannel },

@@ -4,7 +4,6 @@ import { useQuery } from "react-query";
 
 const getUser = async (): Promise<User | undefined> => {
   try {
-    console.log(JSON.stringify(document.cookie));
     const userDto = await getApi().getUser();
     return mapToUser(userDto);
   } catch (error) {
