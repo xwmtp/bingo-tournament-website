@@ -1,7 +1,6 @@
 - Add restream to matches
 - Admin: add custom match results (without racetime)
 - Check everything on smaller screen / mobile
-- Invalidate matches/results after signing up for the lb
 
 Checks
 - Check todos

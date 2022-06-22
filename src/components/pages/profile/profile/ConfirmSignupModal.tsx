@@ -20,6 +20,7 @@ export const ConfirmSignupModal: React.FC<Props> = ({ visible, onClose }) => {
   const signUpMutation = useMutation(signUp, {
     onSuccess: () => {
       queryClient.invalidateQueries("user");
+      queryClient.invalidateQueries("allEntrants");
     },
   });
 
