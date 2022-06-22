@@ -1,5 +1,5 @@
 import React from "react";
-import { HashRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Header } from "./components/header/Header";
 import { SchedulePage } from "./pages/SchedulePage";
 import { Content } from "./components/Content";
@@ -27,7 +27,7 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <HashRouter basename={"/"}>
+      <BrowserRouter basename={"/"}>
         <ModalProvider>
           <Header />
           <Content>
@@ -49,7 +49,7 @@ function App() {
             </Page>
           </Content>
         </ModalProvider>
-      </HashRouter>
+      </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );

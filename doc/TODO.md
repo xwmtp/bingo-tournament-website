@@ -6,6 +6,7 @@
 Checks
 - Check todos
 - Remove extra logs
+- Remove mock data
 - Check what is displayed in case of error / no data
 - Check Query settings, like staletime
 
