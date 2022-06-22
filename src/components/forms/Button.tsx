@@ -6,6 +6,7 @@ export interface ButtonProps extends ButtonLayoutProps {
   label?: string;
   onClick?: () => void;
   href?: string;
+  sameTab?: boolean;
   className?: string;
 }
 
@@ -22,6 +23,7 @@ export const Button: React.FC<ButtonProps> = ({
   label,
   onClick,
   href,
+  sameTab,
   children,
   className,
   color,
@@ -38,7 +40,7 @@ export const Button: React.FC<ButtonProps> = ({
       size={size}
       onClick={onClick}
       href={href}
-      target={"_blank"}
+      target={sameTab ? undefined : "_blank"}
       className={className}
     >
       {children}

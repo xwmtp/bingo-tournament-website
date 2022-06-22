@@ -7,12 +7,13 @@ import { WideScreenOnly } from "../../divs/WideScreenOnly";
 interface Props {
   text?: string;
   url?: string;
+  sameTab?: boolean;
   className?: string;
 }
 
-export const RacetimeButton: React.FC<Props> = ({ text, url, className }) => {
+export const RacetimeButton: React.FC<Props> = ({ text, url, sameTab, className }) => {
   return (
-    <UrlButton color={"racetimeDarkGrey"} url={url} className={className}>
+    <UrlButton color={"racetimeDarkGrey"} url={url} sameTab={sameTab} className={className}>
       <RacetimeLogo />
       {text && <WideScreenOnlyButtonText>{text}</WideScreenOnlyButtonText>}
     </UrlButton>
