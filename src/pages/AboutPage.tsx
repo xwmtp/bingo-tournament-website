@@ -24,10 +24,10 @@ export const AboutPage: React.FC = () => {
             <ListItem>
               This is a regular{" "}
               <ExternalLink url="https://ootbingo.github.io/bingo/latest-version.html">
-                Bingo tournament
-              </ExternalLink>
-              , played on the latest version (currently <strong>v10.1</strong>). Note that the
-              version may be updated between rounds, but never while a round is in progress.
+                Bingo
+              </ExternalLink>{" "}
+              tournament, played on the latest version (currently <strong>v10.1</strong>). Note that
+              the version may be updated between rounds, but never while a round is in progress.
             </ListItem>
             <ListItem>
               The tournament consists of two phases: a swiss-round phase followed by a
