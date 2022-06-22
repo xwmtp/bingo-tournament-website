@@ -117,7 +117,7 @@ const MatchBlockContainer = styled(Block)<{
   $displayAsLoggedInUser: boolean;
 }>`
   background-color: ${({ $displayAsLoggedInUser }) =>
-    $displayAsLoggedInUser ? Colors.brightGrey : Colors.lightGray};
+    $displayAsLoggedInUser ? Colors.brightGrey : Colors.lightGrey};
   opacity: ${({ $displayAsFinished }) => ($displayAsFinished ? "30%" : "100%")};
   border: ${({ $displayAsInProgress }) => ($displayAsInProgress ? "0.24rem" : "0")} solid
     ${Colors.brightMossGreen};

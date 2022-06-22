@@ -12,7 +12,7 @@ export const Input: React.FC<Props> = (props) => {
 const InputStyled = styled.input`
   padding: 0.8rem;
   border-radius: 0.6rem;
-  border: 0.18rem solid ${Colors.lightGray};
+  border: 0.18rem solid ${Colors.lightGrey};
   background-color: white;
   box-shadow: none;
   font-size: 1.1rem;

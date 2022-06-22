@@ -73,7 +73,7 @@ export const EditModal: React.FC<Props> = ({ match, visible, onClose }) => {
         />
 
         {!!user && isAdmin(user) && (
-          <AdminOnlyDiv title="Admin only" size="small" backgroundColor="lightGray">
+          <AdminOnlyDiv title="Admin only" size="small" backgroundColor="lightGrey">
             <p>Click the button to completely remove this match from the database.</p>
 
             <DeleteMatchButton

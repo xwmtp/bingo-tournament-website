@@ -17,7 +17,7 @@ export const RoleButton: React.FC<Props> = ({
   onClick,
   className,
 }) => {
-  const color = userHasRole ? "brightMossGreen" : "lightGray";
+  const color = userHasRole ? "brightMossGreen" : "lightGrey";
   return (
     <RoleButtonStyled color={color} disabled={!isEditable} className={className}>
       <p>

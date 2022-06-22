@@ -119,7 +119,7 @@ const LeaderboardEntryBlock = styled(Block)<{
 }>`
   justify-content: space-between;
   background-color: ${({ $displayAsLoggedInUser }) =>
-    $displayAsLoggedInUser ? Colors.brightGrey : Colors.lightGray};
+    $displayAsLoggedInUser ? Colors.brightGrey : Colors.lightGrey};
   font-size: 1.1rem;
 `;
 

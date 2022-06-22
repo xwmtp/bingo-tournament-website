@@ -61,7 +61,7 @@ const ResultBlockContainer = styled(Block)<{
 }>`
   justify-content: space-between;
   background-color: ${({ $displayAsLoggedInUser }) =>
-    $displayAsLoggedInUser ? Colors.brightGrey : Colors.lightGray};
+    $displayAsLoggedInUser ? Colors.brightGrey : Colors.lightGrey};
 `;
 
 const EntrantResult = styled.div`

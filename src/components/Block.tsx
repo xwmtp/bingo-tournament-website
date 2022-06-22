@@ -14,7 +14,7 @@ export const Block: React.FC<Props> = ({ children, className }) => {
 
 const BlockStyled = styled(FlexDiv)`
   justify-content: space-between;
-  background-color: ${Colors.lightGray};
+  background-color: ${Colors.lightGrey};
   border-radius: 0.6rem;
   padding: 0.6rem 2rem;
   margin-top: 0.7rem;

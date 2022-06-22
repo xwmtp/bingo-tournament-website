@@ -6,7 +6,7 @@ export const Colors = {
   brighterMossGreen: "#9acbb9",
   darkGrey: "#3A4040",
   mediumGrey: "#454B4B",
-  lightGray: "#535959",
+  lightGrey: "#535959",
   brightGrey: "#626868",
   boxShadowGrey: "#383d3c",
   racetimeDarkGrey: "#3A4040",
@@ -80,7 +80,7 @@ export const GlobalStyle = createGlobalStyle`
     box-shadow: none;
 
     ::placeholder {
-      color: ${Colors.lightGray};
+      color: ${Colors.lightGrey};
       opacity: 1;
     }
   }
