@@ -6,6 +6,7 @@ Checks
 - Check todos
 - Remove extra logs
 - Check what is displayed in case of error / no data
+- Check Query settings, like staletime
 
 Nice to have
 - Alert bar when there is a match to record

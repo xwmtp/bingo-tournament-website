@@ -8,11 +8,14 @@ import { onlyUnique } from "../lib/onlyUnique";
 import { capitalize } from "../lib/stringHelpers";
 import { useMatchResults } from "../api/matchesApi";
 import { MatchResult, sortByScheduledTime } from "../domain/Match";
+import { NothingToDisplay } from "../components/general/NothingToDisplay";
 
 export const ResultsPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string | undefined>(undefined);
 
-  const { data: matchResults, isSuccess } = useMatchResults();
+  const { data: matchResults, isSuccess, isError } = useMatchResults();
+
+  const title = "Results";
 
   const uniqueRounds = useMemo(
     () => (matchResults ? getUniqueRounds(matchResults) : []),
@@ -27,15 +30,23 @@ export const ResultsPage: React.FC = () => {
     }
   }, [activeTab, matchResults, uniqueRounds]);
 
+  if (isError) {
+    return (
+      <Container title={title}>
+        <NothingToDisplay>There are no results to display (yet).</NothingToDisplay>
+      </Container>
+    );
+  }
+
   if (!isSuccess) {
-    return <></>;
+    return <Container title={title} />;
   }
 
   const tabMatches = matchResults.filter((result) => result.round === activeTab);
   const showTabSelector = activeTab && uniqueRounds.length > 1;
 
   return (
-    <Container title={"Results"}>
+    <Container title={title}>
       {showTabSelector && (
         <TabSelectorStyled
           activeTab={activeTab}

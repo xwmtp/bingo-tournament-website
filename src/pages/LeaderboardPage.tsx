@@ -29,7 +29,7 @@ export const LeaderboardPage: React.FC = () => {
     return (
       <Container title={title}>
         <NothingToDisplay>
-          <p>Cannot display leaderboard.</p>
+          <p>An error occurred while loading the data.</p>
         </NothingToDisplay>
       </Container>
     );
