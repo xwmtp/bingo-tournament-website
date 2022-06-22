@@ -1,7 +1,11 @@
 - Add restream to matches
 - Admin: add custom match results (without racetime)
 - Check everything on smaller screen / mobile
-- Dheck todos
+
+Checks
+- Check todos
+- Remove extra logs
+- Check what is displayed in case of error / no data
 
 Nice to have
 - Alert bar when there is a match to record
