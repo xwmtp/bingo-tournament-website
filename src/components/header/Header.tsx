@@ -6,12 +6,16 @@ import { FlexDiv } from "../divs/FlexDiv";
 import { LoginButton } from "./LoginButton";
 import React from "react";
 import { useUser } from "../../api/userApi";
+import { Logo } from "./Logo";
 
 export const Header: React.FC = () => {
   return (
     <HeaderStyled>
       <HeaderContent>
-        <Nav />
+        <FlexDiv>
+          <LogoStyled />
+          <Nav />
+        </FlexDiv>
         <LoginOrUser />
       </HeaderContent>
     </HeaderStyled>
@@ -40,4 +44,9 @@ const HeaderStyled = styled(FlexDiv)`
 const HeaderContent = styled(FlexDiv)`
   width: 1200px;
   justify-content: space-between;
+  padding: 0 1rem;
+`;
+
+const LogoStyled = styled(Logo)`
+  margin-right: 2rem;
 `;

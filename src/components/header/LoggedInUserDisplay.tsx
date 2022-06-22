@@ -13,7 +13,7 @@ export const LoggedInUserDisplay: React.FC<Props> = ({ user }) => {
   return (
     <NavLinkStyled to="/profile/settings">
       <FlexDiv>
-        <UserStyled user={user} size="big" wideScreenOnlyName={true} />
+        <UserStyled user={user} size="big" wideScreenOnlyName={true} removeNamePadding={true} />
       </FlexDiv>
     </NavLinkStyled>
   );

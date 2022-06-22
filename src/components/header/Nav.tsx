@@ -5,7 +5,7 @@ import React from "react";
 export const Nav: React.FC = () => {
   return (
     <Navigation>
-      <Link to="/leaderboard">Leaderboard</Link>
+      <Link to="/">Leaderboard</Link>
       <Link to="/schedule">Schedule</Link>
       <Link to="/results">Results</Link>
       <Link to="/about">About</Link>

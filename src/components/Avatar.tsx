@@ -1,13 +1,21 @@
 import React from "react";
 import styled from "styled-components";
+import { User } from "../domain/User";
 
 interface Props {
-  src?: string;
+  user: User;
   $sizeRem?: number;
 }
 
-export const Avatar: React.FC<Props> = ({ src, $sizeRem }) => {
-  return <AvatarStyled src={src} $size={$sizeRem || 1.6} />;
+export const Avatar: React.FC<Props> = ({ user, $sizeRem }) => {
+  return (
+    <AvatarStyled
+      title={user.name}
+      alt={`${user.name}'s avatar`}
+      src={user.avatar}
+      $size={$sizeRem || 1.6}
+    />
+  );
 };
 
 const AvatarStyled = styled.img<{ $size: number }>`

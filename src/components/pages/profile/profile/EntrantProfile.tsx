@@ -19,7 +19,7 @@ export const EntrantProfile: React.FC<Props> = ({ user }) => {
     <Container>
       <Profile>
         <UserDiv>
-          <Avatar src={user.avatar} $sizeRem={5} />
+          <Avatar user={user} $sizeRem={5} />
 
           <NameAndRole>
             <h2>{user.name}</h2>
