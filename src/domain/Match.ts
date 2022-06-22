@@ -150,17 +150,13 @@ const calculateRanks = (allEntrantDtos: EntrantDto[]) => {
   let rank = 1;
   let prevObject = undefined;
   for (const obj of sortedObjects) {
-    console.log("\n prevobj " + JSON.stringify(prevObject) + " obj " + JSON.stringify(obj));
     if (prevObject && obj.time !== prevObject.time) {
       rank += 1;
-      console.log("plus 1");
     }
     ranksByEntrantId[obj.id] = rank;
 
     prevObject = obj;
   }
-
-  console.log(JSON.stringify(ranksByEntrantId, null, 1));
 
   return ranksByEntrantId;
 };
