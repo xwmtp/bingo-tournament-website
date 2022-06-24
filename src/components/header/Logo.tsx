@@ -19,16 +19,16 @@ export const Logo: React.FC<Props> = ({ className }) => {
       </ImageContainer>
 
       <WideScreenOnly>
-        <h3>Bingo 2022</h3>
+        <h3>2022</h3>
       </WideScreenOnly>
     </FlexDiv>
   );
 };
 
 const ImageContainer = styled(FlexDiv)`
-  width: 3rem;
-  height: 3rem;
-  margin-right: 0.2rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-right: 0.3rem;
 `;
 
 const ImageStyled = styled.img`

@@ -53,11 +53,13 @@ export const LeaderboardPage: React.FC = () => {
       <LeaderboardHeader>
         <HiddenRankAndUser>
           <Rank>0</Rank>
-          <UserDisplay size="big" user={entries[0].user} wideScreenOnlyName={true} />
+          <UserDisplay size="big" user={entries[0].user} />
         </HiddenRankAndUser>
 
         <Number>Points</Number>
-        <Time>Median</Time>
+        <WideScreenOnly>
+          <Time>Median</Time>
+        </WideScreenOnly>
         <Number>Rounds</Number>
         <WideScreenOnly>
           <Number>Forfeits</Number>
@@ -72,16 +74,21 @@ export const LeaderboardPage: React.FC = () => {
           >
             <RankAndUser>
               <Rank>{index + 1}</Rank>
-              <UserDisplay size="big" user={entry.user} wideScreenOnlyName={true} />
+              <UserDisplay size="big" user={entry.user} />
             </RankAndUser>
 
             <Number>{entry.points}</Number>
-            <Time>
-              {entry.median
-                ? Duration.fromObject({ seconds: entry.median }).toFormat("hh:mm:ss")
-                : "--:--:--"}
-            </Time>
+
+            <WideScreenOnly>
+              <Time>
+                {entry.median
+                  ? Duration.fromObject({ seconds: entry.median }).toFormat("hh:mm:ss")
+                  : "--:--:--"}
+              </Time>
+            </WideScreenOnly>
+
             <Number>{entry.roundsPlayed}</Number>
+
             <WideScreenOnly>
               <Number>{entry.forfeits}</Number>
             </WideScreenOnly>

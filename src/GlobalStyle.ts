@@ -40,9 +40,9 @@ export const GlobalStyle = createGlobalStyle`
   html {
     height: 100%;
     overflow-y: scroll;
-    font-size: 100%;
+    font-size: 95%;
     @media (max-width: ${ScreenWidths.phone}px) {
-      font-size: 55%;
+      font-size: 60%;
     }
   }
 
@@ -83,6 +83,19 @@ export const GlobalStyle = createGlobalStyle`
       color: ${Colors.lightGrey};
       opacity: 1;
     }
+  }
+
+
+  h1 {
+    font-size: 1.4rem;
+  }
+
+  h2 {
+    font-size: 1.35rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
   }
 
   h4 {

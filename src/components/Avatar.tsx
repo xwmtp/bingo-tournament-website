@@ -4,16 +4,18 @@ import { User } from "../domain/User";
 
 interface Props {
   user: User;
-  $sizeRem?: number;
+  sizeRem?: number;
+  className?: string;
 }
 
-export const Avatar: React.FC<Props> = ({ user, $sizeRem }) => {
+export const Avatar: React.FC<Props> = ({ user, className, sizeRem }) => {
   return (
     <AvatarStyled
       title={user.name}
       alt={`${user.name}'s avatar`}
       src={user.avatar}
-      $size={$sizeRem || 1.6}
+      className={className}
+      $size={sizeRem || 1.6}
     />
   );
 };

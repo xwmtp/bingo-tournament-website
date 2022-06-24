@@ -8,12 +8,9 @@ import { tournamentSettings } from "../Settings";
 import { InternalLink } from "../components/general/InternalLink";
 
 export const AboutPage: React.FC = () => {
-  //const aboutWidth = 700 - Math.round(Margins.container / 2);
-  //const previousYearsWidth = 1000 - aboutWidth - Margins.container;
-
   return (
     <AboutPageDiv>
-      <Container title={"About"} width={"70%"}>
+      <Container title={"Bingo Tournament 2022"} width={"70%"}>
         <AboutContent>
           <p> Welcome to the 2022 Ocarina of Time Bingo Tournament!</p>
           <br />

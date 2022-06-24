@@ -19,17 +19,17 @@ const Link: React.FC<{ to: string; $fontSize?: string }> = ({ to, children }) =>
 
   return (
     <LinkStyled to={to} $isActive={!!match}>
-      {children}
+      <h4> {children}</h4>
     </LinkStyled>
   );
 };
 
 const Navigation = styled.nav`
+  display: flex;
   flex-direction: row;
 `;
 
 const LinkStyled = styled(NavLink)<{ $isActive: boolean }>`
   padding: 0.6rem;
-  font-size: 1.3rem;
   text-decoration: ${({ $isActive }) => ($isActive ? "underline" : "none")};
 `;

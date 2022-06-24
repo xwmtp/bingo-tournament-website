@@ -1,12 +1,15 @@
 import { getApi } from "./api";
 import { mapToUser, User } from "../domain/User";
 import { useQuery } from "react-query";
+import { mockLoggedInUser } from "../domain/MockData";
 
 const getUser = async (): Promise<User | undefined> => {
   try {
     const userDto = await getApi().getUser();
     return mapToUser(userDto);
   } catch (error) {
+    // todo remove
+    return mockLoggedInUser;
     console.log("No logged in user found");
   }
 };
