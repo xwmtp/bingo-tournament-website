@@ -11,7 +11,12 @@ interface Props extends ModalProps {
 
 export const Modal: React.FC<Props> = (props) => {
   return (
-    <ModalStyled {...props} onBackgroundClick={props.onClose} onEscapeKeydown={props.onClose}>
+    <ModalStyled
+      {...props}
+      allowScroll={true}
+      onBackgroundClick={props.onClose}
+      onEscapeKeydown={props.onClose}
+    >
       <ContainerStyled title={props.title} size="small" width={"700px"}>
         {props.children}
       </ContainerStyled>

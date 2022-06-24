@@ -13,6 +13,7 @@ export const Colors = {
   racetimeLightGrey: "#a7babb",
   racetimeGreen: "#26DB9AFF",
   twitchPurple: "#9146FF",
+  brightTwitchPurple: "#9c79da",
   coral: "#a15f4f",
   brightCoral: "#ef8b73",
   jeansBlue: "#5483af",

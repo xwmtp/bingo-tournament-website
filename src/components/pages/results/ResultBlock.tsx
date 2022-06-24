@@ -6,9 +6,9 @@ import { Colors, ScreenWidths } from "../../../GlobalStyle";
 import { UserDisplay } from "../../UserDisplay";
 import { EntrantWithResult, getResultString } from "../../../domain/Entrant";
 import { RacetimeButton } from "../../forms/buttons/RacetimeButton";
-import { TwitchButton } from "../../forms/buttons/TwitchButton";
 import { useUser } from "../../../api/userApi";
 import { Block } from "../../Block";
+import { RestreamButton } from "../../forms/buttons/RestreamButton";
 
 interface Props {
   result: MatchResult;
@@ -29,10 +29,7 @@ export const ResultBlock: React.FC<Props> = ({ result, highlightUser }) => {
       </Entrants>
 
       <ButtonsDiv>
-        <TwitchButtonStyled
-          text="Restream"
-          url={result.restreamChannel && "https://www.twitch.tv/" + result.restreamChannel}
-        />
+        <RestreamButtonStyled restreamChannel={result.restreamChannel} />
 
         <RacetimeButtonStyled
           text="racetime.gg"
@@ -95,7 +92,7 @@ const RacetimeButtonStyled = styled(RacetimeButton)`
   width: 100%;
 `;
 
-const TwitchButtonStyled = styled(TwitchButton)`
+const RestreamButtonStyled = styled(RestreamButton)`
   width: 100%;
 `;
 

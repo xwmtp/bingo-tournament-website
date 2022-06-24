@@ -13,7 +13,6 @@ import { FlexDiv, WideScreenOnlyFlexDiv } from "../../divs/FlexDiv";
 import { Colors, ScreenWidths } from "../../../GlobalStyle";
 import { UserDisplay } from "../../UserDisplay";
 import { ScheduleModal } from "./ScheduleModal";
-import { TwitchButton } from "../../forms/buttons/TwitchButton";
 import { KadgarButton } from "../../forms/buttons/KadgarButton";
 import { ScheduleButton } from "../../forms/buttons/ScheduleButton";
 import { EditButton } from "../../forms/buttons/EditButton";
@@ -22,6 +21,9 @@ import { RecordButton } from "../../forms/buttons/RecordButton";
 import { RecordModal } from "./RecordModal";
 import { useUser } from "../../../api/userApi";
 import { Block } from "../../Block";
+import { isAdmin, isRestreamer } from "../../../domain/User";
+import { ClaimRestreamButton } from "../../forms/buttons/ClaimRestreamButton";
+import { RestreamButton } from "../../forms/buttons/RestreamButton";
 
 interface Props {
   match: UnscheduledMatch | ScheduledMatch;
@@ -31,11 +33,18 @@ interface Props {
 
 export const MatchBlock: React.FC<Props> = ({ match, editable, displayStatus }) => {
   const { data: user } = useUser();
+  console.log(user?.id);
   const [scheduleModalMatch, setScheduleModalMatch] = useState<UnscheduledMatch | undefined>(
     undefined
   );
   const [editModalMatch, setEditModalMatch] = useState<ScheduledMatch | undefined>(undefined);
   const [recordModalMatch, setRecordModalMatch] = useState<ScheduledMatch | undefined>(undefined);
+
+  const userCanClaimRestream =
+    !!user &&
+    (isRestreamer(user) || isAdmin(user)) &&
+    !match.restreamChannel &&
+    !includesEntrant(match, user.id);
 
   return (
     <MatchBlockContainer
@@ -77,10 +86,12 @@ export const MatchBlock: React.FC<Props> = ({ match, editable, displayStatus }) 
       </Round>
 
       <VerticalButtonsDiv>
-        <TwitchButton
-          text="Restream"
-          url={match.restreamChannel && "https://www.twitch.tv/" + match.restreamChannel}
-        />
+        {userCanClaimRestream ? (
+          <ClaimRestreamButtonStyled match={match} />
+        ) : (
+          <RestreamButton restreamChannel={match.restreamChannel} />
+        )}
+
         <KadgarButtonStyled users={match.entrants.map((entrant) => entrant.user)} />
       </VerticalButtonsDiv>
 
@@ -172,5 +183,9 @@ const KadgarButtonStyled = styled(KadgarButton)`
 
 const RecordButtonStyled = styled(RecordButton)`
   margin-top: 0.5rem;
+  width: 100%;
+`;
+
+const ClaimRestreamButtonStyled = styled(ClaimRestreamButton)`
   width: 100%;
 `;

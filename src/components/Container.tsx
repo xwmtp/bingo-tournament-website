@@ -19,38 +19,38 @@ export const Container: React.FC<Props> = ({
   children,
 }) => {
   return (
-    <ContainerStyled className={className} width={width}>
+    <ContainerStyled className={className} $width={width}>
       {title && (
-        <ContainerHeader backgroundColor={backgroundColor}>
+        <ContainerHeader $backgroundColor={backgroundColor}>
           {size === "normal" ? <h2>{title}</h2> : <h3>{title}</h3>}
         </ContainerHeader>
       )}
 
-      <Content backgroundColor={backgroundColor} title={title}>
+      <Content $backgroundColor={backgroundColor} $hasHeader={!!title}>
         {children}
       </Content>
     </ContainerStyled>
   );
 };
 
-const ContainerStyled = styled.div<Props>`
-  width: ${({ width }) => width ?? "100%"};
+const ContainerStyled = styled.div<{ $width?: string }>`
+  width: ${({ $width }) => $width ?? "100%"};
   margin-bottom: ${Margins.container}rem;
 `;
 
-const ContainerHeader = styled.div<Props>`
-  background-color: ${({ backgroundColor }) =>
-    backgroundColor ? Colors[backgroundColor] : Colors.mediumGrey};
+const ContainerHeader = styled.div<{ $backgroundColor?: ColorName }>`
+  background-color: ${({ $backgroundColor }) =>
+    $backgroundColor ? Colors[$backgroundColor] : Colors.mediumGrey};
   padding: 0.6rem 1.2rem;
   margin-bottom: 0.3rem;
   border-radius: 0.6rem 0.6rem 0 0;
   box-shadow: 0.3rem 0.3rem 0.3rem ${Colors.boxShadowGrey};
 `;
 
-const Content = styled.div<Props>`
-  background-color: ${({ backgroundColor }) =>
-    backgroundColor ? Colors[backgroundColor] : Colors.mediumGrey};
+const Content = styled.div<{ $backgroundColor?: ColorName; $hasHeader?: boolean }>`
+  background-color: ${({ $backgroundColor }) =>
+    $backgroundColor ? Colors[$backgroundColor] : Colors.mediumGrey};
   padding: 1.2rem;
-  border-radius: ${({ title }) => (title ? "0 0" : "0.6rem 0.6rem")} 0.6rem 0.6rem;
+  border-radius: ${({ $hasHeader }) => ($hasHeader ? "0 0" : "0.6rem 0.6rem")} 0.6rem 0.6rem;
   box-shadow: 0.3rem 0.3rem 0.3rem ${Colors.boxShadowGrey};
 `;

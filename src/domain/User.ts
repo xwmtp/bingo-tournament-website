@@ -18,6 +18,12 @@ export const isAdmin = (user: User): boolean => {
   return user.roles.includes(Role.Admin);
 };
 
+export const isRestreamer = (user: User): boolean => {
+  // todo
+  // return user.roles.includes(Role.Restreamer);
+  return true;
+};
+
 export const mapToUser = (userDto: UserDto): User => {
   return {
     id: userDto.id,

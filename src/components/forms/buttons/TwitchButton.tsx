@@ -6,12 +6,15 @@ import { IconUrlButton } from "../IconButton";
 interface Props {
   text?: string;
   url?: string;
+  label?: string;
   className?: string;
 }
 
-export const TwitchButton: React.FC<Props> = ({ text, url, className }) => {
+export const TwitchButton: React.FC<Props> = ({ text, url, label, className }) => {
   return (
     <IconUrlButton
+      label={label}
+      children={url}
       text={text}
       Icon={TwitchIcon}
       url={url}

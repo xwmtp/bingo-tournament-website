@@ -18,11 +18,7 @@ export const SchedulePage: React.FC = () => {
   }
 
   if (!scheduledMatches) {
-    return (
-      <Container title={title}>
-        <NothingToDisplay>There are no current scheduled matches.</NothingToDisplay>
-      </Container>
-    );
+    return <Container title={title} />;
   }
 
   return (
