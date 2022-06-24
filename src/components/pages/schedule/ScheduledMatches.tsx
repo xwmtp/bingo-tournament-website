@@ -11,8 +11,7 @@ interface Props {
 
 export const ScheduledMatches: React.FC<Props> = ({ matches, displayStatusOnMatchBlocks }) => {
   const relevantMatches = matches.filter(
-    //todo
-    (match) => match.scheduledTime > DateTime.fromISO("2020-01-01T00:00:00").startOf("day")
+    (match) => match.scheduledTime > DateTime.local().startOf("day")
   );
   const sortedRelevantMatches = sortByScheduledTime(relevantMatches);
 
