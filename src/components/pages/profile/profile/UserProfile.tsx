@@ -1,18 +1,20 @@
 import React, { useState } from "react";
 import { Container } from "../../../Container";
-import { User } from "../../../../domain/User";
+import { isEntrant, User } from "../../../../domain/User";
 import { Avatar } from "../../../Avatar";
 import styled from "styled-components";
 import { Colors } from "../../../../GlobalStyle";
 import { FlexDiv } from "../../../divs/FlexDiv";
 import { Button } from "../../../forms/Button";
 import { ConfirmWithdrawalModal } from "./ConfirmWithdrawalModal";
+import { tournamentSettings } from "../../../../Settings";
+import { capitalize } from "../../../../lib/stringHelpers";
 
 interface Props {
   user: User;
 }
 
-export const EntrantProfile: React.FC<Props> = ({ user }) => {
+export const UserProfile: React.FC<Props> = ({ user }) => {
   const [showWithdrawModal, setShowWithdrawModal] = useState<boolean>(false);
 
   return (
@@ -21,15 +23,17 @@ export const EntrantProfile: React.FC<Props> = ({ user }) => {
         <UserDiv>
           <Avatar user={user} sizeRem={5} />
 
-          <NameAndRole>
+          <NameAndRoles>
             <h2>{user.name}</h2>
-            <Role>Entrant</Role>
-          </NameAndRole>
+            <Role>{user.roles.map((role) => capitalize(role.toLowerCase())).join(" • ")}</Role>
+          </NameAndRoles>
         </UserDiv>
 
-        <WithdrawButton size="normal" color={"coral"} onClick={() => setShowWithdrawModal(true)}>
-          Withdraw from tournament
-        </WithdrawButton>
+        {isEntrant(user) && tournamentSettings.CAN_WITHDRAW && (
+          <WithdrawButton size="normal" color={"coral"} onClick={() => setShowWithdrawModal(true)}>
+            Withdraw from tournament
+          </WithdrawButton>
+        )}
       </Profile>
 
       <ConfirmWithdrawalModal
@@ -50,7 +54,7 @@ const UserDiv = styled.div`
   flex-direction: row;
 `;
 
-const NameAndRole = styled.div`
+const NameAndRoles = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 1.5rem;

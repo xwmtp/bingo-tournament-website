@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { SignUp } from "../components/pages/profile/profile/SignUp";
-import { EntrantProfile } from "../components/pages/profile/profile/EntrantProfile";
+import { UserProfile } from "../components/pages/profile/profile/UserProfile";
 import { useUser } from "../api/userApi";
 import { isEntrant } from "../domain/User";
 import { Container } from "../components/Container";
@@ -21,8 +21,8 @@ export const ProfileSettingsPage: React.FC = () => {
 
   return (
     <ProfileSettingsPageDiv>
+      {<UserProfile user={user} />}
       {!isEntrant(user) && <SignUp />}
-      {isEntrant(user) && <EntrantProfile user={user} />}
     </ProfileSettingsPageDiv>
   );
 };

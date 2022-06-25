@@ -16,6 +16,7 @@ export const ConfirmWithdrawalModal: React.FC<Props> = ({ visible, onClose }) =>
   const withdrawMutation = useMutation(withdraw, {
     onSuccess: () => {
       queryClient.invalidateQueries("user");
+      internalOnClose();
     },
   });
 

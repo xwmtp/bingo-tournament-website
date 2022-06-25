@@ -19,7 +19,7 @@ const getAllMatches = async (): Promise<Match[]> => {
     const matchDtos = await getApi().getAllMatches();
     return matchDtos.map(mapToMatch);
   } catch (error) {
-    if (websiteSettings.USE_MOCK_DATA === "true") {
+    if (websiteSettings.USE_MOCK_DATA) {
       return mockAllMatches;
     }
     throw error;

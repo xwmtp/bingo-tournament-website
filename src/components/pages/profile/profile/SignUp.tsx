@@ -11,7 +11,7 @@ export const SignUp: React.FC = () => {
   return (
     <Container>
       <SignUpDiv>
-        <h4>Sign up now for the 2022 OoT Bingo Tournament is now open! </h4>
+        <h4>Sign up for the 2022 OoT Bingo Tournament is now open! </h4>
         <SignupButton size="big" color={"brightMossGreen"} onClick={() => setShowSignUpModal(true)}>
           Sign up
         </SignupButton>

@@ -28,7 +28,7 @@ export const mapToUser = (userDto: UserDto): User => {
   return {
     id: userDto.id,
     name: userDto.name,
-    roles: userDto.roles,
+    roles: [...userDto.roles].sort((a, b) => a.localeCompare(b)),
     avatar: userDto.avatar || websiteSettings.DEFAULT_AVATAR,
     twitchChannel: userDto.twitchChannel,
   };
