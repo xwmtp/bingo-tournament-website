@@ -3,13 +3,14 @@ import styled from "styled-components";
 import { User } from "../../../../../domain/User";
 import { UserDisplay } from "../../../../UserDisplay";
 import { FlexDiv } from "../../../../divs/FlexDiv";
-import { EntrantInputField } from "../../../../forms/EntrantInputField";
+import { UserInputField } from "../../../../forms/UserInputField";
 import { Input } from "../../../../forms/Input";
 import { Button } from "../../../../forms/Button";
 import { MatchesToAddList } from "./MatchesToAddList";
 import { ConfirmMatchesToAddModal } from "./ConfirmMatchesToAddModal";
 import { MatchToAdd } from "../../../../../domain/Match";
 import { useAllEntrants } from "../../../../../api/entrantsApi";
+import { Spinner } from "../../../../general/Spinner";
 
 const maxMatchesAtOnce = 25;
 
@@ -29,7 +30,7 @@ export const AddMatches: React.FC = () => {
     return <p>Could not load entrants</p>;
   }
   if (!isSuccess) {
-    return <p>loading...</p>;
+    return <Spinner size="small" />;
   }
 
   const addMatch = () => {
@@ -58,10 +59,11 @@ export const AddMatches: React.FC = () => {
     <AddMatchesDiv>
       <InputRow>
         <InputLabel>Entrant 1</InputLabel>
-        <EntrantInputField
+        <UserInputField
           initialInput={""}
-          allEntrants={allEntrants}
-          onEntrantChange={setEntrant1}
+          allUsers={allEntrants}
+          onUserChange={setEntrant1}
+          placeholder="entrant"
         />
         {entrant1 && <UserDisplay user={entrant1} />}
       </InputRow>
@@ -69,10 +71,11 @@ export const AddMatches: React.FC = () => {
       <InputRow>
         <InputLabel>Entrant 2</InputLabel>
 
-        <EntrantInputField
+        <UserInputField
           initialInput={""}
-          allEntrants={allEntrants}
-          onEntrantChange={setEntrant2}
+          allUsers={allEntrants}
+          onUserChange={setEntrant2}
+          placeholder="entrant"
         />
         {entrant2 && <UserDisplay user={entrant2} />}
       </InputRow>

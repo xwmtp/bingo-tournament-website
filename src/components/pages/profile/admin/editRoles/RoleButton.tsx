@@ -1,29 +1,59 @@
 import React from "react";
-import { Button } from "../../../../forms/Button";
 import styled from "styled-components";
+import { useMutation, useQueryClient } from "react-query";
+import { addRole, removeRole } from "../../../../../api/userApi";
+import { Role, User } from "@xwmtp/bingo-tournament";
+import { MutationButton } from "../../../../forms/buttons/MutationButton";
 
 interface Props {
-  role: string;
-  userHasRole: boolean;
+  role: Role;
+  user: User;
   isEditable: boolean;
-  onClick: () => void;
   className?: string;
 }
 
-export const RoleButton: React.FC<Props> = ({
-  role,
-  userHasRole,
-  isEditable,
-  onClick,
-  className,
-}) => {
+export const RoleButton: React.FC<Props> = ({ role, user, isEditable, className }) => {
+  const queryClient = useQueryClient();
+  const addRoleMutation = useMutation(addRole, {
+    onSuccess: () => {
+      onRoleMutationSuccess();
+    },
+  });
+
+  const removeRoleMutation = useMutation(removeRole, {
+    onSuccess: () => {
+      onRoleMutationSuccess();
+    },
+  });
+
+  const userHasRole = user.roles.includes(role);
+  const editRoleMutation = userHasRole ? removeRoleMutation : addRoleMutation;
+
+  const roleRequest = {
+    userId: user.id,
+    role: role,
+  };
+
+  const onRoleMutationSuccess = () => {
+    queryClient.invalidateQueries("allEntrants");
+    queryClient.invalidateQueries("allUsers");
+    queryClient.invalidateQueries("user");
+  };
+
   const color = userHasRole ? "brightMossGreen" : "lightGrey";
   return (
-    <RoleButtonStyled color={color} disabled={!isEditable} className={className}>
-      <p>
-        <strong>{getRoleSign(userHasRole, isEditable)}</strong> {role}
-      </p>
-    </RoleButtonStyled>
+    <RoleButtonStyled
+      mutationStatus={editRoleMutation.status}
+      onIdleText={getRoleSign(userHasRole, isEditable) + role}
+      color={color}
+      disabled={!isEditable}
+      onClick={() => {
+        if (isEditable) {
+          editRoleMutation.mutate(roleRequest);
+        }
+      }}
+      className={className}
+    />
   );
 };
 
@@ -37,6 +67,8 @@ const getRoleSign = (userHasRole: boolean, isEditable: boolean): string => {
   return "+ ";
 };
 
-const RoleButtonStyled = styled(Button)`
-  flex-grow: 0;
+const RoleButtonStyled = styled(MutationButton)`
+  flex-grow: 1;
+  justify-content: flex-start;
+  min-width: auto;
 `;

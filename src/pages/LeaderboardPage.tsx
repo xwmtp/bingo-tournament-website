@@ -13,6 +13,7 @@ import { useMatchResults } from "../api/matchesApi";
 import { Block } from "../components/Block";
 import { WideScreenOnly } from "../components/divs/WideScreenOnly";
 import { tournamentSettings } from "../Settings";
+import { Spinner } from "../components/general/Spinner";
 
 export const LeaderboardPage: React.FC = () => {
   const { data: user } = useUser();
@@ -22,15 +23,17 @@ export const LeaderboardPage: React.FC = () => {
   const title = "Leaderboard";
 
   if (isLoadingEntrants || isLoadingMatches) {
-    return <Container title={title} />;
+    return (
+      <Container title={title}>
+        <Spinner />
+      </Container>
+    );
   }
 
   if (!allEntrants || !matchResults) {
     return (
       <Container title={title}>
-        <NothingToDisplay>
-          <p>An error occurred while loading the data.</p>
-        </NothingToDisplay>
+        <NothingToDisplay>An error occurred while loading the data.</NothingToDisplay>
       </Container>
     );
   }

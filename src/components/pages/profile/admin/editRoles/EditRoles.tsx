@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useAllEntrants } from "../../../../../api/entrantsApi";
-import { EntrantInputField } from "../../../../forms/EntrantInputField";
-import { UserDisplay } from "../../../../UserDisplay";
 import { FlexDiv } from "../../../../divs/FlexDiv";
-import { User } from "../../../../../domain/User";
+import { uneditableRoles, User } from "../../../../../domain/User";
 import { RoleButton } from "./RoleButton";
 import { Role } from "@xwmtp/bingo-tournament";
+import { useAllUsers } from "../../../../../api/userApi";
+import { Spinner } from "../../../../general/Spinner";
+import { UserInputField } from "../../../../forms/UserInputField";
+import { UserDisplay } from "../../../../UserDisplay";
 
 const allRoles = Object.values(Role);
-const uneditableRoles = [Role.Admin];
 
 export const EditRoles: React.FC = () => {
-  const { data: allEntrants, isError, isSuccess } = useAllEntrants();
+  const { data: allUsers, isError, isSuccess } = useAllUsers();
 
   const [selectedUser, setSelectedUser] = useState<User | undefined>(undefined);
 
@@ -20,35 +20,71 @@ export const EditRoles: React.FC = () => {
     return <p>Could not load entrants</p>;
   }
   if (!isSuccess) {
-    return <p>loading...</p>;
+    return <Spinner size="small" />;
   }
 
   return (
     <EditRolesDiv>
       <InputRow>
         <InputLabel>User</InputLabel>
-        <EntrantInputField
-          initialInput={""}
-          allEntrants={allEntrants}
-          onEntrantChange={setSelectedUser}
-        />
+        <UserInputField initialInput={""} allUsers={allUsers} onUserChange={setSelectedUser} />
         {selectedUser && <UserDisplay user={selectedUser} />}
       </InputRow>
+
       {selectedUser && (
         <RolesDiv>
-          {allRoles.map((role) => (
-            <RoleButtonStyled
-              key={role}
-              role={role}
-              userHasRole={selectedUser?.roles.includes(role)}
-              isEditable={!uneditableRoles.includes(role)}
-              onClick={() => {}}
-            />
-          ))}
+          <EditRolesGroup
+            title={"Remove roles:"}
+            roles={rolesToRemove(selectedUser)}
+            user={selectedUser}
+          />
+
+          <EditRolesGroup
+            title={"Add roles:"}
+            roles={rolesToAdd(selectedUser)}
+            user={selectedUser}
+          />
         </RolesDiv>
       )}
     </EditRolesDiv>
   );
+};
+
+const EditRolesGroup: React.FC<{ title: string; user: User; roles: Role[] }> = ({
+  title,
+  user,
+  roles,
+}) => {
+  if (roles.length === 0) {
+    return <></>;
+  }
+  return (
+    <RolesGroup>
+      <p>{title}</p>
+      <RolesRow>
+        {roles.map((role) => (
+          <RoleButtonStyled
+            key={role}
+            role={role}
+            user={user}
+            isEditable={!uneditableRoles.includes(role)}
+          />
+        ))}
+      </RolesRow>
+    </RolesGroup>
+  );
+};
+
+const rolesToAdd = (user: User): Role[] => {
+  return allRoles.filter((role) => !uneditableRoles.includes(role) && !user.roles.includes(role));
+};
+
+const rolesToRemove = (user: User): Role[] => {
+  const roles = user.roles.filter((role) => !uneditableRoles.includes(role));
+  const uneditableRolesUserHas = allRoles.filter(
+    (role) => uneditableRoles.includes(role) && user.roles.includes(role)
+  );
+  return [...roles, ...uneditableRolesUserHas];
 };
 
 const EditRolesDiv = styled.div`
@@ -67,8 +103,20 @@ const InputLabel = styled(FlexDiv)`
 `;
 
 const RolesDiv = styled(FlexDiv)`
-  justify-content: flex-start;
+  flex-direction: column;
+  align-items: flex-start;
   margin-top: 1rem;
+`;
+
+const RolesGroup = styled(FlexDiv)`
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 1rem;
+`;
+
+const RolesRow = styled(FlexDiv)`
+  justify-content: flex-start;
+  margin-top: 0.3rem;
 `;
 
 const RoleButtonStyled = styled(RoleButton)`

@@ -19,10 +19,10 @@ export const isAdmin = (user: User): boolean => {
 };
 
 export const isRestreamer = (user: User): boolean => {
-  // todo
-  // return user.roles.includes(Role.Restreamer);
-  return true;
+  return user.roles.includes(Role.Restreamer);
 };
+
+export const uneditableRoles = [Role.Admin];
 
 export const mapToUser = (userDto: UserDto): User => {
   return {
