@@ -1,6 +1,6 @@
 - Overview of matches to restream
 - Remove restream completely
-- Handle getting full urls for kadgar/twitch button
+- Handle getting full urls for kadgar/twitch button, and possibly filter out of user
 - Admin: add custom match results (without racetime)
 
 Checks
