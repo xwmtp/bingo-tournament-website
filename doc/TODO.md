@@ -1,7 +1,7 @@
-- Add restream to matches
+- Overview of matches to restream
+- Remove restream completely
+- Handle getting full urls for kadgar/twitch button
 - Admin: add custom match results (without racetime)
-- Check everything on smaller screen / mobile
-- See lb when logged out?
 
 Checks
 
@@ -9,9 +9,9 @@ Checks
 - Remove extra logs
 - Check what is displayed in case of error / no data
 - Check Query settings, like staletime
+- Check everything on smaller screen / mobile
 
 Nice to have
 
 - Alert bar when there is a match to record
-- Claim restreams
 - Replace BorderRadius with variable

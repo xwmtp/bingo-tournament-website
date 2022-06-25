@@ -87,14 +87,12 @@ export const updateMatchRacetimeId = async (updateMatch: {
 
 export const updateMatchRestream = async (updateMatch: {
   matchId: string;
-  restreamChannel: string;
-}): Promise<Match> => {
-  throw Error("not implemented");
-  const updatedMatchDto = await getApi().updateMatch({
+  restreamChannelUrl: string;
+}): Promise<void> => {
+  await getApi().setRestreamChannel({
     matchId: updateMatch.matchId,
-    updateMatch: {}, //todo{ restream: updateMatch.restreamChannel },
+    restreamChannel: updateMatch.restreamChannelUrl,
   });
-  return mapToMatch(updatedMatchDto);
 };
 
 export const deleteMatches = async (matchIds: string[]): Promise<void> => {

@@ -8,11 +8,12 @@ import { DateTime } from "luxon";
 
 interface Props {
   match: Match;
+  className?: string;
 }
 
-export const MatchDisplay: React.FC<Props> = ({ match }) => {
+export const MatchDisplay: React.FC<Props> = ({ match, className }) => {
   return (
-    <Display>
+    <Display className={className}>
       {isScheduledMatch(match) && (
         <DateAndTime>
           <p>
@@ -40,7 +41,7 @@ export const MatchDisplay: React.FC<Props> = ({ match }) => {
 
 const Display = styled(Block)`
   margin-top: 0;
-  margin-bottom: 0.6rem;
+  margin-bottom: 1.2rem;
   padding: 0.3rem 2rem;
 `;
 

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FlexDiv } from "../../divs/FlexDiv";
 import { Modal } from "../../Modal";
@@ -6,9 +6,9 @@ import { useMutation, useQueryClient } from "react-query";
 import { updateMatchRestream } from "../../../api/matchesApi";
 import { Match } from "../../../domain/Match";
 import { MutationButton } from "../../forms/buttons/MutationButton";
-import { Input } from "../../forms/Input";
 import { ErrorText } from "../../general/ErrorText";
 import { MatchDisplay } from "../../MatchDisplay";
+import { RestreamChannelInputField } from "../../forms/RestreamChannelInputField";
 
 interface Props {
   match: Match;
@@ -17,8 +17,7 @@ interface Props {
 }
 
 export const ClaimRestreamModal: React.FC<Props> = ({ match, visible, onClose }) => {
-  const [restreamInput, setRestreamInput] = useState<string>("");
-  const restreamChannel = useMemo(() => extractRestreamChannel(restreamInput), [restreamInput]);
+  const [restreamChannel, setRestreamChannel] = useState<string | undefined>(undefined);
 
   const queryClient = useQueryClient();
   const updateRestreamMutation = useMutation(updateMatchRestream, {
@@ -28,15 +27,22 @@ export const ClaimRestreamModal: React.FC<Props> = ({ match, visible, onClose })
     },
   });
 
-  const updateRestreamMatch = {
+  const updateRestreamMatch = restreamChannel && {
     matchId: match.id,
-    restreamChannel: restreamChannel,
+    restreamChannelUrl: "https://twitch.tv/" + restreamChannel,
   };
 
   const internalOnClose = () => {
     updateRestreamMutation.reset();
     onClose();
   };
+
+  useEffect(() => {
+    if (updateRestreamMutation.isError) {
+      updateRestreamMutation.reset();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [restreamChannel]);
 
   return (
     <Modal title={"Set restream channel of match"} isOpen={visible} onClose={internalOnClose}>
@@ -48,41 +54,23 @@ export const ClaimRestreamModal: React.FC<Props> = ({ match, visible, onClose })
           on. Only claim the restream if you're actually planning on hosting it.
         </p>
 
-        <ChannelInput
-          type="text"
-          maxLength={30}
-          value={restreamInput}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            setRestreamInput(event.target.value);
-            updateRestreamMutation.reset();
-          }}
-          placeholder={`channelname`}
-        />
+        <RestreamChannelInputField initialInput={""} onChannelChange={setRestreamChannel} />
 
         {updateRestreamMutation.isError && (
           <ErrorText>Could not set the restream channel, please try again later.</ErrorText>
         )}
 
-        {restreamChannel && <p>{`Channel: ${restreamChannel}`}</p>}
-
         <MutationButtonStyled
-          disabled={!restreamChannel}
+          disabled={!updateRestreamMatch}
           mutationStatus={updateRestreamMutation.status}
           onIdleText={"Set restream"}
           color={"brightMossGreen"}
           size={"big"}
-          onClick={() => restreamChannel && updateRestreamMutation.mutate(updateRestreamMatch)}
+          onClick={() => updateRestreamMatch && updateRestreamMutation.mutate(updateRestreamMatch)}
         />
       </ContainerContents>
     </Modal>
   );
-};
-
-const extractRestreamChannel = (input: string) => {
-  if (input.startsWith("_")) {
-    return "";
-  }
-  return input.replace(/[^a-z0-9_]/gi, "");
 };
 
 const ContainerContents = styled(FlexDiv)`
@@ -92,10 +80,4 @@ const ContainerContents = styled(FlexDiv)`
 
 const MutationButtonStyled = styled(MutationButton)`
   margin-top: 1.2rem;
-`;
-
-const ChannelInput = styled(Input)`
-  width: 30rem;
-  margin: 1rem 0;
-  font-size: 0.95rem;
 `;

@@ -84,15 +84,15 @@ export const MatchBlock: React.FC<Props> = ({ match, editable, displayStatus }) 
         <p>{match.round}</p>
       </Round>
 
-      <VerticalButtonsDiv>
+      <VerticalStreamButtonsDiv>
         {userCanClaimRestream ? (
           <ClaimRestreamButtonStyled match={match} />
         ) : (
-          <RestreamButton restreamChannel={match.restreamChannel} />
+          <RestreamButtonStyled restreamChannel={match.restreamChannel} />
         )}
 
         <KadgarButtonStyled users={match.entrants.map((entrant) => entrant.user)} />
-      </VerticalButtonsDiv>
+      </VerticalStreamButtonsDiv>
 
       {scheduleModalMatch && (
         <ScheduleModal
@@ -175,6 +175,11 @@ const VerticalButtonsDiv = styled(FlexDiv)`
   flex-direction: column;
 `;
 
+const VerticalStreamButtonsDiv = styled(VerticalButtonsDiv)`
+  min-width: 6.3rem;
+  align-items: flex-end;
+`;
+
 const KadgarButtonStyled = styled(KadgarButton)`
   margin-top: 0.5rem;
   width: 100%;
@@ -182,6 +187,10 @@ const KadgarButtonStyled = styled(KadgarButton)`
 
 const RecordButtonStyled = styled(RecordButton)`
   margin-top: 0.5rem;
+  width: 100%;
+`;
+
+const RestreamButtonStyled = styled(RestreamButton)`
   width: 100%;
 `;
 

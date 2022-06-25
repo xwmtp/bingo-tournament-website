@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { DateTime } from "luxon";
 import { FlexDiv } from "../../divs/FlexDiv";
@@ -11,9 +11,9 @@ import { MutationButton } from "../../forms/buttons/MutationButton";
 import { useUser } from "../../../api/userApi";
 import { isAdmin } from "../../../domain/User";
 import { Container } from "../../Container";
-import { Input } from "../../forms/Input";
 import { ErrorText } from "../../general/ErrorText";
 import { MatchDisplay } from "../../MatchDisplay";
+import { RestreamChannelInputField } from "../../forms/RestreamChannelInputField";
 
 interface Props {
   match: ScheduledMatch;
@@ -23,7 +23,7 @@ interface Props {
 
 export const EditModal: React.FC<Props> = ({ match, visible, onClose }) => {
   const [dateTimeInput, setDateTimeInput] = useState<DateTime>(match.scheduledTime);
-  const [restreamInput, setRestreamInput] = useState<string>("");
+  const [restreamChannel, setRestreamChannel] = useState<string | undefined>(undefined);
 
   const { data: user } = useUser();
 
@@ -54,9 +54,9 @@ export const EditModal: React.FC<Props> = ({ match, visible, onClose }) => {
     newTime: dateTimeInput,
   };
 
-  const updateRestreamMatch = {
+  const updateRestreamMatch = restreamChannel && {
     matchId: match.id,
-    restreamChannel: restreamInput,
+    restreamChannelUrl: "https://twitch.tv/" + restreamChannel,
   };
 
   const internalOnClose = () => {
@@ -66,8 +66,15 @@ export const EditModal: React.FC<Props> = ({ match, visible, onClose }) => {
     onClose();
   };
 
+  useEffect(() => {
+    if (updateRestreamMutation.isError) {
+      updateRestreamMutation.reset();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [restreamChannel]);
+
   return (
-    <Modal title={"Update date & time"} isOpen={visible} onClose={internalOnClose}>
+    <Modal title={"Change date & time"} isOpen={visible} onClose={internalOnClose}>
       <ContainerContents>
         <MatchDisplay match={match} />
 
@@ -80,7 +87,7 @@ export const EditModal: React.FC<Props> = ({ match, visible, onClose }) => {
 
         <DateTimeInput dateTime={dateTimeInput} setDateTime={setDateTimeInput} />
 
-        <p>Change scheduled date & time to:</p>
+        <p>New date & time:</p>
         <h4>{dateTimeInput.toLocaleString(DateTime.DATETIME_FULL)}</h4>
 
         {updateTimeMutation.isError && (
@@ -89,7 +96,7 @@ export const EditModal: React.FC<Props> = ({ match, visible, onClose }) => {
 
         <MutationButtonStyled
           mutationStatus={updateTimeMutation.status}
-          onIdleText={"Update"}
+          onIdleText={"Change"}
           color={"brightMossGreen"}
           size={"big"}
           onClick={() => updateTimeMutation.mutate(updateTimeMatch)}
@@ -102,30 +109,25 @@ export const EditModal: React.FC<Props> = ({ match, visible, onClose }) => {
               size="small"
               backgroundColor="lightGrey"
             >
-              <p>Set a new restream Twitch channel.</p>
+              <p>Set a new restream Twitch channel {`(currently: ${match.restreamChannel})`}.</p>
 
-              <ChannelInput
-                type="text"
-                maxLength={70}
-                value={restreamInput}
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  setRestreamInput(event.target.value);
-                  updateRestreamMutation.reset();
-                }}
-                placeholder={`ootv`}
-              />
+              <UpdateRestreamDiv>
+                <RestreamChannelInputField initialInput={""} onChannelChange={setRestreamChannel} />
 
-              {updateRestreamMutation.isError && (
-                <ErrorText>Could not set the restream channel, please try again later.</ErrorText>
-              )}
+                {updateRestreamMutation.isError && (
+                  <ErrorText>Could not set the restream channel, please try again later.</ErrorText>
+                )}
+              </UpdateRestreamDiv>
 
               <MutationButtonStyled
-                disabled={!restreamInput}
+                disabled={!updateRestreamMatch}
                 mutationStatus={updateRestreamMutation.status}
                 onIdleText={"Update restream"}
                 color={"brightMossGreen"}
                 size={"big"}
-                onClick={() => restreamInput && updateRestreamMutation.mutate(updateRestreamMatch)}
+                onClick={() =>
+                  updateRestreamMatch && updateRestreamMutation.mutate(updateRestreamMatch)
+                }
               />
             </AdminOnlyDiv>
 
@@ -170,8 +172,6 @@ const AdminOnlyDiv = styled(Container)`
   flex-direction: column;
 `;
 
-const ChannelInput = styled(Input)`
-  width: 30rem;
-  margin: 1rem 0;
-  font-size: 0.95rem;
+const UpdateRestreamDiv = styled(FlexDiv)`
+  flex-direction: column;
 `;
