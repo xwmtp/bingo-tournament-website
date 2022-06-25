@@ -26,9 +26,11 @@ export const Modal: React.FC<Props> = (props) => {
 
 const ModalStyled = ModalExternal.styled`
   position: absolute;
-  top: 20%;
+  top: 15%;
+  max-height: 70vh;
   border-radius: 0.6rem;
   padding: 1.2rem;
+  overflow-y: auto;
   background-color: ${Colors.darkGrey};
 `;
 
