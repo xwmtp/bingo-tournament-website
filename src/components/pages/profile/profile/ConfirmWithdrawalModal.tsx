@@ -26,7 +26,7 @@ export const ConfirmWithdrawalModal: React.FC<Props> = ({ visible, onClose }) =>
   };
 
   return (
-    <Modal title={"Withdraw from tournament"} isOpen={visible} onClose={internalOnClose}>
+    <Modal modalTitle={"Withdraw from tournament"} isOpen={visible} onClose={internalOnClose}>
       <p>
         Are you sure you want to withdraw from the tournament? You are able to join again until the
         sign up deadline. Afterwards you cannot rejoin the tournament. Note that you have to alert a

@@ -30,7 +30,11 @@ export const ConfirmSignupModal: React.FC<Props> = ({ visible, onClose }) => {
   };
 
   return (
-    <Modal title={"Sign up for the Bingo tournament"} isOpen={visible} onClose={internalOnClose}>
+    <Modal
+      modalTitle={"Sign up for the Bingo tournament"}
+      isOpen={visible}
+      onClose={internalOnClose}
+    >
       <p>
         Before you sign up, make sure to familiarize yourself with the{" "}
         <Link to={"/about"} target={"_blank"} rel="noopener noreferrer">

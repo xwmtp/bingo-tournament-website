@@ -74,7 +74,7 @@ export const EditModal: React.FC<Props> = ({ match, visible, onClose }) => {
   }, [restreamChannel]);
 
   return (
-    <Modal title={"Change date & time"} isOpen={visible} onClose={internalOnClose}>
+    <Modal modalTitle={"Change date & time"} isOpen={visible} onClose={internalOnClose}>
       <ContainerContents>
         <MatchDisplay match={match} />
 

@@ -6,7 +6,7 @@ import { Container } from "./Container";
 
 interface Props extends ModalProps {
   onClose: () => void;
-  title?: string;
+  modalTitle?: string;
 }
 
 export const Modal: React.FC<Props> = (props) => {
@@ -17,7 +17,7 @@ export const Modal: React.FC<Props> = (props) => {
       onBackgroundClick={props.onClose}
       onEscapeKeydown={props.onClose}
     >
-      <ContainerStyled title={props.title} size="small" width={"700px"}>
+      <ContainerStyled title={props.modalTitle} size="small" width={"700px"}>
         {props.children}
       </ContainerStyled>
     </ModalStyled>

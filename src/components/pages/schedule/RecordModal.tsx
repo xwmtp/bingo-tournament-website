@@ -41,7 +41,7 @@ export const RecordModal: React.FC<Props> = ({ match, visible, onClose }) => {
   };
 
   return (
-    <Modal title={"Record results of match"} isOpen={visible} onClose={internalOnClose}>
+    <Modal modalTitle={"Record results of match"} isOpen={visible} onClose={internalOnClose}>
       <ContainerContents>
         <MatchDisplay match={match} />
 

@@ -45,7 +45,7 @@ export const ClaimRestreamModal: React.FC<Props> = ({ match, visible, onClose })
   }, [restreamChannel]);
 
   return (
-    <Modal title={"Set restream channel of match"} isOpen={visible} onClose={internalOnClose}>
+    <Modal modalTitle={"Set restream channel of match"} isOpen={visible} onClose={internalOnClose}>
       <ContainerContents>
         <MatchDisplay match={match} />
 

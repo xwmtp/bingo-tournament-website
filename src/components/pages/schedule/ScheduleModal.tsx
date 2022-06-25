@@ -39,7 +39,7 @@ export const ScheduleModal: React.FC<Props> = ({ match, visible, onClose }) => {
   };
 
   return (
-    <Modal title={"Pick date & time"} isOpen={visible} onClose={internalOnClose}>
+    <Modal modalTitle={"Pick date & time"} isOpen={visible} onClose={internalOnClose}>
       <ContainerContents>
         <MatchDisplay match={match} />
 
