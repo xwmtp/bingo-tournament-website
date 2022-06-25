@@ -13,6 +13,7 @@ import { isAdmin } from "../../../domain/User";
 import { Container } from "../../Container";
 import { Input } from "../../forms/Input";
 import { ErrorText } from "../../general/ErrorText";
+import { MatchDisplay } from "../../MatchDisplay";
 
 interface Props {
   match: ScheduledMatch;
@@ -68,6 +69,8 @@ export const EditModal: React.FC<Props> = ({ match, visible, onClose }) => {
   return (
     <Modal title={"Update date & time"} isOpen={visible} onClose={internalOnClose}>
       <ContainerContents>
+        <MatchDisplay match={match} />
+
         <p>
           {`Please only change the date and time your match after agreeing with your
             opponent. Your detected timezone is ${DateTime.local().toFormat(

@@ -10,6 +10,7 @@ import { Input } from "../../forms/Input";
 import { ExternalLink } from "../../general/ExternalLink";
 import { ErrorText } from "../../general/ErrorText";
 import { tournamentSettings } from "../../../Settings";
+import { MatchDisplay } from "../../MatchDisplay";
 
 interface Props {
   match: ScheduledMatch;
@@ -42,6 +43,8 @@ export const RecordModal: React.FC<Props> = ({ match, visible, onClose }) => {
   return (
     <Modal title={"Record results of match"} isOpen={visible} onClose={internalOnClose}>
       <ContainerContents>
+        <MatchDisplay match={match} />
+
         <p>
           Paste the url of the{" "}
           <ExternalLink url={`https://racetime.gg/${tournamentSettings.RACETIME_CATEGORY}`}>

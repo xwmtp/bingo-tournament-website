@@ -9,6 +9,7 @@ import { updateMatchTime } from "../../../api/matchesApi";
 import { MutationButton } from "../../forms/buttons/MutationButton";
 import { UnscheduledMatch } from "../../../domain/Match";
 import { ErrorText } from "../../general/ErrorText";
+import { MatchDisplay } from "../../MatchDisplay";
 
 interface Props {
   match: UnscheduledMatch;
@@ -40,6 +41,8 @@ export const ScheduleModal: React.FC<Props> = ({ match, visible, onClose }) => {
   return (
     <Modal title={"Pick date & time"} isOpen={visible} onClose={internalOnClose}>
       <ContainerContents>
+        <MatchDisplay match={match} />
+
         <p>
           {`Please schedule your match after agreeing on a time with your
             opponent. Your detected timezone is ${DateTime.local().toFormat(

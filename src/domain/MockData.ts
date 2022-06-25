@@ -154,7 +154,7 @@ export const mockScheduledMatches: ScheduledMatch[] = [
         },
       },
     ],
-    scheduledTime: DateTime.fromISO("2023-02-19T10:30:03Z"),
+    scheduledTime: DateTime.fromISO("2022-02-19T10:30:03Z"),
     round: "Round 2",
     restreamChannel: undefined,
   },

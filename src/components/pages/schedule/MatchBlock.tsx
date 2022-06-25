@@ -33,7 +33,6 @@ interface Props {
 
 export const MatchBlock: React.FC<Props> = ({ match, editable, displayStatus }) => {
   const { data: user } = useUser();
-  console.log(user?.id);
   const [scheduleModalMatch, setScheduleModalMatch] = useState<UnscheduledMatch | undefined>(
     undefined
   );

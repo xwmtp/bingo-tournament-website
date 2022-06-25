@@ -1,8 +1,6 @@
 - Add restream to matches
 - Admin: add custom match results (without racetime)
 - Check everything on smaller screen / mobile
-- Create MatchDisplay to display matches on modals
-- Allow scroll in edit modal
 
 Checks
 

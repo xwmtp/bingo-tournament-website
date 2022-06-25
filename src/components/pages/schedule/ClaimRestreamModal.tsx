@@ -8,6 +8,7 @@ import { Match } from "../../../domain/Match";
 import { MutationButton } from "../../forms/buttons/MutationButton";
 import { Input } from "../../forms/Input";
 import { ErrorText } from "../../general/ErrorText";
+import { MatchDisplay } from "../../MatchDisplay";
 
 interface Props {
   match: Match;
@@ -40,6 +41,8 @@ export const ClaimRestreamModal: React.FC<Props> = ({ match, visible, onClose })
   return (
     <Modal title={"Set restream channel of match"} isOpen={visible} onClose={internalOnClose}>
       <ContainerContents>
+        <MatchDisplay match={match} />
+
         <p>
           Enter the name of the Twitch channel that you're going to host the restream of this match
           on. Only claim the restream if you're actually planning on hosting it.
