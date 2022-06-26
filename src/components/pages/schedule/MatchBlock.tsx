@@ -41,7 +41,7 @@ export const MatchBlock: React.FC<Props> = ({ match, editable, displayStatus }) 
 
   const userCanClaimRestream =
     !!user &&
-    (isRestreamer(user) || isAdmin(user)) &&
+    (isAdmin(user) || isRestreamer(user)) &&
     !match.restreamChannel &&
     !includesEntrant(match, user.id);
 

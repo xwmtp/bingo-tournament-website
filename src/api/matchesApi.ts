@@ -95,6 +95,13 @@ export const updateMatchRestream = async (updateMatch: {
   });
 };
 
+export const removeMatchRestream = async (matchId: string): Promise<void> => {
+  await getApi().setRestreamChannel({
+    matchId: matchId,
+    restreamChannel: undefined,
+  });
+};
+
 export const deleteMatches = async (matchIds: string[]): Promise<void> => {
   return await getApi().deleteMatches({ requestBody: matchIds });
 };

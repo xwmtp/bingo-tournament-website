@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { MdOutlineLiveTv } from "react-icons/md";
 import { IconUrlButton } from "../IconButton";
 import { User } from "../../../domain/User";
+import { extractTwitchChannel } from "../../../lib/urlHelpers";
 
 interface Props {
   users: User[];
@@ -12,7 +13,7 @@ interface Props {
 
 export const KadgarButton: React.FC<Props> = ({ users, text, className }) => {
   const twitchChannels = users
-    .map((user) => user.twitchChannel)
+    .map((user) => extractTwitchChannel(user.twitchChannel ?? ""))
     .filter((twitchChannel): twitchChannel is string => !!twitchChannel);
 
   const url =

@@ -50,8 +50,8 @@ export const ClaimRestreamModal: React.FC<Props> = ({ match, visible, onClose })
         <MatchDisplay match={match} />
 
         <p>
-          Enter the name of the Twitch channel that you're going to host the restream of this match
-          on. Only claim the restream if you're actually planning on hosting it.
+          If you're planning to organise a restream for this match, enter the name of the Twitch
+          channel it will be broadcast on.
         </p>
 
         <RestreamChannelInputField initialInput={""} onChannelChange={setRestreamChannel} />

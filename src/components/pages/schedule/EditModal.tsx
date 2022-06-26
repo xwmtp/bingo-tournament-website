@@ -5,7 +5,12 @@ import { FlexDiv } from "../../divs/FlexDiv";
 import { DateTimeInput } from "../../forms/DateTimeInput";
 import { Modal } from "../../Modal";
 import { useMutation, useQueryClient } from "react-query";
-import { deleteMatches, updateMatchRestream, updateMatchTime } from "../../../api/matchesApi";
+import {
+  deleteMatches,
+  removeMatchRestream,
+  updateMatchRestream,
+  updateMatchTime,
+} from "../../../api/matchesApi";
 import { ScheduledMatch } from "../../../domain/Match";
 import { MutationButton } from "../../forms/buttons/MutationButton";
 import { useUser } from "../../../api/userApi";
@@ -14,6 +19,7 @@ import { Container } from "../../Container";
 import { ErrorText } from "../../general/ErrorText";
 import { MatchDisplay } from "../../MatchDisplay";
 import { RestreamChannelInputField } from "../../forms/RestreamChannelInputField";
+import { extractTwitchChannel } from "../../../lib/urlHelpers";
 
 interface Props {
   match: ScheduledMatch;
@@ -42,7 +48,14 @@ export const EditModal: React.FC<Props> = ({ match, visible, onClose }) => {
     },
   });
 
-  const updateRestreamMutation = useMutation(updateMatchRestream, {
+  const setRestreamMutation = useMutation(updateMatchRestream, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("allMatches");
+      onClose();
+    },
+  });
+
+  const deleteRestreamMutation = useMutation(removeMatchRestream, {
     onSuccess: () => {
       queryClient.invalidateQueries("allMatches");
       onClose();
@@ -62,13 +75,14 @@ export const EditModal: React.FC<Props> = ({ match, visible, onClose }) => {
   const internalOnClose = () => {
     updateTimeMutation.reset();
     deleteMatchMutation.reset();
-    updateRestreamMutation.reset();
+    setRestreamMutation.reset();
     onClose();
   };
 
   useEffect(() => {
-    if (updateRestreamMutation.isError) {
-      updateRestreamMutation.reset();
+    if (setRestreamMutation.isError) {
+      setRestreamMutation.reset();
+      deleteRestreamMutation.reset();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [restreamChannel]);
@@ -109,25 +123,40 @@ export const EditModal: React.FC<Props> = ({ match, visible, onClose }) => {
               size="small"
               backgroundColor="lightGrey"
             >
-              <p>Set a new restream Twitch channel {`(currently: ${match.restreamChannel})`}.</p>
+              <p>
+                Set a new restream Twitch channel{" "}
+                {`(currently: ${match.restreamChannel ?? "no channel set"})`}.
+              </p>
 
               <UpdateRestreamDiv>
-                <RestreamChannelInputField initialInput={""} onChannelChange={setRestreamChannel} />
+                <RestreamChannelInputField
+                  initialInput={extractTwitchChannel(match.restreamChannel ?? "")}
+                  onChannelChange={setRestreamChannel}
+                />
 
-                {updateRestreamMutation.isError && (
+                {setRestreamMutation.isError && (
                   <ErrorText>Could not set the restream channel, please try again later.</ErrorText>
                 )}
               </UpdateRestreamDiv>
 
               <MutationButtonStyled
                 disabled={!updateRestreamMatch}
-                mutationStatus={updateRestreamMutation.status}
-                onIdleText={"Update restream"}
+                mutationStatus={setRestreamMutation.status}
+                onIdleText={"Set restream"}
                 color={"brightMossGreen"}
                 size={"big"}
                 onClick={() =>
-                  updateRestreamMatch && updateRestreamMutation.mutate(updateRestreamMatch)
+                  updateRestreamMatch && setRestreamMutation.mutate(updateRestreamMatch)
                 }
+              />
+
+              <MutationButtonStyled
+                disabled={!match.restreamChannel}
+                mutationStatus={deleteRestreamMutation.status}
+                onIdleText={"Remove restream"}
+                color={"coral"}
+                size={"big"}
+                onClick={() => match.restreamChannel && deleteRestreamMutation.mutate(match.id)}
               />
             </AdminOnlyDiv>
 
