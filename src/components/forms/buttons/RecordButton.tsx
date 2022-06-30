@@ -15,7 +15,7 @@ export const RecordButton: React.FC<Props> = ({ text, onClick, className }) => {
       label="Record"
       color={"brightMossGreen"}
       text={text}
-      Icon={PencilIcon}
+      Icon={SaveIcon}
       onClick={onClick}
       className={className}
     />
@@ -26,6 +26,6 @@ const RecordButtonStyled = styled(IconButton)`
   padding: 0.3rem 0.4rem;
 `;
 
-const PencilIcon = styled(BiSave)`
+const SaveIcon = styled(BiSave)`
   transform: scale(1.3);
 `;
