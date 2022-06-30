@@ -14,11 +14,13 @@ import { Block } from "../components/Block";
 import { WideScreenOnly } from "../components/divs/WideScreenOnly";
 import { tournamentSettings } from "../Settings";
 import { Spinner } from "../components/general/Spinner";
+import { useBingoLeaderboard } from "../api/bingoLeaderboardApi";
 
 export const LeaderboardPage: React.FC = () => {
   const { data: user } = useUser();
   const { data: allEntrants, isLoading: isLoadingEntrants } = useAllEntrants();
   const { data: matchResults, isLoading: isLoadingMatches } = useMatchResults();
+  const { data: racetimeLeaderboard } = useBingoLeaderboard();
 
   const title = "Leaderboard";
 
@@ -38,7 +40,7 @@ export const LeaderboardPage: React.FC = () => {
     );
   }
 
-  const entries = toLeaderboardEntries(allEntrants, matchResults);
+  const entries = toLeaderboardEntries(allEntrants, matchResults, racetimeLeaderboard);
   const sortedEntries = sortLeaderboardEntries(entries);
 
   if (entries.length === 0) {
@@ -111,6 +113,12 @@ const sortLeaderboardEntries = (entries: LeaderboardEntry[]) => {
     }
     if (a.median !== b.median) {
       return (a.median ?? emptyMedian) - (b.median ?? emptyMedian);
+    }
+    if (a.racetimeStats?.leaderboardTime !== b.racetimeStats?.leaderboardTime) {
+      return (
+        (a.racetimeStats?.leaderboardTime ?? emptyMedian) -
+        (b.racetimeStats?.leaderboardTime ?? emptyMedian)
+      );
     }
     return a.user.name.toLowerCase().localeCompare(b.user.name.toLowerCase());
   });

@@ -3,6 +3,7 @@ import { MatchResult } from "./Match";
 import { RankStatus } from "./Entrant";
 import { tournamentSettings } from "../Settings";
 import { calculateMedian } from "../lib/timeHelpers";
+import { BingoLeaderboard, BingoLeaderboardPlayer } from "./BingoLeaderboard";
 
 const RESULT_POINTS: { [key in RankStatus]: number } = {
   win: tournamentSettings.WIN_POINTS,
@@ -17,6 +18,7 @@ export interface LeaderboardEntry {
   points: number;
   median?: number;
   finishTimes: number[];
+  racetimeStats?: BingoLeaderboardPlayer;
 }
 
 const createEmptyEntry = (user: User): LeaderboardEntry => {
@@ -27,13 +29,19 @@ const createEmptyEntry = (user: User): LeaderboardEntry => {
     points: 0,
     median: undefined,
     finishTimes: [],
+    racetimeStats: undefined,
   };
 };
 
-export const toLeaderboardEntries = (allEntrantsUsers: User[], allResults: MatchResult[]) => {
-  let entries: { [key: string]: LeaderboardEntry } = {};
+export const toLeaderboardEntries = (
+  allEntrantsUsers: User[],
+  allResults: MatchResult[],
+  racetimeLeaderboard?: BingoLeaderboard
+): LeaderboardEntry[] => {
+  let entries: { [id: string]: LeaderboardEntry } = {};
 
   for (const entrantUser of allEntrantsUsers) {
+    console.log(entrantUser.name);
     entries[entrantUser.id] = createEmptyEntry(entrantUser);
   }
 
@@ -49,6 +57,12 @@ export const toLeaderboardEntries = (allEntrantsUsers: User[], allResults: Match
       entry.finishTimes.push(
         entrant.result.hasForfeited ? tournamentSettings.FORFEIT_TIME : entrant.result.finishTime!
       );
+      if (racetimeLeaderboard) {
+        const racetimePlayer = racetimeLeaderboard[entrant.user.id];
+        if (racetimePlayer) {
+          entry.racetimeStats = racetimePlayer;
+        }
+      }
     }
   }
   for (const entrantId in entries) {
