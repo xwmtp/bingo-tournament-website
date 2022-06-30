@@ -21,8 +21,7 @@ function App() {
     defaultOptions: {
       queries: {
         staleTime: 1000 * 60,
-        //todo
-        retry: false,
+        retry: 3,
       },
     },
   });

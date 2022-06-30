@@ -1,10 +1,8 @@
 - Overview of matches to restream
-- Remove restream completely
 - Handle getting full urls for kadgar/twitch button, and possibly filter out of user
 - Admin: add custom match results (without racetime)
 
 Checks
-
 - Check todos
 - Remove extra logs
 - Check what is displayed in case of error / no data
@@ -12,6 +10,7 @@ Checks
 - Check everything on smaller screen / mobile
 
 Nice to have
-
+- Backend: redownload user info once a day
 - Alert bar when there is a match to record
 - Replace BorderRadius with variable
+- 

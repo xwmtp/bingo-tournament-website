@@ -5,9 +5,9 @@ import { tournamentSettings } from "../Settings";
 import { calculateMedian } from "../lib/timeHelpers";
 
 const RESULT_POINTS: { [key in RankStatus]: number } = {
-  win: 3,
-  tie: 1,
-  loss: 0,
+  win: tournamentSettings.WIN_POINTS,
+  tie: tournamentSettings.TIE_POINTS,
+  loss: tournamentSettings.LOSE_POINTS,
 } as const;
 
 export interface LeaderboardEntry {
@@ -46,7 +46,6 @@ export const toLeaderboardEntries = (allEntrantsUsers: User[], allResults: Match
       entry.roundsPlayed += 1;
       entry.points += RESULT_POINTS[entrant.result.resultStatus];
       entry.forfeits += entrant.result.hasForfeited ? 1 : 0;
-      // todo median
       entry.finishTimes.push(
         entrant.result.hasForfeited ? tournamentSettings.FORFEIT_TIME : entrant.result.finishTime!
       );

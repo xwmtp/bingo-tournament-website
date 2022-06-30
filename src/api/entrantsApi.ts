@@ -9,7 +9,6 @@ const getAllEntrants = async (): Promise<User[]> => {
     const entrantDtos = await getApi().getEntrants();
     return entrantDtos.map(mapToUser);
   } catch (error) {
-    console.log(error);
     if (websiteSettings.USE_MOCK_DATA) {
       return mockAllUsers;
     }

@@ -2,6 +2,9 @@ export const tournamentSettings = {
   RACETIME_CATEGORY: "oot",
   FORFEIT_TIME: 4 * 3600,
   CAN_WITHDRAW: true,
+  WIN_POINTS: 3,
+  TIE_POINTS: 1,
+  LOSE_POINTS: 0,
 } as const;
 
 export const websiteSettings = {

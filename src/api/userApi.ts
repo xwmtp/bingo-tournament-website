@@ -15,8 +15,6 @@ export const useUser = () => {
 };
 
 export const signUp = async (): Promise<void> => {
-  // todo remove sleep
-  await sleep(2000);
   await getApi().signUp();
 };
 
@@ -43,7 +41,6 @@ const getAllUsers = async (): Promise<User[]> => {
     const userDtos = await getApi().getAllUsers();
     return userDtos.map(mapToUser);
   } catch (error) {
-    console.log(error);
     if (websiteSettings.USE_MOCK_DATA) {
       return mockAllUsers;
     }
@@ -54,7 +51,3 @@ const getAllUsers = async (): Promise<User[]> => {
 export const useAllUsers = () => {
   return useQuery<User[], Error>("allUsers", getAllUsers);
 };
-
-function sleep(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}

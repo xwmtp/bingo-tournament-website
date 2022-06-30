@@ -86,8 +86,6 @@ export function sortByScheduledTime<T extends Scheduled>(
 }
 
 export const mapToMatch = (matchDto: MatchDto): Match => {
-  // todo calculate entrant ranks manually
-
   const entrantRanks =
     matchDto.state === MatchState.Finished ? calculateRanks(matchDto.entrants) : {};
 
