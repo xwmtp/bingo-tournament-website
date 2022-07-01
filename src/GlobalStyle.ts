@@ -23,7 +23,7 @@ export type ColorName = keyof typeof Colors;
 
 export const ScreenWidths = {
   smallPhone: 425,
-  phone: 500,
+  phone: 550,
   tablet: 768,
 } as const;
 
