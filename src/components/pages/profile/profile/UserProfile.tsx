@@ -9,6 +9,9 @@ import { Button } from "../../../forms/Button";
 import { ConfirmWithdrawalModal } from "./ConfirmWithdrawalModal";
 import { tournamentSettings } from "../../../../Settings";
 import { capitalize } from "../../../../lib/stringHelpers";
+import { useBingoLeaderboard } from "../../../../api/bingoLeaderboardApi";
+import { RacetimeStats } from "./RacetimeStats";
+import { RacetimeButton } from "../../../forms/buttons/RacetimeButton";
 
 interface Props {
   user: User;
@@ -16,31 +19,46 @@ interface Props {
 
 export const UserProfile: React.FC<Props> = ({ user }) => {
   const [showWithdrawModal, setShowWithdrawModal] = useState<boolean>(false);
+  const { data: racetimeLeaderboard } = useBingoLeaderboard();
+  const racetimeStats = racetimeLeaderboard && user ? racetimeLeaderboard[user.id] : undefined;
 
   return (
-    <Container>
-      <Profile>
-        <UserDiv>
-          <Avatar user={user} sizeRem={5} />
+    <>
+      <Container>
+        <Profile>
+          <UserDiv>
+            <Avatar user={user} sizeRem={5} />
 
-          <NameAndRoles>
-            <h2>{user.name}</h2>
-            <Role>{user.roles.map((role) => capitalize(role.toLowerCase())).join(" • ")}</Role>
-          </NameAndRoles>
-        </UserDiv>
+            <NameAndRoles>
+              <h2>{user.name}</h2>
+              <Role>{user.roles.map((role) => capitalize(role.toLowerCase())).join(" • ")}</Role>
+              <ButtonDiv>
+                <RacetimeButtonStyled
+                  text="racetime.gg"
+                  url={`https://racetime.gg/user/${user.id}`}
+                />
+              </ButtonDiv>
+            </NameAndRoles>
+          </UserDiv>
 
-        {isEntrant(user) && tournamentSettings.CAN_WITHDRAW && (
-          <WithdrawButton size="normal" color={"coral"} onClick={() => setShowWithdrawModal(true)}>
-            Withdraw from tournament
-          </WithdrawButton>
-        )}
-      </Profile>
+          {isEntrant(user) && tournamentSettings.CAN_WITHDRAW && (
+            <WithdrawButton
+              size="normal"
+              color={"coral"}
+              onClick={() => setShowWithdrawModal(true)}
+            >
+              Withdraw from tournament
+            </WithdrawButton>
+          )}
+        </Profile>
 
-      <ConfirmWithdrawalModal
-        visible={showWithdrawModal}
-        onClose={() => setShowWithdrawModal(false)}
-      />
-    </Container>
+        <ConfirmWithdrawalModal
+          visible={showWithdrawModal}
+          onClose={() => setShowWithdrawModal(false)}
+        />
+      </Container>
+      {racetimeStats && <RacetimeStats racetimeStats={racetimeStats} />}
+    </>
   );
 };
 
@@ -62,6 +80,16 @@ const NameAndRoles = styled.div`
 
 const Role = styled.p`
   color: ${Colors.brighterMossGreen};
+`;
+
+const ButtonDiv = styled.div`
+  width: 20rem;
+  flex-grow: 0;
+`;
+
+const RacetimeButtonStyled = styled(RacetimeButton)`
+  width: min-content;
+  margin-top: 0.4rem;
 `;
 
 const WithdrawButton = styled(Button)`

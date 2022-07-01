@@ -15,7 +15,7 @@ export const DeleteButton: React.FC<Props> = ({ text, onClick, className }) => {
       label="Delete"
       color={"coral"}
       text={text}
-      Icon={PencilIcon}
+      Icon={TrashIcon}
       onClick={onClick}
       className={className}
     />
@@ -26,6 +26,6 @@ const DeleteButtonStyled = styled(IconButton)`
   flex-grow: 0;
 `;
 
-const PencilIcon = styled(BiTrash)`
+const TrashIcon = styled(BiTrash)`
   transform: scale(1.3);
 `;

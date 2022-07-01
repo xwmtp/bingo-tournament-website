@@ -6,7 +6,6 @@ import styled from "styled-components";
 import { FlexDiv } from "../components/divs/FlexDiv";
 import { Colors } from "../GlobalStyle";
 import { useUser } from "../api/userApi";
-import { Duration } from "luxon";
 import { useAllEntrants } from "../api/entrantsApi";
 import { NothingToDisplay } from "../components/general/NothingToDisplay";
 import { useMatchResults } from "../api/matchesApi";
@@ -15,6 +14,7 @@ import { WideScreenOnly } from "../components/divs/WideScreenOnly";
 import { tournamentSettings } from "../Settings";
 import { Spinner } from "../components/general/Spinner";
 import { useBingoLeaderboard } from "../api/bingoLeaderboardApi";
+import { secondsToHms } from "../lib/timeHelpers";
 
 export const LeaderboardPage: React.FC = () => {
   const { data: user } = useUser();
@@ -85,11 +85,7 @@ export const LeaderboardPage: React.FC = () => {
             <Number>{entry.points}</Number>
 
             <WideScreenOnly>
-              <Time>
-                {entry.median
-                  ? Duration.fromObject({ seconds: entry.median }).toFormat("hh:mm:ss")
-                  : "--:--:--"}
-              </Time>
+              <Time>{entry.median ? secondsToHms(entry.median) : "--:--:--"}</Time>
             </WideScreenOnly>
 
             <Number>{entry.roundsPlayed}</Number>

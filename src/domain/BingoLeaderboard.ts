@@ -26,6 +26,7 @@ export type BingoLeaderboard = { [id: string]: BingoLeaderboardPlayer };
 
 export interface BingoLeaderboardPlayer {
   id: string;
+  rank: number;
   leaderboardTime: number;
   average: number;
   effectiveMedian: number;
@@ -40,6 +41,7 @@ export const mapToBingoLeaderboard = (
   for (const entry of bingoLeaderboardDto.entries) {
     leaderboard[entry.playerId] = {
       id: entry.playerId,
+      rank: entry.rank,
       leaderboardTime: hmsToSeconds(entry.leaderboardTime),
       average: hmsToSeconds(entry.average),
       effectiveMedian: hmsToSeconds(entry.effectiveMedian),

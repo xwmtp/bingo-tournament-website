@@ -6,11 +6,18 @@ interface Props {
   url: string;
   children: React.ReactNode;
   color?: ColorName;
+  className?: string;
 }
 
-export const ExternalLink: React.FC<Props> = ({ url, color, children }) => {
+export const ExternalLink: React.FC<Props> = ({ url, color, children, className }) => {
   return (
-    <UrlLink $color={color} href={url} target={"_blank"} rel="noopener noreferrer">
+    <UrlLink
+      className={className}
+      $color={color}
+      href={url}
+      target={"_blank"}
+      rel="noopener noreferrer"
+    >
       {children}
     </UrlLink>
   );
