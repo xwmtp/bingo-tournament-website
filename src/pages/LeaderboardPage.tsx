@@ -1,5 +1,5 @@
 import { Container } from "../components/Container";
-import React from "react";
+import React, { useMemo } from "react";
 import { LeaderboardEntry, toLeaderboardEntries } from "../domain/Leaderboard";
 import { UserDisplay } from "../components/UserDisplay";
 import styled from "styled-components";
@@ -13,16 +13,24 @@ import { Block } from "../components/Block";
 import { WideScreenOnly } from "../components/divs/WideScreenOnly";
 import { tournamentSettings } from "../Settings";
 import { Spinner } from "../components/general/Spinner";
-import { useBingoLeaderboard } from "../api/bingoLeaderboardApi";
+import { useRacetimeLeaderboard } from "../api/racetimeLeaderboardApi";
 import { secondsToHms } from "../lib/timeHelpers";
 
 export const LeaderboardPage: React.FC = () => {
   const { data: user } = useUser();
   const { data: allEntrants, isLoading: isLoadingEntrants } = useAllEntrants();
   const { data: matchResults, isLoading: isLoadingMatches } = useMatchResults();
-  const { data: racetimeLeaderboard } = useBingoLeaderboard();
+  const { data: racetimeLeaderboard } = useRacetimeLeaderboard();
 
   const title = "Leaderboard";
+
+  const sortedEntries = useMemo(() => {
+    if (!!allEntrants && !!matchResults && matchResults.length > 0) {
+      const entries = toLeaderboardEntries(allEntrants, matchResults, racetimeLeaderboard);
+      return sortLeaderboardEntries(entries);
+    }
+    return [];
+  }, [allEntrants, matchResults, racetimeLeaderboard]);
 
   if (isLoadingEntrants || isLoadingMatches) {
     return (
@@ -40,10 +48,7 @@ export const LeaderboardPage: React.FC = () => {
     );
   }
 
-  const entries = toLeaderboardEntries(allEntrants, matchResults, racetimeLeaderboard);
-  const sortedEntries = sortLeaderboardEntries(entries);
-
-  if (entries.length === 0) {
+  if (sortedEntries.length === 0) {
     return (
       <Container title={title}>
         <NothingToDisplay>
@@ -58,7 +63,7 @@ export const LeaderboardPage: React.FC = () => {
       <LeaderboardHeader>
         <HiddenRankAndUser>
           <Rank>0</Rank>
-          <UserDisplay size="big" user={entries[0].user} />
+          <UserDisplay size="big" user={sortedEntries[0].user} />
         </HiddenRankAndUser>
 
         <Number>Points</Number>

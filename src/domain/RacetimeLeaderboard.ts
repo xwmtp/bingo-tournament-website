@@ -1,12 +1,14 @@
 import { DateTime } from "luxon";
 
-export interface BingoLeaderboardDto {
+// Bingo Leaderboard (using racetime data)
+
+export interface RacetimeLeaderboardDto {
   lastUpdated: DateTime;
   numEntries: number;
-  entries: BingoLeaderboardEntryDto[];
+  entries: RacetimeLeaderboardEntryDto[];
 }
 
-interface BingoLeaderboardEntryDto {
+interface RacetimeLeaderboardEntryDto {
   playerName: string;
   playerId: string;
   racetimePoints: number;
@@ -22,9 +24,9 @@ interface BingoLeaderboardEntryDto {
   rank: number;
 }
 
-export type BingoLeaderboard = { [id: string]: BingoLeaderboardPlayer };
+export type RacetimeLeaderboard = { [id: string]: RacetimeLeaderboardEntry };
 
-export interface BingoLeaderboardPlayer {
+export interface RacetimeLeaderboardEntry {
   id: string;
   rank: number;
   leaderboardTime: number;
@@ -33,12 +35,12 @@ export interface BingoLeaderboardPlayer {
   lastRaceDate: DateTime;
 }
 
-export const mapToBingoLeaderboard = (
-  bingoLeaderboardDto: BingoLeaderboardDto
-): BingoLeaderboard => {
-  const leaderboard: BingoLeaderboard = {};
+export const mapToRacetimeLeaderboard = (
+  racetimeLeaderboardDto: RacetimeLeaderboardDto
+): RacetimeLeaderboard => {
+  const leaderboard: RacetimeLeaderboard = {};
 
-  for (const entry of bingoLeaderboardDto.entries) {
+  for (const entry of racetimeLeaderboardDto.entries) {
     leaderboard[entry.playerId] = {
       id: entry.playerId,
       rank: entry.rank,

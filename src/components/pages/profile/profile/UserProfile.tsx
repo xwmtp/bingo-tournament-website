@@ -9,8 +9,6 @@ import { Button } from "../../../forms/Button";
 import { ConfirmWithdrawalModal } from "./ConfirmWithdrawalModal";
 import { tournamentSettings } from "../../../../Settings";
 import { capitalize } from "../../../../lib/stringHelpers";
-import { useBingoLeaderboard } from "../../../../api/bingoLeaderboardApi";
-import { RacetimeStats } from "./RacetimeStats";
 import { RacetimeButton } from "../../../forms/buttons/RacetimeButton";
 
 interface Props {
@@ -19,8 +17,6 @@ interface Props {
 
 export const UserProfile: React.FC<Props> = ({ user }) => {
   const [showWithdrawModal, setShowWithdrawModal] = useState<boolean>(false);
-  const { data: racetimeLeaderboard } = useBingoLeaderboard();
-  const racetimeStats = racetimeLeaderboard && user ? racetimeLeaderboard[user.id] : undefined;
 
   return (
     <>
@@ -32,12 +28,10 @@ export const UserProfile: React.FC<Props> = ({ user }) => {
             <NameAndRoles>
               <h2>{user.name}</h2>
               <Role>{user.roles.map((role) => capitalize(role.toLowerCase())).join(" • ")}</Role>
-              <ButtonDiv>
-                <RacetimeButtonStyled
-                  text="racetime.gg"
-                  url={`https://racetime.gg/user/${user.id}`}
-                />
-              </ButtonDiv>
+              <RacetimeButtonStyled
+                text="racetime.gg"
+                url={`https://racetime.gg/user/${user.id}`}
+              />
             </NameAndRoles>
           </UserDiv>
 
@@ -57,7 +51,6 @@ export const UserProfile: React.FC<Props> = ({ user }) => {
           onClose={() => setShowWithdrawModal(false)}
         />
       </Container>
-      {racetimeStats && <RacetimeStats racetimeStats={racetimeStats} />}
     </>
   );
 };
@@ -76,15 +69,11 @@ const NameAndRoles = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 1.5rem;
+  margin-right: 1rem;
 `;
 
 const Role = styled.p`
   color: ${Colors.brighterMossGreen};
-`;
-
-const ButtonDiv = styled.div`
-  width: 20rem;
-  flex-grow: 0;
 `;
 
 const RacetimeButtonStyled = styled(RacetimeButton)`
