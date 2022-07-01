@@ -25,7 +25,7 @@ export const LeaderboardPage: React.FC = () => {
   const title = "Leaderboard";
 
   const sortedEntries = useMemo(() => {
-    if (!!allEntrants && !!matchResults && matchResults.length > 0) {
+    if (allEntrants && matchResults) {
       const entries = toLeaderboardEntries(allEntrants, matchResults, racetimeLeaderboard);
       return sortLeaderboardEntries(entries);
     }

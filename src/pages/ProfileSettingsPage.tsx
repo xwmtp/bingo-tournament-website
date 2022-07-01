@@ -19,7 +19,7 @@ export const ProfileSettingsPage: React.FC = () => {
   const { data: racetimeLeaderboard } = useRacetimeLeaderboard();
 
   const leaderboardEntry = useMemo(() => {
-    if (!!user && !!matchResults && matchResults.length > 0) {
+    if (user && matchResults) {
       return toLeaderboardEntry(user, matchResults, racetimeLeaderboard);
     }
     return undefined;

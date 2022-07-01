@@ -1,5 +1,4 @@
 - Overview of matches to restream
-- Handle getting full urls for kadgar/twitch button, and possibly filter out of user
 - Admin: add custom match results (without racetime)
 
 Checks

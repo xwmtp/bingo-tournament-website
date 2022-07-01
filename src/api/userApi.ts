@@ -3,15 +3,19 @@ import { mapToUser, User } from "../domain/User";
 import { useQuery } from "react-query";
 import { Role } from "@xwmtp/bingo-tournament";
 import { websiteSettings } from "../Settings";
-import { mockAllUsers } from "../domain/MockData";
+import { mockAllUsers, mockLoggedInUser } from "../domain/MockData";
 
 const getUser = async (): Promise<User | undefined> => {
-  const userDto = await getApi().getUser();
-  return mapToUser(userDto);
+  try {
+    const userDto = await getApi().getUser();
+    return mapToUser(userDto);
+  } catch {
+    return mockLoggedInUser;
+  }
 };
 
 export const useUser = () => {
-  return useQuery<User | undefined, Error>("user", getUser);
+  return useQuery<User | undefined, Error>("user", getUser, { retry: 1 });
 };
 
 export const signUp = async (): Promise<void> => {
