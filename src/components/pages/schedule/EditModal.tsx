@@ -31,6 +31,8 @@ export const EditModal: React.FC<Props> = ({ match, visible, onClose }) => {
   const [dateTimeInput, setDateTimeInput] = useState<DateTime>(match.scheduledTime);
   const [restreamChannel, setRestreamChannel] = useState<string | undefined>(undefined);
 
+  const validDateTimeInput = dateTimeInput > DateTime.local();
+
   const { data: user } = useUser();
 
   const queryClient = useQueryClient();
@@ -109,11 +111,12 @@ export const EditModal: React.FC<Props> = ({ match, visible, onClose }) => {
         )}
 
         <MutationButtonStyled
+          disabled={!validDateTimeInput}
           mutationStatus={updateTimeMutation.status}
           onIdleText={"Change"}
           color={"brightMossGreen"}
           size={"big"}
-          onClick={() => updateTimeMutation.mutate(updateTimeMatch)}
+          onClick={() => validDateTimeInput && updateTimeMutation.mutate(updateTimeMatch)}
         />
 
         {!!user && isAdmin(user) && (

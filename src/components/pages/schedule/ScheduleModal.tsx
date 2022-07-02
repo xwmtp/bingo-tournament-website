@@ -18,7 +18,8 @@ interface Props {
 }
 
 export const ScheduleModal: React.FC<Props> = ({ match, visible, onClose }) => {
-  const [dateTimeInput, setDateTimeInput] = useState<DateTime>(DateTime.local());
+  const initialDateTime = DateTime.local().plus({ day: 1 }).startOf("day").plus({ hour: 20 });
+  const [dateTimeInput, setDateTimeInput] = useState<DateTime>(initialDateTime);
 
   const queryClient = useQueryClient();
   const matchMutation = useMutation(updateMatchTime, {
@@ -37,6 +38,8 @@ export const ScheduleModal: React.FC<Props> = ({ match, visible, onClose }) => {
     matchMutation.reset();
     onClose();
   };
+
+  const validInput = dateTimeInput > DateTime.local();
 
   return (
     <Modal modalTitle={"Pick date & time"} isOpen={visible} onClose={internalOnClose}>
@@ -60,10 +63,11 @@ export const ScheduleModal: React.FC<Props> = ({ match, visible, onClose }) => {
         )}
 
         <ConfirmButton
+          disabled={!validInput}
           mutationStatus={matchMutation.status}
           color={"brightMossGreen"}
           size={"big"}
-          onClick={() => matchMutation.mutate(updateMatch)}
+          onClick={() => validInput && matchMutation.mutate(updateMatch)}
         />
       </ContainerContents>
     </Modal>
