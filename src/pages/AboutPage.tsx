@@ -128,9 +128,9 @@ export const AboutPage: React.FC = () => {
                 <em>virtual point</em>. The virtual point is removed before Round 3 starts.
               </ListItem>
               <ListItem>
-                Within each group of entrants with the same amount of points (including the virtual
-                point), the highest-seeded player will face the lowest-seeded player, the second
-                highest will face the second lowest, and so on.
+                Within each group of entrants with the same amount of tournament points (including
+                the virtual point), the highest-seeded player will face the lowest-seeded player,
+                the second highest will face the second lowest, and so on.
               </ListItem>
               <ListItem>
                 If a group has an odd number of entrants, the highest seed of that group floats down
@@ -138,14 +138,17 @@ export const AboutPage: React.FC = () => {
                 once.
               </ListItem>
               <ListItem>
-                If there is an odd number of entrants, the highest seed of the lowest group at each
-                round gets a <strong>bye</strong>. A maximum of one bye can be given to each
-                entrant.
+                Each entrant will only have to face an entrant that floated down once at most.
               </ListItem>
               <ListItem>
-                A player that received a bye should still do a race that Round against any
-                opponent(s), to set a a time for their tournament median. If not, they receive a
-                forfeit time (but still 3 points).
+                If there is an odd number of entrants, the highest seed of the lowest group gets a{" "}
+                <strong>bye</strong>. A maximum of one bye can be given to each entrant.
+              </ListItem>
+              <ListItem>
+                A player that received a bye should still do a race against any opponent(s), to set
+                a time for their tournament median. If not, they receive a forfeit time (but still 3
+                points). They should announce before the match that it will count for the
+                tournament.
               </ListItem>
             </List>
             <ListItem>
