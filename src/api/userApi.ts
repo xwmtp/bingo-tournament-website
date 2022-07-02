@@ -3,14 +3,14 @@ import { mapToUser, User } from "../domain/User";
 import { useQuery } from "react-query";
 import { Role } from "@xwmtp/bingo-tournament";
 import { websiteSettings } from "../Settings";
-import { mockAllUsers, mockLoggedInUser } from "../domain/MockData";
+import { mockAllUsers } from "../domain/MockData";
 
 const getUser = async (): Promise<User | undefined> => {
   try {
     const userDto = await getApi().getUser();
     return mapToUser(userDto);
   } catch {
-    return mockLoggedInUser;
+    return undefined;
   }
 };
 
