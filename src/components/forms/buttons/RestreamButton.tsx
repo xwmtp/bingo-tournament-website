@@ -11,7 +11,7 @@ export const RestreamButton: React.FC<Props> = ({ restreamChannel, className }) 
     <TwitchButton
       label={restreamChannel}
       text="Restream"
-      url={restreamChannel && `https://twitch.tv/${restreamChannel}`}
+      url={restreamChannel}
       className={className}
     />
   );
