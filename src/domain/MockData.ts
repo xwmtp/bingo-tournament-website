@@ -57,7 +57,15 @@ const exodus = {
   roles: [Role.Entrant],
   name: "Exodus",
   avatar: websiteSettings.DEFAULT_AVATAR,
-  twitchChannel: "https://www.twitch.tv/matttinthehat",
+  twitchChannel: "https://www.twitch.tv/exodus",
+};
+
+const adef = {
+  id: "ZVa0eMonnbol9pyJ",
+  roles: [Role.Entrant],
+  name: "Adef",
+  avatar: websiteSettings.DEFAULT_AVATAR,
+  twitchChannel: "https://www.twitch.tv/adef",
 };
 
 export const mockScheduledMatches: ScheduledMatch[] = [
@@ -344,6 +352,7 @@ export const mockAllUsers: User[] = [
   juwk,
   matttInTheHat,
   exodus,
+  adef,
 ];
 
 export const mockAllMatches = [

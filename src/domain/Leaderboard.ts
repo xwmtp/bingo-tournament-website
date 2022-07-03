@@ -71,16 +71,16 @@ export const toLeaderboardEntries = (
       if (entrant.result.resultStatus === "loss") {
         entry.losses++;
       }
-      if (racetimeLeaderboard) {
-        const racetimePlayer = racetimeLeaderboard[entrant.user.id];
-        if (racetimePlayer) {
-          entry.racetimeStats = racetimePlayer;
-        }
-      }
     }
   }
   for (const entrantId in entries) {
     entries[entrantId].median = calculateMedian(entries[entrantId].finishTimes);
+    if (racetimeLeaderboard) {
+      const racetimeEntry = racetimeLeaderboard[entrantId];
+      if (racetimeEntry) {
+        entries[entrantId].racetimeStats = racetimeEntry;
+      }
+    }
   }
   return Object.values(entries);
 };
