@@ -21,6 +21,7 @@ export interface LeaderboardEntry {
   ties: number;
   losses: number;
   finishTimes: number[];
+  opponents: User[];
   racetimeStats?: RacetimeLeaderboardEntry;
 }
 
@@ -35,6 +36,7 @@ const createEmptyEntry = (user: User): LeaderboardEntry => {
     ties: 0,
     losses: 0,
     finishTimes: [],
+    opponents: [],
     racetimeStats: undefined,
   };
 };
@@ -62,6 +64,11 @@ export const toLeaderboardEntries = (
       entry.finishTimes.push(
         entrant.result.hasForfeited ? tournamentSettings.FORFEIT_TIME : entrant.result.finishTime!
       );
+      for (const opponent of result.entrants) {
+        if (opponent.user.id !== entrant.user.id) {
+          entry.opponents.push(opponent.user);
+        }
+      }
       if (entrant.result.resultStatus === "win") {
         entry.wins++;
       }
@@ -92,4 +99,40 @@ export const toLeaderboardEntry = (
 ): LeaderboardEntry | undefined => {
   const entries = toLeaderboardEntries([user], allResults, racetimeLeaderboard);
   return entries.filter((entry) => entry.user.id === user.id)[0];
+};
+
+export const sortLeaderboardEntries = (entries: LeaderboardEntry[]) => {
+  const emptyMedian = tournamentSettings.FORFEIT_TIME;
+
+  return [...entries].sort((a, b) => {
+    if (a.points !== b.points) {
+      return b.points - a.points;
+    }
+    if (a.median !== b.median) {
+      return (a.median ?? emptyMedian) - (b.median ?? emptyMedian);
+    }
+    if (a.racetimeStats?.leaderboardTime !== b.racetimeStats?.leaderboardTime) {
+      return (
+        (a.racetimeStats?.leaderboardTime ?? emptyMedian) -
+        (b.racetimeStats?.leaderboardTime ?? emptyMedian)
+      );
+    }
+    return a.user.name.toLowerCase().localeCompare(b.user.name.toLowerCase());
+  });
+};
+
+// export for pairing calculations
+export const toPairingEntries = (entries: LeaderboardEntry[]) => {
+  const sortedEntries = sortLeaderboardEntries(entries);
+  return sortedEntries.map((entry) => {
+    return {
+      name: entry.user.name,
+      id: entry.user.id,
+      opponents: entry.opponents.map((opponent) => {
+        return { name: opponent.name, id: opponent.id };
+      }),
+      points: entry.points,
+      current_seed: entry.racetimeStats?.leaderboardScore ?? null,
+    };
+  });
 };

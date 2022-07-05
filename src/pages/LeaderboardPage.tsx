@@ -1,6 +1,6 @@
 import { Container } from "../components/Container";
 import React, { useMemo } from "react";
-import { LeaderboardEntry, toLeaderboardEntries } from "../domain/Leaderboard";
+import { sortLeaderboardEntries, toLeaderboardEntries } from "../domain/Leaderboard";
 import { UserDisplay } from "../components/UserDisplay";
 import styled from "styled-components";
 import { FlexDiv } from "../components/divs/FlexDiv";
@@ -11,7 +11,6 @@ import { NothingToDisplay } from "../components/general/NothingToDisplay";
 import { useMatchResults } from "../api/matchesApi";
 import { Block } from "../components/Block";
 import { WideScreenOnly } from "../components/divs/WideScreenOnly";
-import { tournamentSettings } from "../Settings";
 import { Spinner } from "../components/general/Spinner";
 import { useRacetimeLeaderboard } from "../api/racetimeLeaderboardApi";
 import { secondsToHms } from "../lib/timeHelpers";
@@ -103,26 +102,6 @@ export const LeaderboardPage: React.FC = () => {
       })}
     </Container>
   );
-};
-
-const emptyMedian = tournamentSettings.FORFEIT_TIME;
-
-const sortLeaderboardEntries = (entries: LeaderboardEntry[]) => {
-  return [...entries].sort((a, b) => {
-    if (a.points !== b.points) {
-      return b.points - a.points;
-    }
-    if (a.median !== b.median) {
-      return (a.median ?? emptyMedian) - (b.median ?? emptyMedian);
-    }
-    if (a.racetimeStats?.leaderboardTime !== b.racetimeStats?.leaderboardTime) {
-      return (
-        (a.racetimeStats?.leaderboardTime ?? emptyMedian) -
-        (b.racetimeStats?.leaderboardTime ?? emptyMedian)
-      );
-    }
-    return a.user.name.toLowerCase().localeCompare(b.user.name.toLowerCase());
-  });
 };
 
 const LeaderboardHeader = styled(Block)`

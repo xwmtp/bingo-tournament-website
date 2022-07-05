@@ -29,6 +29,7 @@ export type RacetimeLeaderboard = { [id: string]: RacetimeLeaderboardEntry };
 export interface RacetimeLeaderboardEntry {
   id: string;
   rank: number;
+  leaderboardScore: number;
   leaderboardTime: number;
   average: number;
   effectiveMedian: number;
@@ -44,6 +45,7 @@ export const mapToRacetimeLeaderboard = (
     leaderboard[entry.playerId] = {
       id: entry.playerId,
       rank: entry.rank,
+      leaderboardScore: entry.leaderboardScore,
       leaderboardTime: hmsToSeconds(entry.leaderboardTime),
       average: hmsToSeconds(entry.average),
       effectiveMedian: hmsToSeconds(entry.effectiveMedian),
