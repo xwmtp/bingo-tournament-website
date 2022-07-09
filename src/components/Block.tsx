@@ -3,13 +3,17 @@ import styled from "styled-components";
 import { FlexDiv } from "./divs/FlexDiv";
 import { Colors, ScreenWidths } from "../GlobalStyle";
 
-interface Props {
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   className?: string;
 }
 
-export const Block: React.FC<Props> = ({ children, className }) => {
-  return <BlockStyled className={className}>{children}</BlockStyled>;
+export const Block: React.FC<Props> = (props) => {
+  return (
+    <BlockStyled className={props.className} {...props}>
+      {props.children}
+    </BlockStyled>
+  );
 };
 
 const BlockStyled = styled(FlexDiv)`

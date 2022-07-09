@@ -41,7 +41,7 @@ export const UserDisplay: React.FC<Props> = ({
       </EmptySpaceWrapper>
 
       <NameWrapper>
-        <Name $removeNamePadding={removeNamePadding}>{truncateString(user.name, 20)}</Name>
+        <Name $removeNamePadding={removeNamePadding}>{truncateString(user.name, 18)}</Name>
       </NameWrapper>
     </UserStyled>
   );

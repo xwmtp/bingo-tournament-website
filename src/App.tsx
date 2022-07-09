@@ -15,6 +15,7 @@ import { Page } from "./components/Page";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { LeaderboardPage } from "./pages/LeaderboardPage";
+import { PairingPage } from "./pages/PairingPage";
 
 function App() {
   const queryClient = new QueryClient({
@@ -44,8 +45,9 @@ function App() {
                 <Route path={"/profile"} element={<ProfilePage />}>
                   <Route path={"settings"} element={<ProfileSettingsPage />} />
                   <Route path={"matches"} element={<MyMatchesPage />} />
-                  <Route path={"admin"} element={<AdminPage />} />
+                  <Route path={"admin"} element={<AdminPage />}></Route>
                 </Route>
+                <Route path={"pairing"} element={<PairingPage />} />
               </Routes>
             </Page>
           </Content>

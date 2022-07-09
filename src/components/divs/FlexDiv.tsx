@@ -2,16 +2,24 @@ import styled from "styled-components";
 import React from "react";
 import { WideScreenOnly } from "./WideScreenOnly";
 
-export const FlexDiv: React.FC<{
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
-}> = ({ className, children }) => {
-  return <CenteredFlexDiv className={className}>{children}</CenteredFlexDiv>;
+}
+
+export const FlexDiv: React.FC<Props> = (props) => {
+  return (
+    <CenteredFlexDiv className={props.className} {...props}>
+      {props.children}
+    </CenteredFlexDiv>
+  );
 };
 
-export const WideScreenOnlyFlexDiv: React.FC<{
-  className?: string;
-}> = ({ className, children }) => {
-  return <CenteredWideScreenOnlyDiv className={className}>{children}</CenteredWideScreenOnlyDiv>;
+export const WideScreenOnlyFlexDiv: React.FC<Props> = (props) => {
+  return (
+    <CenteredWideScreenOnlyDiv className={props.className} {...props}>
+      {props.children}
+    </CenteredWideScreenOnlyDiv>
+  );
 };
 
 const CenteredFlexDiv = styled.div`
