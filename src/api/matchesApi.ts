@@ -12,7 +12,7 @@ import { DateTime } from "luxon";
 import { useQuery } from "react-query";
 import { NewMatch as NewMatchDto } from "@xwmtp/bingo-tournament";
 import { websiteSettings } from "../Settings";
-import { mockAllMatches } from "../domain/MockData";
+import { mockAllMatches } from "../domain/mocks/MockData";
 
 const getAllMatches = async (): Promise<Match[]> => {
   try {

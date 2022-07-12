@@ -1,33 +1,18 @@
-import React, { useState } from "react";
-import { Pair, PairBlock } from "./PairBlock";
+import React from "react";
+import { PairBlock } from "./PairBlock";
+import { Pair } from "../../../domain/Pair";
 
 interface Props {
   pairs: Pair[];
+  numberOfVisiblePairs: number;
 }
 
-export const PairsList: React.FC<Props> = ({ pairs }) => {
-  const [areVisible, setAreVisible] = useState<boolean[]>(Array(pairs.length).fill(false));
-
-  const toggleIsVisible = (index: number) => {
-    return () => {
-      setAreVisible((prevState) => {
-        const newState = [...prevState];
-        newState[index] = !newState[index];
-        return newState;
-      });
-    };
-  };
-
+export const PairsList: React.FC<Props> = ({ pairs, numberOfVisiblePairs }) => {
   return (
-    <div>
+    <>
       {pairs.map((pair, i) => (
-        <PairBlock
-          key={i}
-          pair={pair}
-          isVisible={areVisible[i]}
-          toggleIsVisible={toggleIsVisible(i).bind(this)}
-        />
+        <PairBlock key={i} pair={pair} isVisible={i < numberOfVisiblePairs} />
       ))}
-    </div>
+    </>
   );
 };

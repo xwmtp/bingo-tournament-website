@@ -1,7 +1,7 @@
-import { MatchResult, ScheduledMatch, UnscheduledMatch } from "./Match";
+import { MatchResult, ScheduledMatch, UnscheduledMatch } from "../Match";
 import { DateTime } from "luxon";
-import { User } from "./User";
-import { websiteSettings } from "../Settings";
+import { User } from "../User";
+import { websiteSettings } from "../../Settings";
 import { Role } from "@xwmtp/bingo-tournament";
 
 const xwillmarktheplace = {

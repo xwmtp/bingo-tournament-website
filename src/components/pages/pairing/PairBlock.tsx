@@ -1,47 +1,48 @@
 import React from "react";
-import { LeaderboardEntry } from "../../../domain/Leaderboard";
 import styled from "styled-components";
 import { Block } from "../../Block";
 import { UserDisplay } from "../../UserDisplay";
 import { FlexDiv } from "../../divs/FlexDiv";
-
-export type Pair = PairEntry[];
-
-export interface PairEntry {
-  leaderboardEntry: LeaderboardEntry;
-  pairPoints: number; // incl virtual point
-  pairTourneyPoints: number; // excl virtual point
-  pairSeed: number;
-}
+import { Pair } from "../../../domain/Pair";
 
 interface Props {
   pair: Pair;
   isVisible: boolean;
-  toggleIsVisible: () => void;
+  direction?: "row" | "column";
 }
 
-export const PairBlock: React.FC<Props> = ({ pair, isVisible, toggleIsVisible }) => {
+export const PairBlock: React.FC<Props> = ({ pair, isVisible, direction = "row" }) => {
+  const BlockStyled = direction === "row" ? BlockHorizontal : BlockVertical;
+  const PairUserStyled = direction === "row" ? PairUserRow : PairUserRowVertical;
   return (
-    <BlockStyled onClick={toggleIsVisible}>
+    <BlockStyled>
       {pair.map((entry) => (
-        <PairUser key={entry.leaderboardEntry.user.id} $isVisible={isVisible}>
-          <PairUserDisplay user={entry.leaderboardEntry.user} />
+        <PairUserStyled key={entry.user.id} $isVisible={isVisible}>
+          <PairUserDisplay user={entry.user} />
           <PairPoints>{entry.pairPoints}</PairPoints>
           <p>{entry.pairSeed}</p>
-        </PairUser>
+        </PairUserStyled>
       ))}
     </BlockStyled>
   );
 };
 
-const BlockStyled = styled(Block)`
-  flex-direction: row;
+const BlockHorizontal = styled(Block)`
   justify-content: space-between;
+  padding: 0.6rem;
 `;
 
-const PairUser = styled(FlexDiv)<{ $isVisible: boolean }>`
+const BlockVertical = styled(BlockHorizontal)`
+  flex-direction: column;
+`;
+
+const PairUserRow = styled(FlexDiv)<{ $isVisible: boolean }>`
   visibility: ${({ $isVisible }) => ($isVisible ? "visible" : "hidden")};
   min-width: 18rem;
+`;
+
+const PairUserRowVertical = styled(PairUserRow)`
+  margin: 0.5rem 0;
 `;
 
 const PairUserDisplay = styled(UserDisplay)`

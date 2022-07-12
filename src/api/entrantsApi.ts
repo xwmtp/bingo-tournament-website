@@ -1,6 +1,6 @@
 import { mapToUser, User } from "../domain/User";
 import { getApi } from "./api";
-import { mockAllUsers } from "../domain/MockData";
+import { mockAllUsers } from "../domain/mocks/MockData";
 import { useQuery } from "react-query";
 import { websiteSettings } from "../Settings";
 
