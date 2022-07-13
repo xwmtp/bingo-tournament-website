@@ -8,6 +8,7 @@ import { useMatchResults } from "../../../../api/matchesApi";
 import { useRacetimeLeaderboard } from "../../../../api/racetimeLeaderboardApi";
 import { toLeaderboardEntries, toPairingEntries } from "../../../../domain/Leaderboard";
 import { DateTime } from "luxon";
+import { ExternalLink } from "../../../general/ExternalLink";
 
 export const AllEntrants: React.FC = () => {
   const { data: allEntrants, isLoading, isError, isIdle } = useAllEntrants();
@@ -50,7 +51,9 @@ export const AllEntrants: React.FC = () => {
       <p>Total entrants: {sortedEntrants.length}</p>
       <EntrantsList>
         {sortedEntrants.map((entrant) => (
-          <UserDisplayStyled key={entrant.id} user={entrant} />
+          <RacetimeLink url={`https://racetime.gg/user/${entrant.id}`}>
+            <UserDisplayStyled key={entrant.id} user={entrant} />
+          </RacetimeLink>
         ))}
       </EntrantsList>
 
@@ -82,4 +85,9 @@ const UserDisplayStyled = styled(UserDisplay)`
 const JsonButton = styled(Button)`
   margin-top: 0.7rem;
   width: 7.5rem;
+`;
+
+const RacetimeLink = styled(ExternalLink)`
+  font-weight: normal;
+  color: white;
 `;
