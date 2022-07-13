@@ -9,6 +9,7 @@ import { useRacetimeLeaderboard } from "../../../../api/racetimeLeaderboardApi";
 import { toLeaderboardEntries, toPairingEntries } from "../../../../domain/Leaderboard";
 import { DateTime } from "luxon";
 import { ExternalLink } from "../../../general/ExternalLink";
+import { FlexDiv } from "../../../divs/FlexDiv";
 
 export const AllEntrants: React.FC = () => {
   const { data: allEntrants, isLoading, isError, isIdle } = useAllEntrants();
@@ -30,12 +31,11 @@ export const AllEntrants: React.FC = () => {
     return <p>Could not load entrants</p>;
   }
 
+  const namesCsv = allEntrants.map((entrant) => `${entrant.name}; ${entrant.id}`).join("\n");
+
   const sortedEntrants = allEntrants.sort((a, b) => a.name.localeCompare(b.name));
 
-  const downloadPairingEntries = () => {
-    const text = JSON.stringify(pairingEntries, null, 1);
-    const fileName = `entrants_${DateTime.local(DateTime.DATETIME_SHORT)}.json`;
-
+  const downloadText = (text: string, fileName: string) => {
     const element = document.createElement("a");
     const file = new Blob([text], {
       type: "text/plain",
@@ -57,13 +57,32 @@ export const AllEntrants: React.FC = () => {
         ))}
       </EntrantsList>
 
-      <JsonButton
-        disabled={pairingEntries.length === 0}
-        color="brightMossGreen"
-        onClick={() => pairingEntries.length > 0 && downloadPairingEntries()}
-      >
-        Download json
-      </JsonButton>
+      <DownloadButtons>
+        <DownloadButton
+          disabled={pairingEntries.length === 0}
+          color="brightMossGreen"
+          onClick={() =>
+            pairingEntries.length > 0 &&
+            downloadText(
+              JSON.stringify(pairingEntries, null, 1),
+              `entrants_${DateTime.local(DateTime.DATETIME_SHORT)}.json`
+            )
+          }
+        >
+          Download pairing json
+        </DownloadButton>
+
+        <DownloadButton
+          disabled={pairingEntries.length === 0}
+          color="brightMossGreen"
+          onClick={() =>
+            pairingEntries.length > 0 &&
+            downloadText(namesCsv, `entrants_${DateTime.local(DateTime.DATETIME_SHORT)}.csv`)
+          }
+        >
+          Download names csv
+        </DownloadButton>
+      </DownloadButtons>
     </AllEntrantsDiv>
   );
 };
@@ -82,9 +101,15 @@ const UserDisplayStyled = styled(UserDisplay)`
   margin-top: 0.7rem;
 `;
 
-const JsonButton = styled(Button)`
+const DownloadButtons = styled(FlexDiv)`
   margin-top: 0.7rem;
-  width: 7.5rem;
+  justify-content: flex-start;
+`;
+
+const DownloadButton = styled(Button)`
+  margin-top: 0.7rem;
+  flex-grow: 0;
+  margin-right: 0.6rem;
 `;
 
 const RacetimeLink = styled(ExternalLink)`
