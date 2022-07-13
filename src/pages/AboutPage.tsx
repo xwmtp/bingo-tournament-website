@@ -29,7 +29,7 @@ export const AboutPage: React.FC = () => {
               <ExternalLink url="https://ootbingo.github.io/bingo/latest-version.html">
                 Bingo
               </ExternalLink>{" "}
-              tournament, played on the latest version (currently <strong>v10.1</strong>). Note that
+              tournament, played on the latest version (currently <strong>v10.2</strong>). Note that
               the version <em>may</em> be updated between rounds, but never while a round is in
               progress.
             </ListItem>
