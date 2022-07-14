@@ -3,7 +3,7 @@ import { mapToUser, User } from "../domain/User";
 import { useQuery } from "react-query";
 import { Role } from "@xwmtp/bingo-tournament";
 import { websiteSettings } from "../Settings";
-import { mockAllUsers } from "../domain/MockData";
+import { mockAllUsers } from "../domain/mocks/MockData";
 
 const getUser = async (): Promise<User | undefined> => {
   try {
