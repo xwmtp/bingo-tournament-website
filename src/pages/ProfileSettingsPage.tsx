@@ -12,6 +12,7 @@ import { FlexDiv } from "../components/divs/FlexDiv";
 import { Margins } from "../GlobalStyle";
 import { useMatchResults } from "../api/matchesApi";
 import { toLeaderboardEntry } from "../domain/Leaderboard";
+import { tournamentSettings } from "../Settings";
 
 export const ProfileSettingsPage: React.FC = () => {
   const { data: user } = useUser();
@@ -39,7 +40,7 @@ export const ProfileSettingsPage: React.FC = () => {
   return (
     <ProfileSettingsPageDiv>
       {<UserProfile user={user} />}
-      {!isEntrant(user) && <SignUp />}
+      {!isEntrant(user) && tournamentSettings.CAN_SIGNUP && <SignUp />}
 
       <Stats>
         {isEntrant(user) && !!leaderboardEntry && (
