@@ -3,15 +3,18 @@ import styled from "styled-components";
 import { FlexDiv } from "./divs/FlexDiv";
 import { ScreenWidths } from "../GlobalStyle";
 
-export const Page: React.FC = ({ children }) => {
-  return <PageStyled>{children}</PageStyled>;
+interface Props {
+  width?: number;
+}
+
+export const Page: React.FC<Props> = ({ width, children }) => {
+  return <PageStyled $width={width || 1000}>{children}</PageStyled>;
 };
 
-const PageStyled = styled(FlexDiv)`
-  width: 1000px;
-  flex-direction: column;
+const PageStyled = styled(FlexDiv)<{ $width: number }>`
+  width: ${({ $width }) => `${$width}px`};
   max-width: 90vw;
-  flex-flow: column;
+  flex-direction: column;
   justify-content: start;
   flex-grow: 1;
 

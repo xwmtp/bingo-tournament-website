@@ -11,11 +11,11 @@ import { AboutPage } from "./pages/AboutPage";
 import { AdminPage } from "./pages/AdminPage";
 import { ModalProvider } from "styled-react-modal";
 import { ResultsPage } from "./pages/ResultsPage";
-import { Page } from "./components/Page";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { LeaderboardPage } from "./pages/LeaderboardPage";
 import { PairingPage } from "./pages/PairingPage";
+import { Page } from "./components/Page";
 
 function App() {
   const queryClient = new QueryClient({
@@ -33,23 +33,23 @@ function App() {
         <ModalProvider>
           <Header />
           <Content>
-            <Page>
-              <Routes>
-                <Route path={"/"} element={<LeaderboardPage />} />
-                <Route path={"/leaderboard"} element={<LeaderboardPage />} />
-                <Route path={"/schedule"} element={<SchedulePage />}>
-                  <Route path={"addmatch"} element={<AddMatchPage />} />
-                </Route>
-                <Route path={"/results"} element={<ResultsPage />} />
-                <Route path={"/about"} element={<AboutPage />} />
-                <Route path={"/profile"} element={<ProfilePage />}>
-                  <Route path={"settings"} element={<ProfileSettingsPage />} />
-                  <Route path={"matches"} element={<MyMatchesPage />} />
-                  <Route path={"admin"} element={<AdminPage />}></Route>
-                </Route>
-                <Route path={"pairing"} element={<PairingPage />} />
-              </Routes>
-            </Page>
+            <Routes>
+              <Route path={"/"} element={<Page children={<LeaderboardPage />} />} />
+              <Route path={"/leaderboard"} element={<Page children={<LeaderboardPage />} />} />
+              <Route path={"/schedule"} element={<Page children={<SchedulePage />} />}>
+                <Route path={"addmatch"} element={<Page children={<AddMatchPage />} />} />
+              </Route>
+
+              <Route path={"/results"} element={<Page children={<ResultsPage />} />} />
+              <Route path={"/about"} element={<Page children={<AboutPage />} />} />
+              <Route path={"/profile"} element={<Page children={<ProfilePage />} />}>
+                <Route path={"settings"} element={<Page children={<ProfileSettingsPage />} />} />
+                <Route path={"matches"} element={<Page children={<MyMatchesPage />} />} />
+                <Route path={"admin"} element={<Page children={<AdminPage />} />} />
+              </Route>
+
+              <Route path={"pairing"} element={<Page width={2000} children={<PairingPage />} />} />
+            </Routes>
           </Content>
         </ModalProvider>
       </BrowserRouter>
