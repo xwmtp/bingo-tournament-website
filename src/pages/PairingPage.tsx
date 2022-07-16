@@ -55,13 +55,13 @@ export const PairingPage: React.FC = () => {
 
   return (
     <Page>
-      <PairsContainer width={"65%"}>
+      <PairsContainer>
         <PairsList pairs={pairs} numberOfVisiblePairs={numberOfVisiblePairs} />
         {pairs.length === 0 && <NothingToDisplay>No pairs to display.</NothingToDisplay>}
       </PairsContainer>
 
       <ControlContainers>
-        <ControlContainer width={"35%"}>
+        <ControlContainer>
           <FlexDiv>
             <ControlButton
               disabled={numberOfVisiblePairs === 0}
@@ -108,7 +108,8 @@ export const PairingPage: React.FC = () => {
 };
 
 const Page = styled(FlexDiv)`
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
   justify-content: flex-start;
   width: 100%;
 `;
@@ -118,11 +119,15 @@ const PairsContainer = styled(Container)`
 `;
 
 const ControlContainers = styled(FlexDiv)`
-  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
 `;
 
 const ControlContainer = styled(Container)`
-  width: 100%;
+  width: auto;
+  min-width: 25rem;
+  margin: 0 1rem 1rem;
 `;
 
 const ControlButton = styled(Button)`
@@ -132,6 +137,6 @@ const ControlButton = styled(Button)`
 `;
 
 const TextArea = styled(TextAreaInput)`
-  height: 20rem;
   width: 100%;
+  height: 20rem;
 `;

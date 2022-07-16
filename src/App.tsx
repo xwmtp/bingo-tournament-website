@@ -48,7 +48,10 @@ function App() {
                 <Route path={"admin"} element={<Page children={<AdminPage />} />} />
               </Route>
 
-              <Route path={"pairing"} element={<Page width={2000} children={<PairingPage />} />} />
+              <Route
+                path={"pairing"}
+                element={<Page width={"100%"} children={<PairingPage />} />}
+              />
             </Routes>
           </Content>
         </ModalProvider>

@@ -3,6 +3,7 @@ import { DateTime } from "luxon";
 import { User } from "../User";
 import { websiteSettings } from "../../Settings";
 import { Role } from "@xwmtp/bingo-tournament";
+import { Pair } from "../Pair";
 
 const xwillmarktheplace = {
   id: "d17DexWEKg3ak64R",
@@ -342,6 +343,25 @@ export const mockMatchResults: MatchResult[] = [
     scheduledTime: DateTime.fromISO("2023-02-14T12:45:03Z"),
     round: "Round 2",
   },
+];
+
+export const mockPairs: Pair[] = [
+  [
+    { user: xwillmarktheplace, pairPoints: 1, pairTourneyPoints: 1, pairSeed: 110 },
+    { user: scaramanga, pairPoints: 1, pairTourneyPoints: 1, pairSeed: 110 },
+  ],
+  [
+    { user: fleush, pairPoints: 1, pairTourneyPoints: 1, pairSeed: 110 },
+    { user: jenslang, pairPoints: 1, pairTourneyPoints: 1, pairSeed: 110 },
+  ],
+  [
+    { user: juwk, pairPoints: 1, pairTourneyPoints: 1, pairSeed: 110 },
+    { user: matttInTheHat, pairPoints: 1, pairTourneyPoints: 1, pairSeed: 110 },
+  ],
+  [
+    { user: exodus, pairPoints: 1, pairTourneyPoints: 1, pairSeed: 110 },
+    { user: adef, pairPoints: 1, pairTourneyPoints: 1, pairSeed: 110 },
+  ],
 ];
 
 export const mockAllUsers: User[] = [
