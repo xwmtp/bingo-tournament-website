@@ -22,6 +22,6 @@ export const PairsList: React.FC<Props> = ({ pairs, numberOfVisiblePairs }) => {
 const PairsListStyled = styled(FlexDiv)`
   flex-direction: column;
   flex-wrap: wrap;
-  max-height: 50rem;
+  max-height: 48rem;
   margin-bottom: 0.7rem;
 `;
