@@ -163,7 +163,8 @@ const ActionButton = styled(FlexDiv)`
 `;
 
 const StartTime = styled(FlexDiv)`
-  font-size: 1.4rem;
+  min-width: 6.1rem;
+  font-size: 1.3rem;
   font-weight: 600;
 `;
 
@@ -171,23 +172,26 @@ const Round = styled(WideScreenOnlyFlexDiv)`
   min-width: 7.2rem;
 `;
 
+const RecordButtonStyled = styled(RecordButton)`
+  margin-top: 0.5rem;
+  min-width: fit-content;
+  width: 100%;
+`;
+
 const VerticalButtonsDiv = styled(FlexDiv)`
   flex-direction: column;
 `;
 
 const VerticalStreamButtonsDiv = styled(VerticalButtonsDiv)`
+  //min-width: 6.3rem;
+  @media (min-width: ${ScreenWidths.phone + 1}px) and (max-width: ${ScreenWidths.tablet}px) {
+    min-width: auto;
+  }
+  @media (max-width: ${ScreenWidths.smallPhone}px) {
+    min-width: auto;
+  }
   min-width: 6.3rem;
   align-items: flex-end;
-`;
-
-const KadgarButtonStyled = styled(KadgarButton)`
-  margin-top: 0.5rem;
-  width: 100%;
-`;
-
-const RecordButtonStyled = styled(RecordButton)`
-  margin-top: 0.5rem;
-  width: 100%;
 `;
 
 const RestreamButtonStyled = styled(RestreamButton)`
@@ -195,5 +199,11 @@ const RestreamButtonStyled = styled(RestreamButton)`
 `;
 
 const ClaimRestreamButtonStyled = styled(ClaimRestreamButton)`
+  width: 100%;
+`;
+
+const KadgarButtonStyled = styled(KadgarButton)`
+  margin-top: 0.5rem;
+  min-width: fit-content;
   width: 100%;
 `;
