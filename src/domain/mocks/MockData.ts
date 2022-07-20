@@ -2,7 +2,8 @@ import { MatchResult, ScheduledMatch, UnscheduledMatch } from "../Match";
 import { DateTime } from "luxon";
 import { User } from "../User";
 import { websiteSettings } from "../../Settings";
-import { Role } from "@xwmtp/bingo-tournament";
+import { EntrantState, MatchState, Role } from "@xwmtp/bingo-tournament";
+import { Match as MatchDto } from "@xwmtp/bingo-tournament/dist/models/Match";
 import { Pair } from "../Pair";
 
 const xwillmarktheplace = {
@@ -344,6 +345,39 @@ export const mockMatchResults: MatchResult[] = [
     round: "Round 2",
   },
 ];
+
+const mockMatchResultDto: MatchDto = {
+  id: "2198ea9b-e3f6-49a5-8194-c6e059a90ceb",
+  entrants: [
+    {
+      user: {
+        id: "qOkXxyE6YNdpPz69",
+        name: "Sheik",
+        roles: [Role.Entrant],
+        avatar: "http://localhost:8000/media/Sheik.png",
+      },
+      state: EntrantState.DidNotFinish,
+      finishTime: "1:03:20",
+      finishTimeSeconds: 1000,
+      racetimePlace: 2,
+    },
+    {
+      user: {
+        id: "xbZJYyoanPj8PMQe",
+        name: "Zelda",
+        roles: [Role.Entrant],
+        avatar: "http://localhost:8000/media/Zelda.png",
+      },
+      state: EntrantState.Finished,
+      finishTime: "1:10:20",
+      finishTimeSeconds: 2000,
+      racetimePlace: 1,
+    },
+  ],
+  state: MatchState.Finished,
+  round: "Round 1",
+  scheduledTime: new Date("2022-07-08T23:00:00.000Z"),
+};
 
 export const mockPairs: Pair[] = [
   [

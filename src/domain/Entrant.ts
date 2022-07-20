@@ -54,7 +54,7 @@ export const mapToEntrant = (
         finishTime:
           entrantDto.state === EntrantState.Finished
             ? entrantDto.finishTimeSeconds ?? 0
-            : entrantDto.finishTimeSeconds,
+            : undefined,
       },
     };
   }

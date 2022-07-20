@@ -2,7 +2,7 @@ import { DateTime, Duration } from "luxon";
 import { Entrant, EntrantWithResult, hasResult, mapToEntrant, RankStatus } from "./Entrant";
 import { User } from "./User";
 import { Match as MatchDto } from "@xwmtp/bingo-tournament/dist/models/Match";
-import { MatchState } from "@xwmtp/bingo-tournament";
+import { EntrantState, MatchState } from "@xwmtp/bingo-tournament";
 import { Entrant as EntrantDto } from "@xwmtp/bingo-tournament/dist/models/Entrant";
 import { tournamentSettings } from "../Settings";
 
@@ -114,13 +114,20 @@ const calculateRankStatus = (
   entrantDto: EntrantDto,
   allEntrantDtos: EntrantDto[]
 ): RankStatus | undefined => {
-  const timeEntrant = entrantDto.finishTimeSeconds;
+  const timeEntrant =
+    entrantDto.state === EntrantState.Finished
+      ? entrantDto.finishTimeSeconds ?? 0
+      : tournamentSettings.FORFEIT_TIME;
   if (!timeEntrant) {
     return undefined;
   }
   const timesOpponents = allEntrantDtos
     .filter((entrant) => entrant.user.id !== entrantDto.user.id)
-    .map((entrant) => entrant.finishTimeSeconds);
+    .map((entrant) =>
+      entrant.state === EntrantState.Finished
+        ? entrant.finishTimeSeconds ?? 0
+        : tournamentSettings.FORFEIT_TIME
+    );
   if (timesOpponents.every((opponentTime) => (opponentTime ?? Number.MAX_VALUE) > timeEntrant)) {
     return "win";
   }
@@ -139,7 +146,10 @@ const calculateRanks = (allEntrantDtos: EntrantDto[]) => {
   const sortObjects = allEntrantDtos.map((entrantDto) => {
     return {
       id: entrantDto.user.id,
-      time: entrantDto.finishTimeSeconds || tournamentSettings.FORFEIT_TIME,
+      time:
+        entrantDto.state === EntrantState.Finished
+          ? entrantDto.finishTimeSeconds ?? 0
+          : tournamentSettings.FORFEIT_TIME,
     };
   });
 
