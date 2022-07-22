@@ -1,14 +1,14 @@
 import React from "react";
-import { Container } from "../components/Container";
+import { Container } from "../../components/Container";
 import styled from "styled-components";
-import { ScheduledMatches } from "../components/pages/schedule/ScheduledMatches";
-import { UnscheduledMatches } from "../components/pages/schedule/UnscheduledMatches";
-import { isFinished, isNotFinished } from "../domain/Match";
-import { useUser } from "../api/userApi";
-import { MatchResults } from "../components/pages/results/MatchResults";
-import { UnrecordedMatches } from "../components/pages/profile/admin/addMatches/UnrecordedMatches";
-import { useMatchResults, useScheduledMatches, useUnscheduledMatches } from "../api/matchesApi";
-import { NothingToDisplay } from "../components/general/NothingToDisplay";
+import { ScheduledMatches } from "../../components/pages/schedule/ScheduledMatches";
+import { UnscheduledMatches } from "../../components/pages/schedule/UnscheduledMatches";
+import { isFinished, isNotFinished } from "../../domain/Match";
+import { useUser } from "../../api/userApi";
+import { MatchResults } from "../../components/pages/results/MatchResults";
+import { UnrecordedMatches } from "../../components/pages/profile/admin/addMatches/UnrecordedMatches";
+import { useMatchResults, useScheduledMatches, useUnscheduledMatches } from "../../api/matchesApi";
+import { NothingToDisplay } from "../../components/general/NothingToDisplay";
 
 export const MyMatchesPage: React.FC = () => {
   const { data: user } = useUser();

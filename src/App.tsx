@@ -3,19 +3,19 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Header } from "./components/header/Header";
 import { SchedulePage } from "./pages/SchedulePage";
 import { Content } from "./components/Content";
-import { AddMatchPage } from "./pages/AddMatchPage";
-import { ProfilePage } from "./pages/ProfilePage";
-import { MyMatchesPage } from "./pages/MyMatchesPage";
-import { ProfileSettingsPage } from "./pages/ProfileSettingsPage";
+import { ProfilePage } from "./pages/profile/ProfilePage";
+import { MyMatchesPage } from "./pages/profile/MyMatchesPage";
+import { ProfileSettingsPage } from "./pages/profile/ProfileSettingsPage";
 import { AboutPage } from "./pages/AboutPage";
-import { AdminPage } from "./pages/AdminPage";
+import { AdminPage } from "./pages/profile/AdminPage";
 import { ModalProvider } from "styled-react-modal";
 import { ResultsPage } from "./pages/ResultsPage";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { LeaderboardPage } from "./pages/LeaderboardPage";
-import { PairingPage } from "./pages/PairingPage";
+import { PairingPage } from "./pages/extra/PairingPage";
 import { Page } from "./components/Page";
+import { StatsPage } from "./pages/extra/StatsPage";
 
 function App() {
   const queryClient = new QueryClient({

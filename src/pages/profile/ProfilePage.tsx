@@ -1,12 +1,12 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
-import { RouteTabSelector } from "../components/RouteTabSelector";
-import { Margins } from "../GlobalStyle";
-import { useUser } from "../api/userApi";
-import { isAdmin } from "../domain/User";
-import { Container } from "../components/Container";
-import { NothingToDisplay } from "../components/general/NothingToDisplay";
+import { RouteTabSelector } from "../../components/RouteTabSelector";
+import { Margins } from "../../GlobalStyle";
+import { useUser } from "../../api/userApi";
+import { isAdmin } from "../../domain/User";
+import { Container } from "../../components/Container";
+import { NothingToDisplay } from "../../components/general/NothingToDisplay";
 
 export const ProfilePage: React.FC = () => {
   const { data: user } = useUser();

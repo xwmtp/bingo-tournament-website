@@ -1,15 +1,15 @@
 import React from "react";
-import { Container } from "../components/Container";
+import { Container } from "../../components/Container";
 import styled from "styled-components";
-import { AllEntrants } from "../components/pages/profile/admin/AllEntrants";
-import { UnscheduledMatches } from "../components/pages/schedule/UnscheduledMatches";
-import { AddMatches } from "../components/pages/profile/admin/addMatches/AddMatches";
-import { UnrecordedMatches } from "../components/pages/profile/admin/addMatches/UnrecordedMatches";
-import { useScheduledMatches, useUnscheduledMatches } from "../api/matchesApi";
-import { useUser } from "../api/userApi";
-import { isAdmin } from "../domain/User";
-import { EditRoles } from "../components/pages/profile/admin/editRoles/EditRoles";
-import { Button } from "../components/forms/Button";
+import { AllEntrants } from "../../components/pages/profile/admin/AllEntrants";
+import { UnscheduledMatches } from "../../components/pages/schedule/UnscheduledMatches";
+import { AddMatches } from "../../components/pages/profile/admin/addMatches/AddMatches";
+import { UnrecordedMatches } from "../../components/pages/profile/admin/addMatches/UnrecordedMatches";
+import { useScheduledMatches, useUnscheduledMatches } from "../../api/matchesApi";
+import { useUser } from "../../api/userApi";
+import { isAdmin } from "../../domain/User";
+import { EditRoles } from "../../components/pages/profile/admin/editRoles/EditRoles";
+import { Button } from "../../components/forms/Button";
 import { Link } from "react-router-dom";
 
 export const AdminPage: React.FC = () => {

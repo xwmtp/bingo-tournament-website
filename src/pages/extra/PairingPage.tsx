@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { useUser } from "../api/userApi";
-import { isAdmin } from "../domain/User";
-import { NothingToDisplay } from "../components/general/NothingToDisplay";
-import { useAllEntrants } from "../api/entrantsApi";
-import { Container } from "../components/Container";
+import { useUser } from "../../api/userApi";
+import { isAdmin } from "../../domain/User";
+import { NothingToDisplay } from "../../components/general/NothingToDisplay";
+import { useAllEntrants } from "../../api/entrantsApi";
+import { Container } from "../../components/Container";
 import styled from "styled-components";
-import { FlexDiv } from "../components/divs/FlexDiv";
-import { Margins } from "../GlobalStyle";
-import { PairsList } from "../components/pages/pairing/PairsList";
-import { Button } from "../components/forms/Button";
-import { mapToPairs, Pair } from "../domain/Pair";
-import { PairBlock } from "../components/pages/pairing/PairBlock";
-import { TextAreaInput } from "../components/forms/TextAreaInput";
-import { ErrorText } from "../components/general/ErrorText";
+import { FlexDiv } from "../../components/divs/FlexDiv";
+import { Margins } from "../../GlobalStyle";
+import { PairsList } from "../../components/pages/pairing/PairsList";
+import { Button } from "../../components/forms/Button";
+import { mapToPairs, Pair } from "../../domain/Pair";
+import { PairBlock } from "../../components/pages/pairing/PairBlock";
+import { TextAreaInput } from "../../components/forms/TextAreaInput";
+import { ErrorText } from "../../components/general/ErrorText";
 
 export const PairingPage: React.FC = () => {
   const { data: user } = useUser();

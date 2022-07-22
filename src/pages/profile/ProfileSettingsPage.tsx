@@ -1,18 +1,18 @@
 import React, { useMemo } from "react";
 import styled from "styled-components";
-import { SignUp } from "../components/pages/profile/profile/SignUp";
-import { UserProfile } from "../components/pages/profile/profile/UserProfile";
-import { useUser } from "../api/userApi";
-import { isEntrant } from "../domain/User";
-import { Container } from "../components/Container";
-import { useRacetimeLeaderboard } from "../api/racetimeLeaderboardApi";
-import { RacetimeStats } from "../components/pages/profile/profile/stats/RacetimeStats";
-import { TournamentStats } from "../components/pages/profile/profile/stats/TournamentStats";
-import { FlexDiv } from "../components/divs/FlexDiv";
-import { Margins } from "../GlobalStyle";
-import { useMatchResults } from "../api/matchesApi";
-import { toLeaderboardEntry } from "../domain/Leaderboard";
-import { tournamentSettings } from "../Settings";
+import { SignUp } from "../../components/pages/profile/profile/SignUp";
+import { UserProfile } from "../../components/pages/profile/profile/UserProfile";
+import { useUser } from "../../api/userApi";
+import { isEntrant } from "../../domain/User";
+import { Container } from "../../components/Container";
+import { useRacetimeLeaderboard } from "../../api/racetimeLeaderboardApi";
+import { RacetimeStats } from "../../components/pages/profile/profile/stats/RacetimeStats";
+import { TournamentStats } from "../../components/pages/profile/profile/stats/TournamentStats";
+import { FlexDiv } from "../../components/divs/FlexDiv";
+import { Margins } from "../../GlobalStyle";
+import { useMatchResults } from "../../api/matchesApi";
+import { toLeaderboardEntry } from "../../domain/Leaderboard";
+import { tournamentSettings } from "../../Settings";
 
 export const ProfileSettingsPage: React.FC = () => {
   const { data: user } = useUser();
