@@ -15,6 +15,7 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import { LeaderboardPage } from "./pages/LeaderboardPage";
 import { PairingPage } from "./pages/extra/PairingPage";
 import { Page } from "./components/Page";
+import { StatsPage } from "./pages/extra/StatsPage";
 
 function App() {
   const queryClient = new QueryClient({
@@ -48,6 +49,7 @@ function App() {
                 path={"pairing"}
                 element={<Page width={"100%"} children={<PairingPage />} />}
               />
+              <Route path={"stats"} element={<Page children={<StatsPage />} />} />
             </Routes>
           </Content>
         </ModalProvider>
