@@ -36,10 +36,7 @@ function App() {
             <Routes>
               <Route path={"/"} element={<Page children={<LeaderboardPage />} />} />
               <Route path={"/leaderboard"} element={<Page children={<LeaderboardPage />} />} />
-              <Route path={"/schedule"} element={<Page children={<SchedulePage />} />}>
-                <Route path={"addmatch"} element={<Page children={<AddMatchPage />} />} />
-              </Route>
-
+              <Route path={"/schedule"} element={<Page children={<SchedulePage />} />} />
               <Route path={"/results"} element={<Page children={<ResultsPage />} />} />
               <Route path={"/about"} element={<Page children={<AboutPage />} />} />
               <Route path={"/profile"} element={<Page children={<ProfilePage />} />}>
