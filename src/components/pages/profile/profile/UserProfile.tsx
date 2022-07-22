@@ -7,9 +7,13 @@ import { Colors } from "../../../../GlobalStyle";
 import { FlexDiv } from "../../../divs/FlexDiv";
 import { Button } from "../../../forms/Button";
 import { ConfirmWithdrawalModal } from "./ConfirmWithdrawalModal";
-import { tournamentSettings } from "../../../../Settings";
 import { capitalize } from "../../../../lib/stringHelpers";
 import { RacetimeButton } from "../../../forms/buttons/RacetimeButton";
+import { tournamentSettings } from "../../../../Settings";
+import { useMutation, useQueryClient } from "react-query";
+import { logout } from "../../../../api/userApi";
+import { MutationButton } from "../../../forms/buttons/MutationButton";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   user: User;
@@ -17,6 +21,15 @@ interface Props {
 
 export const UserProfile: React.FC<Props> = ({ user }) => {
   const [showWithdrawModal, setShowWithdrawModal] = useState<boolean>(false);
+
+  const queryClient = useQueryClient();
+  const logoutMutation = useMutation(logout, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("user");
+    },
+  });
+
+  const navigate = useNavigate();
 
   return (
     <>
@@ -35,15 +48,28 @@ export const UserProfile: React.FC<Props> = ({ user }) => {
             </NameAndRoles>
           </UserDiv>
 
-          {isEntrant(user) && tournamentSettings.CAN_WITHDRAW && (
-            <WithdrawButton
+          <div>
+            <LogoutButton
               size="normal"
               color={"coral"}
-              onClick={() => setShowWithdrawModal(true)}
-            >
-              Withdraw from tournament
-            </WithdrawButton>
-          )}
+              onClick={() => {
+                logoutMutation.mutate();
+                navigate("/");
+              }}
+              mutationStatus={logoutMutation.status}
+              onIdleText="Logout"
+            />
+
+            {isEntrant(user) && tournamentSettings.CAN_WITHDRAW && (
+              <WithdrawButton
+                size="normal"
+                color={"coral"}
+                onClick={() => setShowWithdrawModal(true)}
+              >
+                Withdraw from tournament
+              </WithdrawButton>
+            )}
+          </div>
         </Profile>
 
         <ConfirmWithdrawalModal
@@ -82,5 +108,10 @@ const RacetimeButtonStyled = styled(RacetimeButton)`
 `;
 
 const WithdrawButton = styled(Button)`
+  margin-top: 0.7rem;
+  flex-grow: 0;
+`;
+
+const LogoutButton = styled(MutationButton)`
   flex-grow: 0;
 `;

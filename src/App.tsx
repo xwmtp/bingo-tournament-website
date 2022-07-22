@@ -15,7 +15,6 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import { LeaderboardPage } from "./pages/LeaderboardPage";
 import { PairingPage } from "./pages/extra/PairingPage";
 import { Page } from "./components/Page";
-import { StatsPage } from "./pages/extra/StatsPage";
 
 function App() {
   const queryClient = new QueryClient({

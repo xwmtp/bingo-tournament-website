@@ -1,4 +1,4 @@
-import { getApi } from "./api";
+import { getApi, getXXsrfToken } from "./api";
 import { mapToUser, User } from "../domain/User";
 import { useQuery } from "react-query";
 import { Role } from "@xwmtp/bingo-tournament";
@@ -54,4 +54,16 @@ const getAllUsers = async (): Promise<User[]> => {
 
 export const useAllUsers = () => {
   return useQuery<User[], Error>("allUsers", getAllUsers);
+};
+
+export const logout = async () => {
+  try {
+    await fetch(websiteSettings.LOGOUT_URL as string, {
+      method: "post",
+      credentials: "include",
+      headers: {
+        "X-XSRF-TOKEN": getXXsrfToken(),
+      },
+    });
+  } catch (_) {}
 };
