@@ -16,7 +16,7 @@ import { ScheduleModal } from "./ScheduleModal";
 import { KadgarButton } from "../../forms/buttons/KadgarButton";
 import { ScheduleButton } from "../../forms/buttons/ScheduleButton";
 import { EditButton } from "../../forms/buttons/EditButton";
-import { EditModal } from "./EditModal";
+import { EditModal } from "./EditModal/EditModal";
 import { RecordButton } from "../../forms/buttons/RecordButton";
 import { RecordModal } from "./RecordModal";
 import { useUser } from "../../../api/userApi";

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { includesEntrant, MatchResult } from "../../../domain/Match";
 import { FlexDiv } from "../../divs/FlexDiv";
@@ -9,6 +9,9 @@ import { RacetimeButton } from "../../forms/buttons/RacetimeButton";
 import { useUser } from "../../../api/userApi";
 import { Block } from "../../Block";
 import { RestreamButton } from "../../forms/buttons/RestreamButton";
+import { isAdmin } from "../../../domain/User";
+import { EditButton } from "../../forms/buttons/EditButton";
+import { EditModal } from "../schedule/EditModal/EditModal";
 
 interface Props {
   result: MatchResult;
@@ -17,6 +20,8 @@ interface Props {
 
 export const ResultBlock: React.FC<Props> = ({ result, highlightUser }) => {
   const { data: user } = useUser();
+
+  const [showEditModal, setShowEditModal] = useState<boolean>(false);
 
   return (
     <ResultBlockContainer
@@ -28,6 +33,12 @@ export const ResultBlock: React.FC<Props> = ({ result, highlightUser }) => {
         ))}
       </Entrants>
 
+      {!!user && isAdmin(user) && (
+        <FlexDiv>
+          <EditButton onClick={() => setShowEditModal(true)} />
+        </FlexDiv>
+      )}
+
       <ButtonsDiv>
         <RestreamButtonStyled restreamChannel={result.restreamChannel} />
 
@@ -36,6 +47,10 @@ export const ResultBlock: React.FC<Props> = ({ result, highlightUser }) => {
           url={`https://www.racetime.gg/${result.racetimeId}`}
         />
       </ButtonsDiv>
+
+      {showEditModal && (
+        <EditModal match={result} visible={showEditModal} onClose={() => setShowEditModal(false)} />
+      )}
     </ResultBlockContainer>
   );
 };

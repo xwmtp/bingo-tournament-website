@@ -11,6 +11,7 @@ interface BaseMatch<T extends Entrant> {
   entrants: T[];
   round?: string;
   restreamChannel?: string;
+  vodUrl?: string;
   racetimeId?: string;
 }
 
