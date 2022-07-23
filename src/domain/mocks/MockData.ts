@@ -233,6 +233,7 @@ export const mockMatchResults: MatchResult[] = [
     scheduledTime: DateTime.fromISO("2023-02-02T19:45:03Z"),
     round: "Round 1",
     restreamChannel: "xwillmarktheplace",
+    racetimeId: "pretty-malon-1234",
   },
   {
     id: "r2",
@@ -261,6 +262,7 @@ export const mockMatchResults: MatchResult[] = [
     scheduledTime: DateTime.fromISO("2023-02-04T04:45:03Z"),
     round: "Round 1",
     restreamChannel: "ZeldaSpeedruns",
+    racetimeId: "weird-talon-1234",
   },
   {
     id: "r3",
@@ -288,6 +290,7 @@ export const mockMatchResults: MatchResult[] = [
     ],
     scheduledTime: DateTime.fromISO("2023-02-04T22:30:03Z"),
     round: "Round 1",
+    racetimeId: "funny-impa-1234",
   },
   {
     id: "r4",
@@ -316,6 +319,7 @@ export const mockMatchResults: MatchResult[] = [
     ],
     scheduledTime: DateTime.fromISO("2023-02-07T12:45:03Z"),
     round: "Round 1",
+    racetimeId: "interesting-zelda-1234",
   },
   {
     id: "r5",
