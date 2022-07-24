@@ -28,7 +28,7 @@ export const TournamentStats: React.FC<Props> = ({
         <StatRow name={"Wins"} stat={leaderboardEntry.wins} />
         <StatRow name={"Ties"} stat={leaderboardEntry.ties} />
         <StatRow name={"Losses"} stat={leaderboardEntry.losses} />
-        <StatRow name={"Forfeits"} stat={leaderboardEntry.forfeits} />
+        <StatRow name={"Dnf"} stat={leaderboardEntry.forfeits} />
       </Stats>
     </Container>
   );

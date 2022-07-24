@@ -71,7 +71,7 @@ export const LeaderboardPage: React.FC = () => {
         </WideScreenOnly>
         <Number>Rounds</Number>
         <WideScreenOnly>
-          <Number>Forfeits</Number>
+          <Number>Dnf</Number>
         </WideScreenOnly>
       </LeaderboardHeader>
 
