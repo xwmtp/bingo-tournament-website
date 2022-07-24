@@ -20,8 +20,8 @@ const BlockStyled = styled(FlexDiv)`
   justify-content: space-between;
   background-color: ${Colors.lightGrey};
   border-radius: 0.6rem;
-  padding: 0.6rem 2rem;
-  margin-top: 0.7rem;
+  padding: 0.5rem 2rem;
+  margin-top: 0.6rem;
   font-size: 1.1rem;
 
   @media (min-width: ${ScreenWidths.phone + 1}px) and (max-width: ${ScreenWidths.tablet}px) {

@@ -110,6 +110,8 @@ const LeaderboardHeader = styled(Block)`
   margin-top: 0;
   font-weight: bold;
   font-size: 1rem;
+  padding-top: 0.35rem;
+  padding-bottom: 0.35rem;
 `;
 
 const LeaderboardEntryBlock = styled(Block)<{
@@ -119,6 +121,9 @@ const LeaderboardEntryBlock = styled(Block)<{
   background-color: ${({ $displayAsLoggedInUser }) =>
     $displayAsLoggedInUser ? Colors.brightGrey : Colors.lightGrey};
   font-size: 1.1rem;
+  margin-top: 0.5rem;
+  padding-top: 0.35rem;
+  padding-bottom: 0.35rem;
 `;
 
 const RankAndUser = styled(FlexDiv)`
