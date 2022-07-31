@@ -1,6 +1,6 @@
 import { DateTime, Duration } from "luxon";
 import { Entrant, EntrantWithResult, hasResult, mapToEntrant, RankStatus } from "./Entrant";
-import { User } from "./User";
+import { mapToUser, User } from "./User";
 import { Match as MatchDto } from "@xwmtp/bingo-tournament/dist/models/Match";
 import { EntrantState, MatchState } from "@xwmtp/bingo-tournament";
 import { Entrant as EntrantDto } from "@xwmtp/bingo-tournament/dist/models/Entrant";
@@ -10,6 +10,7 @@ interface BaseMatch<T extends Entrant> {
   id: string;
   entrants: T[];
   round?: string;
+  restreamer?: User;
   restreamChannel?: string;
   vodUrl?: string;
   racetimeId?: string;
@@ -105,6 +106,7 @@ export const mapToMatch = (matchDto: MatchDto): Match => {
       hasResult(a) && hasResult(b) ? a.result.rank - b.result.rank : 0
     ),
     round: matchDto.round,
+    restreamer: matchDto.restreamUser && mapToUser(matchDto.restreamUser),
     restreamChannel: matchDto.restreamChannel,
     racetimeId: matchDto.racetimeId,
     scheduledTime: matchDto.scheduledTime ? DateTime.fromJSDate(matchDto.scheduledTime) : undefined,

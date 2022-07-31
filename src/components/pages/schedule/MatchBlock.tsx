@@ -88,7 +88,10 @@ export const MatchBlock: React.FC<Props> = ({ match, editable, displayStatus }) 
         {userCanClaimRestream ? (
           <ClaimRestreamButtonStyled match={match} />
         ) : (
-          <RestreamButtonStyled restreamChannel={match.restreamChannel} />
+          <RestreamButtonStyled
+            restreamer={match.restreamer}
+            restreamChannel={match.restreamChannel}
+          />
         )}
 
         <KadgarButtonStyled users={match.entrants.map((entrant) => entrant.user)} />

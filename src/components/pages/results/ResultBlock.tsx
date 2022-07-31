@@ -40,7 +40,10 @@ export const ResultBlock: React.FC<Props> = ({ result, highlightUser }) => {
       )}
 
       <ButtonsDiv>
-        <RestreamButtonStyled restreamChannel={result.restreamChannel} />
+        <RestreamButtonStyled
+          restreamer={result.restreamer}
+          restreamChannel={result.restreamChannel}
+        />
 
         <RacetimeButtonStyled
           text="racetime.gg"
