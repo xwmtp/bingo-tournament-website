@@ -1,16 +1,17 @@
 import React, { useMemo, useState } from "react";
 import styled from "styled-components";
-import { FlexDiv } from "../../divs/FlexDiv";
-import { Modal } from "../../Modal";
+import { FlexDiv } from "../../../divs/FlexDiv";
+import { Modal } from "../../../Modal";
 import { useMutation, useQueryClient } from "react-query";
-import { updateMatchRacetimeId } from "../../../api/matchesApi";
-import { ScheduledMatch } from "../../../domain/Match";
-import { MutationButton } from "../../forms/buttons/MutationButton";
-import { Input } from "../../forms/Input";
-import { ExternalLink } from "../../general/ExternalLink";
-import { ErrorText } from "../../general/ErrorText";
-import { tournamentSettings } from "../../../Settings";
-import { MatchDisplay } from "../../MatchDisplay";
+import { updateMatchRacetimeId, updateMatchRestream } from "../../../../api/matchesApi";
+import { ScheduledMatch } from "../../../../domain/Match";
+import { MutationButton } from "../../../forms/buttons/MutationButton";
+import { Input } from "../../../forms/Input";
+import { ExternalLink } from "../../../general/ExternalLink";
+import { ErrorText } from "../../../general/ErrorText";
+import { tournamentSettings } from "../../../../Settings";
+import { MatchDisplay } from "../../../MatchDisplay";
+import { useUser } from "../../../../api/userApi";
 
 interface Props {
   match: ScheduledMatch;
@@ -19,11 +20,20 @@ interface Props {
 }
 
 export const RecordModal: React.FC<Props> = ({ match, visible, onClose }) => {
+  const { data: user } = useUser();
   const [racetimeInput, setRacetimeInput] = useState<string>("");
   const racetimeId = useMemo(() => extractRacetimeId(racetimeInput), [racetimeInput]);
 
   const queryClient = useQueryClient();
   const updateRacetimeIdMutation = useMutation(updateMatchRacetimeId, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("allMatches");
+      onClose();
+    },
+  });
+
+  // todo change to set custom result mutation
+  const setRestreamMutation = useMutation(updateMatchRestream, {
     onSuccess: () => {
       queryClient.invalidateQueries("allMatches");
       onClose();
@@ -84,6 +94,11 @@ export const RecordModal: React.FC<Props> = ({ match, visible, onClose }) => {
           onClick={() => updateMatch && updateRacetimeIdMutation.mutate(updateMatch)}
         />
       </ContainerContents>
+
+      {/* todo add once working*/}
+      {/*{!!user && isAdmin(user) && (*/}
+      {/*  <CustomResult match={match} setCustomResultMutation={setRestreamMutation} />*/}
+      {/*)}*/}
     </Modal>
   );
 };
