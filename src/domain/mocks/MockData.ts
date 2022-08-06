@@ -5,6 +5,7 @@ import { websiteSettings } from "../../Settings";
 import { EntrantState, MatchState, Role } from "@xwmtp/bingo-tournament";
 import { Match as MatchDto } from "@xwmtp/bingo-tournament/dist/models/Match";
 import { Pair } from "../Pair";
+import { BracketSetup } from "../BracketSetup";
 
 const xwillmarktheplace = {
   id: "d17DexWEKg3ak64R",
@@ -402,6 +403,67 @@ export const mockPairs: Pair[] = [
     { user: exodus, pairPoints: 1, pairTourneyPoints: 1, pairSeed: 110 },
     { user: adef, pairPoints: 1, pairTourneyPoints: 1, pairSeed: 110 },
   ],
+];
+
+export const mockBracketSetup: BracketSetup = [
+  {
+    name: "Eighths",
+    matchUps: [
+      {
+        player1: { user: xwillmarktheplace },
+        player2: { user: jenslang },
+      },
+      {
+        player1: { user: fleush },
+        player2: { user: scaramanga },
+      },
+      {
+        player1: { user: juwk },
+        player2: { user: matttInTheHat },
+      },
+      {
+        player1: { user: exodus },
+        player2: { user: adef },
+      },
+      {
+        player1: { user: xwillmarktheplace },
+        player2: { user: jenslang },
+      },
+      {
+        player1: { user: fleush },
+        player2: { user: scaramanga },
+      },
+      {
+        player1: { user: juwk },
+        player2: { user: matttInTheHat },
+      },
+      {
+        player1: { user: exodus },
+        player2: { user: adef },
+      },
+    ],
+  },
+  {
+    name: "Quarters",
+    matchUps: [
+      {
+        player1: { user: xwillmarktheplace },
+        player2: { user: scaramanga },
+      },
+      {
+        player1: { user: juwk },
+        player2: undefined,
+      },
+      {
+        player1: undefined,
+        player2: undefined,
+      },
+      {
+        player1: undefined,
+        player2: { user: adef },
+      },
+    ],
+  },
 ];
 
 export const mockAllUsers: User[] = [

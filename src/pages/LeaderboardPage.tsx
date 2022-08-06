@@ -28,5 +28,10 @@ export const LeaderboardPage: React.FC = () => {
     );
   }
 
-  return <Leaderboard allEntrants={allEntrants} allResults={matchResults} />;
+  return (
+    <>
+      {/* todo add later <Bracket allEntrants={allEntrants} allResults={matchResults} />}*/}
+      <Leaderboard allEntrants={allEntrants} allResults={matchResults} />
+    </>
+  );
 };
