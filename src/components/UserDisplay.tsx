@@ -6,9 +6,11 @@ import { truncateString } from "../lib/stringHelpers";
 import { FlexDiv } from "./divs/FlexDiv";
 import { WideScreenOnly } from "./divs/WideScreenOnly";
 
+type Size = "big" | "normal" | "small";
+
 interface Props {
   user: User;
-  size?: "big" | "normal";
+  size?: Size;
   removeNamePadding?: boolean;
   wideScreenOnlyAvatar?: boolean;
   wideScreenOnlyName?: boolean;
@@ -23,8 +25,7 @@ export const UserDisplay: React.FC<Props> = ({
   removeNamePadding,
   className,
 }) => {
-  const avatarSize = size === "big" ? 2.1 : 1.6;
-
+  const sizes = sizeSettings[size || "normal"];
   const AvatarWrapper = wideScreenOnlyAvatar ? WideScreenOnly : React.Fragment;
   const NameWrapper = wideScreenOnlyName ? WideScreenOnly : React.Fragment;
   const EmptySpaceWrapper =
@@ -33,18 +34,37 @@ export const UserDisplay: React.FC<Props> = ({
   return (
     <UserStyled className={className}>
       <AvatarWrapper>
-        <Avatar user={user} sizeRem={avatarSize} />
+        <Avatar user={user} sizeRem={sizes.avatar} />
       </AvatarWrapper>
 
       <EmptySpaceWrapper>
-        <EmptySpace $width={avatarSize * 0.375} />
+        <EmptySpace $width={sizes.avatar * 0.375} />
       </EmptySpaceWrapper>
 
       <NameWrapper>
-        <Name $removeNamePadding={removeNamePadding}>{truncateString(user.name, 18)}</Name>
+        <Name $fontSize={sizes.font} $removeNamePadding={removeNamePadding}>
+          {truncateString(user.name, 18)}
+        </Name>
       </NameWrapper>
     </UserStyled>
   );
+};
+
+const sizeSettings: {
+  [size in Size]: { avatar: number; font: number };
+} = {
+  big: {
+    avatar: 2.1,
+    font: 1,
+  },
+  normal: {
+    avatar: 1.6,
+    font: 1,
+  },
+  small: {
+    avatar: 1.4,
+    font: 0.8,
+  },
 };
 
 const EmptySpace = styled.div<{ $width: number }>`
@@ -55,7 +75,7 @@ const UserStyled = styled(FlexDiv)`
   justify-content: start;
 `;
 
-const Name = styled.p<{ $removeNamePadding?: boolean }>`
-  font-size: 1rem;
+const Name = styled.p<{ $fontSize: number; $removeNamePadding?: boolean }>`
+  font-size: ${({ $fontSize }) => $fontSize}rem;
   min-width: ${({ $removeNamePadding }) => ($removeNamePadding ? "1rem" : "10rem")};
 `;
