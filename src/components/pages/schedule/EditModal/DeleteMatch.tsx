@@ -14,7 +14,7 @@ interface Props {
 export const DeleteMatch: React.FC<Props> = ({ match, deleteMatchMutation }) => {
   return (
     <DeleteMatchContainer
-      title="Admin only - Delete match"
+      title="Delete match (Admin only)"
       size="small"
       backgroundColor="lightGrey"
     >

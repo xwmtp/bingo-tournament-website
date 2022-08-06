@@ -8,8 +8,10 @@ import { useMutation, useQueryClient } from "react-query";
 import {
   deleteMatches,
   removeMatchRestream,
+  removeMatchVod,
   updateMatchRestream,
   updateMatchTime,
+  updateMatchVod,
 } from "../../../../api/matchesApi";
 import { ScheduledMatch } from "../../../../domain/Match";
 import { MutationButton } from "../../../forms/buttons/MutationButton";
@@ -19,6 +21,7 @@ import { ErrorText } from "../../../general/ErrorText";
 import { MatchDisplay } from "../../../MatchDisplay";
 import { EditRestream } from "./EditRestream";
 import { DeleteMatch } from "./DeleteMatch";
+import { EditVodUrl } from "./EditVodUrl";
 
 interface Props {
   match: ScheduledMatch;
@@ -34,45 +37,19 @@ export const EditModal: React.FC<Props> = ({ match, visible, onClose }) => {
   const { data: user } = useUser();
 
   const queryClient = useQueryClient();
-  const updateTimeMutation = useMutation(updateMatchTime, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("allMatches");
-      onClose();
-    },
-  });
+  const onMutationSucces = async () => {
+    await queryClient.invalidateQueries("allMatches");
+    onClose();
+  };
 
-  const deleteMatchMutation = useMutation(deleteMatches, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("allMatches");
-      onClose();
-    },
-  });
+  const updateTimeMutation = useMutation(updateMatchTime, { onSuccess: onMutationSucces });
+  const deleteMatchMutation = useMutation(deleteMatches, { onSuccess: onMutationSucces });
 
-  const setRestreamMutation = useMutation(updateMatchRestream, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("allMatches");
-      onClose();
-    },
-  });
+  const setRestreamMutation = useMutation(updateMatchRestream, { onSuccess: onMutationSucces });
+  const deleteRestreamMutation = useMutation(removeMatchRestream, { onSuccess: onMutationSucces });
 
-  const deleteRestreamMutation = useMutation(removeMatchRestream, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("allMatches");
-      onClose();
-    },
-  });
-
-  const setVodMutation = useMutation(updateMatchTime, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("allMatches");
-    },
-  });
-
-  const deleteVodMutation = useMutation(updateMatchTime, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("allMatches");
-    },
-  });
+  const setVodMutation = useMutation(updateMatchVod, { onSuccess: onMutationSucces });
+  const deleteVodMutation = useMutation(removeMatchVod, { onSuccess: onMutationSucces });
 
   const updateTimeMatch = {
     matchId: match.id,
@@ -126,14 +103,11 @@ export const EditModal: React.FC<Props> = ({ match, visible, onClose }) => {
               setRestreamMutation={setRestreamMutation}
               deleteRestreamMutation={deleteRestreamMutation}
             />
-
-            {/*todo*/}
-            {/*<EditVodUrl*/}
-            {/*  match={match}*/}
-            {/*  setVodMutation={setVodMutation}*/}
-            {/*  deleteVodMutation={deleteVodMutation}*/}
-            {/*/>*/}
-
+            <EditVodUrl
+              match={match}
+              setVodMutation={setVodMutation}
+              deleteVodMutation={deleteVodMutation}
+            />
             <DeleteMatch match={match} deleteMatchMutation={deleteMatchMutation} />
           </>
         )}

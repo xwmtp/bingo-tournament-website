@@ -109,6 +109,7 @@ export const mapToMatch = (matchDto: MatchDto): Match => {
     restreamer: matchDto.restreamUser && mapToUser(matchDto.restreamUser),
     restreamChannel: matchDto.restreamChannel,
     racetimeId: matchDto.racetimeId,
+    vodUrl: matchDto.vodUrl,
     scheduledTime: matchDto.scheduledTime ? DateTime.fromJSDate(matchDto.scheduledTime) : undefined,
   };
 };

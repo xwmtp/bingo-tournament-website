@@ -102,6 +102,23 @@ export const removeMatchRestream = async (matchId: string): Promise<void> => {
   });
 };
 
+export const updateMatchVod = async (updateMatch: {
+  matchId: string;
+  vodUrl: string;
+}): Promise<void> => {
+  await getApi().setVodUrl({
+    matchId: updateMatch.matchId,
+    vodUrl: updateMatch.vodUrl,
+  });
+};
+
+export const removeMatchVod = async (matchId: string): Promise<void> => {
+  await getApi().setVodUrl({
+    matchId: matchId,
+    vodUrl: undefined,
+  });
+};
+
 export const deleteMatches = async (matchIds: string[]): Promise<void> => {
   return await getApi().deleteMatches({ requestBody: matchIds });
 };

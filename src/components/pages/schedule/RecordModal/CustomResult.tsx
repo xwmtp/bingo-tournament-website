@@ -36,7 +36,7 @@ export const CustomResult: React.FC<Props> = ({ match, setCustomResultMutation }
 
   return (
     <CustomResultContainer
-      title="Admin only - Set custom result"
+      title="Set custom result (Admin onyl)"
       size="small"
       backgroundColor="lightGrey"
     >

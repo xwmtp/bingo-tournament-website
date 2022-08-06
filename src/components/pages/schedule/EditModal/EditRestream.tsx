@@ -26,10 +26,13 @@ export const EditRestream: React.FC<Props> = ({
 }) => {
   const [restreamChannel, setRestreamChannel] = useState<string | undefined>(undefined);
 
-  const updateRestreamMatch = restreamChannel && {
-    matchId: match.id,
-    restreamChannelUrl: "https://twitch.tv/" + restreamChannel,
-  };
+  const isValidInput = !(restreamChannel || "").startsWith("https");
+
+  const updateRestreamMatch = restreamChannel &&
+    isValidInput && {
+      matchId: match.id,
+      restreamChannelUrl: "https://twitch.tv/" + restreamChannel,
+    };
 
   useEffect(() => {
     if (setRestreamMutation.isError) {
@@ -41,7 +44,7 @@ export const EditRestream: React.FC<Props> = ({
 
   return (
     <EditRestreamContainer
-      title="Admin only - Update restream"
+      title="Update restream (Admin only)"
       size="small"
       backgroundColor="lightGrey"
     >
@@ -59,6 +62,7 @@ export const EditRestream: React.FC<Props> = ({
         {setRestreamMutation.isError && (
           <ErrorText>Could not set the restream channel, please try again later.</ErrorText>
         )}
+        {!isValidInput && <ErrorText>Put the channel name only, not a url.</ErrorText>}
       </UpdateRestreamDiv>
 
       <MutationButtonStyled
