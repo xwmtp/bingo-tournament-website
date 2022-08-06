@@ -1,5 +1,7 @@
 - Overview of matches to restream
 - Admin: add custom match results (without racetime)
+- When recording, download races from racetime and suggest matches to record
+- Combine restreamChannel and restreamer into one object in Match
 
 Checks
 - Check todos
@@ -9,7 +11,5 @@ Checks
 - Check everything on smaller screen / mobile
 
 Nice to have
-- Backend: redownload user info once a day
 - Alert bar when there is a match to record
 - Replace BorderRadius with variable
-- 

@@ -12,6 +12,7 @@ import { RestreamButton } from "../../forms/buttons/RestreamButton";
 import { isAdmin } from "../../../domain/User";
 import { EditButton } from "../../forms/buttons/EditButton";
 import { EditModal } from "../schedule/EditModal/EditModal";
+import { VodButton } from "../../forms/buttons/VodButton";
 
 interface Props {
   result: MatchResult;
@@ -40,10 +41,14 @@ export const ResultBlock: React.FC<Props> = ({ result, highlightUser }) => {
       )}
 
       <ButtonsDiv>
-        <RestreamButtonStyled
-          restreamer={result.restreamer}
-          restreamChannel={result.restreamChannel}
-        />
+        {result.vodUrl ? (
+          <VodButtonStyled matchResult={result} />
+        ) : (
+          <RestreamButtonStyled
+            restreamer={result.restreamer}
+            restreamChannel={result.restreamChannel}
+          />
+        )}
 
         <RacetimeButtonStyled
           text="racetime.gg"
@@ -111,6 +116,10 @@ const RacetimeButtonStyled = styled(RacetimeButton)`
 `;
 
 const RestreamButtonStyled = styled(RestreamButton)`
+  width: 100%;
+`;
+
+const VodButtonStyled = styled(VodButton)`
   width: 100%;
 `;
 

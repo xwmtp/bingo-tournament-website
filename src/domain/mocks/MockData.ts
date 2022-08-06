@@ -233,6 +233,7 @@ export const mockMatchResults: MatchResult[] = [
     scheduledTime: DateTime.fromISO("2023-02-02T19:45:03Z"),
     round: "Round 1",
     restreamChannel: "xwillmarktheplace",
+    vodUrl: "https://twitch.tv/videos/1234",
     racetimeId: "pretty-malon-1234",
   },
   {
@@ -346,6 +347,7 @@ export const mockMatchResults: MatchResult[] = [
       },
     ],
     scheduledTime: DateTime.fromISO("2023-02-14T12:45:03Z"),
+    vodUrl: "https://twitch.tv/videos/5678",
     round: "Round 2",
   },
 ];
