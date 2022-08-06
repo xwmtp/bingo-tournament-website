@@ -17,7 +17,7 @@ interface Props {
 export const EditVodUrl: React.FC<Props> = ({ match, setVodMutation, deleteVodMutation }) => {
   const [vodUrl, setVodUrl] = useState<string | undefined>(undefined);
 
-  const isValidInput = vodUrl?.startsWith("https://twitch.tv/");
+  const isValidInput = vodUrl?.startsWith("https://");
 
   const updateVodMatch = !!vodUrl &&
     isValidInput && {
