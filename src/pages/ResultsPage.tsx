@@ -25,7 +25,7 @@ export const ResultsPage: React.FC = () => {
   useEffect(() => {
     if (matchResults) {
       if (!activeTab || !uniqueRounds.includes(activeTab)) {
-        setActiveTab(uniqueRounds[0]);
+        setActiveTab(uniqueRounds[uniqueRounds.length - 1]);
       }
     }
   }, [activeTab, matchResults, uniqueRounds]);

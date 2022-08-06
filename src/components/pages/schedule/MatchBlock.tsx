@@ -18,7 +18,7 @@ import { ScheduleButton } from "../../forms/buttons/ScheduleButton";
 import { EditButton } from "../../forms/buttons/EditButton";
 import { EditModal } from "./EditModal/EditModal";
 import { RecordButton } from "../../forms/buttons/RecordButton";
-import { RecordModal } from "./RecordModal";
+import { RecordModal } from "./RecordModal/RecordModal";
 import { useUser } from "../../../api/userApi";
 import { Block } from "../../Block";
 import { isAdmin, isRestreamer } from "../../../domain/User";
@@ -88,7 +88,10 @@ export const MatchBlock: React.FC<Props> = ({ match, editable, displayStatus }) 
         {userCanClaimRestream ? (
           <ClaimRestreamButtonStyled match={match} />
         ) : (
-          <RestreamButtonStyled restreamChannel={match.restreamChannel} />
+          <RestreamButtonStyled
+            restreamer={match.restreamer}
+            restreamChannel={match.restreamChannel}
+          />
         )}
 
         <KadgarButtonStyled users={match.entrants.map((entrant) => entrant.user)} />
