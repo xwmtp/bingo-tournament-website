@@ -2,6 +2,7 @@
 - Admin: add custom match results (without racetime)
 - When recording, download races from racetime and suggest matches to record
 - Combine restreamChannel and restreamer into one object in Match
+- Allow adding matches with a json with just id (don't need to know pair seeds etc)
 
 Checks
 - Check todos

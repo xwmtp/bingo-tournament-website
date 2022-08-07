@@ -173,13 +173,7 @@ export const mockUnscheduledMatches: UnscheduledMatch[] = [
     id: "u2",
     entrants: [
       {
-        user: {
-          id: "wdm1LPWjGABEnVx6",
-          roles: [Role.Entrant],
-          name: "xwillmarktheplace",
-          avatar: "https://racetime.gg/media/Racetime.png",
-          twitchChannel: "https://www.twitch.tv/xwillmarktheplace",
-        },
+        user: xwillmarktheplace,
       },
       {
         user: scaramanga,

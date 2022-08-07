@@ -124,9 +124,15 @@ export const deleteMatches = async (matchIds: string[]): Promise<void> => {
 };
 
 const mapToNewMatchDto = (matchToAdd: MatchToAdd): NewMatchDto => {
-  const entrantIds = [matchToAdd.entrant1.id];
+  const entrantIds = [];
+  if (matchToAdd.entrant1) {
+    entrantIds.push(matchToAdd.entrant1.id);
+  }
   if (matchToAdd.entrant2) {
     entrantIds.push(matchToAdd.entrant2.id);
+  }
+  if (entrantIds.length === 0) {
+    throw Error("Cannot add match without at least one entrant!");
   }
   return {
     entrantIds: entrantIds,

@@ -1,6 +1,6 @@
 import React from "react";
-import { isFinished, ScheduledMatch, sortByScheduledTime } from "../../../../../domain/Match";
-import { MatchesByDate } from "../../../../MatchesByDate";
+import { isFinished, ScheduledMatch, sortByScheduledTime } from "../../../../domain/Match";
+import { MatchesByDate } from "../../../MatchesByDate";
 
 interface Props {
   scheduledMatches: ScheduledMatch[];

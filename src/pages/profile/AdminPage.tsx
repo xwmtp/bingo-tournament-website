@@ -2,15 +2,16 @@ import React from "react";
 import { Container } from "../../components/Container";
 import styled from "styled-components";
 import { AllEntrants } from "../../components/pages/profile/admin/AllEntrants";
-import { UnscheduledMatches } from "../../components/pages/schedule/UnscheduledMatches";
+import { UnscheduledMatches } from "../../components/pages/profile/myMatches/UnscheduledMatches";
 import { AddMatches } from "../../components/pages/profile/admin/addMatches/AddMatches";
-import { UnrecordedMatches } from "../../components/pages/profile/admin/addMatches/UnrecordedMatches";
+import { UnrecordedMatches } from "../../components/pages/profile/myMatches/UnrecordedMatches";
 import { useScheduledMatches, useUnscheduledMatches } from "../../api/matchesApi";
 import { useUser } from "../../api/userApi";
 import { isAdmin } from "../../domain/User";
 import { EditRoles } from "../../components/pages/profile/admin/editRoles/EditRoles";
 import { Button } from "../../components/forms/Button";
 import { Link } from "react-router-dom";
+import { FlexDiv } from "../../components/divs/FlexDiv";
 
 export const AdminPage: React.FC = () => {
   const { data: user } = useUser();
@@ -42,12 +43,19 @@ export const AdminPage: React.FC = () => {
       <Container title={"Edit roles"} size="small">
         <EditRoles />
       </Container>
-      <Container title={"Display pairings"} size="small">
-        <Link to="/pairing">
-          <PairingPageButton size="big" color="brightMossGreen">
-            To pairings page
-          </PairingPageButton>
-        </Link>
+      <Container title={"Tools"} size="small">
+        <LinkButtons>
+          <Link to="/pairing">
+            <LinkButton size="big" color="brightMossGreen">
+              Pairings
+            </LinkButton>
+          </Link>
+          <Link to="/stats">
+            <LinkButton size="big" color="brightMossGreen">
+              Stats
+            </LinkButton>
+          </Link>
+        </LinkButtons>
       </Container>
       <Container title={"All unrecorded matches"} size="small">
         {allScheduledMatches && <UnrecordedMatches scheduledMatches={allScheduledMatches} />}
@@ -64,6 +72,11 @@ const AdminPageDiv = styled.div`
   flex-direction: column;
 `;
 
-const PairingPageButton = styled(Button)`
-  width: 13rem;
+const LinkButtons = styled(FlexDiv)`
+  justify-content: flex-start;
+`;
+
+const LinkButton = styled(Button)`
+  width: 8rem;
+  margin-right: 1rem;
 `;

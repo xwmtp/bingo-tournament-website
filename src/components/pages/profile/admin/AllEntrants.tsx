@@ -51,8 +51,8 @@ export const AllEntrants: React.FC = () => {
       <p>Total entrants: {sortedEntrants.length}</p>
       <EntrantsList>
         {sortedEntrants.map((entrant) => (
-          <RacetimeLink url={`https://racetime.gg/user/${entrant.id}`}>
-            <UserDisplayStyled key={entrant.id} user={entrant} />
+          <RacetimeLink key={entrant.id} url={`https://racetime.gg/user/${entrant.id}`}>
+            <UserDisplayStyled user={entrant} />
           </RacetimeLink>
         ))}
       </EntrantsList>

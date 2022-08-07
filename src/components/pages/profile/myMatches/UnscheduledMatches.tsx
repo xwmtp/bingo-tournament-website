@@ -1,6 +1,6 @@
-import { MatchBlock } from "./MatchBlock";
+import { MatchBlock } from "../../schedule/MatchBlock";
 import React from "react";
-import { UnscheduledMatch } from "../../../domain/Match";
+import { UnscheduledMatch } from "../../../../domain/Match";
 
 interface Props {
   unscheduledMatches: UnscheduledMatch[];
