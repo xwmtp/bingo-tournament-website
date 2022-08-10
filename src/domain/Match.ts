@@ -74,6 +74,14 @@ export function isNotFinished(match: ScheduledMatch): boolean {
   return !isFinished(match);
 }
 
+export function getWinner(match: MatchResult): EntrantWithResult | undefined {
+  for (const entrant of match.entrants) {
+    if (entrant.result.resultStatus === "win") {
+      return entrant;
+    }
+  }
+}
+
 export function sortByScheduledTime<T extends Scheduled>(
   scheduledItems: T[],
   descending?: boolean

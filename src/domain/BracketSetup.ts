@@ -1,6 +1,6 @@
 import { User } from "./User";
 import { mockAllUsers } from "./mocks/MockData";
-import { MatchResult } from "./Match";
+import { getWinner, includesEntrant, MatchResult } from "./Match";
 import { Entrant, hasResult } from "./Entrant";
 
 const BRACKET_SIZES = [2, 4, 8, 16];
@@ -76,15 +76,22 @@ const toBracket = (
     );
     const roundLength = Math.floor(previousRound.matchUps.length / 2);
     for (let j = 0; j < roundLength; j++) {
-      const previousMatchUoPlayer1 = previousRound.matchUps[j * 2];
+      const previousMatchUpPlayer1 = previousRound.matchUps[j * 2];
       let player1 = undefined;
-      if (isFinishedMatchUp(previousMatchUoPlayer1)) {
-        const winnerPreviousMatchUp = previousMatchUoPlayer1.player1;
+      if (isFinishedMatchUp(previousMatchUpPlayer1)) {
+        const winnerPreviousMatchUp = getWinner(previousMatchUpPlayer1);
       }
     }
   }
 
   return [firstRound];
+};
+
+const findMatchUpResult = (matchUp: MatchUp, roundName: string, allResults: MatchResult[]) => {
+  const matchingResults = allResults.filter((result) => {
+    const isInRound = result.round?.toLowerCase() === roundName.toLowerCase();
+    const containsEntrants = includesEntrant(result, matchUp.player1.id);
+  });
 };
 
 const rawBracketSetup: RawBracketSetup = {
