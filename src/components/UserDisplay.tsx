@@ -63,7 +63,7 @@ const sizeSettings: {
   },
   small: {
     avatar: 1.4,
-    font: 0.8,
+    font: 0.85,
   },
 };
 
@@ -77,5 +77,6 @@ const UserStyled = styled(FlexDiv)`
 
 const Name = styled.p<{ $fontSize: number; $removeNamePadding?: boolean }>`
   font-size: ${({ $fontSize }) => $fontSize}rem;
-  min-width: ${({ $removeNamePadding }) => ($removeNamePadding ? "1rem" : "10rem")};
+  min-width: ${({ $removeNamePadding, $fontSize }) =>
+    $removeNamePadding ? "1rem" : `${$fontSize * 10}rem`};
 `;
