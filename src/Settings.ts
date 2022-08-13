@@ -1,3 +1,5 @@
+import { BracketSetup } from "./domain/BracketSetup";
+
 export const tournamentSettings = {
   RACETIME_CATEGORY: "oot",
   FORFEIT_TIME: 4 * 3600,
@@ -16,3 +18,9 @@ export const websiteSettings = {
   BACKEND_URL: process.env.REACT_APP_BACKEND_URL,
   USE_MOCK_DATA: process.env.REACT_APP_USE_MOCK_DATA_FALLBACK === "true",
 } as const;
+
+// Add Bracket to LeaderboardPage, only if roundNames is non-empty
+export const bracketSetup: BracketSetup = {
+  roundNames: [],
+  firstRoundMatchUps: [],
+};

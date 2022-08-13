@@ -74,6 +74,7 @@ const adef = {
 export const mockScheduledMatches: ScheduledMatch[] = [
   {
     id: "m1",
+    round: "Round 1",
     entrants: [
       {
         user: fleush,
@@ -83,11 +84,11 @@ export const mockScheduledMatches: ScheduledMatch[] = [
       },
     ],
     scheduledTime: DateTime.fromISO("2023-02-02T19:45:03Z"),
-    round: "Round 1",
     restreamChannel: "xwillmarktheplace",
   },
   {
     id: "m2",
+    round: "Round 1",
     entrants: [
       {
         user: xwillmarktheplace,
@@ -97,11 +98,11 @@ export const mockScheduledMatches: ScheduledMatch[] = [
       },
     ],
     scheduledTime: DateTime.fromISO("2023-01-01T04:45:03Z"),
-    round: "Round 1",
     restreamChannel: "ZeldaSpeedruns",
   },
   {
     id: "m3",
+    round: "Round 1",
     entrants: [
       {
         user: juwk,
@@ -111,10 +112,10 @@ export const mockScheduledMatches: ScheduledMatch[] = [
       },
     ],
     scheduledTime: DateTime.fromISO("2023-02-04T22:30:03Z"),
-    round: "Round 1",
   },
   {
     id: "m4",
+    round: "Round 1",
     entrants: [
       {
         user: scaramanga,
@@ -124,10 +125,10 @@ export const mockScheduledMatches: ScheduledMatch[] = [
       },
     ],
     scheduledTime: DateTime.fromISO("2023-02-07T12:45:03Z"),
-    round: "Round 1",
   },
   {
     id: "m5",
+    round: "Round 1",
     entrants: [
       {
         user: juwk,
@@ -137,10 +138,10 @@ export const mockScheduledMatches: ScheduledMatch[] = [
       },
     ],
     scheduledTime: DateTime.fromISO("2023-02-04T03:30:03Z"),
-    round: "Round 1",
   },
   {
     id: "m6",
+    round: "Round 2",
     entrants: [
       {
         user: xwillmarktheplace,
@@ -150,7 +151,6 @@ export const mockScheduledMatches: ScheduledMatch[] = [
       },
     ],
     scheduledTime: DateTime.fromISO("2022-02-19T10:30:03Z"),
-    round: "Round 2",
     restreamChannel: undefined,
   },
 ];
@@ -158,6 +158,7 @@ export const mockScheduledMatches: ScheduledMatch[] = [
 export const mockUnscheduledMatches: UnscheduledMatch[] = [
   {
     id: "u1",
+    round: "Round 1",
     entrants: [
       {
         user: fleush,
@@ -166,11 +167,11 @@ export const mockUnscheduledMatches: UnscheduledMatch[] = [
         user: matttInTheHat,
       },
     ],
-    round: "Round 1",
     restreamChannel: "xwillmarktheplace",
   },
   {
     id: "u2",
+    round: "Round 1",
     entrants: [
       {
         user: xwillmarktheplace,
@@ -179,11 +180,11 @@ export const mockUnscheduledMatches: UnscheduledMatch[] = [
         user: scaramanga,
       },
     ],
-    round: "Round 1",
     restreamChannel: "ZeldaSpeedruns",
   },
   {
     id: "u3",
+    round: "Round 1",
     entrants: [
       {
         user: juwk,
@@ -192,18 +193,18 @@ export const mockUnscheduledMatches: UnscheduledMatch[] = [
         user: jenslang,
       },
     ],
-    round: "Round 1",
   },
   {
     id: "u4",
-    entrants: [{ user: scaramanga }, { user: jenslang }],
     round: "Round 1",
+    entrants: [{ user: scaramanga }, { user: jenslang }],
   },
 ];
 
 export const mockMatchResults: MatchResult[] = [
   {
     id: "r1",
+    round: "Round 1",
     entrants: [
       {
         user: fleush,
@@ -226,13 +227,13 @@ export const mockMatchResults: MatchResult[] = [
       },
     ],
     scheduledTime: DateTime.fromISO("2023-02-02T19:45:03Z"),
-    round: "Round 1",
     restreamChannel: "xwillmarktheplace",
     vodUrl: "https://twitch.tv/videos/1234",
     racetimeId: "pretty-malon-1234",
   },
   {
     id: "r2",
+    round: "Round 1",
     entrants: [
       {
         user: xwillmarktheplace,
@@ -256,12 +257,12 @@ export const mockMatchResults: MatchResult[] = [
       },
     ],
     scheduledTime: DateTime.fromISO("2023-02-04T04:45:03Z"),
-    round: "Round 1",
     restreamChannel: "ZeldaSpeedruns",
     racetimeId: "weird-talon-1234",
   },
   {
     id: "r3",
+    round: "Round 1",
     entrants: [
       {
         user: juwk,
@@ -285,11 +286,11 @@ export const mockMatchResults: MatchResult[] = [
       },
     ],
     scheduledTime: DateTime.fromISO("2023-02-04T22:30:03Z"),
-    round: "Round 1",
     racetimeId: "funny-impa-1234",
   },
   {
     id: "r4",
+    round: "Round 1",
     entrants: [
       {
         user: scaramanga,
@@ -314,11 +315,11 @@ export const mockMatchResults: MatchResult[] = [
       },
     ],
     scheduledTime: DateTime.fromISO("2023-02-07T12:45:03Z"),
-    round: "Round 1",
     racetimeId: "interesting-zelda-1234",
   },
   {
     id: "r5",
+    round: "Round 2",
     entrants: [
       {
         user: scaramanga,
@@ -343,12 +344,96 @@ export const mockMatchResults: MatchResult[] = [
     ],
     scheduledTime: DateTime.fromISO("2023-02-14T12:45:03Z"),
     vodUrl: "https://twitch.tv/videos/5678",
-    round: "Round 2",
+  },
+  {
+    id: "b1",
+    round: "Eights",
+    entrants: [
+      {
+        user: scaramanga,
+        result: {
+          resultStatus: "win",
+          hasForfeited: false,
+          finishTime: 4499,
+          rank: 1,
+          racetimeRank: 1,
+        },
+      },
+      {
+        user: fleush,
+        result: {
+          resultStatus: "loss",
+          hasForfeited: false,
+          finishTime: 4611,
+          rank: 2,
+          racetimeRank: 2,
+        },
+      },
+    ],
+    scheduledTime: DateTime.fromISO("2023-02-14T12:45:03Z"),
+    vodUrl: "https://twitch.tv/videos/5678",
+  },
+  {
+    id: "b2",
+    round: "Eights",
+    entrants: [
+      {
+        user: exodus,
+        result: {
+          resultStatus: "loss",
+          hasForfeited: false,
+          finishTime: 4822,
+          rank: 2,
+          racetimeRank: 2,
+        },
+      },
+      {
+        user: adef,
+        result: {
+          resultStatus: "win",
+          hasForfeited: false,
+          finishTime: 4800,
+          rank: 1,
+          racetimeRank: 1,
+        },
+      },
+    ],
+    scheduledTime: DateTime.fromISO("2023-02-14T12:45:03Z"),
+    vodUrl: "https://twitch.tv/videos/5678",
+  },
+  {
+    id: "b3",
+    round: "Quarters",
+    entrants: [
+      {
+        user: adef,
+        result: {
+          resultStatus: "loss",
+          hasForfeited: true,
+          finishTime: 9999,
+          rank: 2,
+          racetimeRank: 2,
+        },
+      },
+      {
+        user: scaramanga,
+        result: {
+          resultStatus: "win",
+          hasForfeited: false,
+          finishTime: 4455,
+          rank: 1,
+          racetimeRank: 1,
+        },
+      },
+    ],
+    scheduledTime: DateTime.fromISO("2023-02-14T12:45:03Z"),
+    vodUrl: "https://twitch.tv/videos/5678",
   },
 ];
 
 const mockMatchResultDto: MatchDto = {
   id: "2198ea9b-e3f6-49a5-8194-c6e059a90ceb",
+  round: "Round 1",
   entrants: [
     {
       user: {
@@ -376,7 +461,6 @@ const mockMatchResultDto: MatchDto = {
     },
   ],
   state: MatchState.Finished,
-  round: "Round 1",
   scheduledTime: new Date("2022-07-08T23:00:00.000Z"),
 };
 
@@ -399,66 +483,19 @@ export const mockPairs: Pair[] = [
   ],
 ];
 
-export const mockBracketSetup: BracketSetup = [
-  {
-    name: "Eighths",
-    matchUps: [
-      {
-        player1: { user: xwillmarktheplace },
-        player2: { user: jenslang },
-      },
-      {
-        player1: { user: fleush },
-        player2: { user: scaramanga },
-      },
-      {
-        player1: { user: juwk },
-        player2: { user: matttInTheHat },
-      },
-      {
-        player1: { user: exodus },
-        player2: { user: adef },
-      },
-      {
-        player1: { user: xwillmarktheplace },
-        player2: { user: jenslang },
-      },
-      {
-        player1: { user: fleush },
-        player2: { user: scaramanga },
-      },
-      {
-        player1: { user: juwk },
-        player2: { user: matttInTheHat },
-      },
-      {
-        player1: { user: exodus },
-        player2: { user: adef },
-      },
-    ],
-  },
-  {
-    name: "Quarters",
-    matchUps: [
-      {
-        player1: { user: xwillmarktheplace },
-        player2: { user: scaramanga },
-      },
-      {
-        player1: { user: juwk },
-        player2: undefined,
-      },
-      {
-        player1: undefined,
-        player2: undefined,
-      },
-      {
-        player1: undefined,
-        player2: { user: adef },
-      },
-    ],
-  },
-];
+export const mockBracketSetup: BracketSetup = {
+  roundNames: ["Eights", "Quarters", "Semis", "Finals"],
+  firstRoundMatchUps: [
+    { player1Id: xwillmarktheplace.id, player2Id: jenslang.id },
+    { player1Id: fleush.id, player2Id: scaramanga.id },
+    { player1Id: juwk.id, player2Id: matttInTheHat.id },
+    { player1Id: xwillmarktheplace.id, player2Id: jenslang.id },
+    { player1Id: adef.id, player2Id: exodus.id },
+    { player1Id: fleush.id, player2Id: scaramanga.id },
+    { player1Id: juwk.id, player2Id: matttInTheHat.id },
+    { player1Id: adef.id, player2Id: exodus.id },
+  ],
+};
 
 export const mockAllUsers: User[] = [
   xwillmarktheplace,

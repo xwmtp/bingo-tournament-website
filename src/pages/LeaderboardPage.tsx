@@ -5,6 +5,9 @@ import { Spinner } from "../components/general/Spinner";
 import { useAllEntrants } from "../api/entrantsApi";
 import { useMatchResults } from "../api/matchesApi";
 import { NothingToDisplay } from "../components/general/NothingToDisplay";
+import { Bracket } from "../components/pages/leaderboard/Bracket";
+import { parseToBracketRounds } from "../domain/BracketSetup";
+import { bracketSetup } from "../Settings";
 
 export const LeaderboardPage: React.FC = () => {
   const { data: allEntrants, isLoading: isLoadingEntrants } = useAllEntrants();
@@ -28,9 +31,11 @@ export const LeaderboardPage: React.FC = () => {
     );
   }
 
+  const bracketRounds = parseToBracketRounds(bracketSetup, allEntrants, matchResults);
+
   return (
     <>
-      {/* todo add later <Bracket allEntrants={allEntrants} allResults={matchResults} />}*/}
+      {bracketRounds.length > 0 && <Bracket bracketRounds={bracketRounds} />}
       <Leaderboard allEntrants={allEntrants} allResults={matchResults} />
     </>
   );
