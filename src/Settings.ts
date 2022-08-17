@@ -21,6 +21,15 @@ export const websiteSettings = {
 
 // Add Bracket to LeaderboardPage, only if roundNames is non-empty
 export const bracketSetup: BracketSetup = {
-  roundNames: [],
-  firstRoundMatchUps: [],
+  roundNames: ["Eights", "Quarters", "Semis", "Finals"],
+  firstRoundMatchUps: [
+    { player1Id: "XGzr7pBMny3kqgyE", player2Id: "jb8GPMWwDLB1nEk0" },
+    { player1Id: "kzM65aWX6b31y8q0", player2Id: "OR6ym83myb3Pd1Xr" },
+    { player1Id: "ZbpNAaBvn5BJkg04", player2Id: "vrZyM4orbEoqDJX0" },
+    { player1Id: "LxldAMBlnboaOP57", player2Id: "wNZ1KRBOV8W4qAyj" },
+    { player1Id: "5rNGD3DKVaB9blOy", player2Id: "R8QGZrB2k03Ngk4V" },
+    { player1Id: "Va0eMongz6Wl9pyJ", player2Id: "JXzVwZWqElW5k8eb" },
+    { player1Id: "rZyM4orRvRoqDJX0", player2Id: "kzM65aWXgxo1y8q0" },
+    { player1Id: "jQbq4dBp7yWvlrG0", player2Id: "LxldAMBlYV3aOP57" },
+  ],
 };
