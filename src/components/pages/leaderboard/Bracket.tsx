@@ -56,7 +56,7 @@ const BracketMatchSlot: React.FC<{
   const playerHasLost = !!matchWinner && player?.user.id !== matchWinner.user.id;
   return (
     <Slot $hasLost={playerHasLost} className={className}>
-      {player && <UserDisplay user={player.user} />}
+      <UserDisplay user={player?.user} size="small" />
     </Slot>
   );
 };
