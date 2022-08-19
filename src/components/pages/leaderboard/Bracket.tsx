@@ -56,7 +56,7 @@ const BracketMatchSlot: React.FC<{
   const playerHasLost = !!matchWinner && player?.user.id !== matchWinner.user.id;
   return (
     <Slot $hasLost={playerHasLost} className={className}>
-      <UserDisplay user={player?.user} size="small" />
+      {!!player?.user && <UserDisplay user={player.user} size="small" removeNamePadding={true} />}
     </Slot>
   );
 };
@@ -67,22 +67,26 @@ const Round = styled(FlexDiv)`
   align-items: flex-start;
   justify-content: space-around;
   margin: 0 0.3rem;
+  flex-basis: 25%;
+  min-width: 0;
 `;
 
 const Slot = styled(FlexDiv)<{ $hasLost?: boolean }>`
   justify-content: flex-start;
-  height: 1.9rem;
-  min-width: 13.5rem;
+  height: 1.7rem;
+  max-width: 100%;
   opacity: ${({ $hasLost }) => ($hasLost ? 0.5 : 1)};
 `;
 
-const MatchUpBlock = styled.div<{
+const MatchUpBlock = styled(FlexDiv)<{
   $displayAsLoggedInUser: boolean;
 }>`
-  margin: 0.7rem 0;
   flex-direction: column;
+  align-items: flex-start;
+  margin: 0.7rem 0;
   background-color: ${({ $displayAsLoggedInUser }) =>
     $displayAsLoggedInUser ? Colors.brightGrey : Colors.lightGrey};
   border-radius: 0.6rem;
   padding: 0.4rem 0.6rem;
+  width: 100%;
 `;

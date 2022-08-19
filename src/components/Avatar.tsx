@@ -26,4 +26,5 @@ const AvatarStyled = styled.img<{ $size: number }>`
   height: var(--size);
   object-fit: cover;
   border-radius: 10rem;
+  flex-shrink: 0;
 `;

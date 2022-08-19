@@ -9,7 +9,7 @@ import { WideScreenOnly } from "./divs/WideScreenOnly";
 type Size = "big" | "normal" | "small";
 
 interface Props {
-  user?: User;
+  user: User;
   size?: Size;
   removeNamePadding?: boolean;
   wideScreenOnlyAvatar?: boolean;
@@ -34,11 +34,7 @@ export const UserDisplay: React.FC<Props> = ({
   return (
     <UserStyled className={className}>
       <AvatarWrapper>
-        {user ? (
-          <Avatar user={user} sizeRem={sizes.avatar} />
-        ) : (
-          <EmptyAvatar $sizeRem={sizes.avatar} />
-        )}
+        <Avatar user={user} sizeRem={sizes.avatar} />
       </AvatarWrapper>
 
       <EmptySpaceWrapper>
@@ -72,19 +68,19 @@ const sizeSettings: {
 };
 
 const EmptySpace = styled.div<{ $width: number }>`
+  flex-shrink: 0;
   width: ${({ $width }) => $width}rem;
 `;
 
 const UserStyled = styled(FlexDiv)`
   justify-content: start;
+  min-width: 0;
 `;
 
 const Name = styled.p<{ $fontSize: number; $removeNamePadding?: boolean }>`
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-size: ${({ $fontSize }) => $fontSize}rem;
   min-width: ${({ $removeNamePadding, $fontSize }) =>
     $removeNamePadding ? "1rem" : `${$fontSize * 10}rem`};
-`;
-
-const EmptyAvatar = styled.div<{ $sizeRem: number }>`
-  width: ${({ $sizeRem }) => $sizeRem};
 `;

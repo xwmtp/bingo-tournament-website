@@ -7,7 +7,7 @@ import { useMatchResults } from "../api/matchesApi";
 import { NothingToDisplay } from "../components/general/NothingToDisplay";
 import { Bracket } from "../components/pages/leaderboard/Bracket";
 import { parseToBracketRounds } from "../domain/BracketSetup";
-import { mockBracketSetup } from "../domain/mocks/MockData";
+import { bracketSetup } from "../Settings";
 
 export const LeaderboardPage: React.FC = () => {
   const { data: allEntrants, isLoading: isLoadingEntrants } = useAllEntrants();
@@ -31,7 +31,7 @@ export const LeaderboardPage: React.FC = () => {
     );
   }
 
-  const bracketRounds = parseToBracketRounds(mockBracketSetup, allEntrants, matchResults);
+  const bracketRounds = parseToBracketRounds(bracketSetup, allEntrants, matchResults);
 
   return (
     <>
