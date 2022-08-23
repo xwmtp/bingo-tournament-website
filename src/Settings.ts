@@ -17,6 +17,7 @@ export const websiteSettings = {
   LOGOUT_URL: process.env.REACT_APP_LOGOUT_URL,
   BACKEND_URL: process.env.REACT_APP_BACKEND_URL,
   USE_MOCK_DATA: process.env.REACT_APP_USE_MOCK_DATA_FALLBACK === "true",
+  MAX_TAB_SELECTOR_ITEMS: 4,
 } as const;
 
 // Add Bracket to LeaderboardPage, only if roundNames is non-empty

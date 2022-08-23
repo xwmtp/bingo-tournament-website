@@ -2,6 +2,8 @@ import styled from "styled-components";
 import React from "react";
 import { FlexDiv } from "./divs/FlexDiv";
 import { Colors, ScreenWidths } from "../GlobalStyle";
+import { chunkArray } from "../lib/arrayHelpers";
+import { websiteSettings } from "../Settings";
 
 interface Props {
   activeTab: string;
@@ -18,6 +20,32 @@ export const TabSelector: React.FC<Props> = ({
   setActiveTab,
   width,
   fontSize,
+  className,
+}) => {
+  const tabChunks = chunkArray(tabOptions, websiteSettings.MAX_TAB_SELECTOR_ITEMS);
+
+  return (
+    <Selectors>
+      {tabChunks.map((tabChunk) => (
+        <TabSelectorRow
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          tabOptions={tabChunk}
+          fontSize={fontSize}
+          width={width}
+          className={className}
+        />
+      ))}
+    </Selectors>
+  );
+};
+
+const TabSelectorRow: React.FC<Props> = ({
+  tabOptions,
+  activeTab,
+  fontSize,
+  setActiveTab,
+  width,
   className,
 }) => {
   return (
@@ -37,6 +65,10 @@ export const TabSelector: React.FC<Props> = ({
     </Selector>
   );
 };
+
+const Selectors = styled(FlexDiv)`
+  flex-direction: column;
+`;
 
 const TabOptionDiv = styled.div<{
   $isActive: boolean;

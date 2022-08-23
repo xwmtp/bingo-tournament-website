@@ -7,11 +7,13 @@ import { useMatchResults } from "../api/matchesApi";
 import { NothingToDisplay } from "../components/general/NothingToDisplay";
 import { Bracket } from "../components/pages/leaderboard/Bracket";
 import { parseToBracketRounds } from "../domain/BracketSetup";
-import { bracketSetup } from "../Settings";
+import { bracketSetup, websiteSettings } from "../Settings";
+import { mockBracketSetup } from "../domain/mocks/MockData";
 
 export const LeaderboardPage: React.FC = () => {
   const { data: allEntrants, isLoading: isLoadingEntrants } = useAllEntrants();
   const { data: matchResults, isLoading: isLoadingMatches } = useMatchResults();
+  const bracketSetupData = websiteSettings.USE_MOCK_DATA ? mockBracketSetup : bracketSetup;
 
   const pageTitle = "Leaderboard";
 
@@ -31,7 +33,7 @@ export const LeaderboardPage: React.FC = () => {
     );
   }
 
-  const bracketRounds = parseToBracketRounds(bracketSetup, allEntrants, matchResults);
+  const bracketRounds = parseToBracketRounds(bracketSetupData, allEntrants, matchResults);
 
   return (
     <>
