@@ -67,7 +67,10 @@ const createMatchUp = (
   player2?: Entrant
 ): MatchUp => {
   if (!player1 || !player2) {
-    return {};
+    return {
+      player1: player1,
+      player2: player2,
+    };
   }
   const matchingResult = allResults.find(
     (result) =>
@@ -96,11 +99,12 @@ const idToEntrant = (id: string, allEntrants: User[]): Entrant => {
 };
 
 export const getWinner = (matchUp: MatchUp): Entrant | undefined => {
-  for (const player of [matchUp.player1, matchUp.player2])
+  for (const player of [matchUp.player1, matchUp.player2]) {
     if (player && hasResult(player) && player.result.resultStatus === "win") {
-      // only return erntrant, without result
+      // only return entrant, without result
       return { user: player.user };
     }
+  }
 };
 
 export const includesUser = (matchUp: MatchUp, user: User): boolean => {
