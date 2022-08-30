@@ -20,6 +20,11 @@ export const websiteSettings = {
   MAX_TAB_SELECTOR_ITEMS: 4,
 } as const;
 
+export const leaderboardSettings = {
+  // list of round names, or undefined if all rounds are relevant for the leaderboard
+  RELEVANT_ROUNDS: ["Round 1", "Round 2", "Round 3", "Round 4"],
+};
+
 // Add Bracket to LeaderboardPage, only if roundNames is non-empty
 export const bracketSetup: BracketSetup = {
   roundNames: ["Eights", "Quarters", "Semis", "Finals"],

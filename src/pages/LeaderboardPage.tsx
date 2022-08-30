@@ -7,7 +7,7 @@ import { useMatchResults } from "../api/matchesApi";
 import { NothingToDisplay } from "../components/general/NothingToDisplay";
 import { Bracket } from "../components/pages/leaderboard/Bracket";
 import { parseToBracketRounds } from "../domain/BracketSetup";
-import { bracketSetup, websiteSettings } from "../Settings";
+import { bracketSetup, leaderboardSettings, websiteSettings } from "../Settings";
 import { mockBracketSetup } from "../domain/mocks/MockData";
 
 export const LeaderboardPage: React.FC = () => {
@@ -33,12 +33,17 @@ export const LeaderboardPage: React.FC = () => {
     );
   }
 
+  const relevantMatchResults = matchResults.filter((result) =>
+    leaderboardSettings.RELEVANT_ROUNDS.some(
+      (relevantRound) => result.round?.toLocaleLowerCase() === relevantRound.toLowerCase()
+    )
+  );
   const bracketRounds = parseToBracketRounds(bracketSetupData, allEntrants, matchResults);
 
   return (
     <>
       {bracketRounds.length > 0 && <Bracket bracketRounds={bracketRounds} />}
-      <Leaderboard allEntrants={allEntrants} allResults={matchResults} />
+      <Leaderboard allEntrants={allEntrants} allResults={relevantMatchResults} />
     </>
   );
 };
